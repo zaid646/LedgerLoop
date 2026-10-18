@@ -58,7 +58,7 @@ Upload a receipt image (or push a card transaction) and ExpenseIQ:
 ```
                         ┌──────────────── LOCAL (Docker Desktop) ────────────────┐
    receipts / txns      │                                                        │
-        │               │   ┌──────────────────┐        ┌────────────────────┐  │
+        │               │   ┌───────────────────┐        ┌────────────────────┐  │
         ▼               │   │  backend          │  HTTP  │  ai-service        │  │
    ┌─────────┐  POST    │   │  Node.js + TS     │ ─────▶ │  Python + FastAPI  │  │
    │ client  │ ───────▶ │   │  Fastify          │        │  · redaction       │  │
@@ -66,21 +66,21 @@ Upload a receipt image (or push a card transaction) and ExpenseIQ:
         ▲   approvals   │   │  approvals /      │  JSON  │  · GL coding       │  │
         │   webhooks    │   │  webhooks         │        │  · policy check    │  │
         │               │   └────────┬──────────┘        └─────────┬──────────┘  │
-        │               │            │                             │              │
+        │               │            │                             │             │
         │               │   ┌────────▼─────────────────────────────▼──────────┐  │
-        │               │   │ Postgres · MongoDB · OpenSearch (hybrid search)   │  │
-        │               │   └────────┬──────────────────────────────────────────┘ │
-        │               │            │  traces                                     │
-        │               │   ┌────────▼─────────┐   ┌───────────────────────────┐  │
-        └───────────────┼───│ Langfuse          │   │ W&B (evals, artifacts)    │  │
-                        │   └──────────────────┘   └───────────────────────────┘  │
-                        └────────────────────────────┬───────────────────────────┘
+        │               │   │ Postgres · MongoDB · OpenSearch (hybrid search) │  │
+        │               │   └────────┬────────────────────────────────────────┘  │
+        │               │            │  traces                                   │
+        │               │   ┌────────▼─────────┐   ┌───────────────────────────┐ │
+        └───────────────┼───│ Langfuse         │   │ W&B (evals, artifacts)    │ │
+                        │   └──────────────────┘   └───────────────────────────┘ │
+                        └─────────────────────────────┬──────────────────────────┘
                                                       │ OpenAI-compatible API
-                                        ┌─────────────▼──────────────┐
+                                        ┌─────────────▼───────────────┐
                                         │ RENTED GPU (vLLM, on-demand)│
                                         │  Qwen2.5-Instruct · guided  │
-                                        │  JSON · QLoRA + vLLM       │
-                                        └────────────────────────────┘
+                                        │  JSON · QLoRA + vLLM        │
+                                        └─────────────────────────────┘
 ```
 
 The model is **self-hosted** (vLLM on a rented GPU), not a paid API — so the platform
