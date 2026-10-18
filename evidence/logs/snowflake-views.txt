@@ -1,0 +1,2 @@
+views: V_SPEND_AUDIT, V_SPEND_BY_CATEGORY, V_SPEND_BY_MONTH, V_TOP_MERCHANTS
+objects created via warehouse/apply_ddl.py (account MI46278)
