@@ -48,7 +48,6 @@ jobs:
     name: PromptFoo suite (if GPU endpoint configured)
     runs-on: ubuntu-latest
     needs: python-service
-    if: ${{ secrets.VLLM_BASE_URL != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v3
@@ -67,4 +66,9 @@ jobs:
           VLLM_BASE_URL: ${{ secrets.VLLM_BASE_URL }}
           VLLM_API_KEY: ${{ secrets.VLLM_API_KEY }}
           VLLM_MODEL: ${{ secrets.VLLM_MODEL }}
-        run: npx -y promptfoo@latest eval -c promptfooconfig.yaml --max-concurrency 4
+        run: |
+          if [ -z "$VLLM_BASE_URL" ]; then
+            echo "VLLM_BASE_URL not configured — skipping PromptFoo (LLM suite runs once a GPU endpoint exists)."
+            exit 0
+          fi
+          npx -y promptfoo@latest eval -c promptfooconfig.yaml --max-concurrency 4
