@@ -14,7 +14,7 @@ names below, then tick the box.
 | 7 | `png/07-langfuse-traces.png` | Langfuse trace tree incl. repair attempt | [x] |
 | 8 | `png/08-promptfoo.png` | PromptFoo pass/fail table | [x] |
 | 9 | `png/09-ci-green.png` | GitHub Actions CI passing (lint+test+gate) | [x] |
-| 10 | `png/10-api-smoke.png` | `/extract` + `/code` + `/policy-check` responses | [x] |
+| 10 | `png/10-api-smoke.png` | `/extract` + `/code` + `/policy-check` + `/assistant/ask` (grounded answer + guarded SQL) | [x] |
 | 11 | `png/11-snowflake-views.png` | Snowflake `V_SPEND_BY_CATEGORY` query result | [x] |
 | 12 | `png/12-backend-submit.png` | `POST /expenses/submit` routed response | [x] |
 | 13 | `png/13-qlora-eval.png` | QLoRA base (10.9%) vs adapter (98.4%) + train loss | [x] |
