@@ -1,0 +1,6 @@
+run: https://github.com/zaid646/expenseiq/actions/runs/39152285522
+completed
+success
+Lint + tests (ai-service): success
+PromptFoo suite (if GPU endpoint configured): success
+Eval regression gate: success
