@@ -95,24 +95,20 @@ services:
     volumes: [redisdata:/data]
 
   minio:
-    image: minio/minio
+    # minio/minio is no longer anonymously pullable from Docker Hub;
+    # the archived Bitnami build is API-compatible.
+    image: bitnamilegacy/minio:latest
     container_name: eq-minio
     restart: unless-stopped
     profiles: ["observability"]
-    command: server /data --console-address ":9090"
     environment:
       MINIO_ROOT_USER: minio
       MINIO_ROOT_PASSWORD: miniosecret
-    ports: ["9001:9000", "9090:9090"]
+    ports: ["9002:9000", "9090:9001"]
     volumes: [miniodata:/data]
-    healthcheck:
-      test: ["CMD", "mc", "ready", "local"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
 
   minio-init:
-    image: minio/mc
+    image: bitnamilegacy/minio-client:latest
     container_name: eq-minio-init
     profiles: ["observability"]
     depends_on:
@@ -143,6 +139,7 @@ services:
       NEXTAUTH_SECRET: "4c45e2e6604c5dfe12a706eef5e7b315f214522f351dcf5caab1e5225e249e52"
       CLICKHOUSE_URL: http://clickhouse:8123
       CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
+      CLICKHOUSE_CLUSTER_ENABLED: "false"
       CLICKHOUSE_USER: clickhouse
       CLICKHOUSE_PASSWORD: clickhouse
       CLICKHOUSE_DB: default
@@ -158,7 +155,7 @@ services:
       LANGFUSE_S3_MEDIA_UPLOAD_REGION: auto
       LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: minio
       LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: miniosecret
-      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://localhost:9000
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://minio:9000
       LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: "true"
       LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: media/
       LANGFUSE_INIT_ORG_ID: expenseiq

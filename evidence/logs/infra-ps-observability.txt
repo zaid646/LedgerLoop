@@ -1,0 +1,9 @@
+NAME                 IMAGE                                 COMMAND                  SERVICE           CREATED              STATUS                        PORTS
+eq-clickhouse        clickhouse/clickhouse-server:24.3     "/entrypoint.sh"         clickhouse        About a minute ago   Up About a minute (healthy)   0.0.0.0:8123->8123/tcp, [::]:8123->8123/tcp, 0.0.0.0:9000->9000/tcp, [::]:9000->9000/tcp
+eq-langfuse-web      langfuse/langfuse:3                   "dumb-init -- ./web/…"   langfuse-web      34 seconds ago       Up 30 seconds                 0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp
+eq-langfuse-worker   langfuse/langfuse-worker:3            "dumb-init -- ./work…"   langfuse-worker   34 seconds ago       Up 30 seconds                 3030/tcp
+eq-minio             bitnamilegacy/minio:latest            "/opt/bitnami/script…"   minio             About a minute ago   Up About a minute             0.0.0.0:9002->9000/tcp, [::]:9002->9000/tcp, 0.0.0.0:9090->9001/tcp, [::]:9090->9001/tcp
+eq-mongo             mongo:7                               "docker-entrypoint.s…"   mongo             30 minutes ago       Up 30 minutes (healthy)       0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp
+eq-opensearch        opensearchproject/opensearch:2.15.0   "./opensearch-docker…"   opensearch        30 minutes ago       Up 30 minutes (healthy)       0.0.0.0:9200->9200/tcp, [::]:9200->9200/tcp
+eq-postgres          postgres:16-alpine                    "docker-entrypoint.s…"   postgres          30 minutes ago       Up 30 minutes (healthy)       0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp
+eq-redis             redis:7-alpine                        "docker-entrypoint.s…"   redis             About a minute ago   Up About a minute             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp
