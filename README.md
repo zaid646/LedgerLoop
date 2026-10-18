@@ -79,7 +79,7 @@ Upload a receipt image (or push a card transaction) and ExpenseIQ:
                                         ┌─────────────▼──────────────┐
                                         │ RENTED GPU (vLLM, on-demand)│
                                         │  Qwen2.5-Instruct · guided  │
-                                        │  JSON · QLoRA + vLLM         │
+                                        │  JSON · QLoRA + vLLM       │
                                         └────────────────────────────┘
 ```
 
