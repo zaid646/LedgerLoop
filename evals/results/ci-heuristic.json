@@ -1,0 +1,1454 @@
+{
+  "name": "ci-heuristic",
+  "config": {
+    "engine": "heuristic",
+    "golden": "v0"
+  },
+  "summary": {
+    "n": 75,
+    "field_accuracy": {
+      "merchant": 0.64,
+      "total_amount": 0.3467,
+      "transaction_date": 0.84
+    },
+    "field_support": {
+      "merchant": 50,
+      "total_amount": 75,
+      "transaction_date": 50
+    },
+    "exact_doc_match": 0.1467,
+    "p50_latency_ms": 0.0,
+    "p95_latency_ms": 0.0,
+    "mean_cost_usd": 0.0,
+    "total_cost_usd": 0.0,
+    "repaired_rate": 0.0,
+    "escalated_rate": 0.0
+  },
+  "predictions": [
+    {
+      "id": "sroie-0",
+      "pred": {
+        "merchant": "TAN WOON YANN",
+        "transaction_date": "25/12/2018",
+        "total_amount": 10.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-1",
+      "pred": {
+        "merchant": "TAN WOON YANN",
+        "transaction_date": "19/10/2018",
+        "total_amount": 70.3,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-2",
+      "pred": {
+        "merchant": "TAN WOON YANN",
+        "transaction_date": "12-01-19",
+        "total_amount": 50.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-3",
+      "pred": {
+        "merchant": "TAN WOON YANN",
+        "transaction_date": "25/12/2018",
+        "total_amount": 100.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-4",
+      "pred": {
+        "merchant": "TAN WOON YANN",
+        "transaction_date": "18-11-18",
+        "total_amount": 51.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-5",
+      "pred": {
+        "merchant": "TAN CHAY YEE",
+        "transaction_date": "09/01/2019",
+        "total_amount": 101.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-6",
+      "pred": {
+        "merchant": "TAN CHAY YEE",
+        "transaction_date": "11/01/2019",
+        "total_amount": 327.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-7",
+      "pred": {
+        "merchant": "TAN CHAY YEE",
+        "transaction_date": "23-01-2019",
+        "total_amount": 20.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-8",
+      "pred": {
+        "merchant": "PERNIAGAAN ZHENG HUI",
+        "transaction_date": "12/02/2018",
+        "total_amount": 112.45,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-9",
+      "pred": {
+        "merchant": "1950",
+        "transaction_date": "18/01/2018",
+        "total_amount": 100.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-10",
+      "pred": {
+        "merchant": "SAM SAM TRADING CO",
+        "transaction_date": "29-12-2017",
+        "total_amount": 20.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-11",
+      "pred": {
+        "merchant": "AIK HUAT HARDWARE",
+        "transaction_date": "15/06/2017",
+        "total_amount": 15.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-12",
+      "pred": {
+        "merchant": "HOME MASTER HARDWARE &",
+        "transaction_date": "22/12/2017",
+        "total_amount": 50.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-13",
+      "pred": {
+        "merchant": "RESTORAN HASSANBISTRO",
+        "transaction_date": "2-1-1",
+        "total_amount": 15.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-14",
+      "pred": {
+        "merchant": "ASIA MART",
+        "transaction_date": "22/12/2017",
+        "total_amount": 40.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-15",
+      "pred": {
+        "merchant": "HOME MASTER HARDWARE &",
+        "transaction_date": "22/12/2017",
+        "total_amount": 50.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-16",
+      "pred": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/12/2017",
+        "total_amount": 73.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-17",
+      "pred": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/11/2017",
+        "total_amount": 39.8,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-18",
+      "pred": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/12/2017",
+        "total_amount": 73.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-19",
+      "pred": {
+        "merchant": "3",
+        "transaction_date": "18/03/18",
+        "total_amount": 86.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-20",
+      "pred": {
+        "merchant": "SYL ROASTED DELIGHTS SDN. BHD.",
+        "transaction_date": "06/03/2018",
+        "total_amount": 54.5,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-21",
+      "pred": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "18/01/2018",
+        "total_amount": 6.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-22",
+      "pred": {
+        "merchant": "FUYI MINI MARKET",
+        "transaction_date": "25/01/2018",
+        "total_amount": 1.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-23",
+      "pred": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "17/01/2018",
+        "total_amount": 28.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-24",
+      "pred": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "15/01/2018",
+        "total_amount": 55.1,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-25",
+      "pred": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "23/01/2018",
+        "total_amount": 18.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-26",
+      "pred": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "23/01/2018",
+        "total_amount": 18.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-27",
+      "pred": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "12/02/2018",
+        "total_amount": 153.35,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-28",
+      "pred": {
+        "merchant": "MR. D.I.Y. (M) SDN BHD",
+        "transaction_date": "14-03-18",
+        "total_amount": 50.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-29",
+      "pred": {
+        "merchant": "99 SPEED MART S/B (519537-X)",
+        "transaction_date": "24-01-18",
+        "total_amount": 5.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-30",
+      "pred": {
+        "merchant": "3-1707067",
+        "transaction_date": "01-03-18",
+        "total_amount": 21.2,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-31",
+      "pred": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-32",
+      "pred": {
+        "merchant": "AEON CO. (M) BHD (126926-H)",
+        "transaction_date": "06/03/2018",
+        "total_amount": 100.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-33",
+      "pred": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-34",
+      "pred": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-35",
+      "pred": {
+        "merchant": "PERNIAGAAN ZHENG HUI",
+        "transaction_date": "09/03/2018",
+        "total_amount": 332.3,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-36",
+      "pred": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-37",
+      "pred": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-38",
+      "pred": {
+        "merchant": "WARAKUYA PERMAS CITY SDN BHD",
+        "transaction_date": "10/03/2018",
+        "total_amount": 79.6,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-39",
+      "pred": {
+        "merchant": "YHM AEON TEBRAU CITY",
+        "transaction_date": "11/03/2018",
+        "total_amount": 20.1,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-40",
+      "pred": {
+        "merchant": "BREWERY TAP",
+        "transaction_date": "30/03/2018",
+        "total_amount": 189.75,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-41",
+      "pred": {
+        "merchant": "THREE STOOGES",
+        "transaction_date": "12/03/2018",
+        "total_amount": 343.95,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-42",
+      "pred": {
+        "merchant": "THREE STOOGES",
+        "transaction_date": "03/03/2018",
+        "total_amount": 200.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-43",
+      "pred": {
+        "merchant": "GEOVENTURE",
+        "transaction_date": "5/3/2018",
+        "total_amount": 100.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-44",
+      "pred": {
+        "merchant": "32 PUB & BISTRO OWN BY CNU TRADING",
+        "transaction_date": "10-03-2018",
+        "total_amount": 200.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-45",
+      "pred": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.6,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-46",
+      "pred": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 6.9,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-47",
+      "pred": {
+        "merchant": "PASAR MINI JIN SENG",
+        "transaction_date": "18/03/18",
+        "total_amount": 100.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-48",
+      "pred": {
+        "merchant": "RESTAURANT SIN DU",
+        "transaction_date": "09/03/2018",
+        "total_amount": 170.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "sroie-49",
+      "pred": {
+        "merchant": "YONG TAT HARDWARE TRADING",
+        "transaction_date": "13/03/2018",
+        "total_amount": 101.0,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.5,
+          "transaction_date": 0.6
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-0",
+      "pred": {
+        "merchant": "-TICKET CP 60.000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-1",
+      "pred": {
+        "merchant": "J.STB PROMO 17500",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-2",
+      "pred": {
+        "merchant": "JASMINE MT ( L ) 24,000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-3",
+      "pred": {
+        "merchant": "DONAT GULA 11,000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-4",
+      "pred": {
+        "merchant": "ICE BLACKCOFFE 82,000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-5",
+      "pred": {
+        "merchant": "TRAD KY TOAST CARTE 28.182",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-6",
+      "pred": {
+        "merchant": "EGG TART 13,000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-7",
+      "pred": {
+        "merchant": "Kupon 15 100,000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-8",
+      "pred": {
+        "merchant": "[REG] BLACK SAKURA 45,455",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-9",
+      "pred": {
+        "merchant": "Bumbu Kaldu Ayam 1 36000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-10",
+      "pred": {
+        "merchant": "CINNAMON SUGAR 17,000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-11",
+      "pred": {
+        "merchant": "BANABERRY FRESH CREAM CAK 230,000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-12",
+      "pred": {
+        "merchant": "BLUS WANITA 120,000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-13",
+      "pred": {
+        "merchant": "BASO KUAH 43.636",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-14",
+      "pred": {
+        "merchant": "RedVelvet Cheese Slc 38,000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-15",
+      "pred": {
+        "merchant": "Lemon Tea (L) 25.000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-16",
+      "pred": {
+        "merchant": "[LG] BLACK SAKURA 59,091",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-17",
+      "pred": {
+        "merchant": "Goblin's Mace 25,000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-18",
+      "pred": {
+        "merchant": "Propolis Cair 156000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-19",
+      "pred": {
+        "merchant": "AMBUSH DBL CHS 60000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-20",
+      "pred": {
+        "merchant": "cashew nuts chkn 64,500",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-21",
+      "pred": {
+        "merchant": "NASI GOR SFD TLR Rp 35.000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-22",
+      "pred": {
+        "merchant": "[MD] SOFT STEAMED CHEESEC 20,000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-23",
+      "pred": {
+        "merchant": "TWIST DONUT 54,000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    },
+    {
+      "id": "cord-24",
+      "pred": {
+        "merchant": "5001-Corn Flakes Cookies Rp.56.000",
+        "transaction_date": null,
+        "total_amount": null,
+        "currency": null,
+        "confidence": {
+          "merchant": 0.3,
+          "total_amount": 0.0,
+          "transaction_date": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 0.0,
+      "cost_usd": 0.0
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+# =============================================================================
+# ExpenseIQ local infra
+#   core         : Postgres, MongoDB, OpenSearch  (default)
+#   observability: + Langfuse v3 (web, worker, clickhouse, redis, minio)
+#
+#   docker compose up -d
+#   docker compose --profile observability up -d
+# =============================================================================
+name: expenseiq
+
+services:
+  # ---------------------------------------------------------------- Postgres
+  postgres:
+    image: postgres:16-alpine
+    container_name: eq-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: expenseiq
+      POSTGRES_PASSWORD: expenseiq
+      POSTGRES_DB: expenseiq
+    ports: ["5432:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/init-multiple-dbs.sh:/docker-entrypoint-initdb.d/init-multiple-dbs.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U expenseiq"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # ------------------------------------------------------------------ MongoDB
+  mongo:
+    image: mongo:7
+    container_name: eq-mongo
+    restart: unless-stopped
+    ports: ["27017:27017"]
+    volumes:
+      - mongodata:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # --------------------------------------------------------------- OpenSearch
+  opensearch:
+    image: opensearchproject/opensearch:2.15.0
+    container_name: eq-opensearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - DISABLE_SECURITY_PLUGIN=true
+      - DISABLE_INSTALL_DEMO_CONFIG=true
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
+    ulimits:
+      memlock: { soft: -1, hard: -1 }
+      nofile: { soft: 65536, hard: 65536 }
+    ports: ["9200:9200"]
+    volumes:
+      - osdata:/usr/share/opensearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+  # ============================ Langfuse (profile: observability) ============
+  clickhouse:
+    image: clickhouse/clickhouse-server:24.3
+    container_name: eq-clickhouse
+    restart: unless-stopped
+    profiles: ["observability"]
+    environment:
+      CLICKHOUSE_USER: clickhouse
+      CLICKHOUSE_PASSWORD: clickhouse
+      CLICKHOUSE_DB: default
+    ulimits:
+      nofile: { soft: 262144, hard: 262144 }
+    ports: ["8123:8123", "9000:9000"]
+    volumes:
+      - clickhousedata:/var/lib/clickhouse
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8123/ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    container_name: eq-redis
+    restart: unless-stopped
+    profiles: ["observability"]
+    ports: ["6379:6379"]
+    volumes: [redisdata:/data]
+
+  minio:
+    image: minio/minio
+    container_name: eq-minio
+    restart: unless-stopped
+    profiles: ["observability"]
+    command: server /data --console-address ":9090"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: miniosecret
+    ports: ["9001:9000", "9090:9090"]
+    volumes: [miniodata:/data]
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  minio-init:
+    image: minio/mc
+    container_name: eq-minio-init
+    profiles: ["observability"]
+    depends_on:
+      minio: { condition: service_started }
+    entrypoint: >
+      /bin/sh -c "
+      until mc alias set local http://minio:9000 minio miniosecret; do sleep 1; done;
+      mc mb --ignore-existing local/langfuse;
+      echo 'minio bucket ready';
+      "
+
+  langfuse-web:
+    image: langfuse/langfuse:3
+    container_name: eq-langfuse-web
+    restart: unless-stopped
+    profiles: ["observability"]
+    depends_on:
+      postgres: { condition: service_healthy }
+      clickhouse: { condition: service_healthy }
+      redis: { condition: service_started }
+      minio: { condition: service_started }
+    ports: ["3000:3000"]
+    environment: &langfuse_env
+      DATABASE_URL: postgresql://expenseiq:expenseiq@postgres:5432/langfuse
+      SALT: "306368be54865a8291a6aec634635a5b"
+      ENCRYPTION_KEY: "8df54504bfd3ec4a522867d8c377402abbd8e60ece4c59e90d61cb0acf82a977"
+      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_SECRET: "4c45e2e6604c5dfe12a706eef5e7b315f214522f351dcf5caab1e5225e249e52"
+      CLICKHOUSE_URL: http://clickhouse:8123
+      CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
+      CLICKHOUSE_USER: clickhouse
+      CLICKHOUSE_PASSWORD: clickhouse
+      CLICKHOUSE_DB: default
+      REDIS_CONNECTION_STRING: redis://redis:6379
+      LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
+      LANGFUSE_S3_EVENT_UPLOAD_REGION: auto
+      LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: minio
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: miniosecret
+      LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://minio:9000
+      LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: "true"
+      LANGFUSE_S3_EVENT_UPLOAD_PREFIX: events/
+      LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: langfuse
+      LANGFUSE_S3_MEDIA_UPLOAD_REGION: auto
+      LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: minio
+      LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: miniosecret
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://localhost:9000
+      LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: "true"
+      LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: media/
+      LANGFUSE_INIT_ORG_ID: expenseiq
+      LANGFUSE_INIT_ORG_NAME: ExpenseIQ
+      LANGFUSE_INIT_PROJECT_ID: expenseiq
+      LANGFUSE_INIT_PROJECT_NAME: ExpenseIQ
+      LANGFUSE_INIT_PROJECT_PUBLIC_KEY: pk-lf-local
+      LANGFUSE_INIT_PROJECT_SECRET_KEY: sk-lf-local
+      LANGFUSE_INIT_USER_EMAIL: zaidhussain646@gmail.com
+      LANGFUSE_INIT_USER_NAME: Zaid
+      LANGFUSE_INIT_USER_PASSWORD: expenseiq123
+
+  langfuse-worker:
+    image: langfuse/langfuse-worker:3
+    container_name: eq-langfuse-worker
+    restart: unless-stopped
+    profiles: ["observability"]
+    depends_on:
+      postgres: { condition: service_healthy }
+      clickhouse: { condition: service_healthy }
+      redis: { condition: service_started }
+      minio: { condition: service_started }
+    environment: *langfuse_env
+
+volumes:
+  pgdata:
+  mongodata:
+  osdata:
+  clickhousedata:
+  redisdata:
+  miniodata:

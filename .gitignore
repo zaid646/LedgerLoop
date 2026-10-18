@@ -1,0 +1,44 @@
+# --- secrets / local state ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+
+# --- python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+.ipynb_checkpoints/
+
+# --- node ---
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# --- data / artifacts ---
+data/raw/
+data/processed/
+artifacts/
+wandb/
+*.sqlite
+*.duckdb
+runs/
+!runs/.gitkeep
+
+# --- notebooks outputs (keep notebooks, drop heavy outputs) ---
+notebooks/**/*.nbconvert.ipynb
+
+# --- os / editor ---
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json

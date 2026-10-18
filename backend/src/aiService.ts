@@ -1,0 +1,57 @@
+import { env } from './env.js';
+
+type Json = Record<string, unknown>;
+
+async function post<T = Json>(path: string, body: unknown): Promise<T> {
+  const res = await fetch(`${env.aiServiceUrl}${path}`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    throw new Error(`ai-service ${path} -> ${res.status}: ${await res.text()}`);
+  }
+  return (await res.json()) as T;
+}
+
+export interface Extraction {
+  document_id: string;
+  extraction: { merchant: string; total_amount: number | null; currency: string | null; [k: string]: unknown };
+  prompt_version: string;
+  model: string;
+  attempts: number;
+  repaired: boolean;
+  escalated: boolean;
+  latency_ms: number;
+  cost_usd: number;
+  redactions: Record<string, number>;
+}
+
+export interface Coding {
+  category: string;
+  confidence: number;
+  rationale: string;
+  model: string;
+  latency_ms: number;
+  cost_usd: number;
+}
+
+export interface Policy {
+  compliant: boolean;
+  route: 'auto_approve' | 'manager_review' | 'human_queue';
+  violations: { rule: string; detail: string }[];
+}
+
+export const ai = {
+  async health(): Promise<Json> {
+    const res = await fetch(`${env.aiServiceUrl}/health`);
+    return (await res.json()) as Json;
+  },
+  extract: (document_id: string, text: string) =>
+    post<Extraction>('/extract', { document_id, text }),
+  code: (description: string, merchant?: string, amount?: number) =>
+    post<Coding>('/code', { description, merchant, amount }),
+  policyCheck: (amount: number, category: string, has_receipt = true) =>
+    post<Policy>('/policy-check', { amount, category, has_receipt }),
+  correct: (payload: unknown) => post('/corrections', payload),
+};

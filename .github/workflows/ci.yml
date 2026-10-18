@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  python-service:
+    name: Lint + tests (ai-service)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ai-service
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+      - run: uv python install 3.12
+      - run: uv sync --dev
+      - name: Ruff
+        run: uv run ruff check .
+      - name: Pytest
+        run: uv run pytest -q
+
+  eval-gate:
+    name: Eval regression gate
+    runs-on: ubuntu-latest
+    needs: python-service
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+      - run: uv python install 3.12
+      - name: Sync env
+        working-directory: ai-service
+        run: uv sync --dev
+      - name: Run deterministic (heuristic) eval
+        working-directory: ai-service
+        run: uv run python ../evals/run_evals.py --engine heuristic --golden v0 --no-wandb --name ci-heuristic
+      - name: Gate against baseline
+        working-directory: ai-service
+        run: uv run python ../evals/gate.py --results ../evals/results/ci-heuristic.json --baseline ../evals/baseline.json
+
+  promptfoo:
+    name: PromptFoo suite (if GPU endpoint configured)
+    runs-on: ubuntu-latest
+    needs: python-service
+    if: ${{ secrets.VLLM_BASE_URL != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+      - run: uv python install 3.12
+      - name: Export prompt + tests from registry
+        working-directory: ai-service
+        run: uv sync --dev && uv run python ../evals/export_promptfoo.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run PromptFoo
+        working-directory: evals
+        env:
+          VLLM_BASE_URL: ${{ secrets.VLLM_BASE_URL }}
+          VLLM_API_KEY: ${{ secrets.VLLM_API_KEY }}
+          VLLM_MODEL: ${{ secrets.VLLM_MODEL }}
+        run: npx -y promptfoo@latest eval -c promptfooconfig.yaml --max-concurrency 4

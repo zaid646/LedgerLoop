@@ -1,0 +1,21 @@
+description: ExpenseIQ — receipt extraction regression suite (PromptFoo)
+
+prompts:
+  - file://prompt.json
+
+providers:
+  - id: openai:chat:${VLLM_MODEL}
+    label: vllm-receipt-extraction
+    config:
+      apiBaseUrl: ${VLLM_BASE_URL}
+      apiKey: ${VLLM_API_KEY}
+      temperature: 0
+      max_tokens: 700
+
+defaultTest:
+  assert:
+    - type: is-json
+    - type: javascript
+      value: file://assert_receipt.js
+
+tests: file://tests.jsonl

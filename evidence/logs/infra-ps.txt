@@ -1,0 +1,4 @@
+NAME            IMAGE                                 COMMAND                  SERVICE      CREATED          STATUS                    PORTS
+eq-mongo        mongo:7                               "docker-entrypoint.s…"   mongo        24 minutes ago   Up 24 minutes (healthy)   0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp
+eq-opensearch   opensearchproject/opensearch:2.15.0   "./opensearch-docker…"   opensearch   24 minutes ago   Up 24 minutes (healthy)   0.0.0.0:9200->9200/tcp, [::]:9200->9200/tcp
+eq-postgres     postgres:16-alpine                    "docker-entrypoint.s…"   postgres     24 minutes ago   Up 24 minutes (healthy)   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp
