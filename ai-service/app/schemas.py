@@ -54,13 +54,11 @@ class ReceiptExtraction(BaseModel):
 class ExtractRequest(BaseModel):
     model_config = {
         "json_schema_extra": {
-            "examples": [
-                {
-                    "document_id": "demo-1",
-                    "text": "MR D.I.Y. (M) SDN BHD\nTOTAL: RM 30.90\nDATE: 18/11/2018 13:58",
-                    "source": "receipt",
-                }
-            ]
+            "example": {
+                "document_id": "demo-1",
+                "text": "MR D.I.Y. (M) SDN BHD\nTOTAL: RM 30.90\nDATE: 18/11/2018 13:58",
+                "source": "receipt",
+            }
         }
     }
 
@@ -88,11 +86,7 @@ class ExtractResponse(BaseModel):
 class CodeRequest(BaseModel):
     model_config = {
         "json_schema_extra": {
-            "examples": [
-                {"description": "office chair", "merchant": "IKEA", "amount": 249.0},
-                {"description": "flight to Berlin", "merchant": "Lufthansa", "amount": 420.0},
-                {"description": "monthly GitHub Team seats", "merchant": "GitHub", "amount": 84.0},
-            ]
+            "example": {"description": "office chair", "merchant": "IKEA", "amount": 249.0}
         }
     }
 
@@ -127,19 +121,17 @@ class PolicyRule(BaseModel):
 class PolicyCheckRequest(BaseModel):
     model_config = {
         "json_schema_extra": {
-            "examples": [
-                {
-                    "amount": 249.0,
-                    "category": "HARDWARE",
-                    "merchant": "IKEA",
-                    "has_receipt": True,
-                    "rules": [
-                        {"name": "Meals cap", "applies_to": "MEALS", "max_amount": 100},
-                        {"name": "Receipt required", "requires_receipt": True},
-                        {"name": "Manager above 500", "requires_manager_above": 500},
-                    ],
-                }
-            ]
+            "example": {
+                "amount": 249.0,
+                "category": "HARDWARE",
+                "merchant": "IKEA",
+                "has_receipt": True,
+                "rules": [
+                    {"name": "Meals cap", "applies_to": "MEALS", "max_amount": 100},
+                    {"name": "Receipt required", "requires_receipt": True},
+                    {"name": "Manager above 500", "requires_manager_above": 500},
+                ],
+            }
         }
     }
 
