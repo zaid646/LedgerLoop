@@ -79,7 +79,7 @@ Upload a receipt image (or push a card transaction) and ExpenseIQ:
                                         ┌─────────────▼──────────────┐
                                         │ RENTED GPU (vLLM, on-demand)│
                                         │  Qwen2.5-Instruct · guided  │
-                                        │  JSON · (later) QLoRA + vLLM│
+                                        │  JSON · QLoRA + vLLM         │
                                         └────────────────────────────┘
 ```
 
@@ -147,8 +147,8 @@ python gpu/check_gpu.py
 2. ✅ **FastAPI AI service, prompt registry, PromptFoo gate**
 3. ✅ **Node.js backend with Postgres, MongoDB, OpenSearch hybrid retrieval, approvals + webhooks**
 4. ✅ **Self-healing harness, Langfuse, feedback loop**
-5. 🚧 Snowflake + spend assistant (warehouse + views done; NL→SQL assistant pending)
-6. ⬜ Optional: QLoRA classifier served with vLLM
+5. ✅ **Snowflake warehouse + spend assistant** (guarded NL→SQL over the views)
+6. ✅ **QLoRA GL-coding classifier** fine-tuned and served
 
 ## Measuring quality
 
