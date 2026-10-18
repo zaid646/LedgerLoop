@@ -71,4 +71,4 @@ jobs:
             echo "VLLM_BASE_URL not configured — skipping PromptFoo (LLM suite runs once a GPU endpoint exists)."
             exit 0
           fi
-          npx -y promptfoo@latest eval -c promptfooconfig.yaml --max-concurrency 4
+          npx -y promptfoo@latest eval -c promptfoo/promptfooconfig.js --max-concurrency 4

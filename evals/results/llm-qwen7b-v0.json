@@ -1,0 +1,2807 @@
+{
+  "name": "llm-qwen7b-v0",
+  "config": {
+    "engine": "llm",
+    "golden": "v0",
+    "model": "Qwen2.5-7B-Instruct",
+    "stage": "prod"
+  },
+  "summary": {
+    "n": 75,
+    "field_accuracy": {
+      "merchant": 0.96,
+      "total_amount": 0.6267,
+      "transaction_date": 0.84
+    },
+    "field_support": {
+      "merchant": 50,
+      "total_amount": 75,
+      "transaction_date": 50
+    },
+    "exact_doc_match": 0.4933,
+    "p50_latency_ms": 3684.44,
+    "p95_latency_ms": 6143.47,
+    "mean_cost_usd": 0.00038113,
+    "total_cost_usd": 0.028585,
+    "repaired_rate": 0.0,
+    "escalated_rate": 0.0533
+  },
+  "predictions": [
+    {
+      "id": "sroie-0",
+      "pred": {
+        "merchant": "BOOK TA .TAMAN DAYA) SDN BHD",
+        "transaction_date": "25/12/2018",
+        "total_amount": 9.0,
+        "tax_amount": null,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "KF MODELLING CLAY KIDDY FISH",
+            "amount": 9.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 0.95,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3558.771458996489,
+      "cost_usd": 0.00034599166962465865
+    },
+    {
+      "id": "sroie-1",
+      "pred": {
+        "merchant": "INDAH GIFT & HOME DECO",
+        "transaction_date": "19/10/2018",
+        "total_amount": 60.3,
+        "tax_amount": null,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "ST-PRIVILEGE CARD/GD INDAH",
+            "amount": 10.0
+          },
+          {
+            "description": "GF-TABLE LAMP/STITCH <I>",
+            "amount": 55.9
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 0.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3687.201583001297,
+      "cost_usd": 0.0003584779316806816
+    },
+    {
+      "id": "sroie-2",
+      "pred": {
+        "merchant": "MR D.I.Y. (JOHOR) SDN BHD",
+        "transaction_date": "12-01-19",
+        "total_amount": 33.9,
+        "tax_amount": null,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "CHOPPING BOARD 35.5X25.5CM 803M# EZ10HD05",
+            "amount": 19.0
+          },
+          {
+            "description": "AIR PRESSURE SPRAYER SX-575-1 1.5L HC03-7",
+            "amount": 8.02
+          },
+          {
+            "description": "WAXCO WINDSHIELD CLEANER 120ML WA14-3A",
+            "amount": 3.02
+          },
+          {
+            "description": "BOPP TAPE 48MM*100M CLEAR FZ-04",
+            "amount": 3.88
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 0.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 5741.5370420021645,
+      "cost_usd": 0.0005582049901946549
+    },
+    {
+      "id": "sroie-3",
+      "pred": {
+        "merchant": "TAN WOON YANN\nYONGFATT ENTERPRISE",
+        "transaction_date": "25/12/2018",
+        "total_amount": 80.9,
+        "tax_amount": 0.0,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "ELEGANT SCHTR BAG 15",
+            "amount": 80.91
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3370.0890420004725,
+      "cost_usd": 0.00032764754575004593
+    },
+    {
+      "id": "sroie-4",
+      "pred": {
+        "merchant": "TAN WOON YANN",
+        "transaction_date": "18-11-18",
+        "total_amount": 30.9,
+        "tax_amount": null,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "KILAT AUTO ECO WASH & SHINE ES1000 1L",
+            "amount": 3.11
+          },
+          {
+            "description": "KILAT' ECO AUTO WASH &WAX EW-1000-1L",
+            "amount": 4.62
+          },
+          {
+            "description": "WD40 27ML MOO 2572",
+            "amount": 11.23
+          },
+          {
+            "description": "KLEENSO AJAIB 99 SERAI WANYI 900G",
+            "amount": 7.45
+          },
+          {
+            "description": "HANDKERCHIEF 71386#2PCS",
+            "amount": 4.5
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 0.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 5627.0099579996895,
+      "cost_usd": 0.0005470704125833031
+    },
+    {
+      "id": "sroie-5",
+      "pred": {
+        "merchant": "ABC HO TRADING",
+        "transaction_date": "09/01/2019",
+        "total_amount": 31.0,
+        "tax_amount": null,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "PLASTIC",
+            "amount": 31.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 0.95,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 0.98
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3684.4372500017926,
+      "cost_usd": 0.00035820917708350754
+    },
+    {
+      "id": "sroie-6",
+      "pred": {
+        "merchant": "SOON HUAT MACHINERY ENTERPRISE",
+        "transaction_date": "11/01/2019",
+        "total_amount": 327.0,
+        "tax_amount": null,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "REPAIR ENGINE POWER SPRAYER (1UNIT)",
+            "amount": 80.0
+          },
+          {
+            "description": "WORKMANSHIP & SERVICE",
+            "amount": 160.0
+          },
+          {
+            "description": "GIANT 606 OVERFLOW ASSY",
+            "amount": 17.0
+          },
+          {
+            "description": "ENGINE OIL",
+            "amount": 10.0
+          },
+          {
+            "description": "GREASE FOR TOOLS 40ML (AKODA)",
+            "amount": 6.0
+          },
+          {
+            "description": "EY20 PLUG CHAMPION",
+            "amount": 8.0
+          },
+          {
+            "description": "STARTER TALI",
+            "amount": 10.0
+          },
+          {
+            "description": "EY20 STARTER HANDLE",
+            "amount": 10.0
+          },
+          {
+            "description": "HD40 1L COTIN",
+            "amount": 36.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 0.95,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 0.98
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 7167.696166998212,
+      "cost_usd": 0.0006968593495692706
+    },
+    {
+      "id": "sroie-7",
+      "pred": {
+        "merchant": "S.H.H. MOTOR (SUNGAI RENGIT) SDN. BHD.",
+        "transaction_date": "23-01-2019",
+        "total_amount": 20.0,
+        "tax_amount": null,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "CROCS 300X17 TUBES",
+            "amount": 20.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 0.9,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3682.788417001575,
+      "cost_usd": 0.0003580488738751531
+    },
+    {
+      "id": "sroie-8",
+      "pred": {
+        "merchant": "PERNIAGAAN ZHENG HUI",
+        "transaction_date": "12/02/2018",
+        "total_amount": 112.45,
+        "tax_amount": 6.37,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "8239 SR: 11\" PROWESS H/DUTY SILICONE GUN G-D2",
+            "amount": 15.0
+          },
+          {
+            "description": "9555075109147 SR: XTRASEAL RTV ACETIC SILICONE SA-107",
+            "amount": 21.0
+          },
+          {
+            "description": "9744 SR: CENTRAL PUNCH SET 3PCS - 1/4\",5/32\",1/4\"",
+            "amount": 18.0
+          },
+          {
+            "description": "12525 SR. 24\" MARKSMAN PIPE WRENCH",
+            "amount": 50.0
+          },
+          {
+            "description": "2016 SR: PVC WIRE TAPE 1PC X 7YD",
+            "amount": 2.1
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 6757.76095800029,
+      "cost_usd": 0.0006570045375833615
+    },
+    {
+      "id": "sroie-9",
+      "pred": {
+        "merchant": "GERBANG ALAF RESTAURANTS SDN BHD",
+        "transaction_date": "18/01/2018",
+        "total_amount": 26.6,
+        "tax_amount": 1.51,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "CHICMCMUFFIN",
+            "amount": 11.0
+          },
+          {
+            "description": "M PORRIDGE",
+            "amount": 5.6
+          },
+          {
+            "description": "BM 2HOTCAKES",
+            "amount": 10.0
+          },
+          {
+            "description": "L COKE",
+            "amount": 26.6
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 4468.305375001364,
+      "cost_usd": 0.00043441857812513257
+    },
+    {
+      "id": "sroie-10",
+      "pred": {
+        "merchant": "SAM SAM TRADING CO",
+        "transaction_date": "29-12-2017",
+        "total_amount": 14.1,
+        "tax_amount": 1.3,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "HE EOG UNICORN TWIN SUPER GLUE USG-99-9557368063013",
+            "amount": 5.2
+          },
+          {
+            "description": "SS EZL A4 CYBER MIX COLOR PAPER 100'S8",
+            "amount": 8.9
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 4025.716583000758,
+      "cost_usd": 0.0003913891122361848
+    },
+    {
+      "id": "sroie-11",
+      "pred": {
+        "merchant": "AIK HUAT HARDWARE ENTERPRISE (SETIA ALAM) SDN BHD",
+        "transaction_date": "15/06/2017",
+        "total_amount": 15.0,
+        "tax_amount": 0.85,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "20\" 1.6KG X 500MM",
+            "amount": 15.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3889.5144170019194,
+      "cost_usd": 0.0003781472349862977
+    },
+    {
+      "id": "sroie-12",
+      "pred": {
+        "merchant": "HOME MASTER HARDWARE & ELECTRICAL",
+        "transaction_date": "22/12/2017",
+        "total_amount": 15.9,
+        "tax_amount": 0.9,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "24MMX7Y M.ONE TAPE",
+            "amount": 15.9
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3171.690832998138,
+      "cost_usd": 0.0003083588309859301
+    },
+    {
+      "id": "sroie-13",
+      "pred": {
+        "merchant": "RESTORAN HASSANBISTRO",
+        "transaction_date": "12/28/2017",
+        "total_amount": 15.0,
+        "tax_amount": 0.0,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "MAKANAN",
+            "amount": 15.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3273.889042000519,
+      "cost_usd": 0.00031829476797227263
+    },
+    {
+      "id": "sroie-14",
+      "pred": {
+        "merchant": "ASIA MART",
+        "transaction_date": "22/12/2017",
+        "total_amount": 32.7,
+        "tax_amount": 1.65,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "S LIME 50G",
+            "amount": 15.25
+          },
+          {
+            "description": "DELICIA CHOCOLATE [50G]",
+            "amount": 3.55
+          },
+          {
+            "description": "GARDENIA ORIGINAL CLASSIC JUMBO [600G]",
+            "amount": 1.5
+          },
+          {
+            "description": "SR",
+            "amount": 1.51
+          },
+          {
+            "description": "DOREMON CATCAT JOY 15G",
+            "amount": 1.51
+          },
+          {
+            "description": "MINUTE MAID PULPY [OREN] [350ML]",
+            "amount": 2.44
+          },
+          {
+            "description": "TINGE LEMON DRINK 500ML",
+            "amount": 1.6
+          },
+          {
+            "description": "100 PLUS [1.50]",
+            "amount": 2.9
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 6961.544124998909,
+      "cost_usd": 0.0006768167899304494
+    },
+    {
+      "id": "sroie-15",
+      "pred": {
+        "merchant": "HOME MASTER HARDWARE & ELECTRICAL",
+        "transaction_date": "22/12/2017",
+        "total_amount": 15.9,
+        "tax_amount": 0.9,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "24MMX7Y M.ONE TAPE",
+            "amount": 15.9
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3040.0506660007522,
+      "cost_usd": 0.00029556048141673975
+    },
+    {
+      "id": "sroie-16",
+      "pred": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/12/2017",
+        "total_amount": 73.0,
+        "tax_amount": 4.13,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "T5 JOINT 2PIN 2PCS",
+            "amount": 2.83
+          },
+          {
+            "description": "YE30 BK 7W WW LED TRACK LIGHT",
+            "amount": 66.04
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3713.9866249999614,
+      "cost_usd": 0.0003610820329861073
+    },
+    {
+      "id": "sroie-17",
+      "pred": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/11/2017",
+        "total_amount": 39.8,
+        "tax_amount": 2.25,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "1059 18W SQ WW BK SUR LED LIGHT",
+            "amount": 18.77
+          },
+          {
+            "description": "1059 SQUARE BLACK FRAME",
+            "amount": 18.78
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3684.853958999156,
+      "cost_usd": 0.0003582496904582512
+    },
+    {
+      "id": "sroie-18",
+      "pred": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/12/2017",
+        "total_amount": 73.0,
+        "tax_amount": 4.13,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "T5 JOINT 2PIN 2PCS",
+            "amount": 2.83
+          },
+          {
+            "description": "YE30 BK 7W WW LED TRACK LIGHT",
+            "amount": 66.04
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3605.276292000781,
+      "cost_usd": 0.00035051297283340924
+    },
+    {
+      "id": "sroie-19",
+      "pred": {
+        "merchant": "SHELL ISNI PETRO TRADING",
+        "transaction_date": "18/03/18",
+        "total_amount": 86.0,
+        "tax_amount": 4.87,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "35.10 LITRE PUMP # 02 V-POWER 97",
+            "amount": 81.13
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3353.5663330003445,
+      "cost_usd": 0.0003260411712639224
+    },
+    {
+      "id": "sroie-20",
+      "pred": {
+        "merchant": "SYL ROASTED DELIGHTS SDN. BHD.",
+        "transaction_date": "06/03/2018",
+        "total_amount": 54.5,
+        "tax_amount": 3.08,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "T02) BRAISED PORK",
+            "amount": 14.0
+          },
+          {
+            "description": "RICE WITH PEANUT T PORK - SMALL",
+            "amount": 12.0
+          },
+          {
+            "description": "(V02) SOUR & SPICY",
+            "amount": 12.0
+          },
+          {
+            "description": "(B03) JASMINE GREEN TEA",
+            "amount": 4.6
+          },
+          {
+            "description": "(R05) ROAST PORK +",
+            "amount": 11.9
+          },
+          {
+            "description": "ROAST CHICKEN RICE",
+            "amount": 11.9
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 5968.80987500117,
+      "cost_usd": 0.0005803009600695582
+    },
+    {
+      "id": "sroie-21",
+      "pred": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "18/01/2018",
+        "total_amount": 4.9,
+        "tax_amount": 0.28,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "JIANYU STELL RULER 30CM THICK",
+            "amount": 3.3
+          },
+          {
+            "description": "LAMINATE FILM",
+            "amount": 1.3
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3650.576916999853,
+      "cost_usd": 0.0003549172002638746
+    },
+    {
+      "id": "sroie-22",
+      "pred": {
+        "merchant": "FUYI MINI MARKET",
+        "transaction_date": "25/01/2018",
+        "total_amount": 8.49,
+        "tax_amount": 0.51,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "SUMMER CUP 48X230ML",
+            "amount": 8.49
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 0.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3172.3772910008847,
+      "cost_usd": 0.0003084255699584193
+    },
+    {
+      "id": "sroie-23",
+      "pred": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "17/01/2018",
+        "total_amount": 27.55,
+        "tax_amount": 1.56,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "LION FILE 220*307 LAMINATING FILM",
+            "amount": 26.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3684.1581250009767,
+      "cost_usd": 0.0003581820399306505
+    },
+    {
+      "id": "sroie-24",
+      "pred": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "15/01/2018",
+        "total_amount": 55.1,
+        "tax_amount": 3.12,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "CBE BADGE CLIP 100PCS",
+            "amount": 24.0
+          },
+          {
+            "description": "NISO A4 LAMINATING FILM",
+            "amount": 28.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3748.562832999596,
+      "cost_usd": 0.0003644436087638496
+    },
+    {
+      "id": "sroie-25",
+      "pred": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "23/01/2018",
+        "total_amount": 18.0,
+        "tax_amount": 1.02,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "DOUBLE SIDED TISSUE TAPE 18MM",
+            "amount": 6.6
+          },
+          {
+            "description": "G SOFT 6ML QUICK DRY CORRECTION PEN",
+            "amount": 10.38
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3926.084541999444,
+      "cost_usd": 0.0003817026638055015
+    },
+    {
+      "id": "sroie-26",
+      "pred": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "23/01/2018",
+        "total_amount": 18.0,
+        "tax_amount": 1.02,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "DOUBLE SIDED TISSUE TAPE 18MM",
+            "amount": 6.6
+          },
+          {
+            "description": "G SOFT 6ML QUICK DRY CORRECTION PEN",
+            "amount": 10.38
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 4195.752542000264,
+      "cost_usd": 0.00040792038602780346
+    },
+    {
+      "id": "sroie-27",
+      "pred": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "12/02/2018",
+        "total_amount": 153.35,
+        "tax_amount": 8.68,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "IK YELLOW 70GRAMS",
+            "amount": 105.66
+          },
+          {
+            "description": "PAPYRUS DARK COLOUR PAPER",
+            "amount": 17.45
+          },
+          {
+            "description": "ARTLINE 70",
+            "amount": 2.7
+          },
+          {
+            "description": "FASTER CX5N BALL PEN",
+            "amount": 0.85
+          },
+          {
+            "description": "CBE HANDYCUTTER",
+            "amount": 1.7
+          },
+          {
+            "description": "CBE A4 SIZE 20 POCKETS REFILLABLE NEW CLEAR HOLDER",
+            "amount": 8.4
+          },
+          {
+            "description": "EAGLE F4 120 NUMBERING FOOLSCAP BOOK",
+            "amount": 7.92
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 6143.465457997081,
+      "cost_usd": 0.0005972813639719384
+    },
+    {
+      "id": "sroie-28",
+      "pred": {
+        "merchant": "MR. D.I.Y. (M) SDN BHD",
+        "transaction_date": "14-03-18",
+        "total_amount": 37.1,
+        "tax_amount": 2.1,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "SCISSOR G/FISH",
+            "amount": 11.2
+          },
+          {
+            "description": "TRAILING SKT 5GN+SP 3X1.25MM CABLE 2",
+            "amount": 22.9
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3989.7160420005093,
+      "cost_usd": 0.00038788905963893836
+    },
+    {
+      "id": "sroie-29",
+      "pred": {
+        "merchant": "99 SPEED MART S/B",
+        "transaction_date": "24-01-18",
+        "total_amount": null,
+        "tax_amount": 0.14,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "1973 GARBAGE BAG (BLUE)",
+            "amount": 1.25
+          },
+          {
+            "description": "1974 GARBAGE BAG (GREEN)",
+            "amount": 1.25
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 0.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3888.947041999927,
+      "cost_usd": 0.00037809207352777063
+    },
+    {
+      "id": "sroie-30",
+      "pred": {
+        "merchant": "C W KHOO HARDWARE SDN BHD",
+        "transaction_date": "01-03-18",
+        "total_amount": 21.2,
+        "tax_amount": 1.2,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "AIR ADAPTOR @ 1",
+            "amount": 20.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3023.740332999296,
+      "cost_usd": 0.0002939747545971537
+    },
+    {
+      "id": "sroie-31",
+      "pred": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "05 MAR 2018",
+        "total_amount": 8.2,
+        "tax_amount": 0.46,
+        "currency": "USD",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "SR 100100000060- 4 VEGE",
+            "amount": 5.5
+          },
+          {
+            "description": "SR 100100000006- PORK",
+            "amount": 2.7
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3702.5034580001375,
+      "cost_usd": 0.0003599656139722356
+    },
+    {
+      "id": "sroie-32",
+      "pred": {
+        "merchant": "AEON CO. (M) BHD",
+        "transaction_date": "06/03/2018",
+        "total_amount": 75.0,
+        "tax_amount": 4.25,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "AMBROSIAL GREEK",
+            "amount": 75.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3509.09504199808,
+      "cost_usd": 0.0003411620179720355
+    },
+    {
+      "id": "sroie-33",
+      "pred": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "03 MAR 2018",
+        "total_amount": 8.2,
+        "tax_amount": 0.46,
+        "currency": "USD",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "MEAT + 3 VEGE",
+            "amount": 7.1
+          },
+          {
+            "description": "VEGETABLE",
+            "amount": 1.1
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3581.6612080016057,
+      "cost_usd": 0.000348217061889045
+    },
+    {
+      "id": "sroie-34",
+      "pred": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "10-03-2018",
+        "total_amount": 8.2,
+        "tax_amount": 0.46,
+        "currency": "USD",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "MEAT + 3 VEGE",
+            "amount": 7.1
+          },
+          {
+            "description": "VEGETABLE",
+            "amount": 1.1
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3376.985958999285,
+      "cost_usd": 0.0003283180793471526
+    },
+    {
+      "id": "sroie-35",
+      "pred": {
+        "merchant": "PERNIAGAAN ZHENG HUI",
+        "transaction_date": "09/03/2018",
+        "total_amount": 332.3,
+        "tax_amount": 18.81,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "SR: 14\" TRU-CUT CUTTING DISC (1 PC)",
+            "amount": 170.0
+          },
+          {
+            "description": "SR: KOBELCO G-12#(2.6MM) WELDING",
+            "amount": 35.0
+          },
+          {
+            "description": "SR: CS 3\" (750) PAINT BRUSH",
+            "amount": 15.0
+          },
+          {
+            "description": "SR: CS 2\" (750) PAINT BRUSH",
+            "amount": 11.0
+          },
+          {
+            "description": "SR: CS 1-1/2\" (750) PAINT BRUSH",
+            "amount": 3.5
+          },
+          {
+            "description": "SR: 2\" LAMBWOOL YANDA ROLLER REFIL - 20 PCS",
+            "amount": 25.0
+          },
+          {
+            "description": "SR: DIAMOND COTTON GLOVE 8104",
+            "amount": 6.0
+          },
+          {
+            "description": "SR: 10# WELDING GLASS (BLACK) 1PCS",
+            "amount": 5.0
+          },
+          {
+            "description": "SR: WELDING GLASS (CLEAR) 1 PC",
+            "amount": 3.0
+          },
+          {
+            "description": "SR: AEC BROOM NO.5110# C/W IRON HANDLE",
+            "amount": 16.0
+          },
+          {
+            "description": "SR: S/STEEL DUST PANL C/W HANDLE 23 X 28 X",
+            "amount": 24.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 10284.331875001953,
+      "cost_usd": 0.0009998655989585231
+    },
+    {
+      "id": "sroie-36",
+      "pred": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "12-03-2018",
+        "total_amount": 8.2,
+        "tax_amount": 0.46,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "MEAT + 3 VEGE",
+            "amount": 7.1
+          },
+          {
+            "description": "VEGETABLE",
+            "amount": 1.1
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3535.1672079996206,
+      "cost_usd": 0.00034369681188885194
+    },
+    {
+      "id": "sroie-37",
+      "pred": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "14/03/2018",
+        "total_amount": 8.2,
+        "tax_amount": 0.46,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "SR I00100000060-4 VEGE",
+            "amount": 5.5
+          },
+          {
+            "description": "SR I00100000006-PORK",
+            "amount": 2.7
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3991.600708999613,
+      "cost_usd": 0.0003880722911527401
+    },
+    {
+      "id": "sroie-38",
+      "pred": {
+        "merchant": "WARAKUYA PERMAS CITY SDN BHD",
+        "transaction_date": "10/03/2018",
+        "total_amount": 57.8,
+        "tax_amount": 3.27,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "SABA SHIO YAKI SEY",
+            "amount": 53.7
+          },
+          {
+            "description": "SALMON SHIO SET",
+            "amount": 21.9
+          },
+          {
+            "description": "ICED GREEN TEA",
+            "amount": 4.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 4094.407542001136,
+      "cost_usd": 0.0003980673999167771
+    },
+    {
+      "id": "sroie-39",
+      "pred": {
+        "merchant": "YHM AEON TEBRAU CITY",
+        "transaction_date": "11/03/2018",
+        "total_amount": 13.1,
+        "tax_amount": 0.74,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "GREEN TEA",
+            "amount": 1.5
+          },
+          {
+            "description": "KAKE UDON R",
+            "amount": 8.8
+          },
+          {
+            "description": "ENOKI TEMPURA",
+            "amount": 2.8
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3991.7427500004123,
+      "cost_usd": 0.0003880861006944845
+    },
+    {
+      "id": "sroie-40",
+      "pred": {
+        "merchant": "BREWERY TAP",
+        "transaction_date": "30/03/2018",
+        "total_amount": 189.75,
+        "tax_amount": 10.74,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "TIGER 2 BUCKET - HH",
+            "amount": 95.0
+          },
+          {
+            "description": "2 TIGER BUCKET- HH",
+            "amount": 50.0
+          },
+          {
+            "description": "CHICKEN WINGS",
+            "amount": 22.0
+          },
+          {
+            "description": "FRENCH FRIES",
+            "amount": 12.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 4504.659082998842,
+      "cost_usd": 0.00043795296640266517
+    },
+    {
+      "id": "sroie-41",
+      "pred": {
+        "merchant": "THREE STOOGES BISTRO & CAFE",
+        "transaction_date": "12/03/2018",
+        "total_amount": 343.95,
+        "tax_amount": 19.47,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "HH GUINESS 12 GLASSES",
+            "amount": 150.0
+          },
+          {
+            "description": "HH TIGER 12 GLASSES",
+            "amount": 145.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 4097.666624998965,
+      "cost_usd": 0.00039838425520823264
+    },
+    {
+      "id": "sroie-42",
+      "pred": {
+        "merchant": "THREE STOOGES BISTRO & CAFE",
+        "transaction_date": "03/03/2018",
+        "total_amount": 174.9,
+        "tax_amount": 9.9,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "HH GUINESS 12 GLASSES",
+            "amount": 150.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3373.076250001759,
+      "cost_usd": 0.000327937968750171
+    },
+    {
+      "id": "sroie-43",
+      "pred": {
+        "merchant": "TASTE OF THE WORLD SDN BHD",
+        "transaction_date": "5/3/2018",
+        "total_amount": 64.15,
+        "tax_amount": 3.63,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "S TIGER BUCKET GTG02",
+            "amount": 58.3
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3273.225625001942,
+      "cost_usd": 0.000318230269097411
+    },
+    {
+      "id": "sroie-44",
+      "pred": {
+        "merchant": "32 PUB & BISTRO OWN BY CNU TRADING",
+        "transaction_date": "10-03-2018",
+        "total_amount": 190.0,
+        "tax_amount": 10.75,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "HEINEKEN (5 BTL)",
+            "amount": 95.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3684.2729999989388,
+      "cost_usd": 0.00035819320833323015
+    },
+    {
+      "id": "sroie-45",
+      "pred": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "18/03/2018",
+        "total_amount": 8.6,
+        "tax_amount": 0.49,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "SR I00100000031-3 VEGE",
+            "amount": 4.4
+          },
+          {
+            "description": "SR I00100000064-ADD VEGETABLE",
+            "amount": 0.5
+          },
+          {
+            "description": "SR I00100000114-ADD CHICKEN",
+            "amount": 3.7
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 4604.63504099971,
+      "cost_usd": 0.00044767285120830515
+    },
+    {
+      "id": "sroie-46",
+      "pred": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "27/03/2018",
+        "total_amount": 6.9,
+        "tax_amount": 0.39,
+        "currency": "MYR",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "SR I00100000056-FRIED NOODLE(S)",
+            "amount": 2.0
+          },
+          {
+            "description": "SR I00100000006-PORK",
+            "amount": 2.7
+          },
+          {
+            "description": "SR I00100000015-VEGETABLE",
+            "amount": 1.1
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 4607.183250001981,
+      "cost_usd": 0.0004479205937501926
+    },
+    {
+      "id": "sroie-47",
+      "pred": {
+        "merchant": "PASAR MINI JIN SENG",
+        "transaction_date": "18/03/18",
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": "ZRL",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "VEGETABLES",
+            "amount": 2.2
+          },
+          {
+            "description": "LTK OMEGA",
+            "amount": 5.7
+          },
+          {
+            "description": "VEGETABLES",
+            "amount": 1.0
+          },
+          {
+            "description": "VEGETABLES",
+            "amount": 2.0
+          },
+          {
+            "description": "VEGETABLES",
+            "amount": 8.0
+          },
+          {
+            "description": "SEAFOOD",
+            "amount": 8.5
+          },
+          {
+            "description": "FISH BALL / CAKE",
+            "amount": 1.2
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 0.0,
+          "tax_amount": 0.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 5289.259459001187,
+      "cost_usd": 0.0005142335585140043
+    },
+    {
+      "id": "sroie-48",
+      "pred": {
+        "merchant": "RESTAURANT SIN DU",
+        "transaction_date": "09/03/2018",
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "DPT.05",
+            "amount": 149.0
+          },
+          {
+            "description": "DPT.04",
+            "amount": 21.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 0.0,
+          "tax_amount": 0.0,
+          "currency": 1.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3286.0388750013954,
+      "cost_usd": 0.00031947600173624674
+    },
+    {
+      "id": "sroie-49",
+      "pred": {
+        "merchant": "YONG TAT HARDWARE TRADING",
+        "transaction_date": "13/03/2018",
+        "total_amount": 100.9,
+        "tax_amount": 5.71,
+        "currency": "RM",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "2697",
+            "amount": 50.88
+          },
+          {
+            "description": "5736",
+            "amount": 50.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 1.0,
+          "total_amount": 1.0,
+          "tax_amount": 1.0,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3602.0523340012005,
+      "cost_usd": 0.00035019953247233894
+    },
+    {
+      "id": "cord-0",
+      "pred": {
+        "merchant": "TICKET CP",
+        "transaction_date": null,
+        "total_amount": 60.0,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.0,
+          "total_amount": 1.0,
+          "tax_amount": 0.0,
+          "currency": 0.0,
+          "line_items": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 2967.850000000908,
+      "cost_usd": 0.00028854097222231047
+    },
+    {
+      "id": "cord-1",
+      "pred": {
+        "merchant": "J.STB",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "J.STB PROMO",
+            "amount": 17500.0
+          },
+          {
+            "description": "Y.B.BAT",
+            "amount": 46000.0
+          },
+          {
+            "description": "Y.BASO PROM",
+            "amount": 27500.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.9,
+          "total_amount": 0.8,
+          "tax_amount": 0.7,
+          "currency": 0.6,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3786.8194580005365,
+      "cost_usd": 0.00036816300286116326
+    },
+    {
+      "id": "cord-2",
+      "pred": {
+        "merchant": "JASMINE MT",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.0,
+          "total_amount": 0.0,
+          "tax_amount": 0.0,
+          "currency": 0.0,
+          "line_items": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 2162.223624996841,
+      "cost_usd": 0.00021021618576358176
+    },
+    {
+      "id": "cord-3",
+      "pred": {
+        "merchant": "DONAT GULA",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.0,
+          "total_amount": 0.0,
+          "tax_amount": 0.0,
+          "currency": 0.0,
+          "line_items": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 2544.7616250021383,
+      "cost_usd": 0.0002474073802085412
+    },
+    {
+      "id": "cord-4",
+      "pred": {
+        "merchant": "ICE BLACKCOFFE",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "ICE BLACKCOFFE",
+            "amount": 82000.0
+          },
+          {
+            "description": "AVOCADO COFFEE",
+            "amount": 61000.0
+          },
+          {
+            "description": "CHIKEN KATSU FF",
+            "amount": 51000.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.9,
+          "total_amount": 0.8,
+          "tax_amount": 0.7,
+          "currency": 0.6,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3685.3692089971446,
+      "cost_usd": 0.0003582997842080557
+    },
+    {
+      "id": "cord-5",
+      "pred": {
+        "merchant": "TRAD KY TOAST CARTE",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.0,
+          "total_amount": 0.0,
+          "tax_amount": 0.0,
+          "currency": 0.0,
+          "line_items": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 2215.8875839995744,
+      "cost_usd": 0.00021543351511106972
+    },
+    {
+      "id": "cord-6",
+      "pred": {
+        "merchant": "null",
+        "transaction_date": "null",
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": "null",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "EGG TART",
+            "amount": 13000.0
+          },
+          {
+            "description": "CHOCO CUS ARD PASTRY",
+            "amount": 24000.0
+          },
+          {
+            "description": "REDBEAN BREAD",
+            "amount": 9000.0
+          }
+        ],
+        "confidence": {
+          "merchant": 0.05,
+          "transaction_date": 0.05,
+          "total_amount": 0.05,
+          "tax_amount": 0.05,
+          "currency": 0.05,
+          "line_items": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": true,
+      "latency_ms": 4230.86341599992,
+      "cost_usd": 0.0004113339432222144
+    },
+    {
+      "id": "cord-7",
+      "pred": {
+        "merchant": "Kupon",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.0,
+          "total_amount": 0.0,
+          "tax_amount": 0.0,
+          "currency": 0.0,
+          "line_items": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 2352.9358329979004,
+      "cost_usd": 0.00022875765043035143
+    },
+    {
+      "id": "cord-8",
+      "pred": {
+        "merchant": "BLACK SAKURA",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.0,
+          "total_amount": 0.0,
+          "tax_amount": 0.0,
+          "currency": 0.0,
+          "line_items": 0.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 2175.1522080012364,
+      "cost_usd": 0.00021147313133345355
+    },
+    {
+      "id": "cord-9",
+      "pred": {
+        "merchant": "Bumbu Kaldu",
+        "transaction_date": null,
+        "total_amount": 136000.0,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.9,
+          "total_amount": 1.0,
+          "tax_amount": 0.9,
+          "currency": 0.9,
+          "line_items": 0.9,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 2838.415707999957,
+      "cost_usd": 0.000275957082722218
+    },
+    {
+      "id": "cord-10",
+      "pred": {
+        "merchant": "CINNAMON SUGAR",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.0,
+          "total_amount": 0.0,
+          "tax_amount": 0.0,
+          "currency": 0.0,
+          "line_items": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 2353.3583329990506,
+      "cost_usd": 0.00022879872681935213
+    },
+    {
+      "id": "cord-11",
+      "pred": {
+        "merchant": "BANABERRY",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "FRESH CREAM CAK",
+            "amount": 230000.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.9,
+          "total_amount": 0.8,
+          "tax_amount": 0.7,
+          "currency": 0.6,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 2968.5157089988934,
+      "cost_usd": 0.000288605693930448
+    },
+    {
+      "id": "cord-12",
+      "pred": {
+        "merchant": "BLUS WANITA",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "BLUS WANITA 120,000",
+            "amount": 120000.0
+          },
+          {
+            "description": "SHOPPING BAG 0",
+            "amount": 0.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.95,
+          "total_amount": 0.95,
+          "tax_amount": 0.95,
+          "currency": 0.95,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3786.4359580016753,
+      "cost_usd": 0.00036812571813905177
+    },
+    {
+      "id": "cord-13",
+      "pred": {
+        "merchant": "BASO KUAH",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "A.MINERAL GELAS",
+            "amount": 3000.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.9,
+          "total_amount": 0.8,
+          "tax_amount": 0.8,
+          "currency": 0.8,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 2931.5326670002833,
+      "cost_usd": 0.00028501012040280533
+    },
+    {
+      "id": "cord-14",
+      "pred": {
+        "merchant": "RedVelvet",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "RedVelvet Cheese Slc",
+            "amount": 38000.0
+          },
+          {
+            "description": "Chicken Baked Rice",
+            "amount": 55000.0
+          },
+          {
+            "description": "Fish n Chips",
+            "amount": 65000.0
+          },
+          {
+            "description": "Mushroom Soup",
+            "amount": 35000.0
+          },
+          {
+            "description": "Chamomile",
+            "amount": 25000.0
+          },
+          {
+            "description": "Iced Tea",
+            "amount": 20000.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.0,
+          "total_amount": 0.0,
+          "tax_amount": 0.0,
+          "currency": 0.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 4539.691124999081,
+      "cost_usd": 0.0004413588593749106
+    },
+    {
+      "id": "cord-15",
+      "pred": {
+        "merchant": "null",
+        "transaction_date": "null",
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "Lemon Tea (L)",
+            "amount": 25.0
+          },
+          {
+            "description": "Caramel Small",
+            "amount": 38.0
+          }
+        ],
+        "confidence": {
+          "merchant": 0.0,
+          "transaction_date": 0.0,
+          "total_amount": 0.0,
+          "tax_amount": 0.0,
+          "currency": 0.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": true,
+      "latency_ms": 3581.569500001933,
+      "cost_usd": 0.0003482081458335213
+    },
+    {
+      "id": "cord-16",
+      "pred": {
+        "merchant": "LG",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "BLACK SAKURA",
+            "amount": 59091.0
+          },
+          {
+            "description": "IVINERAL WATER (bundling)",
+            "amount": 4545.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.9,
+          "total_amount": 0.8,
+          "tax_amount": 0.7,
+          "currency": 0.6,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3375.0760839975555,
+      "cost_usd": 0.0003281323970553179
+    },
+    {
+      "id": "cord-17",
+      "pred": {
+        "merchant": "Goblin's Mace",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "Goblin's Mace 25,000",
+            "amount": 25000.0
+          },
+          {
+            "description": "Mozarella Hot Dog 38,000",
+            "amount": 38000.0
+          },
+          {
+            "description": "Chili Pepper Croquette 14,000",
+            "amount": 14000.0
+          },
+          {
+            "description": "Cheese Croquette 14,000",
+            "amount": 14000.0
+          },
+          {
+            "description": "Plastik Amook 0",
+            "amount": 0.0
+          },
+          {
+            "description": "Plastik Putih Take Away 0",
+            "amount": 0.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.0,
+          "total_amount": 0.0,
+          "tax_amount": 0.0,
+          "currency": 0.0,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 5164.352166000754,
+      "cost_usd": 0.0005020897939167399
+    },
+    {
+      "id": "cord-18",
+      "pred": {
+        "merchant": "Propolis Cair",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.0,
+          "total_amount": 0.0,
+          "tax_amount": 0.0,
+          "currency": 0.0,
+          "line_items": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 2515.776457999891,
+      "cost_usd": 0.0002445893778611005
+    },
+    {
+      "id": "cord-19",
+      "pred": {
+        "merchant": "AMBUSH",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.0,
+          "total_amount": 0.0,
+          "tax_amount": 0.0,
+          "currency": 0.0,
+          "line_items": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 2349.9018750007963,
+      "cost_usd": 0.00022846268229174407
+    },
+    {
+      "id": "cord-20",
+      "pred": {
+        "merchant": "null",
+        "transaction_date": "null",
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "cashew nuts chkn",
+            "amount": 64500.0
+          },
+          {
+            "description": "garlic pepper beef",
+            "amount": 79500.0
+          },
+          {
+            "description": "red curry beef",
+            "amount": 69500.0
+          },
+          {
+            "description": "phad thai",
+            "amount": 64500.0
+          },
+          {
+            "description": "steamed rice",
+            "amount": 47600.0
+          }
+        ],
+        "confidence": {
+          "merchant": 0.05,
+          "transaction_date": 0.05,
+          "total_amount": 0.05,
+          "tax_amount": 0.05,
+          "currency": 0.05,
+          "line_items": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": true,
+      "latency_ms": 4402.080542000476,
+      "cost_usd": 0.0004279800526944907
+    },
+    {
+      "id": "cord-21",
+      "pred": {
+        "merchant": "NASI GOR SFD TLR",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": "Rp",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "ES TEH TAWAR",
+            "amount": 3000.0
+          },
+          {
+            "description": "NASI GOR SFD TLR",
+            "amount": 35000.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.9,
+          "total_amount": 0.8,
+          "tax_amount": 0.7,
+          "currency": 1.0,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3712.488791999931,
+      "cost_usd": 0.00036093641033332663
+    },
+    {
+      "id": "cord-22",
+      "pred": {
+        "merchant": "SOFT STEAMED",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "CHEESEC 20,000",
+            "amount": 20000.0
+          },
+          {
+            "description": "CHOCOCA 20,000",
+            "amount": 20000.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.95,
+          "total_amount": 0.95,
+          "tax_amount": 0.95,
+          "currency": 0.95,
+          "line_items": 1.0
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3451.0195830007433,
+      "cost_usd": 0.00033551579279173893
+    },
+    {
+      "id": "cord-23",
+      "pred": {
+        "merchant": "TWIST DONUT",
+        "transaction_date": null,
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "TWIST DONUT",
+            "amount": 54000.0
+          },
+          {
+            "description": "REDBEAN BREAD",
+            "amount": 9000.0
+          }
+        ],
+        "confidence": {
+          "merchant": 1.0,
+          "transaction_date": 0.95,
+          "total_amount": 0.95,
+          "tax_amount": 0.95,
+          "currency": 0.95,
+          "line_items": 1.0,
+          "confidence": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": false,
+      "latency_ms": 3376.8056250009977,
+      "cost_usd": 0.0003283005468750969
+    },
+    {
+      "id": "cord-24",
+      "pred": {
+        "merchant": "null",
+        "transaction_date": "null",
+        "total_amount": null,
+        "tax_amount": null,
+        "currency": "Rp",
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [
+          {
+            "description": "5001-Corn Flakes Cookies",
+            "amount": 56000.0
+          },
+          {
+            "description": "5003-Chokoreto Cookies",
+            "amount": 62000.0
+          },
+          {
+            "description": "6002-Plastic Bag Medium",
+            "amount": 0.0
+          }
+        ],
+        "confidence": {
+          "merchant": 0.05,
+          "transaction_date": 0.05,
+          "total_amount": 0.05,
+          "tax_amount": 0.05,
+          "currency": 0.95,
+          "line_items": 0.95
+        }
+      },
+      "attempts": 1,
+      "repaired": false,
+      "escalated": true,
+      "latency_ms": 4299.808666000899,
+      "cost_usd": 0.0004180369536389763
+    }
+  ],
+  "wandb_url": "https://forge.coreweave.com/wandb/loneking193-self/expenseiq/runs/27kf16pd"
+}

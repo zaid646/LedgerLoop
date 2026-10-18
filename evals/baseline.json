@@ -1,10 +1,11 @@
 {
-  "note": "Placeholder baseline = heuristic engine on golden v0. Replace with the prod LLM baseline once the vLLM endpoint is up (evals/run_evals.py --engine llm).",
-  "engine": "heuristic",
+  "note": "Baseline = prod LLM (Qwen2.5-7B-Instruct via vLLM) on golden v0. Heuristic floor: overall 0.6089.",
+  "engine": "llm",
   "golden": "v0",
-  "overall_accuracy": 0.6089,
-  "field_accuracy": { "merchant": 0.64, "total_amount": 0.3467, "transaction_date": 0.84 },
-  "p95_latency_ms": 0.0,
+  "model": "Qwen2.5-7B-Instruct",
+  "overall_accuracy": 0.8089,
+  "field_accuracy": { "merchant": 0.96, "total_amount": 0.6267, "transaction_date": 0.84 },
+  "p95_latency_ms": 6143.47,
   "repaired_rate": 0.0,
-  "escalated_rate": 0.0
+  "escalated_rate": 0.0533
 }

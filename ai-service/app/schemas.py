@@ -37,7 +37,9 @@ class ReceiptExtraction(BaseModel):
     """Structured receipt fields. Used as the LLM's guided JSON schema."""
 
     merchant: str = Field(description="Merchant or vendor name")
-    transaction_date: str | None = Field(default=None, description="ISO-8601 date YYYY-MM-DD")
+    transaction_date: str | None = Field(
+        default=None, description="Transaction date as printed on the receipt (e.g. 25/12/2018 or 2024-01-31)"
+    )
     total_amount: float | None = Field(default=None, description="Grand total")
     tax_amount: float | None = Field(default=None, description="Tax/VAT amount if present")
     currency: str | None = Field(default=None, description="ISO-4217 currency code")

@@ -44,7 +44,20 @@ def validate_extraction(data: dict[str, Any]) -> list[str]:
 
 
 def _low_confidence(extraction: ReceiptExtraction, threshold: float) -> list[str]:
-    return [f for f, c in extraction.confidence.items() if isinstance(c, (int, float)) and c < threshold]
+    """Fields the model extracted but is unsure about.
+
+    Absent fields (``None`` / empty) are ignored: a low/zero score on a field
+    that was not present must not trigger a human escalation.
+    """
+    values = extraction.model_dump()
+    low: list[str] = []
+    for f, c in extraction.confidence.items():
+        if not isinstance(c, (int, float)) or c >= threshold:
+            continue
+        if values.get(f) in (None, "", []):
+            continue
+        low.append(f)
+    return low
 
 
 async def extract_with_healing(
@@ -74,13 +87,29 @@ async def extract_with_healing(
     for attempt in range(1, max_attempts + 1):
         # last attempt uses the fallback model
         model = settings.vllm_fallback_model if attempt == max_attempts and max_attempts > 1 else model_used
-        data, result = await client.complete_json(
-            messages,
-            schema=schema,
-            model=model,
-            temperature=float(prompt.params.get("temperature", 0.0)),
-            max_tokens=int(prompt.params.get("max_tokens", 700)),
-        )
+        try:
+            data, result = await client.complete_json(
+                messages,
+                schema=schema,
+                model=model,
+                temperature=float(prompt.params.get("temperature", 0.0)),
+                max_tokens=int(prompt.params.get("max_tokens", 700)),
+            )
+        except Exception as e:  # noqa: BLE001 — treat any failure as a retryable error
+            errors = [f"request failed: {e}"]
+            messages = [
+                {"role": "system", "content": prompt.system},
+                {"role": "user", "content": prompt.render(text=text)},
+                {
+                    "role": "user",
+                    "content": (
+                        f"Your previous response could not be parsed as JSON: {e}. "
+                        "Return ONLY a valid JSON object matching the schema."
+                    ),
+                },
+            ]
+            continue
+
         total_latency += result.latency_ms
         total_cost += result.cost_usd
 

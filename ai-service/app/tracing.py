@@ -60,14 +60,37 @@ class Tracer:
     ) -> None:
         if not (self.enabled and self._client is not None):
             return
+        client = self._client
         with contextlib.suppress(Exception):
-            self._client.trace(name=name, metadata=metadata or {}).generation(
-                name=name,
-                model=model,
-                input=input,
-                output=output,
-                usage=usage or {},
-            )
+            if hasattr(client, "start_observation"):  # Langfuse SDK >=3 (OTEL)
+                gen = client.start_observation(
+                    name=name,
+                    as_type="generation",
+                    model=model,
+                    input=input,
+                    output=output,
+                    metadata=metadata or {},
+                )
+                gen.end()
+            elif hasattr(client, "start_generation"):  # early v3 alias
+                gen = client.start_generation(
+                    name=name,
+                    model=model,
+                    input=input,
+                    output=output,
+                    usage=usage or {},
+                    metadata=metadata or {},
+                )
+                gen.end()
+            else:  # Langfuse SDK v2
+                client.trace(name=name, metadata=metadata or {}).generation(
+                    name=name,
+                    model=model,
+                    input=input,
+                    output=output,
+                    usage=usage or {},
+                )
+            client.flush()
 
     def flush(self) -> None:
         if self.enabled and self._client is not None:

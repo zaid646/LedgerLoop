@@ -65,10 +65,10 @@ async def run_llm(records: list[dict], stage: str, limit: int | None) -> list[di
         if limit is not None and i >= limit:
             break
         text = redact(r["text"]).text
-        outcome = await extract_with_healing(text, stage=stage)
-        pred = outcome.extraction.model_dump() if outcome.extraction else {}
-        preds.append(
-            {
+        try:
+            outcome = await extract_with_healing(text, stage=stage)
+            pred = outcome.extraction.model_dump() if outcome.extraction else {}
+            row = {
                 "id": r["id"],
                 "pred": pred,
                 "attempts": outcome.attempts,
@@ -77,7 +77,18 @@ async def run_llm(records: list[dict], stage: str, limit: int | None) -> list[di
                 "latency_ms": outcome.latency_ms,
                 "cost_usd": outcome.cost_usd,
             }
-        )
+        except Exception as e:  # noqa: BLE001 — never abort the whole eval on one doc
+            row = {
+                "id": r["id"],
+                "pred": {},
+                "attempts": 0,
+                "repaired": False,
+                "escalated": True,
+                "latency_ms": 0.0,
+                "cost_usd": 0.0,
+                "error": str(e),
+            }
+        preds.append(row)
     return preds
 
 

@@ -1,0 +1,22 @@
+{
+  "n": 75,
+  "field_accuracy": {
+    "merchant": 0.96,
+    "total_amount": 0.6267,
+    "transaction_date": 0.84
+  },
+  "field_support": {
+    "merchant": 50,
+    "total_amount": 75,
+    "transaction_date": 50
+  },
+  "exact_doc_match": 0.4933,
+  "p50_latency_ms": 3684.44,
+  "p95_latency_ms": 6143.47,
+  "mean_cost_usd": 0.00038113,
+  "total_cost_usd": 0.028585,
+  "repaired_rate": 0.0,
+  "escalated_rate": 0.0533
+}
+
+wandb: https://forge.coreweave.com/wandb/loneking193-self/expenseiq/runs/27kf16pd

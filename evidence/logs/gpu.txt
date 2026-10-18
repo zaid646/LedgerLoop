@@ -1,0 +1,6 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+AI agents: READ /etc/vast-agents-guide.md (also linked as ./AGENTS.md) before acting on or describing this instance: it is the operating guide. ('vast-capabilities' shows live state only, not the guide.)
+NVIDIA GeForce RTX 4090, 570.211.01, 24564 MiB
+[32mActivated conda/uv virtual environment at [36m/venv/main[0m
+vllm 0.11.2 torch 2.9.0+cu128 cuda 12.8
