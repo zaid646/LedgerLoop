@@ -157,8 +157,19 @@ python gpu/check_gpu.py
 
 ## Evidence
 
-All screenshots/logs live under [`evidence/`](evidence/) with a capture manifest in
-[`evidence/SCREENSHOTS.md`](evidence/SCREENSHOTS.md).
+Screenshots and captured logs live under [`evidence/`](evidence/) with a capture
+manifest in [`evidence/SCREENSHOTS.md`](evidence/SCREENSHOTS.md).
+
+| Infra & search | Self-hosted GPU inference | Tracing |
+|---|---|---|
+| ![infra](evidence/png/01-infra-up.png) | ![gpu](evidence/png/03-gpu-vllm.png) | ![langfuse](evidence/png/07-langfuse-traces.png) |
+| **Quality (W&B)** | **PromptFoo** | **CI** |
+| ![wandb](evidence/png/06-wandb-run.png) | ![promptfoo](evidence/png/08-promptfoo.png) | ![ci](evidence/png/09-ci-green.png) |
+| **API smoke** | **Snowflake views** | **End-to-end submit** |
+| ![api](evidence/png/10-api-smoke.png) | ![snowflake](evidence/png/11-snowflake-views.png) | ![submit](evidence/png/12-backend-submit.png) |
+
+Notebooks: [`01_dataset_exploration`](evidence/png/04-notebook-dataset.png) ·
+[`02_baseline_extraction`](evidence/png/05-notebook-baseline.png).
 
 ## Security practices
 
