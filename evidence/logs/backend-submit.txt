@@ -1,0 +1,8 @@
+POST /expenses/submit (backend :8082 -> ai-service :8081 -> extract|code|policy -> Postgres+Mongo)
+document_id=exp-live-1
+  extraction.merchant        = "IKEA MALAYSIA"
+  extraction.transaction_date= "2024-03-11"
+  extraction.line_items[0]   = OFFICE CHAIR MARKUS 249
+  coding.category            = OTHER
+  policy.route               = auto_approve
+Postgres row: exp-live-1 | IKEA MALAYSIA | OTHER | auto_approve  (confirmed via psql)
