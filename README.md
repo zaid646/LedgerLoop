@@ -143,12 +143,12 @@ python gpu/check_gpu.py
 
 ## Build order / roadmap
 
-1. ✅ **Notebooks, dataset, baseline evals in W&B**
-2. ✅ **FastAPI AI service, prompt registry, PromptFoo gate**
-3. ✅ **Node.js backend with Postgres, MongoDB, OpenSearch hybrid retrieval, approvals + webhooks**
-4. ✅ **Self-healing harness, Langfuse, feedback loop**
-5. ✅ **Snowflake warehouse + spend assistant** (guarded NL→SQL over the views)
-6. ✅ **QLoRA GL-coding classifier** fine-tuned and served
+1. **Notebooks, dataset, baseline evals in W&B**
+2. **FastAPI AI service, prompt registry, PromptFoo gate**
+3. **Node.js backend with Postgres, MongoDB, OpenSearch hybrid retrieval, approvals + webhooks**
+4. **Self-healing harness, Langfuse, feedback loop**
+5. **Snowflake warehouse + spend assistant** (guarded NL→SQL over the views)
+6. **QLoRA GL-coding classifier** fine-tuned and served
 
 ## Measuring quality
 
