@@ -52,6 +52,18 @@ class ReceiptExtraction(BaseModel):
 
 
 class ExtractRequest(BaseModel):
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "document_id": "demo-1",
+                    "text": "MR D.I.Y. (M) SDN BHD\nTOTAL: RM 30.90\nDATE: 18/11/2018 13:58",
+                    "source": "receipt",
+                }
+            ]
+        }
+    }
+
     document_id: str = Field(min_length=1)
     text: str = Field(min_length=1, description="Redacted OCR / receipt text")
     source: Literal["receipt", "card_transaction"] = "receipt"
@@ -74,9 +86,19 @@ class ExtractResponse(BaseModel):
 
 
 class CodeRequest(BaseModel):
-    description: str = Field(min_length=1)
-    merchant: str | None = None
-    amount: float | None = None
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {"description": "office chair", "merchant": "IKEA", "amount": 249.0},
+                {"description": "flight to Berlin", "merchant": "Lufthansa", "amount": 420.0},
+                {"description": "monthly GitHub Team seats", "merchant": "GitHub", "amount": 84.0},
+            ]
+        }
+    }
+
+    description: str = Field(min_length=1, description="Line item or transaction description")
+    merchant: str | None = Field(default=None, description="Optional merchant; used for retrieval hints")
+    amount: float | None = Field(default=None, description="Optional amount in major units")
 
 
 class CodeResponse(BaseModel):
@@ -103,6 +125,24 @@ class PolicyRule(BaseModel):
 
 
 class PolicyCheckRequest(BaseModel):
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "amount": 249.0,
+                    "category": "HARDWARE",
+                    "merchant": "IKEA",
+                    "has_receipt": True,
+                    "rules": [
+                        {"name": "Meals cap", "applies_to": "MEALS", "max_amount": 100},
+                        {"name": "Receipt required", "requires_receipt": True},
+                        {"name": "Manager above 500", "requires_manager_above": 500},
+                    ],
+                }
+            ]
+        }
+    }
+
     amount: float
     category: GLCategory
     merchant: str | None = None

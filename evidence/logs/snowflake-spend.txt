@@ -1,0 +1,42 @@
+
+=== EXPENSEIQ.ANALYTICS.V_SPEND_BY_CATEGORY ===
+CATEGORY         CURRENCY  N  TOTAL_SPEND
+---------------  --------  -  -----------
+TRAVEL           USD       1  8420.00    
+HARDWARE         MYR       2  6248.00    
+SOFTWARE         USD       2  1740.75    
+OFFICE_SUPPLIES  MYR       1  89.90      
+TRAVEL           MYR       1  86.00      
+MEALS            MYR       1  42.50      
+
+=== EXPENSEIQ.ANALYTICS.V_SPEND_BY_MONTH ===
+MONTH                 CATEGORY         TOTAL_SPEND  ESCALATED_COUNT
+--------------------  ---------------  -----------  ---------------
+1772323200.000000000  TRAVEL           8506.00      1              
+1772323200.000000000  HARDWARE         6248.00      1              
+1772323200.000000000  SOFTWARE         1740.75      0              
+1772323200.000000000  OFFICE_SUPPLIES  89.90        0              
+1772323200.000000000  MEALS            42.50        0              
+
+=== EXPENSEIQ.ANALYTICS.V_TOP_MERCHANTS ===
+MERCHANT           TOTAL_SPEND  N
+-----------------  -----------  -
+MAERSK LINE        8420.00      1
+APPLE STORE        4999.00      1
+AWS EMEA           1530.75      1
+IKEA MALAYSIA      1249.00      1
+GITHUB INC         210.00       1
+MR D.I.Y. SDN BHD  89.90        1
+SHELL ISNI PETRO   86.00        1
+STARBUCKS COFFEE   42.50        1
+
+=== EXPENSEIQ.ANALYTICS.V_SPEND_AUDIT ===
+CATEGORY         TOTAL_SPEND  AVG_AI_COST  PROMPT_VERSIONS
+---------------  -----------  -----------  ---------------
+TRAVEL           8506.00      0.000365     1              
+HARDWARE         6248.00      0.000395     1              
+SOFTWARE         1740.75      0.000363     1              
+OFFICE_SUPPLIES  89.90        0.000341     1              
+MEALS            42.50        0.000305     1              
+
+done
