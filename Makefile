@@ -4,7 +4,7 @@ SHELL := /bin/bash
 # -----------------------------------------------------------------------------
 # ExpenseIQ — developer entrypoints
 # -----------------------------------------------------------------------------
-.PHONY: help infra-up infra-down ai-install ai-run ai-test gpu-check lint fmt evals
+.PHONY: help infra-up infra-down ai-install ai-run ai-test gpu-check lint fmt evals index backend-install backend-run backend-check
 
 help: ## Show this help
 	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*?## "}{printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
@@ -29,6 +29,18 @@ gpu-check: ## Verify the self-hosted vLLM endpoint in .env
 
 evals: ## Run the golden-set evaluation
 	cd ai-service && uv run python ../evals/run_evals.py
+
+index: ## Seed the OpenSearch hybrid indices (merchants + policies)
+	cd ai-service && uv run python scripts/index_opensearch.py
+
+backend-install: ## Install backend deps
+	cd backend && npm install
+
+backend-run: ## Run the Node backend
+	cd backend && npm run dev
+
+backend-check: ## Typecheck the backend
+	cd backend && npm run typecheck
 
 lint: ## Ruff lint (python)
 	cd ai-service && uv run ruff check .

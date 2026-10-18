@@ -153,6 +153,37 @@ class PolicyCheckResponse(BaseModel):
     violations: list[PolicyViolation] = Field(default_factory=list)
 
 
+# --------------------------------------------------------------------- search
+
+
+class SearchRequest(BaseModel):
+    model_config = {"json_schema_extra": {"example": {"query": "rideshare", "k": 5}}}
+
+    query: str = Field(min_length=1, description="Free-text query for hybrid retrieval")
+    k: int = Field(default=5, ge=1, le=50, description="Number of hits to return")
+
+
+class SearchHit(BaseModel):
+    id: str | None = None
+    name: str = ""
+    category: str = "OTHER"
+    score: float = 0.0
+
+
+class SearchResponse(BaseModel):
+    query: str
+    index: str
+    count: int
+    backend: str
+    hits: list[SearchHit] = Field(default_factory=list)
+
+
+class SearchHealthResponse(BaseModel):
+    opensearch: bool
+    embedder: str
+    indices: list[str] = Field(default_factory=list)
+
+
 # ------------------------------------------------------------------------ misc
 
 

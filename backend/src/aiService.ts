@@ -53,5 +53,7 @@ export const ai = {
     post<Coding>('/code', { description, merchant, amount }),
   policyCheck: (amount: number, category: string, has_receipt = true) =>
     post<Policy>('/policy-check', { amount, category, has_receipt }),
+  searchMerchants: (query: string, k = 5) => post('/search/merchants', { query, k }),
+  searchPolicies: (query: string, k = 5) => post('/search/policies', { query, k }),
   correct: (payload: unknown) => post('/corrections', payload),
 };

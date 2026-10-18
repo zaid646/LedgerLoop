@@ -88,4 +88,5 @@ def test_redaction_happens_in_code_endpoint(monkeypatch):
     r = client.post("/code", json={"description": "github subscription", "merchant": "GitHub"})
     assert r.status_code == 200
     assert r.json()["category"] == "SOFTWARE"
-    assert "github" in r.json()["top_merchants"]
+    top = [m.lower() for m in r.json()["top_merchants"]]
+    assert any("github" in m for m in top)

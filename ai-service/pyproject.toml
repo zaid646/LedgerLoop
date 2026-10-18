@@ -22,6 +22,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+# semantic vectors for OpenSearch hybrid retrieval (falls back to hashing)
+search = [
+    "fastembed>=0.3",
+]
 # notebooks / evals / datasets (Phase 1)
 evals = [
     "datasets>=2.20",

@@ -12,7 +12,7 @@ from . import __version__
 from .config import get_settings
 from .llm import LLMClient
 from .metrics import STORE
-from .routers import code, corrections, extract, policy
+from .routers import code, corrections, extract, policy, search
 from .schemas import HealthResponse
 from .tracing import get_tracer
 
@@ -54,6 +54,7 @@ app.include_router(extract.router)
 app.include_router(code.router)
 app.include_router(policy.router)
 app.include_router(corrections.router)
+app.include_router(search.router)
 
 
 @app.get("/health", response_model=HealthResponse, tags=["meta"])

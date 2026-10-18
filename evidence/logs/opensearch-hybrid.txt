@@ -1,0 +1,7 @@
+OpenSearch hybrid retrieval (BM25 + kNN, backend=fastembed)
+health: {"opensearch": true, "embedder": "fastembed", "indices": ["expenseiq-merchants", "expenseiq-policies"]}
+merchants[rideshare]: Uber(TRAVEL,0.5), Lyft(TRAVEL,0.2438), Uber Eats(MEALS,0.0005)
+merchants[office chair]: IKEA(HARDWARE,0.5), Staples(OFFICE_SUPPLIES,0.3951), MR D.I.Y.(OFFICE_SUPPLIES,0.0005)
+merchants[team chat software]: Slack(SOFTWARE,1.0), Microsoft(SOFTWARE,0.5005), GitHub(SOFTWARE,0.5)
+merchants[coffee]: Starbucks(MEALS,0.5), BISTRO & CAFE(MEALS,0.1967), DoorDash(MEALS,0.0005)
+policies[meals limit]: meals_limit(MEALS), meals_manager(MEALS), entertainment_limit(ENTERTAINMENT)

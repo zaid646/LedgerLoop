@@ -12,5 +12,6 @@ export const env = {
   postgresDsn: required('POSTGRES_DSN', 'postgresql://expenseiq:expenseiq@localhost:5432/expenseiq'),
   mongoUri: required('MONGO_URI', 'mongodb://localhost:27017'),
   mongoDb: required('MONGO_DB', 'expenseiq'),
+  webhookUrl: process.env.WEBHOOK_URL,
   logLevel: process.env.LOG_LEVEL ?? 'info',
 };

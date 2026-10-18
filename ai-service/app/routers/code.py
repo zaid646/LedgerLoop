@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from fastapi import APIRouter
 
+from .. import search
 from ..llm import LLMClient
 from ..metrics import STORE
 from ..redaction import redact
@@ -12,7 +13,9 @@ from ..tracing import get_tracer
 
 router = APIRouter(tags=["coding"])
 
-# Seed merchant -> category hints (a merchant index in OpenSearch replaces this in Phase 3).
+# Seed merchant -> category hints. Used as a fallback when OpenSearch hybrid
+# retrieval is unavailable (e.g. CI); the `expenseiq-merchants` index is the
+# primary source of retrieval hints.
 MERCHANT_HINTS: dict[str, GLCategory] = {
     "uber": GLCategory.TRAVEL,
     "lyft": GLCategory.TRAVEL,
@@ -41,11 +44,35 @@ _CODE_SCHEMA = {
 }
 
 
-def _hints(merchant: str | None) -> list[str]:
-    if not merchant:
-        return []
-    m = merchant.lower()
-    return [k for k in MERCHANT_HINTS if k in m]
+def _retrieve(merchant: str | None, description: str) -> tuple[list[str], list[GLCategory]]:
+    """Hybrid-retrieve neighbouring merchants; return (names, candidate categories).
+
+    Falls back to the seeded ``MERCHANT_HINTS`` when OpenSearch has no hits.
+    """
+    query = f"{merchant or ''} {description}".strip()
+    hits = search.search_merchants(query) if query else []
+    m = (merchant or "").lower()
+
+    names: list[str] = []
+    candidates: list[GLCategory] = []
+    for h in hits:
+        if h.get("name"):
+            names.append(h["name"])
+        try:
+            cat = GLCategory(h.get("category", "OTHER"))
+        except ValueError:
+            continue
+        if cat not in candidates:
+            candidates.append(cat)
+
+    for key, cat in MERCHANT_HINTS.items():
+        if key in m:
+            if cat not in candidates:
+                candidates.append(cat)
+            if not names:
+                names.append(key)
+
+    return names, candidates
 
 
 @router.post("/code", response_model=CodeResponse)
@@ -56,7 +83,7 @@ async def code(req: CodeRequest) -> CodeResponse:
     client = LLMClient()
 
     desc = redact(req.description).text
-    top = _hints(req.merchant)
+    top, candidates = _retrieve(req.merchant, desc)
     categories = ", ".join(c.value for c in GLCategory)
 
     messages = [
@@ -77,12 +104,6 @@ async def code(req: CodeRequest) -> CodeResponse:
         category = GLCategory(data.get("category", "OTHER"))
     except ValueError:
         category = GLCategory.OTHER
-
-    candidates: list[GLCategory] = []
-    for k in top:
-        c = MERCHANT_HINTS[k]
-        if c not in candidates:
-            candidates.append(c)
 
     STORE.observe("/code", result.latency_ms, result.cost_usd)
     STORE.incr("code_requests")

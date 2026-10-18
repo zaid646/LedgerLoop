@@ -1,0 +1,5 @@
+Approvals flow (backend :8082, Postgres + Mongo)
+GET /expenses?status=pending -> 2 pending: ['exp-appr-4', 'exp-appr-5']
+approve exp-appr-4 -> approved by zaid
+reject  exp-appr-5 -> rejected by zaid
+mongo approvals: 6 events

@@ -6,7 +6,7 @@ routes approvals to the right human. Every AI step is **versioned, evaluated, tr
 self-correcting** — so quality is a number, not a vibe.
 
 <p align="center">
-  <img alt="status" src="https://img.shields.io/badge/status-building-orange">
+  <img alt="status" src="https://img.shields.io/badge/status-beta-blue">
   <img alt="python" src="https://img.shields.io/badge/python-3.12-blue">
   <img alt="node" src="https://img.shields.io/badge/node-22-green">
   <img alt="license" src="https://img.shields.io/badge/license-MIT-lightgrey">
@@ -131,18 +131,24 @@ cd infra && docker compose up -d && cd ..
 # 2) python env + AI service
 cd ai-service && uv sync && uv run uvicorn app.main:app --reload --port 8080
 
+# 2b) seed OpenSearch hybrid indices (merchants + policies)
+cd ai-service && uv sync --extra search && uv run python scripts/index_opensearch.py
+
+# 2c) Node backend (approvals, webhooks)
+cd backend && npm install && npm run dev
+
 # 3) GPU: follow gpu/RUNBOOK.md, then verify
 python gpu/check_gpu.py
 ```
 
 ## Build order / roadmap
 
-1. **Notebooks, dataset, baseline evals in W&B**  ← *in progress*
-2. **FastAPI AI service, prompt registry, PromptFoo gate**
-3. Node.js backend with Postgres, MongoDB, OpenSearch
-4. Self-healing harness, Langfuse, feedback loop
-5. Snowflake + spend assistant
-6. Optional: QLoRA classifier served with vLLM
+1. ✅ **Notebooks, dataset, baseline evals in W&B**
+2. ✅ **FastAPI AI service, prompt registry, PromptFoo gate**
+3. ✅ **Node.js backend with Postgres, MongoDB, OpenSearch hybrid retrieval, approvals + webhooks**
+4. ✅ **Self-healing harness, Langfuse, feedback loop**
+5. 🚧 Snowflake + spend assistant (warehouse + views done; NL→SQL assistant pending)
+6. ⬜ Optional: QLoRA classifier served with vLLM
 
 ## Measuring quality
 

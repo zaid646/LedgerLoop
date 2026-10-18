@@ -39,6 +39,12 @@ class Settings(BaseSettings):
     opensearch_url: str = "http://localhost:9200"
     opensearch_user: str = "admin"
     opensearch_password: str = "ExpenseIQ!123"
+    # The bundled OpenSearch runs with the security plugin disabled; flip to true
+    # when pointing at a secured cluster.
+    opensearch_use_security: bool = False
+    # Embedding model for the vector channel (fastembed/ONNX). Falls back to
+    # feature hashing when fastembed is not installed.
+    embed_model: str = "BAAI/bge-small-en-v1.5"
 
     # --- service ---
     ai_service_port: int = 8080
