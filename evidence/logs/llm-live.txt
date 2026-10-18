@@ -1,0 +1,55 @@
+# Live pipeline E2E (vLLM Qwen2.5-7B-Instruct, 2026-10-19 03:39)
+
+## POST /code
+{
+    "category": "HARDWARE",
+    "confidence": 0.8,
+    "rationale": "An office chair is typically considered hardware as it is a physical item used in the office.",
+    "candidates": [
+        "HARDWARE",
+        "OFFICE_SUPPLIES"
+    ],
+    "prompt_version": "v1",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "latency_ms": 1457.82,
+    "cost_usd": 0.0,
+    "top_merchants": [
+        "IKEA",
+        "Staples",
+        "YONGFATT ENTERPRISE",
+        "SOON HUAT MACHINERY ENTERPRISE",
+        "TEO HENG STATIONERY & BOOKS"
+    ]
+}
+
+## POST /extract
+{
+    "document_id": "ev-1",
+    "extraction": {
+        "merchant": "GITHUB INC",
+        "transaction_date": "2026-06-15",
+        "total_amount": 21.0,
+        "tax_amount": null,
+        "currency": null,
+        "payment_method": null,
+        "receipt_number": null,
+        "line_items": [],
+        "confidence": {
+            "merchant": 1.0,
+            "transaction_date": 1.0,
+            "total_amount": 1.0,
+            "tax_amount": 0.0,
+            "currency": 0.0,
+            "line_items": 0.0,
+            "confidence": 1.0
+        }
+    },
+    "prompt_version": "v1",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "attempts": 1,
+    "repaired": false,
+    "escalated": false,
+    "latency_ms": 2445.79,
+    "cost_usd": 0.0,
+    "redactions": {}
+}

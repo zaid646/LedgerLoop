@@ -1,0 +1,6 @@
+{"question": "How much did we spend per category?", "expect_relation": "v_spend_by_category"}
+{"question": "Which merchants cost us the most?", "expect_relation": "v_top_merchants"}
+{"question": "How much did we spend on travel?", "expect_relation": "v_spend_by_category"}
+{"question": "How many expenses were escalated by month?", "expect_relation": "v_spend_by_month"}
+{"question": "What is our average AI cost per category?", "expect_relation": "v_spend_audit"}
+{"question": "Show the highest-value expenses", "expect_relation": "expenses"}

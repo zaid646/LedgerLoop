@@ -1,0 +1,31 @@
+# Phase 6 — QLoRA GL-coding classifier (2026-10-19 04:02)
+
+## fine-tune: Qwen/Qwen2.5-0.5B-Instruct, 4-bit NF4 LoRA (258 train / 64 val)
+{
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "epochs": 3.0,
+  "train_rows": 258,
+  "val_rows": 64,
+  "train_loss": 0.35917028918570715,
+  "minutes": 0.67,
+  "adapter_dir": "/workspace/expenseiq-qlora"
+}
+
+## eval: base vs adapter, 64 held-out coding rows
+{
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "val_rows": 64,
+  "base_accuracy": 0.1094,
+  "adapter": "/workspace/expenseiq-qlora",
+  "adapter_accuracy": 0.9844,
+  "delta": 0.875
+}
+
+## served adapter (transformers+peft, FastAPI :8001) — POST /classify
+{"text":"ride to the airport - Uber","category":"TRAVEL","latency_ms":185.3}
+{"text":"coffee with a client - Starbucks","category":"MEALS","latency_ms":132.3}
+{"text":"seats for the dev team - GitHub","category":"RENT","latency_ms":135.0}
+{"text":"monitor for a new hire - Dell","category":"HARDWARE","latency_ms":177.8}
+{"text":"office lease - WeWork","category":"RENT","latency_ms":135.2}
+{"text":"spring ad campaign - Google Ads","category":"MARKETING","latency_ms":135.2}
+{"text":"monthly charge - Apple","category":"HARDWARE","latency_ms":181.7}

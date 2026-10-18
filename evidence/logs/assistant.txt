@@ -1,0 +1,264 @@
+# Spend assistant (NL -> guarded SQL -> Snowflake), 2026-10-19 03:40
+# model Qwen/Qwen2.5-7B-Instruct | ANSWER_SUMMARY=1
+
+## Q: How much did we spend per category?
+{
+    "question": "How much did we spend per category?",
+    "sql": "SELECT CATEGORY, TOTAL_SPEND FROM EXPENSEIQ.ANALYTICS.V_SPEND_BY_CATEGORY ORDER BY TOTAL_SPEND DESC LIMIT 200",
+    "columns": [
+        "CATEGORY",
+        "TOTAL_SPEND"
+    ],
+    "rows": [
+        [
+            "OTHER",
+            null
+        ],
+        [
+            "HARDWARE",
+            "10247.00"
+        ],
+        [
+            "TRAVEL",
+            "3180.00"
+        ],
+        [
+            "PROFESSIONAL_SERVICES",
+            "1200.00"
+        ],
+        [
+            "MARKETING",
+            "500.00"
+        ],
+        [
+            "INSURANCE",
+            "450.00"
+        ],
+        [
+            "SOFTWARE",
+            "385.40"
+        ],
+        [
+            "MEALS",
+            "240.00"
+        ],
+        [
+            "SOFTWARE",
+            "210.00"
+        ],
+        [
+            "OTHER",
+            "102.05"
+        ],
+        [
+            "OFFICE_SUPPLIES",
+            "63.20"
+        ],
+        [
+            "TRAVEL",
+            "42.50"
+        ],
+        [
+            "ENTERTAINMENT",
+            "15.99"
+        ]
+    ],
+    "row_count": 13,
+    "answer": "The top categories by spending are HARDWARE ($10,247.00), TRAVEL ($3,180.00), PROFESSIONAL_SERVICES ($1,200.00), and MARKETING ($500.00).",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "latency_ms": 2840.47,
+    "cost_usd": 0.0
+}
+
+## Q: Which merchants cost us the most?
+{
+    "question": "Which merchants cost us the most?",
+    "sql": "SELECT MERCHANT, TOTAL_SPEND FROM EXPENSEIQ.ANALYTICS.V_TOP_MERCHANTS LIMIT 200",
+    "columns": [
+        "MERCHANT",
+        "TOTAL_SPEND"
+    ],
+    "rows": [
+        [
+            "IKEA MALAYSIA",
+            null
+        ],
+        [
+            "IKEA",
+            "5248.00"
+        ],
+        [
+            "APPLE STORE",
+            "4999.00"
+        ],
+        [
+            "Marriott Hotels",
+            "2400.00"
+        ],
+        [
+            "DELOITTE CONSULTING",
+            "1200.00"
+        ],
+        [
+            "DELTA AIR LINES",
+            "780.00"
+        ],
+        [
+            "GOOGLE ADS",
+            "500.00"
+        ],
+        [
+            "AETNA",
+            "450.00"
+        ],
+        [
+            "AMAZON WEB SERVICES",
+            "315.40"
+        ],
+        [
+            "THE CAPITAL GRILLE",
+            "240.00"
+        ],
+        [
+            "GitHub",
+            "210.00"
+        ],
+        [
+            "STAPLES",
+            "63.20"
+        ],
+        [
+            "SHELL",
+            "55.30"
+        ],
+        [
+            "COURSERA",
+            "49.00"
+        ],
+        [
+            "UBER TRIP",
+            "42.50"
+        ],
+        [
+            "FEDEX",
+            "28.00"
+        ],
+        [
+            "GITHUB INC",
+            "21.00"
+        ],
+        [
+            "STARBUCKS COFFEE",
+            "18.75"
+        ],
+        [
+            "NETFLIX",
+            "15.99"
+        ]
+    ],
+    "row_count": 19,
+    "answer": "The top two most costly merchants are IKEA with $5248.00 and APPLE STORE with $4999.00.",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "latency_ms": 2185.54,
+    "cost_usd": 0.0
+}
+
+## Q: How much did we spend on travel?
+{
+    "question": "How much did we spend on travel?",
+    "sql": "SELECT TOTAL_SPEND FROM EXPENSEIQ.ANALYTICS.V_SPEND_BY_CATEGORY WHERE CATEGORY = 'TRAVEL' LIMIT 200",
+    "columns": [
+        "TOTAL_SPEND"
+    ],
+    "rows": [
+        [
+            "3180.00"
+        ],
+        [
+            "42.50"
+        ]
+    ],
+    "row_count": 2,
+    "answer": "You spent a total of $3,222.50 on travel.",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "latency_ms": 2340.52,
+    "cost_usd": 0.0
+}
+
+## Q: How many expenses were escalated by month?
+{
+    "question": "How many expenses were escalated by month?",
+    "sql": "SELECT MONTH, SUM(ESCALATED_COUNT) AS ESCALATED FROM EXPENSEIQ.ANALYTICS.V_SPEND_BY_MONTH GROUP BY MONTH ORDER BY MONTH LIMIT 200",
+    "columns": [
+        "MONTH",
+        "ESCALATED"
+    ],
+    "rows": [
+        [
+            "1790812800.000000000",
+            "5"
+        ]
+    ],
+    "row_count": 1,
+    "answer": "In January, 5 expenses were escalated.",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "latency_ms": 2005.7,
+    "cost_usd": 0.0
+}
+
+## Q: What is our average AI cost per category?
+{
+    "question": "What is our average AI cost per category?",
+    "sql": "SELECT CATEGORY, AVG_AI_COST FROM EXPENSEIQ.ANALYTICS.V_SPEND_AUDIT LIMIT 200",
+    "columns": [
+        "CATEGORY",
+        "AVG_AI_COST"
+    ],
+    "rows": [
+        [
+            "HARDWARE",
+            null
+        ],
+        [
+            "TRAVEL",
+            null
+        ],
+        [
+            "PROFESSIONAL_SERVICES",
+            null
+        ],
+        [
+            "SOFTWARE",
+            null
+        ],
+        [
+            "MARKETING",
+            null
+        ],
+        [
+            "INSURANCE",
+            null
+        ],
+        [
+            "MEALS",
+            null
+        ],
+        [
+            "OTHER",
+            "0.000357"
+        ],
+        [
+            "OFFICE_SUPPLIES",
+            null
+        ],
+        [
+            "ENTERTAINMENT",
+            null
+        ]
+    ],
+    "row_count": 10,
+    "answer": "The average AI cost for the 'Other' category is $0.000357.",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "latency_ms": 2233.1,
+    "cost_usd": 0.0
+}

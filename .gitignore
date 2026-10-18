@@ -27,6 +27,7 @@ coverage/
 # --- data / artifacts ---
 data/raw/
 data/processed/
+gpu/data/
 artifacts/
 wandb/
 *.sqlite

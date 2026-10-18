@@ -1,0 +1,93 @@
+{
+  "generated_at": "2026-10-18T22:09:12+00:00",
+  "url": "http://localhost:8080",
+  "n": 6,
+  "mean_score": 1.0,
+  "fully_passed": 6,
+  "results": [
+    {
+      "question": "How much did we spend per category?",
+      "checks": {
+        "sql_valid": true,
+        "relation": true,
+        "rows": true,
+        "answer_present": true,
+        "answer_grounded": true
+      },
+      "score": 1.0,
+      "sql": "SELECT CATEGORY, TOTAL_SPEND FROM EXPENSEIQ.ANALYTICS.V_SPEND_BY_CATEGORY ORDER BY TOTAL_SPEND DESC LIMIT 200",
+      "answer": "The top categories by spending are HARDWARE ($10,247.00), TRAVEL ($3,180.00), PROFESSIONAL_SERVICES ($1,200.00), and MARKETING ($500.00).",
+      "row_count": 13
+    },
+    {
+      "question": "Which merchants cost us the most?",
+      "checks": {
+        "sql_valid": true,
+        "relation": true,
+        "rows": true,
+        "answer_present": true,
+        "answer_grounded": true
+      },
+      "score": 1.0,
+      "sql": "SELECT MERCHANT, TOTAL_SPEND FROM EXPENSEIQ.ANALYTICS.V_TOP_MERCHANTS LIMIT 200",
+      "answer": "The top two most costly merchants are IKEA with $5248.00 and APPLE STORE with $4999.00.",
+      "row_count": 19
+    },
+    {
+      "question": "How much did we spend on travel?",
+      "checks": {
+        "sql_valid": true,
+        "relation": true,
+        "rows": true,
+        "answer_present": true,
+        "answer_grounded": true
+      },
+      "score": 1.0,
+      "sql": "SELECT TOTAL_SPEND FROM EXPENSEIQ.ANALYTICS.V_SPEND_BY_CATEGORY WHERE CATEGORY = 'TRAVEL' LIMIT 200",
+      "answer": "You spent a total of $3,222.50 on travel.",
+      "row_count": 2
+    },
+    {
+      "question": "How many expenses were escalated by month?",
+      "checks": {
+        "sql_valid": true,
+        "relation": true,
+        "rows": true,
+        "answer_present": true,
+        "answer_grounded": true
+      },
+      "score": 1.0,
+      "sql": "SELECT MONTH, SUM(ESCALATED_COUNT) AS ESCALATED FROM EXPENSEIQ.ANALYTICS.V_SPEND_BY_MONTH GROUP BY MONTH ORDER BY MONTH LIMIT 200",
+      "answer": "In January, 5 expenses were escalated.",
+      "row_count": 1
+    },
+    {
+      "question": "What is our average AI cost per category?",
+      "checks": {
+        "sql_valid": true,
+        "relation": true,
+        "rows": true,
+        "answer_present": true,
+        "answer_grounded": true
+      },
+      "score": 1.0,
+      "sql": "SELECT CATEGORY, AVG_AI_COST FROM EXPENSEIQ.ANALYTICS.V_SPEND_AUDIT LIMIT 200",
+      "answer": "The average AI cost for the 'Other' category is $0.000357.",
+      "row_count": 10
+    },
+    {
+      "question": "Show the highest-value expenses",
+      "checks": {
+        "sql_valid": true,
+        "relation": true,
+        "rows": true,
+        "answer_present": true,
+        "answer_grounded": true
+      },
+      "score": 1.0,
+      "sql": "SELECT ID, MERCHANT, TOTAL_AMOUNT, CURRENCY, CATEGORY, POLICY_ROUTE, ESCALATED, AI_MODEL, PROMPT_VERSION, COST_USD, CREATED_AT FROM EXPENSEIQ.ANALYTICS.EXPENSES ORDER BY TOTAL_AMOUNT DESC LIMIT 10",
+      "answer": "The highest-value expense is RM 17,923,517.00 for IKEA MALAYSIA.",
+      "row_count": 10
+    }
+  ]
+}

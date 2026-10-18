@@ -1,7 +1,171 @@
-OpenSearch hybrid retrieval (BM25 + kNN, backend=fastembed)
-health: {"opensearch": true, "embedder": "fastembed", "indices": ["expenseiq-merchants", "expenseiq-policies"]}
-merchants[rideshare]: Uber(TRAVEL,0.5), Lyft(TRAVEL,0.2438), Uber Eats(MEALS,0.0005)
-merchants[office chair]: IKEA(HARDWARE,0.5), Staples(OFFICE_SUPPLIES,0.3951), MR D.I.Y.(OFFICE_SUPPLIES,0.0005)
-merchants[team chat software]: Slack(SOFTWARE,1.0), Microsoft(SOFTWARE,0.5005), GitHub(SOFTWARE,0.5)
-merchants[coffee]: Starbucks(MEALS,0.5), BISTRO & CAFE(MEALS,0.1967), DoorDash(MEALS,0.0005)
-policies[meals limit]: meals_limit(MEALS), meals_manager(MEALS), entertainment_limit(ENTERTAINMENT)
+# OpenSearch hybrid retrieval (BM25 + kNN), 2026-10-19 03:39
+
+## query: rideshare
+{
+    "query": "rideshare",
+    "index": "expenseiq-merchants",
+    "count": 5,
+    "backend": "fastembed",
+    "hits": [
+        {
+            "id": "m-0",
+            "name": "Uber",
+            "category": "TRAVEL",
+            "score": 0.5
+        },
+        {
+            "id": "m-1",
+            "name": "Lyft",
+            "category": "TRAVEL",
+            "score": 0.3513
+        },
+        {
+            "id": "m-2",
+            "name": "Uber Eats",
+            "category": "MEALS",
+            "score": 0.2099
+        },
+        {
+            "id": "m-5",
+            "name": "Airbnb",
+            "category": "TRAVEL",
+            "score": 0.0789
+        },
+        {
+            "id": "m-7",
+            "name": "Shell",
+            "category": "TRAVEL",
+            "score": 0.0005
+        }
+    ]
+}
+
+## query: office chair
+{
+    "query": "office chair",
+    "index": "expenseiq-merchants",
+    "count": 5,
+    "backend": "fastembed",
+    "hits": [
+        {
+            "id": "m-18",
+            "name": "IKEA",
+            "category": "HARDWARE",
+            "score": 0.5
+        },
+        {
+            "id": "m-17",
+            "name": "Staples",
+            "category": "OFFICE_SUPPLIES",
+            "score": 0.4244
+        },
+        {
+            "id": "m-19",
+            "name": "MR D.I.Y.",
+            "category": "OFFICE_SUPPLIES",
+            "score": 0.1397
+        },
+        {
+            "id": "m-35",
+            "name": "SOON HUAT MACHINERY ENTERPRISE",
+            "category": "OFFICE_SUPPLIES",
+            "score": 0.0185
+        },
+        {
+            "id": "m-32",
+            "name": "YONGFATT ENTERPRISE",
+            "category": "OFFICE_SUPPLIES",
+            "score": 0.0005
+        }
+    ]
+}
+
+## query: team chat software
+{
+    "query": "team chat software",
+    "index": "expenseiq-merchants",
+    "count": 5,
+    "backend": "fastembed",
+    "hits": [
+        {
+            "id": "m-13",
+            "name": "Slack",
+            "category": "SOFTWARE",
+            "score": 1.0
+        },
+        {
+            "id": "m-16",
+            "name": "Salesforce",
+            "category": "SOFTWARE",
+            "score": 0.7225
+        },
+        {
+            "id": "m-14",
+            "name": "Microsoft",
+            "category": "SOFTWARE",
+            "score": 0.7197
+        },
+        {
+            "id": "m-11",
+            "name": "GitHub",
+            "category": "SOFTWARE",
+            "score": 0.5005
+        },
+        {
+            "id": "m-15",
+            "name": "Adobe",
+            "category": "SOFTWARE",
+            "score": 0.5
+        }
+    ]
+}
+
+## query: airline
+{
+    "query": "airline",
+    "index": "expenseiq-merchants",
+    "count": 5,
+    "backend": "fastembed",
+    "hits": [
+        {
+            "id": "m-4",
+            "name": "United Airlines",
+            "category": "TRAVEL",
+            "score": 0.5
+        },
+        {
+            "id": "m-3",
+            "name": "Delta Air Lines",
+            "category": "TRAVEL",
+            "score": 0.0959
+        },
+        {
+            "id": "m-7",
+            "name": "Shell",
+            "category": "TRAVEL",
+            "score": 0.0398
+        },
+        {
+            "id": "m-1",
+            "name": "Lyft",
+            "category": "TRAVEL",
+            "score": 0.0058
+        },
+        {
+            "id": "m-0",
+            "name": "Uber",
+            "category": "TRAVEL",
+            "score": 0.0005
+        }
+    ]
+}
+
+## GET /search/health
+{
+    "opensearch": true,
+    "embedder": "fastembed",
+    "indices": [
+        "expenseiq-merchants",
+        "expenseiq-policies"
+    ]
+}

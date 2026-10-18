@@ -184,6 +184,29 @@ class SearchHealthResponse(BaseModel):
     indices: list[str] = Field(default_factory=list)
 
 
+# ------------------------------------------------------------------ assistant
+
+
+class AssistantRequest(BaseModel):
+    model_config = {
+        "json_schema_extra": {"example": {"question": "How much did we spend on travel?"}}
+    }
+
+    question: str = Field(min_length=1, description="Natural-language question about spend")
+
+
+class AssistantResponse(BaseModel):
+    question: str
+    sql: str
+    columns: list[str] = Field(default_factory=list)
+    rows: list[list[Any]] = Field(default_factory=list)
+    row_count: int = 0
+    answer: str = ""
+    model: str
+    latency_ms: float
+    cost_usd: float
+
+
 # ------------------------------------------------------------------------ misc
 
 

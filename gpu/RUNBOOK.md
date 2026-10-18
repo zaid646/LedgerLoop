@@ -18,9 +18,23 @@ Target model: **`Qwen/Qwen2.5-7B-Instruct`** (fits a 4090 comfortably, strong JS
 
 ## 2. Launch vLLM
 
-Two equivalent options. Pick one.
+> **Note (Vast base/PyTorch images):** these are *unprivileged containers with no
+> Docker-in-Docker*, so the image's `docker run` path below does **not** work
+> there. Install vLLM into the provisioned venv and serve on the host instead.
 
-**A. Docker on the instance (recommended)**
+**A. Host install (works on Vast base images — recommended there)**
+```bash
+source /venv/main/bin/activate
+uv pip install vllm                 # ~2–4 min, billed
+export HF_HOME=/workspace/.hf_home HF_HUB_ENABLE_HF_TRANSFER=1
+vllm serve Qwen/Qwen2.5-7B-Instruct \
+  --host 127.0.0.1 --port 8000 \
+  --api-key "$VLLM_API_KEY" \
+  --max-model-len 8192 \
+  --gpu-memory-utilization 0.75
+```
+
+**B. Docker (only on hosts that give you the docker CLI + GPU runtime)**
 ```bash
 docker run --gpus all --ipc=host -p 8000:8000 \
   vllm/vllm-openai:latest \
@@ -28,21 +42,11 @@ docker run --gpus all --ipc=host -p 8000:8000 \
   --served-model-name Qwen/Qwen2.5-7B-Instruct \
   --api-key "$VLLM_API_KEY" \
   --max-model-len 8192 \
-  --gpu-memory-utilization 0.90
-```
-
-**B. vLLM on the host**
-```bash
-pip install "vllm>=0.6"
-vllm serve Qwen/Qwen2.5-7B-Instruct \
-  --host 0.0.0.0 --port 8000 \
-  --api-key "$VLLM_API_KEY" \
-  --max-model-len 8192 \
-  --gpu-memory-utilization 0.90
+  --gpu-memory-utilization 0.75
 ```
 
 Wait for the log line `Application startup complete.` and the `Uvicorn running on
-http://0.0.0.0:8000` message. First boot also downloads the weights (~2–5 min on a good pipe).
+http://127.0.0.1:8000` message. First boot also downloads the weights (~2–5 min on a good pipe).
 
 ## 3. Expose the port
 

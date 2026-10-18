@@ -49,6 +49,17 @@ class Settings(BaseSettings):
     # --- service ---
     ai_service_port: int = 8080
     log_level: str = "info"
+    # Second LLM pass in /assistant/ask that phrases the query result as a
+    # sentence. Adds one extra generation per question; disable with ANSWER_SUMMARY=0.
+    answer_summary: bool = True
+
+    # --- warehouse (Snowflake SQL API, PAT auth) ---
+    snowflake_account: str = ""
+    snowflake_token: str = ""
+    snowflake_role: str = "ACCOUNTADMIN"
+    snowflake_warehouse: str = "COMPUTE_WH"
+    snowflake_database: str = "EXPENSEIQ"
+    snowflake_schema: str = "ANALYTICS"
 
     # --- harness behaviour ---
     max_extract_attempts: int = 3

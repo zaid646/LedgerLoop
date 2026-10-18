@@ -17,5 +17,8 @@ names below, then tick the box.
 | 10 | `png/10-api-smoke.png` | `/extract` + `/code` + `/policy-check` responses | [x] |
 | 11 | `png/11-snowflake-views.png` | Snowflake `V_SPEND_BY_CATEGORY` query result | [x] |
 | 12 | `png/12-backend-submit.png` | `POST /expenses/submit` routed response | [x] |
+| 13 | `png/13-assistant-ask.png` | `POST /assistant/ask` — grounded answer + guarded SQL | [ ] |
+| 14 | `png/14-qlora-eval.png` | QLoRA base (10.9%) vs adapter (98.4%) + train loss | [ ] |
+| 15 | `png/15-qlora-serve.png` | `/classify` served adapter predictions | [ ] |
 
 Auto-captured text artefacts (no screenshot needed) live in `evidence/logs/`.

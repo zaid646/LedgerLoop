@@ -1,5 +1,342 @@
-Approvals flow (backend :8082, Postgres + Mongo)
-GET /expenses?status=pending -> 2 pending: ['exp-appr-4', 'exp-appr-5']
-approve exp-appr-4 -> approved by zaid
-reject  exp-appr-5 -> rejected by zaid
-mongo approvals: 6 events
+# Approvals queue (Postgres + Mongo events), 2026-10-19 03:39
+
+## GET /expenses?status=pending
+{
+    "count": 2,
+    "items": [
+        {
+            "id": "sub-010",
+            "merchant": "THE CAPITAL GRILLE",
+            "total_amount": "240",
+            "currency": null,
+            "category": "MEALS",
+            "policy_route": "manager_review",
+            "escalated": false,
+            "payload": {
+                "coding": {
+                    "model": "Qwen/Qwen2.5-7B-Instruct",
+                    "category": "MEALS",
+                    "cost_usd": 0,
+                    "rationale": "The description matches a meal expense at a restaurant.",
+                    "candidates": [
+                        "MEALS",
+                        "OTHER"
+                    ],
+                    "confidence": 0.9,
+                    "latency_ms": 1372.66,
+                    "top_merchants": [
+                        "BISTRO & CAFE",
+                        "TASTE OF THE WORLD SDN BHD",
+                        "RESTAURANT SIN DU",
+                        "Starbucks",
+                        "32 PUB & BISTRO OWN BY CNU TRADING"
+                    ],
+                    "prompt_version": "v1"
+                },
+                "policy": {
+                    "route": "manager_review",
+                    "compliant": false,
+                    "violations": [
+                        {
+                            "rule": "meals_limit",
+                            "detail": "Amount 240.00 exceeds limit 75.00"
+                        }
+                    ]
+                },
+                "extraction": {
+                    "model": "Qwen/Qwen2.5-7B-Instruct",
+                    "attempts": 1,
+                    "cost_usd": 0,
+                    "repaired": false,
+                    "escalated": false,
+                    "extraction": {
+                        "currency": null,
+                        "merchant": "THE CAPITAL GRILLE",
+                        "confidence": {
+                            "currency": 0,
+                            "merchant": 1,
+                            "confidence": 1,
+                            "line_items": 0,
+                            "tax_amount": 0,
+                            "total_amount": 1,
+                            "transaction_date": 1
+                        },
+                        "line_items": [],
+                        "tax_amount": null,
+                        "total_amount": 240,
+                        "payment_method": null,
+                        "receipt_number": null,
+                        "transaction_date": "2026-06-04"
+                    },
+                    "latency_ms": 2437.8,
+                    "redactions": {},
+                    "document_id": "sub-010",
+                    "prompt_version": "v1"
+                }
+            },
+            "created_at": "2026-10-18T22:05:46.281Z",
+            "status": "pending",
+            "approved_by": null,
+            "decided_at": null
+        },
+        {
+            "id": "sub-009",
+            "merchant": "DELTA AIR LINES",
+            "total_amount": "780",
+            "currency": "USD",
+            "category": "TRAVEL",
+            "policy_route": "manager_review",
+            "escalated": true,
+            "payload": {
+                "coding": {
+                    "model": "Qwen/Qwen2.5-7B-Instruct",
+                    "category": "TRAVEL",
+                    "cost_usd": 0,
+                    "rationale": "Expense related to air travel",
+                    "candidates": [
+                        "TRAVEL",
+                        "OTHER"
+                    ],
+                    "confidence": 0.9,
+                    "latency_ms": 988.59,
+                    "top_merchants": [
+                        "Delta Air Lines",
+                        "United Airlines",
+                        "SHELL ISNI PETRO TRADING",
+                        "Shell",
+                        "AEON CO. (M) BHD (126926-H)"
+                    ],
+                    "prompt_version": "v1"
+                },
+                "policy": {
+                    "route": "manager_review",
+                    "compliant": true,
+                    "violations": []
+                },
+                "extraction": {
+                    "model": "Qwen/Qwen2.5-7B-Instruct",
+                    "attempts": 1,
+                    "cost_usd": 0,
+                    "repaired": false,
+                    "escalated": true,
+                    "extraction": {
+                        "currency": "USD",
+                        "merchant": "DELTA AIR LINES",
+                        "confidence": {
+                            "currency": 0,
+                            "merchant": 1,
+                            "confidence": 0.9,
+                            "line_items": 0.8,
+                            "tax_amount": 0,
+                            "total_amount": 1,
+                            "transaction_date": 1
+                        },
+                        "line_items": [
+                            {
+                                "amount": null,
+                                "description": "FLIGHT ATL-SFO"
+                            }
+                        ],
+                        "tax_amount": null,
+                        "total_amount": 780,
+                        "payment_method": null,
+                        "receipt_number": null,
+                        "transaction_date": "2026-06-02"
+                    },
+                    "latency_ms": 3348.3,
+                    "redactions": {},
+                    "document_id": "sub-009",
+                    "prompt_version": "v1"
+                }
+            },
+            "created_at": "2026-10-18T22:05:42.390Z",
+            "status": "pending",
+            "approved_by": null,
+            "decided_at": null
+        }
+    ]
+}
+
+## approve sub-010
+{
+    "row": {
+        "id": "sub-010",
+        "merchant": "THE CAPITAL GRILLE",
+        "total_amount": "240",
+        "currency": null,
+        "category": "MEALS",
+        "policy_route": "manager_review",
+        "escalated": false,
+        "payload": {
+            "coding": {
+                "model": "Qwen/Qwen2.5-7B-Instruct",
+                "category": "MEALS",
+                "cost_usd": 0,
+                "rationale": "The description matches a meal expense at a restaurant.",
+                "candidates": [
+                    "MEALS",
+                    "OTHER"
+                ],
+                "confidence": 0.9,
+                "latency_ms": 1372.66,
+                "top_merchants": [
+                    "BISTRO & CAFE",
+                    "TASTE OF THE WORLD SDN BHD",
+                    "RESTAURANT SIN DU",
+                    "Starbucks",
+                    "32 PUB & BISTRO OWN BY CNU TRADING"
+                ],
+                "prompt_version": "v1"
+            },
+            "policy": {
+                "route": "manager_review",
+                "compliant": false,
+                "violations": [
+                    {
+                        "rule": "meals_limit",
+                        "detail": "Amount 240.00 exceeds limit 75.00"
+                    }
+                ]
+            },
+            "extraction": {
+                "model": "Qwen/Qwen2.5-7B-Instruct",
+                "attempts": 1,
+                "cost_usd": 0,
+                "repaired": false,
+                "escalated": false,
+                "extraction": {
+                    "currency": null,
+                    "merchant": "THE CAPITAL GRILLE",
+                    "confidence": {
+                        "currency": 0,
+                        "merchant": 1,
+                        "confidence": 1,
+                        "line_items": 0,
+                        "tax_amount": 0,
+                        "total_amount": 1,
+                        "transaction_date": 1
+                    },
+                    "line_items": [],
+                    "tax_amount": null,
+                    "total_amount": 240,
+                    "payment_method": null,
+                    "receipt_number": null,
+                    "transaction_date": "2026-06-04"
+                },
+                "latency_ms": 2437.8,
+                "redactions": {},
+                "document_id": "sub-010",
+                "prompt_version": "v1"
+            }
+        },
+        "created_at": "2026-10-18T22:05:46.281Z",
+        "status": "approved",
+        "approved_by": "zaid",
+        "decided_at": "2026-10-18T22:09:41.834Z"
+    },
+    "webhook": {
+        "delivered": false,
+        "reason": "WEBHOOK_URL not configured"
+    }
+}
+
+## reject sub-009
+{
+    "row": {
+        "id": "sub-009",
+        "merchant": "DELTA AIR LINES",
+        "total_amount": "780",
+        "currency": "USD",
+        "category": "TRAVEL",
+        "policy_route": "manager_review",
+        "escalated": true,
+        "payload": {
+            "coding": {
+                "model": "Qwen/Qwen2.5-7B-Instruct",
+                "category": "TRAVEL",
+                "cost_usd": 0,
+                "rationale": "Expense related to air travel",
+                "candidates": [
+                    "TRAVEL",
+                    "OTHER"
+                ],
+                "confidence": 0.9,
+                "latency_ms": 988.59,
+                "top_merchants": [
+                    "Delta Air Lines",
+                    "United Airlines",
+                    "SHELL ISNI PETRO TRADING",
+                    "Shell",
+                    "AEON CO. (M) BHD (126926-H)"
+                ],
+                "prompt_version": "v1"
+            },
+            "policy": {
+                "route": "manager_review",
+                "compliant": true,
+                "violations": []
+            },
+            "extraction": {
+                "model": "Qwen/Qwen2.5-7B-Instruct",
+                "attempts": 1,
+                "cost_usd": 0,
+                "repaired": false,
+                "escalated": true,
+                "extraction": {
+                    "currency": "USD",
+                    "merchant": "DELTA AIR LINES",
+                    "confidence": {
+                        "currency": 0,
+                        "merchant": 1,
+                        "confidence": 0.9,
+                        "line_items": 0.8,
+                        "tax_amount": 0,
+                        "total_amount": 1,
+                        "transaction_date": 1
+                    },
+                    "line_items": [
+                        {
+                            "amount": null,
+                            "description": "FLIGHT ATL-SFO"
+                        }
+                    ],
+                    "tax_amount": null,
+                    "total_amount": 780,
+                    "payment_method": null,
+                    "receipt_number": null,
+                    "transaction_date": "2026-06-02"
+                },
+                "latency_ms": 3348.3,
+                "redactions": {},
+                "document_id": "sub-009",
+                "prompt_version": "v1"
+            }
+        },
+        "created_at": "2026-10-18T22:05:42.390Z",
+        "status": "rejected",
+        "approved_by": "zaid",
+        "decided_at": "2026-10-18T22:09:41.900Z"
+    },
+    "webhook": {
+        "delivered": false,
+        "reason": "WEBHOOK_URL not configured"
+    }
+}
+
+## mongo approvals events (recent)
+[
+    {
+        "document_id": "sub-009",
+        "decision": "rejected",
+        "operator": "zaid",
+        "note": null,
+        "created_at": "2026-10-18T22:09:41.902Z"
+    },
+    {
+        "document_id": "sub-010",
+        "decision": "approved",
+        "operator": "zaid",
+        "note": null,
+        "created_at": "2026-10-18T22:09:41.839Z"
+    }
+]

@@ -4,7 +4,7 @@ SHELL := /bin/bash
 # -----------------------------------------------------------------------------
 # ExpenseIQ — developer entrypoints
 # -----------------------------------------------------------------------------
-.PHONY: help infra-up infra-down ai-install ai-run ai-test gpu-check lint fmt evals index backend-install backend-run backend-check
+.PHONY: help infra-up infra-down ai-install ai-run ai-test gpu-check lint fmt evals index backend-install backend-run backend-check assistant-eval ask
 
 help: ## Show this help
 	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*?## "}{printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
@@ -47,3 +47,9 @@ lint: ## Ruff lint (python)
 
 fmt: ## Ruff format (python)
 	cd ai-service && uv run ruff format .
+
+ask: ## Ask the spend assistant (usage: make ask Q="how much on travel?")
+	cd ai-service && uv run python -m app.assistant "$(Q)"
+
+assistant-eval: ## Answer-correctness eval for the spend assistant (needs ai-service up)
+	cd ai-service && uv run python ../evals/run_assistant_eval.py --url http://localhost:$${AI_SERVICE_PORT:-8080}
