@@ -262,7 +262,7 @@ def _render(json_path: Path, png: Path) -> None:
     panels = [
         (axes[0], acc, "accuracy (%)", lambda x: f"{x:.1f}%", 105),
         (axes[1], lat, "mean latency (ms/call)", lambda x: f"{x:.0f}", None),
-        (axes[2], cost, "cost ($ per 1,000 calls)", lambda x: f"${x:.3f}", None),
+        (axes[2], cost, "GPU cost ($ per 1,000 sequential calls)", lambda x: f"${x:.3f}", None),
     ]
     for ax, vals, ylab, fmt, ylim in panels:
         bars = ax.bar(labels, vals, color=colors)
@@ -274,7 +274,9 @@ def _render(json_path: Path, png: Path) -> None:
             ax.text(b.get_x() + b.get_width() / 2, val + top * 0.02, fmt(val),
                     ha="center", fontsize=9)
     fig.suptitle(title, fontsize=13)
-    fig.tight_layout(rect=(0, 0, 1, 0.95))
+    fig.text(0.5, 0.925, "serving: 0.5B on transformers.generate · 7B on vLLM (continuous batching)",
+             ha="center", va="top", fontsize=10, color="#444444")
+    fig.tight_layout(rect=(0, 0, 1, 0.90))
     png.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(png, dpi=130)
     print(f"wrote {png}")
