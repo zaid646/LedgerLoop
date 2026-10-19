@@ -65,6 +65,22 @@ MERCHANTS: dict[str, str] = {
     "Netflix": "ENTERTAINMENT",
 }
 
+# Merchants held out entirely for the unseen-merchant split. Because each merchant
+# in MERCHANTS maps to exactly one category, a row-random split leaks the answer via
+# the merchant token (a trivial merchant->category lookup scores 100%). Holding out
+# whole merchants makes the held-out set a genuine generalisation test, and drops the
+# lookup baseline to ~0. Chosen to cover 7 categories with at least one train merchant
+# left in each.
+UNSEEN_MERCHANTS: list[str] = [
+    "Uber",
+    "Starbucks",
+    "GitHub",
+    "IKEA",
+    "Staples",
+    "Google Ads",
+    "Deloitte",
+]
+
 DESCRIPTIONS: dict[str, list[str]] = {
     "TRAVEL": [
         "flight booking", "hotel stay", "rideshare trip", "train ticket", "car rental",
@@ -124,13 +140,25 @@ DESCRIPTIONS: dict[str, list[str]] = {
 PROMPT = "Classify this company expense line into exactly one GL category.\nDescription - Merchant: {text}\nCategory:"
 
 
-def _rows() -> list[dict[str, str]]:
-    rows: list[dict[str, str]] = []
-    for merchant, category in MERCHANTS.items():
-        rows.append({"text": f"{category.lower().replace('_', ' ')} - {merchant}", "label": category})
-        for desc in DESCRIPTIONS[category]:
-            rows.append({"text": f"{desc} - {merchant}", "label": category})
+def _rows_for(merchant: str, category: str) -> list[dict[str, str]]:
+    rows = [{"text": f"{category.lower().replace('_', ' ')} - {merchant}", "label": category}]
+    for desc in DESCRIPTIONS.get(category, []):
+        rows.append({"text": f"{desc} - {merchant}", "label": category})
     return rows
+
+
+def _rows() -> list[dict[str, str]]:
+    out: list[dict[str, str]] = []
+    for merchant, category in MERCHANTS.items():
+        out.extend(_rows_for(merchant, category))
+    return out
+
+
+def _prepare(rows: list[dict[str, str]]) -> list[dict]:
+    return [
+        {"text": r["text"], "label": r["label"], "prompt": PROMPT.format(text=r["text"]), "target": r["label"]}
+        for r in rows
+    ]
 
 
 def build(seed: int = 42, val_frac: float = 0.2) -> tuple[list[dict], list[dict]]:
@@ -139,11 +167,22 @@ def build(seed: int = 42, val_frac: float = 0.2) -> tuple[list[dict], list[dict]
     rng = random.Random(seed)
     rng.shuffle(rows)
     n_val = max(1, int(len(rows) * val_frac))
-    prepared = [
-        {"text": r["text"], "label": r["label"], "prompt": PROMPT.format(text=r["text"]), "target": r["label"]}
-        for r in rows
-    ]
+    prepared = _prepare(rows)
     return prepared[n_val:], prepared[:n_val]
+
+
+def build_unseen(seed: int = 42) -> tuple[list[dict], list[dict]]:
+    """Return (train, val) with disjoint merchant sets — the held-out merchants in
+    ``UNSEEN_MERCHANTS`` never appear in training, so the val set tests
+    generalisation to new merchants rather than memorising a merchant->category table.
+    """
+    held = set(UNSEEN_MERCHANTS)
+    train_rows = [r for m, c in MERCHANTS.items() if m not in held for r in _rows_for(m, c)]
+    val_rows = [r for m, c in MERCHANTS.items() if m in held for r in _rows_for(m, c)]
+    rng = random.Random(seed)
+    rng.shuffle(train_rows)
+    rng.shuffle(val_rows)
+    return _prepare(train_rows), _prepare(val_rows)
 
 
 def write(out_dir: Path | str = Path(__file__).parent / "data") -> tuple[Path, Path]:
@@ -157,6 +196,19 @@ def write(out_dir: Path | str = Path(__file__).parent / "data") -> tuple[Path, P
     return tp, vp
 
 
+def write_unseen(out_dir: Path | str = Path(__file__).parent / "data") -> tuple[Path, Path]:
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    train, val = build_unseen()
+    tp = out_dir / "coding_train_unseen.jsonl"
+    vp = out_dir / "coding_val_unseen.jsonl"
+    tp.write_text("\n".join(json.dumps(r) for r in train) + "\n")
+    vp.write_text("\n".join(json.dumps(r) for r in val) + "\n")
+    return tp, vp
+
+
 if __name__ == "__main__":
     tp, vp = write()
     print(f"wrote {tp} and {vp}")
+    up, uv = write_unseen()
+    print(f"wrote {up} and {uv} ({len(UNSEEN_MERCHANTS)} unseen merchants)")

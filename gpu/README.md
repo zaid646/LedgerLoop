@@ -10,12 +10,16 @@ that is separate from the serving stack:
 ```bash
 # on the Vast instance — isolated training env (does not touch /venv/main)
 /venv/main/bin/python -m venv --system-site-packages /workspace/train-venv
-uv pip install --python /workspace/train-venv/bin/python \
-    "transformers>=4.46,<5" "datasets>=3,<5" "huggingface_hub>=0.34,<1.0" \
-    peft bitsandbytes accelerate hf_transfer
-# the image's torch/torchvision pair is mismatched; align a matched pair
-uv pip install --python /workspace/train-venv/bin/python --upgrade torch torchvision
+/workspace/train-venv/bin/pip install -U pip
+/workspace/train-venv/bin/pip install \
+    "transformers==4.57.6" "peft==0.21.2" "datasets==4.8.5" \
+    "bitsandbytes==0.50.2" "trl==1.16.0" accelerate \
+    "huggingface_hub==0.36.2" hf_transfer
 ```
+
+`--system-site-packages` reuses the image's CUDA-enabled `torch`, so nothing in
+`/venv/main` (the serving stack) is touched. Verified on the Vast vLLM 0.30.0
+image (torch 2.13.0+cu130).
 
 ## Files
 
@@ -24,6 +28,7 @@ uv pip install --python /workspace/train-venv/bin/python --upgrade torch torchvi
 | `coding_data.py` | builds the GL-coding dataset (merchant × description → category); pure-python, runs anywhere |
 | `finetune_qlora.py` | QLoRA-fine-tunes a 0.5–1.5B model on the pairs → LoRA adapter |
 | `eval_qlora.py` | evaluates base vs adapter accuracy on the held-out split |
+| `eval_coding_compare.py` | four-way comparison (base/tuned 0.5B, prompted 7B, 7B+retrieval) on one held-out set → `runs/coding_compare.json` + figure |
 | `serve_adapter.py` | serves the adapter over HTTP (`transformers` + `peft`, FastAPI) |
 | `check_gpu.py` | `make gpu-check` — verifies the served vLLM endpoint |
 | `RUNBOOK.md` | how to rent + launch vLLM |
@@ -56,6 +61,38 @@ adapter; `eval_qlora.py` writes base vs adapter accuracy and the `delta`.
 Result on the rented 4090 (Qwen2.5-0.5B-Instruct, 4-bit NF4, 3 epochs): base
 **10.9%** → adapter **98.4%** on 64 held-out coding pairs (**+87.5 pts**),
 train_loss 0.36 in ~40 s.
+
+> **Leakage caveat.** In the default random split each merchant maps to exactly
+> one category, so the merchant token alone reveals the answer — a trivial
+> merchant→category lookup scores **100%**, and the 10.9%→98.4% number is really
+> a *same-model ablation* (adapter on/off), not a generalisation claim. Use the
+> unseen-merchant split below for the honest comparison.
+
+### Four-way comparison — unseen-merchant split
+
+`coding_data.py` holds out whole merchants (`UNSEEN_MERCHANTS`); the held-out
+merchants never appear in training, so the merchant-lookup baseline drops to
+**0%**. `eval_coding_compare.py` scores the **same 75 held-out pairs** with four
+variants and writes `runs/coding_compare.json` (+ a bar-chart figure):
+
+```bash
+python gpu/finetune_qlora.py --split unseen --out /workspace/expenseiq-qlora-unseen
+python gpu/eval_coding_compare.py --split unseen --adapter /workspace/expenseiq-qlora-unseen \
+    --vllm-base-url http://127.0.0.1:18000/v1 --out runs/coding_compare.json
+```
+
+| variant | accuracy | notes |
+|---|---|---|
+| base 0.5B | 10.7% | off-the-shelf, no adapter, plain prompt |
+| tuned 0.5B | 60.0% | + QLoRA adapter; no retrieval, single small model |
+| prompted 7B | 93.3% | zero-shot, given the 13-label list, no retrieval |
+| prompted 7B + retrieval | 100.0% | + lexical candidates from the merchant KB |
+
+Honest read: on genuinely unseen merchants the 0.5B adapter (**60%**) does *not*
+match a prompted 7B (**93%**); its value is **cost/latency** — no 7B GPU, no
+retrieval index, ~40 s to train. Retrieval is what makes the 7B near-perfect.
+The remaining 0.5B errors are merchant-bound (e.g. `laptop - IKEA → IKEA`), i.e.
+it still latches onto the merchant rather than the description.
 
 ### Serve the adapter
 

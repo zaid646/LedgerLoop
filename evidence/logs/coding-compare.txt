@@ -1,0 +1,33 @@
+# Phase 6 — GL-coding four-way comparison, unseen-merchant split (2026-10-19)
+
+Held-out whole merchants (never seen in training): Uber, Starbucks, GitHub,
+IKEA, Staples, Google Ads, Deloitte. Merchant-lookup baseline on this split = 0%
+(the random-split leak is gone). Same 75 held-out pairs scored by all variants.
+
+## fine-tune: Qwen/Qwen2.5-0.5B-Instruct, 4-bit NF4 LoRA (247 train / 75 val)
+{
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "split": "unseen",
+  "epochs": 3.0,
+  "train_rows": 247,
+  "val_rows": 75,
+  "train_loss": 0.39982779309471506,
+  "minutes": 0.56,
+  "adapter_dir": "/workspace/expenseiq-qlora-unseen"
+}
+
+## eval: four variants, 75 held-out coding rows
+{
+  "base_0.5b": 0.1067,
+  "tuned_0.5b": 0.6,
+  "prompted_7b": 0.9333,
+  "prompted_7b_rag": 1.0
+}
+
+- base 0.5B   — Qwen2.5-0.5B-Instruct, plain training prompt, no adapter
+- tuned 0.5B  — + QLoRA adapter (no retrieval), still merchant-bound: e.g. "laptop - IKEA" -> IKEA
+- prompted 7B — Qwen2.5-7B-Instruct zero-shot, given the 13-label list, no retrieval
+- 7B + RAG    — same 7B, prompt augmented with lexical candidates from the merchant KB
+
+## artifact
+runs/coding_compare.json · evidence/png/15-coding-compare.png

@@ -148,7 +148,7 @@ python gpu/check_gpu.py
 3. **Node.js backend with Postgres, MongoDB, OpenSearch hybrid retrieval, approvals + webhooks**
 4. **Self-healing harness, Langfuse, feedback loop**
 5. **Snowflake warehouse + spend assistant** (guarded NL→SQL over the views)
-6. **QLoRA GL-coding classifier** fine-tuned and served
+6. **QLoRA GL-coding classifier** fine-tuned and served — plus a four-way comparison (base/tuned 0.5B vs prompted 7B ± retrieval) on an **unseen-merchant** split
 
 ## Measuring quality
 
@@ -173,8 +173,8 @@ manifest in [`evidence/SCREENSHOTS.md`](evidence/SCREENSHOTS.md).
 | ![wandb](evidence/png/06-wandb-run.png) | ![promptfoo](evidence/png/08-promptfoo.png) | ![ci](evidence/png/09-ci-green.png) |
 | **API smoke** | **Snowflake views** | **End-to-end submit** |
 | ![api](evidence/png/10-api-smoke.png) | ![snowflake](evidence/png/11-snowflake-views.png) | ![submit](evidence/png/12-backend-submit.png) |
-| **QLoRA fine-tune** | **QLoRA served** |  |
-| ![qlora-eval](evidence/png/13-qlora-eval.png) | ![qlora-serve](evidence/png/14-qlora-serve.png) |  |
+| **QLoRA fine-tune** | **QLoRA served** | **Coding compare** |
+| ![qlora-eval](evidence/png/13-qlora-eval.png) | ![qlora-serve](evidence/png/14-qlora-serve.png) | ![coding-compare](evidence/png/15-coding-compare.png) |
 
 Notebooks: [`01_dataset_exploration`](evidence/png/04-notebook-dataset.png) ·
 [`02_baseline_extraction`](evidence/png/05-notebook-baseline.png).

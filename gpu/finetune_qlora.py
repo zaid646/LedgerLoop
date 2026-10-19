@@ -27,7 +27,7 @@ from transformers import (
     TrainingArguments,
 )
 
-from coding_data import build
+from coding_data import build, build_unseen
 
 
 def _encode(tok, ex: dict) -> dict:
@@ -46,6 +46,8 @@ def main() -> int:
     ap.add_argument("--grad-accum", type=int, default=1)
     ap.add_argument("--max-len", type=int, default=256)
     ap.add_argument("--out", default="/workspace/expenseiq-qlora")
+    ap.add_argument("--split", choices=["random", "unseen"], default="random",
+                    help="'unseen' holds out whole merchants so val merchants never appear in training")
     ap.add_argument("--seed", type=int, default=42)
     args = ap.parse_args()
 
@@ -73,7 +75,7 @@ def main() -> int:
     )
     model = get_peft_model(model, peft_cfg)
 
-    train_rows, val_rows = build(seed=args.seed)
+    train_rows, val_rows = (build_unseen(seed=args.seed) if args.split == "unseen" else build(seed=args.seed))
     ds = {
         "train": [_encode(tok, r) for r in train_rows],
         "validation": [_encode(tok, r) for r in val_rows],
@@ -122,6 +124,7 @@ def main() -> int:
 
     meta = {
         "base_model": args.model,
+        "split": args.split,
         "epochs": args.epochs,
         "train_rows": len(train_rows),
         "val_rows": len(val_rows),

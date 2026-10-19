@@ -14,7 +14,7 @@ from pathlib import Path
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from coding_data import CATEGORIES, build
+from coding_data import CATEGORIES, build, build_unseen
 
 
 def _predict(model, tok, prompt: str, max_new: int = 8) -> str:
@@ -45,13 +45,14 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="Qwen/Qwen2.5-0.5B-Instruct")
     ap.add_argument("--adapter", default="")
+    ap.add_argument("--split", choices=["random", "unseen"], default="random")
     ap.add_argument("--out", default="runs/qlora_eval.json")
     args = ap.parse_args()
 
     tok = AutoTokenizer.from_pretrained(args.model)
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
-    _, val = build()
+    _, val = (build_unseen() if args.split == "unseen" else build())
 
     def load(adapter: str):
         m = AutoModelForCausalLM.from_pretrained(args.model, torch_dtype=torch.bfloat16, device_map="auto")
@@ -67,7 +68,7 @@ def main() -> int:
     del base
     torch.cuda.empty_cache()
 
-    result = {"base_model": args.model, "val_rows": len(val), "base_accuracy": round(base_acc, 4)}
+    result = {"base_model": args.model, "split": args.split, "val_rows": len(val), "base_accuracy": round(base_acc, 4)}
     if args.adapter:
         tuned = load(args.adapter)
         tuned_acc, detail = _score(tuned, tok, val)
