@@ -20,5 +20,11 @@ names below, then tick the box.
 | 13 | `png/13-qlora-eval.png` | QLoRA base (10.9%) vs adapter (98.4%) + train loss | [x] |
 | 14 | `png/14-qlora-serve.png` | `/classify` served adapter predictions | [x] |
 | 15 | `png/15-coding-compare.png` | GL coding, unseen split (75 pairs): accuracy · latency · cost for base 0.5B / tuned 0.5B / prompted 7B / 7B+retrieval | [x] |
+| 16 | `png/16-cluster-compare.png` | Merchant clustering vs GL codes: k-means / HDBSCAN / Louvain (ARI, NMI, purity, cluster sizes) | [x] |
+| 17 | `png/17-ingest-throughput.png` | Offline ingestion throughput and steady-state speedup: serial vs mp 2/4/8 vs Ray 8-CPU cluster | [x] |
+| 18 | `a11y/before.png` | Review console before remediation — 2 axe violations, Lighthouse a11y 95 | [x] |
+| 19 | `a11y/after.png` | Review console after remediation — 0 axe violations, Lighthouse a11y 100 | [x] |
 
 Auto-captured text artefacts (no screenshot needed) live in `evidence/logs/`.
+Audit reports: `a11y/before.json`, `a11y/after.json`, `a11y/before-lighthouse.json`,
+`a11y/after-lighthouse.json`, `a11y/keyboard.json`; summary in `runs/a11y_scores.json`.

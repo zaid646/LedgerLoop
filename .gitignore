@@ -35,6 +35,11 @@ wandb/
 runs/*
 !runs/.gitkeep
 !runs/coding_compare.json
+!runs/graph_export.json
+!runs/graph_clusters.json
+!runs/graphql_probe.json
+!runs/ingest_benchmark.json
+!runs/a11y_scores.json
 
 # --- notebooks outputs (keep notebooks, drop heavy outputs) ---
 notebooks/**/*.nbconvert.ipynb
