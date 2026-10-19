@@ -32,8 +32,9 @@ artifacts/
 wandb/
 *.sqlite
 *.duckdb
-runs/
+runs/*
 !runs/.gitkeep
+!runs/coding_compare.json
 
 # --- notebooks outputs (keep notebooks, drop heavy outputs) ---
 notebooks/**/*.nbconvert.ipynb

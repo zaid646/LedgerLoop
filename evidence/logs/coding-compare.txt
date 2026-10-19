@@ -16,18 +16,24 @@ IKEA, Staples, Google Ads, Deloitte. Merchant-lookup baseline on this split = 0%
   "adapter_dir": "/workspace/expenseiq-qlora-unseen"
 }
 
-## eval: four variants, 75 held-out coding rows
-{
-  "base_0.5b": 0.1067,
-  "tuned_0.5b": 0.6,
-  "prompted_7b": 0.9333,
-  "prompted_7b_rag": 1.0
-}
+## eval: four variants, 75 held-out coding rows (GPU $0.35/hr)
+accuracy / mean-latency / p95-latency / throughput / cost-per-call
 
-- base 0.5B   — Qwen2.5-0.5B-Instruct, plain training prompt, no adapter
-- tuned 0.5B  — + QLoRA adapter (no retrieval), still merchant-bound: e.g. "laptop - IKEA" -> IKEA
+base_0.5b       0.1067  260 ms  258 ms  13874 calls/hr  $0.000025
+tuned_0.5b      0.6000  178 ms  323 ms  20236 calls/hr  $0.000017
+prompted_7b     0.9333   93 ms  139 ms  38805 calls/hr  $0.000009
+prompted_7b_rag 1.0000   89 ms  139 ms  40474 calls/hr  $0.000009
+
+- base 0.5B   — Qwen2.5-0.5B-Instruct, plain prompt, no adapter (naive HF generate)
+- tuned 0.5B  — + QLoRA adapter (no retrieval); still merchant-bound: "laptop - IKEA" -> IKEA
 - prompted 7B — Qwen2.5-7B-Instruct zero-shot, given the 13-label list, no retrieval
 - 7B + RAG    — same 7B, prompt augmented with lexical candidates from the merchant KB
+
+## latency/cost note
+The vLLM-served 7B is FASTER per call than the naive transformers.generate() 0.5B
+path here, because vLLM does continuous batching + paged attention on the same GPU.
+In this harness the 0.5B's win is memory footprint / co-tenancy / no retrieval
+index, not raw latency — serving stack dominates, not parameter count.
 
 ## artifact
 runs/coding_compare.json · evidence/png/15-coding-compare.png

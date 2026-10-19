@@ -9,7 +9,9 @@ variants so the QLoRA result can be read honestly against a prompted 7B:
     prompted 7B + RAG  same 7B, prompt augmented with lexical retrieval
                        candidates from the merchant knowledge base
 
-Writes ``runs/coding_compare.json`` and (with ``--render``) a bar-chart figure.
+Writes ``runs/coding_compare.json`` — per variant: accuracy, mean/p50/p95
+latency (ms), throughput (calls/hr) and cost per call (``GPU $/hr ÷ throughput``)
+— and (with ``--render``) a three-panel bar chart (accuracy · latency · cost).
 
 Run on the GPU box (7B served by vLLM):
 
@@ -27,6 +29,7 @@ import argparse
 import json
 import os
 import re
+import time
 import urllib.request
 from pathlib import Path
 
@@ -112,9 +115,35 @@ def _extract(pred: str) -> str:
 
 
 # --------------------------------------------------------------------------- #
+# latency / cost                                                               #
+# --------------------------------------------------------------------------- #
+def _stats(lat_ms: list[float], rate_usd_hr: float) -> dict:
+    """Turn per-call latencies into latency, throughput and cost statistics.
+
+    cost per call = (GPU $/hr) ÷ (calls/hr); calls/hr = 3600 / mean-latency-s.
+    """
+    if not lat_ms:
+        return {}
+    ordered = sorted(lat_ms)
+    n = len(ordered)
+    mean = sum(ordered) / n
+    p50 = ordered[int(0.5 * (n - 1))]
+    p95 = ordered[min(n - 1, int(round(0.95 * (n - 1))))]
+    calls_per_hr = 3600.0 / (mean / 1000.0) if mean else 0.0
+    cost = rate_usd_hr / calls_per_hr if calls_per_hr else 0.0
+    return {
+        "latency_ms_mean": round(mean, 1),
+        "latency_ms_p50": round(p50, 1),
+        "latency_ms_p95": round(p95, 1),
+        "throughput_per_hr": round(calls_per_hr, 1),
+        "cost_usd_per_call": round(cost, 6),
+    }
+
+
+# --------------------------------------------------------------------------- #
 # local 0.5B (base + adapter)                                                  #
 # --------------------------------------------------------------------------- #
-def _local_scores(model_name: str, adapter: str, val: list[dict]) -> dict:
+def _local_scores(model_name: str, adapter: str, val: list[dict], rate: float) -> dict:
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -141,23 +170,26 @@ def _local_scores(model_name: str, adapter: str, val: list[dict]) -> dict:
 
     out = {}
     base = load("")
-    out["base_0.5b"] = _score_local(base, tok, val, generate)
+    out["base_0.5b"] = _score_local(base, tok, val, generate, rate)
     del base
     torch.cuda.empty_cache()
     if adapter:
         tuned = load(adapter)
-        out["tuned_0.5b"] = _score_local(tuned, tok, val, generate)
+        out["tuned_0.5b"] = _score_local(tuned, tok, val, generate, rate)
     return out
 
 
-def _score_local(model, tok, val: list[dict], generate) -> dict:
-    detail, correct = [], 0
+def _score_local(model, tok, val: list[dict], generate, rate: float) -> dict:
+    detail, correct, lat = [], 0, []
     for row in val:
-        pred = _extract(generate(model, row["prompt"]))
+        t0 = time.perf_counter()
+        raw = generate(model, row["prompt"])
+        lat.append((time.perf_counter() - t0) * 1000.0)
+        pred = _extract(raw)
         ok = pred == row["label"]
         correct += ok
         detail.append({"text": row["text"], "label": row["label"], "pred": pred, "ok": ok})
-    return {"accuracy": round(correct / max(1, len(val)), 4), "detail": detail}
+    return {"accuracy": round(correct / max(1, len(val)), 4), "detail": detail, **_stats(lat, rate)}
 
 
 # --------------------------------------------------------------------------- #
@@ -179,14 +211,17 @@ def _chat(base_url: str, api_key: str, model: str, prompt: str, timeout: int = 6
     return data["choices"][0]["message"]["content"]
 
 
-def _score_remote(base_url, api_key, model, val, prompt_fn) -> dict:
-    detail, correct = [], 0
+def _score_remote(base_url, api_key, model, val, prompt_fn, rate: float) -> dict:
+    detail, correct, lat = [], 0, []
     for row in val:
-        pred = _extract(_chat(base_url, api_key, model, prompt_fn(row)))
+        t0 = time.perf_counter()
+        raw = _chat(base_url, api_key, model, prompt_fn(row))
+        lat.append((time.perf_counter() - t0) * 1000.0)
+        pred = _extract(raw)
         ok = pred == row["label"]
         correct += ok
         detail.append({"text": row["text"], "label": row["label"], "pred": pred, "ok": ok})
-    return {"accuracy": round(correct / max(1, len(val)), 4), "detail": detail}
+    return {"accuracy": round(correct / max(1, len(val)), 4), "detail": detail, **_stats(lat, rate)}
 
 
 def _load_env() -> None:
@@ -208,19 +243,38 @@ def _render(json_path: Path, png: Path) -> None:
     import matplotlib.pyplot as plt
 
     data = json.loads(json_path.read_text())
-    variants = [("base_0.5b", "base 0.5B"), ("tuned_0.5b", "tuned 0.5B"),
-                ("prompted_7b", "prompted 7B"), ("prompted_7b_rag", "7B + retrieval")]
-    labels = [lbl for key, lbl in variants if key in data["variants"]]
-    vals = [data["variants"][key]["accuracy"] * 100 for key, lbl in variants if key in data["variants"]]
-    colors = ["#c0392b", "#27ae60", "#2980b9", "#8e44ad"][: len(vals)]
-    fig, ax = plt.subplots(figsize=(8, 5))
-    bars = ax.bar(labels, vals, color=colors)
-    ax.set_ylim(0, 105)
-    ax.set_ylabel("accuracy %")
-    ax.set_title(f"GL coding — {data.get('split', 'unseen')} split ({data['val_rows']} held-out pairs)")
-    for b, v in zip(bars, vals):
-        ax.text(b.get_x() + b.get_width() / 2, v + 1.5, f"{v:.1f}%", ha="center", fontsize=10)
-    fig.tight_layout()
+    v = data["variants"]
+    order = [("base_0.5b", "base 0.5B"), ("tuned_0.5b", "tuned 0.5B"),
+             ("prompted_7b", "prompted 7B"), ("prompted_7b_rag", "7B + retrieval")]
+    keys = [k for k, _ in order if k in v]
+    labels = [lbl for k, lbl in order if k in v]
+    colors = ["#c0392b", "#27ae60", "#2980b9", "#8e44ad"][: len(keys)]
+    acc = [v[k]["accuracy"] * 100 for k in keys]
+    lat = [v[k].get("latency_ms_mean", 0) for k in keys]
+    cost = [v[k].get("cost_usd_per_call", 0) * 1000 for k in keys]  # $ per 1k calls
+
+    rate = data.get("gpu_rate_usd_hr")
+    split = data.get("split", "unseen")
+    title = (f"GL coding — {split} split ({data['val_rows']} unseen-merchant pairs)"
+             + (f" · GPU ${rate}/hr" if rate else ""))
+
+    fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+    panels = [
+        (axes[0], acc, "accuracy (%)", lambda x: f"{x:.1f}%", 105),
+        (axes[1], lat, "mean latency (ms/call)", lambda x: f"{x:.0f}", None),
+        (axes[2], cost, "cost ($ per 1,000 calls)", lambda x: f"${x:.3f}", None),
+    ]
+    for ax, vals, ylab, fmt, ylim in panels:
+        bars = ax.bar(labels, vals, color=colors)
+        ax.set_ylabel(ylab)
+        ax.tick_params(axis="x", labelrotation=20)
+        top = (ylim if ylim else max(vals) * 1.18) or 1
+        ax.set_ylim(0, top)
+        for b, val in zip(bars, vals):
+            ax.text(b.get_x() + b.get_width() / 2, val + top * 0.02, fmt(val),
+                    ha="center", fontsize=9)
+    fig.suptitle(title, fontsize=13)
+    fig.tight_layout(rect=(0, 0, 1, 0.95))
     png.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(png, dpi=130)
     print(f"wrote {png}")
@@ -235,6 +289,8 @@ def main() -> int:
     ap.add_argument("--vllm-base-url", default=os.getenv("VLLM_BASE_URL", "http://localhost:8000/v1"))
     ap.add_argument("--vllm-model", default=os.getenv("VLLM_MODEL", "Qwen/Qwen2.5-7B-Instruct"))
     ap.add_argument("--vllm-api-key", default=os.getenv("VLLM_API_KEY", "changeme"))
+    ap.add_argument("--rate", type=float, default=float(os.getenv("GPU_RATE_USD_HR", "0.35")),
+                    help="GPU $/hr, used to turn throughput into cost per call")
     ap.add_argument("--out", default="runs/coding_compare.json")
     ap.add_argument("--render", action="store_true", help="render the figure from --out instead of scoring")
     ap.add_argument("--png", default="evidence/png/15-coding-compare.png")
@@ -245,11 +301,11 @@ def main() -> int:
         return 0
 
     _, val = (build_unseen() if args.split == "unseen" else build())
-    variants: dict[str, dict] = _local_scores(args.base_model, args.adapter, val)
+    variants: dict[str, dict] = _local_scores(args.base_model, args.adapter, val, args.rate)
     variants["prompted_7b"] = _score_remote(
-        args.vllm_base_url, args.vllm_api_key, args.vllm_model, val, lambda r: _zs_prompt(r["text"]))
+        args.vllm_base_url, args.vllm_api_key, args.vllm_model, val, lambda r: _zs_prompt(r["text"]), args.rate)
     variants["prompted_7b_rag"] = _score_remote(
-        args.vllm_base_url, args.vllm_api_key, args.vllm_model, val, lambda r: _rag_prompt(r["text"]))
+        args.vllm_base_url, args.vllm_api_key, args.vllm_model, val, lambda r: _rag_prompt(r["text"]), args.rate)
 
     result = {
         "split": args.split,
@@ -257,12 +313,21 @@ def main() -> int:
         "base_model": args.base_model,
         "adapter": args.adapter,
         "hosted_model": args.vllm_model,
+        "gpu_rate_usd_hr": args.rate,
         "variants": variants,
     }
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(result, indent=2) + "\n")
-    print(json.dumps({k: v["accuracy"] for k, v in variants.items()}, indent=2))
+    summary = {
+        k: {
+            "accuracy": v["accuracy"],
+            "latency_ms_mean": v.get("latency_ms_mean"),
+            "cost_usd_per_call": v.get("cost_usd_per_call"),
+        }
+        for k, v in variants.items()
+    }
+    print(json.dumps(summary, indent=2))
     return 0
 
 

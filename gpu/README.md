@@ -73,26 +73,33 @@ train_loss 0.36 in ~40 s.
 `coding_data.py` holds out whole merchants (`UNSEEN_MERCHANTS`); the held-out
 merchants never appear in training, so the merchant-lookup baseline drops to
 **0%**. `eval_coding_compare.py` scores the **same 75 held-out pairs** with four
-variants and writes `runs/coding_compare.json` (+ a bar-chart figure):
+variants, timing every call and turning throughput into cost-per-call
+(`GPU $/hr ÷ throughput`), and writes `runs/coding_compare.json` (+ a
+three-panel accuracy/latency/cost figure):
 
 ```bash
 python gpu/finetune_qlora.py --split unseen --out /workspace/expenseiq-qlora-unseen
 python gpu/eval_coding_compare.py --split unseen --adapter /workspace/expenseiq-qlora-unseen \
-    --vllm-base-url http://127.0.0.1:18000/v1 --out runs/coding_compare.json
+    --vllm-base-url http://127.0.0.1:18000/v1 --rate 0.35 --out runs/coding_compare.json
 ```
 
-| variant | accuracy | notes |
-|---|---|---|
-| base 0.5B | 10.7% | off-the-shelf, no adapter, plain prompt |
-| tuned 0.5B | 60.0% | + QLoRA adapter; no retrieval, single small model |
-| prompted 7B | 93.3% | zero-shot, given the 13-label list, no retrieval |
-| prompted 7B + retrieval | 100.0% | + lexical candidates from the merchant KB |
+| variant | accuracy | mean latency | cost / call | notes |
+|---|---|---|---|---|
+| base 0.5B | 10.7% | 260 ms | $0.000025 | off-the-shelf, no adapter, plain prompt |
+| tuned 0.5B | 60.0% | 178 ms | $0.000017 | + QLoRA adapter; no retrieval, single small model |
+| prompted 7B | 93.3% | 93 ms | $0.000009 | zero-shot, given the 13-label list, no retrieval |
+| prompted 7B + retrieval | 100.0% | 89 ms | $0.000009 | + lexical candidates from the merchant KB |
 
 Honest read: on genuinely unseen merchants the 0.5B adapter (**60%**) does *not*
-match a prompted 7B (**93%**); its value is **cost/latency** — no 7B GPU, no
-retrieval index, ~40 s to train. Retrieval is what makes the 7B near-perfect.
-The remaining 0.5B errors are merchant-bound (e.g. `laptop - IKEA → IKEA`), i.e.
-it still latches onto the merchant rather than the description.
+match a prompted 7B (**93%**); retrieval is what makes the 7B near-perfect. The
+remaining 0.5B errors are merchant-bound (e.g. `laptop - IKEA → IKEA`), i.e. it
+still latches onto the merchant rather than the description.
+
+Latency/cost caveat: the vLLM-served 7B is *faster* per call than the naive
+`transformers.generate()` 0.5B path here (continuous batching + paged attention
+on the same GPU), so **serving stack dominates latency, not parameter count**. In
+this harness the 0.5B's real edge is memory/co-tenancy and needing no retrieval
+index, not throughput.
 
 ### Serve the adapter
 

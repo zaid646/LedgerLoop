@@ -19,6 +19,6 @@ names below, then tick the box.
 | 12 | `png/12-backend-submit.png` | `POST /expenses/submit` routed response | [x] |
 | 13 | `png/13-qlora-eval.png` | QLoRA base (10.9%) vs adapter (98.4%) + train loss | [x] |
 | 14 | `png/14-qlora-serve.png` | `/classify` served adapter predictions | [x] |
-| 15 | `png/15-coding-compare.png` | GL coding, unseen-merchant split: base 0.5B / tuned 0.5B / prompted 7B / 7B+retrieval | [x] |
+| 15 | `png/15-coding-compare.png` | GL coding, unseen split (75 pairs): accuracy · latency · cost for base 0.5B / tuned 0.5B / prompted 7B / 7B+retrieval | [x] |
 
 Auto-captured text artefacts (no screenshot needed) live in `evidence/logs/`.

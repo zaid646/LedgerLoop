@@ -1,0 +1,1850 @@
+{
+  "split": "unseen",
+  "val_rows": 75,
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "adapter": "/workspace/expenseiq-qlora-unseen",
+  "hosted_model": "Qwen/Qwen2.5-7B-Instruct",
+  "gpu_rate_usd_hr": 0.35,
+  "variants": {
+    "base_0.5b": {
+      "accuracy": 0.1067,
+      "detail": [
+        {
+          "text": "brand promotion - Google Ads",
+          "label": "MARKETING",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "hotel stay - Uber",
+          "label": "TRAVEL",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "trade show booth - Google Ads",
+          "label": "MARKETING",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "laptop - IKEA",
+          "label": "HARDWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "department lunch - Starbucks",
+          "label": "MEALS",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "sticky notes - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "snack delivery - Starbucks",
+          "label": "MEALS",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "toner cartridge - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "printer paper - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "security scanner - GitHub",
+          "label": "SOFTWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "conference catering - Starbucks",
+          "label": "MEALS",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "recruiting fee - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "office chair - IKEA",
+          "label": "HARDWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "coffee run - Starbucks",
+          "label": "MEALS",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "envelopes - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "onboarding breakfast - Starbucks",
+          "label": "MEALS",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "pizza night - Starbucks",
+          "label": "MEALS",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "whiteboard markers - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "courier service - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "pens and notebooks - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "The company expense line",
+          "ok": false
+        },
+        {
+          "text": "monitor - IKEA",
+          "label": "HARDWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "API usage - GitHub",
+          "label": "SOFTWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "road toll - Uber",
+          "label": "TRAVEL",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "team lunch - Starbucks",
+          "label": "MEALS",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "professional services - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "desk - IKEA",
+          "label": "HARDWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "desk organizer - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "legal retainer - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "binding supplies - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "flight booking - Uber",
+          "label": "TRAVEL",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "stapler - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "The merchant expense lin",
+          "ok": false
+        },
+        {
+          "text": "search ads - Google Ads",
+          "label": "MARKETING",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "meals - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "observability plan - GitHub",
+          "label": "SOFTWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "design tool license - GitHub",
+          "label": "SOFTWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "annual license - GitHub",
+          "label": "SOFTWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "business trip meal - Uber",
+          "label": "TRAVEL",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "sponsored post - Google Ads",
+          "label": "MARKETING",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "car rental - Uber",
+          "label": "TRAVEL",
+          "pred": "RENT",
+          "ok": false
+        },
+        {
+          "text": "travel - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "webcam - IKEA",
+          "label": "HARDWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "rideshare trip - Uber",
+          "label": "TRAVEL",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "marketing - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "office supplies - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "consulting fees - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "train ticket - Uber",
+          "label": "TRAVEL",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "networking switch - IKEA",
+          "label": "HARDWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "CI minutes - GitHub",
+          "label": "SOFTWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "catering order - Starbucks",
+          "label": "MEALS",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "airline baggage fee - Uber",
+          "label": "TRAVEL",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "developer seat - GitHub",
+          "label": "SOFTWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "taxi fare - Uber",
+          "label": "TRAVEL",
+          "pred": "OTHER",
+          "ok": false
+        },
+        {
+          "text": "cloud compute - GitHub",
+          "label": "SOFTWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "collaboration suite - GitHub",
+          "label": "SOFTWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "ad campaign - Google Ads",
+          "label": "MARKETING",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "email marketing tool - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "client dinner - Starbucks",
+          "label": "MEALS",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "influencer fee - Google Ads",
+          "label": "MARKETING",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "audit fee - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "keyboard - IKEA",
+          "label": "HARDWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "office coffee beans - Starbucks",
+          "label": "MEALS",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "hardware - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "monthly subscription - GitHub",
+          "label": "SOFTWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "airport parking - Uber",
+          "label": "TRAVEL",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "accounting services - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "fuel purchase - Uber",
+          "label": "TRAVEL",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "social media ads - Google Ads",
+          "label": "MARKETING",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "notary fee - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "server rack - IKEA",
+          "label": "HARDWARE",
+          "pred": "Based on the description",
+          "ok": false
+        },
+        {
+          "text": "file folders - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "external SSD - IKEA",
+          "label": "HARDWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "translation service - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "The merchant expense lin",
+          "ok": false
+        },
+        {
+          "text": "rail pass - Uber",
+          "label": "TRAVEL",
+          "pred": "The description \"Merchan",
+          "ok": false
+        },
+        {
+          "text": "software - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "docking station - IKEA",
+          "label": "HARDWARE",
+          "pred": "The description \"Merchan",
+          "ok": false
+        }
+      ],
+      "latency_ms_mean": 259.5,
+      "latency_ms_p50": 246.6,
+      "latency_ms_p95": 257.9,
+      "throughput_per_hr": 13874.4,
+      "cost_usd_per_call": 2.5e-05
+    },
+    "tuned_0.5b": {
+      "accuracy": 0.6,
+      "detail": [
+        {
+          "text": "brand promotion - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "hotel stay - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "trade show booth - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "laptop - IKEA",
+          "label": "HARDWARE",
+          "pred": "IKEA",
+          "ok": false
+        },
+        {
+          "text": "department lunch - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "sticky notes - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE",
+          "ok": false
+        },
+        {
+          "text": "snack delivery - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "toner cartridge - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE",
+          "ok": false
+        },
+        {
+          "text": "printer paper - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE",
+          "ok": false
+        },
+        {
+          "text": "security scanner - GitHub",
+          "label": "SOFTWARE",
+          "pred": "CATEGORY/github",
+          "ok": false
+        },
+        {
+          "text": "conference catering - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "recruiting fee - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "office chair - IKEA",
+          "label": "HARDWARE",
+          "pred": "IKEA",
+          "ok": false
+        },
+        {
+          "text": "coffee run - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "envelopes - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": false
+        },
+        {
+          "text": "onboarding breakfast - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "pizza night - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "whiteboard markers - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE",
+          "ok": false
+        },
+        {
+          "text": "courier service - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "pens and notebooks - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE",
+          "ok": false
+        },
+        {
+          "text": "monitor - IKEA",
+          "label": "HARDWARE",
+          "pred": "IKEA",
+          "ok": false
+        },
+        {
+          "text": "API usage - GitHub",
+          "label": "SOFTWARE",
+          "pred": "CATEGORY/github",
+          "ok": false
+        },
+        {
+          "text": "road toll - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "team lunch - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "professional services - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "desk - IKEA",
+          "label": "HARDWARE",
+          "pred": "IKEA",
+          "ok": false
+        },
+        {
+          "text": "desk organizer - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE",
+          "ok": false
+        },
+        {
+          "text": "legal retainer - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "binding supplies - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": false
+        },
+        {
+          "text": "flight booking - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "stapler - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE",
+          "ok": false
+        },
+        {
+          "text": "search ads - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "meals - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "observability plan - GitHub",
+          "label": "SOFTWARE",
+          "pred": "CATEGORY/github",
+          "ok": false
+        },
+        {
+          "text": "design tool license - GitHub",
+          "label": "SOFTWARE",
+          "pred": "CATEGORY/github",
+          "ok": false
+        },
+        {
+          "text": "annual license - GitHub",
+          "label": "SOFTWARE",
+          "pred": "CATEGORY/github",
+          "ok": false
+        },
+        {
+          "text": "business trip meal - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "sponsored post - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "car rental - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "travel - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "webcam - IKEA",
+          "label": "HARDWARE",
+          "pred": "IKEA",
+          "ok": false
+        },
+        {
+          "text": "rideshare trip - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "marketing - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "office supplies - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "consulting fees - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "train ticket - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "networking switch - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "CI minutes - GitHub",
+          "label": "SOFTWARE",
+          "pred": "CATEGORY/github",
+          "ok": false
+        },
+        {
+          "text": "catering order - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "airline baggage fee - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "developer seat - GitHub",
+          "label": "SOFTWARE",
+          "pred": "CATEGORY/github",
+          "ok": false
+        },
+        {
+          "text": "taxi fare - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "cloud compute - GitHub",
+          "label": "SOFTWARE",
+          "pred": "CATEGORY:mysql",
+          "ok": false
+        },
+        {
+          "text": "collaboration suite - GitHub",
+          "label": "SOFTWARE",
+          "pred": "CATEGORY/github",
+          "ok": false
+        },
+        {
+          "text": "ad campaign - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "email marketing tool - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "client dinner - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "influencer fee - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "audit fee - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "keyboard - IKEA",
+          "label": "HARDWARE",
+          "pred": "IKEA",
+          "ok": false
+        },
+        {
+          "text": "office coffee beans - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "hardware - IKEA",
+          "label": "HARDWARE",
+          "pred": "IKEA",
+          "ok": false
+        },
+        {
+          "text": "monthly subscription - GitHub",
+          "label": "SOFTWARE",
+          "pred": "CATEGORY/github",
+          "ok": false
+        },
+        {
+          "text": "airport parking - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "accounting services - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "fuel purchase - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "social media ads - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "notary fee - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "server rack - IKEA",
+          "label": "HARDWARE",
+          "pred": "IKEA",
+          "ok": false
+        },
+        {
+          "text": "file folders - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE",
+          "ok": false
+        },
+        {
+          "text": "external SSD - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "translation service - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "rail pass - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "software - GitHub",
+          "label": "SOFTWARE",
+          "pred": "CATEGORY/github",
+          "ok": false
+        },
+        {
+          "text": "docking station - IKEA",
+          "label": "HARDWARE",
+          "pred": "IKEA",
+          "ok": false
+        }
+      ],
+      "latency_ms_mean": 177.9,
+      "latency_ms_p50": 141.8,
+      "latency_ms_p95": 322.9,
+      "throughput_per_hr": 20236.1,
+      "cost_usd_per_call": 1.7e-05
+    },
+    "prompted_7b": {
+      "accuracy": 0.9333,
+      "detail": [
+        {
+          "text": "brand promotion - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "hotel stay - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "trade show booth - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "laptop - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "department lunch - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "sticky notes - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "snack delivery - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "toner cartridge - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "HARDWARE",
+          "ok": false
+        },
+        {
+          "text": "printer paper - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "security scanner - GitHub",
+          "label": "SOFTWARE",
+          "pred": "HARDWARE",
+          "ok": false
+        },
+        {
+          "text": "conference catering - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "recruiting fee - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "office chair - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "coffee run - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "envelopes - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "onboarding breakfast - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "pizza night - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "whiteboard markers - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "courier service - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "pens and notebooks - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "monitor - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "API usage - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "road toll - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "team lunch - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "professional services - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "desk - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "desk organizer - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "legal retainer - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "binding supplies - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "flight booking - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "stapler - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "search ads - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "meals - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "observability plan - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "design tool license - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "annual license - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "business trip meal - Uber",
+          "label": "TRAVEL",
+          "pred": "MEALS",
+          "ok": false
+        },
+        {
+          "text": "sponsored post - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "car rental - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "travel - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "webcam - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "rideshare trip - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "marketing - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "office supplies - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "consulting fees - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "train ticket - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "networking switch - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "CI minutes - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "catering order - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "airline baggage fee - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "developer seat - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "taxi fare - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "cloud compute - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "collaboration suite - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "ad campaign - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "email marketing tool - Google Ads",
+          "label": "MARKETING",
+          "pred": "SOFTWARE",
+          "ok": false
+        },
+        {
+          "text": "client dinner - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "influencer fee - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "audit fee - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "keyboard - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "office coffee beans - Starbucks",
+          "label": "MEALS",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": false
+        },
+        {
+          "text": "hardware - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "monthly subscription - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "airport parking - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "accounting services - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "fuel purchase - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "social media ads - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "notary fee - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "server rack - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "file folders - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "external SSD - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "translation service - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "rail pass - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "software - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "docking station - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        }
+      ],
+      "latency_ms_mean": 92.8,
+      "latency_ms_p50": 91.0,
+      "latency_ms_p95": 138.6,
+      "throughput_per_hr": 38804.9,
+      "cost_usd_per_call": 9e-06
+    },
+    "prompted_7b_rag": {
+      "accuracy": 1.0,
+      "detail": [
+        {
+          "text": "brand promotion - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "hotel stay - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "trade show booth - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "laptop - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "department lunch - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "sticky notes - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "snack delivery - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "toner cartridge - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "printer paper - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "security scanner - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "conference catering - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "recruiting fee - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "office chair - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "coffee run - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "envelopes - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "onboarding breakfast - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "pizza night - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "whiteboard markers - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "courier service - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "pens and notebooks - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "monitor - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "API usage - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "road toll - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "team lunch - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "professional services - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "desk - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "desk organizer - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "legal retainer - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "binding supplies - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "flight booking - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "stapler - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "search ads - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "meals - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "observability plan - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "design tool license - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "annual license - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "business trip meal - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "sponsored post - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "car rental - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "travel - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "webcam - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "rideshare trip - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "marketing - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "office supplies - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "consulting fees - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "train ticket - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "networking switch - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "CI minutes - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "catering order - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "airline baggage fee - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "developer seat - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "taxi fare - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "cloud compute - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "collaboration suite - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "ad campaign - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "email marketing tool - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "client dinner - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "influencer fee - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "audit fee - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "keyboard - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "office coffee beans - Starbucks",
+          "label": "MEALS",
+          "pred": "MEALS",
+          "ok": true
+        },
+        {
+          "text": "hardware - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "monthly subscription - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "airport parking - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "accounting services - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "fuel purchase - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "social media ads - Google Ads",
+          "label": "MARKETING",
+          "pred": "MARKETING",
+          "ok": true
+        },
+        {
+          "text": "notary fee - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "server rack - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "file folders - Staples",
+          "label": "OFFICE_SUPPLIES",
+          "pred": "OFFICE_SUPPLIES",
+          "ok": true
+        },
+        {
+          "text": "external SSD - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        },
+        {
+          "text": "translation service - Deloitte",
+          "label": "PROFESSIONAL_SERVICES",
+          "pred": "PROFESSIONAL_SERVICES",
+          "ok": true
+        },
+        {
+          "text": "rail pass - Uber",
+          "label": "TRAVEL",
+          "pred": "TRAVEL",
+          "ok": true
+        },
+        {
+          "text": "software - GitHub",
+          "label": "SOFTWARE",
+          "pred": "SOFTWARE",
+          "ok": true
+        },
+        {
+          "text": "docking station - IKEA",
+          "label": "HARDWARE",
+          "pred": "HARDWARE",
+          "ok": true
+        }
+      ],
+      "latency_ms_mean": 88.9,
+      "latency_ms_p50": 83.3,
+      "latency_ms_p95": 138.5,
+      "throughput_per_hr": 40474.0,
+      "cost_usd_per_call": 9e-06
+    }
+  }
+}
