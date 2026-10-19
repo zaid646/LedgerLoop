@@ -1,0 +1,84 @@
+{
+  "url": "http://localhost:8501",
+  "checkedAt": "2026-10-19T19:19:22.088Z",
+  "headings": [
+    {
+      "level": "H1",
+      "text": "ExpenseIQ review console"
+    },
+    {
+      "level": "H2",
+      "text": "Review queue"
+    },
+    {
+      "level": "H2",
+      "text": "Merchant clusters"
+    },
+    {
+      "level": "H2",
+      "text": "Graph details"
+    }
+  ],
+  "skipLink": {
+    "firstStop": {
+      "tag": "A",
+      "text": "Skip to main content",
+      "href": "#stMain",
+      "outline": "rgb(11, 83, 148) solid 3px",
+      "left": "8px"
+    },
+    "skipTarget": {
+      "hash": "",
+      "activeId": "stMain"
+    }
+  },
+  "search": {
+    "accessibleNameCount": 1,
+    "focus": {
+      "outline": "rgb(11, 83, 148) solid 3px",
+      "ariaLabel": "Search expenses"
+    }
+  },
+  "tabStops": [
+    {
+      "tag": "A",
+      "name": "Skip to main content"
+    },
+    {
+      "tag": "BUTTON",
+      "name": "Refresh data"
+    },
+    {
+      "tag": "INPUT",
+      "name": "Category"
+    },
+    {
+      "tag": "INPUT",
+      "name": "Policy route"
+    },
+    {
+      "tag": "BUTTON",
+      "name": "Deploy"
+    },
+    {
+      "tag": "BUTTON",
+      "name": "Main menu"
+    },
+    {
+      "tag": "MAIN",
+      "name": "ExpenseIQ review console\n\nHuman-in-the-loop review for coded"
+    },
+    {
+      "tag": "A",
+      "name": "Link to heading"
+    },
+    {
+      "tag": "BUTTON",
+      "name": "Help for Search expenses"
+    },
+    {
+      "tag": "INPUT",
+      "name": "Search expenses"
+    }
+  ]
+}

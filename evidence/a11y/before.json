@@ -1,0 +1,104 @@
+{
+  "url": "http://localhost:8501",
+  "label": "before",
+  "checkedAt": "2026-10-19T18:54:14.463Z",
+  "violations": [
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "help": "Elements must meet minimum color contrast ratio thresholds",
+      "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+      "tags": [
+        "cat.color",
+        "wcag2aa",
+        "wcag143",
+        "TTv5",
+        "TT13.c",
+        "EN-301-549",
+        "EN-9.1.4.3",
+        "ACT",
+        "RGAAv4",
+        "RGAA-3.2.1"
+      ],
+      "nodes": [
+        {
+          "target": [
+            ".st-emotion-cache-3pwa5w.stElementContainer.element-container:nth-child(2) > .stMarkdown[data-testid=\"stMarkdown\"] > .st-emotion-cache-k2h9z6.e1o1x6gp2 > .st-emotion-cache-1xqokk6.e12uj6qz0[data-testid=\"stCaptionContainer\"] > p"
+          ],
+          "html": "<p>GraphQL <code class=\"st-emotion-cache-2x4akf ej556a80\">http://localhost:8080/graphql</code></p>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.39 (foreground color: #727373, background color: #f4f6f8, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".st-emotion-cache-3pwa5w.stElementContainer.element-container:nth-child(2) > .stMarkdown[data-testid=\"stMarkdown\"] > .st-emotion-cache-k2h9z6.e1o1x6gp2 > .st-emotion-cache-1xqokk6.e12uj6qz0[data-testid=\"stCaptionContainer\"] > p > code"
+          ],
+          "html": "<code class=\"st-emotion-cache-2x4akf ej556a80\">http://localhost:8080/graphql</code>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.37 (foreground color: #70b285, background color: #f8f9fa, font size: 7.9pt (10.5px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".st-emotion-cache-3pwa5w.stElementContainer.element-container:nth-child(3) > .stMarkdown[data-testid=\"stMarkdown\"] > .st-emotion-cache-k2h9z6.e1o1x6gp2 > .st-emotion-cache-1xqokk6.e12uj6qz0[data-testid=\"stCaptionContainer\"] > p"
+          ],
+          "html": "<p>REST <code class=\"st-emotion-cache-2x4akf ej556a80\">http://localhost:8080</code></p>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.39 (foreground color: #727373, background color: #f4f6f8, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".st-emotion-cache-3pwa5w.stElementContainer.element-container:nth-child(3) > .stMarkdown[data-testid=\"stMarkdown\"] > .st-emotion-cache-k2h9z6.e1o1x6gp2 > .st-emotion-cache-1xqokk6.e12uj6qz0[data-testid=\"stCaptionContainer\"] > p > code"
+          ],
+          "html": "<code class=\"st-emotion-cache-2x4akf ej556a80\">http://localhost:8080</code>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.37 (foreground color: #70b285, background color: #f8f9fa, font size: 7.9pt (10.5px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".st-emotion-cache-3pwa5w.stElementContainer.element-container:nth-child(6) > .stMarkdown[data-testid=\"stMarkdown\"] > .st-emotion-cache-k2h9z6.e1o1x6gp2 > .st-emotion-cache-1xqokk6.e12uj6qz0[data-testid=\"stCaptionContainer\"] > p"
+          ],
+          "html": "<p>Loaded 75 expenses from the graph.</p>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.39 (foreground color: #727373, background color: #f4f6f8, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".st-emotion-cache-3pwa5w.stElementContainer.element-container:nth-child(3) > .stMarkdown[data-testid=\"stMarkdown\"] > .st-emotion-cache-k2h9z6.e1o1x6gp2 > .st-emotion-cache-mr2s4y.e12uj6qz0[data-testid=\"stMarkdownContainer\"] > .eq-muted"
+          ],
+          "html": "<p class=\"eq-muted\">Human-in-the-loop review for coded expenses. The graph and cluster metrics refresh automatically every 20 seconds.</p>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.98 (foreground color: #b8b8b8, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".st-emotion-cache-3pwa5w.stElementContainer.element-container:nth-child(8) > .stMarkdown[data-testid=\"stMarkdown\"] > .st-emotion-cache-k2h9z6.e1o1x6gp2 > .st-emotion-cache-mr2s4y.e12uj6qz0[data-testid=\"stMarkdownContainer\"] > .eq-muted"
+          ],
+          "html": "<p class=\"eq-muted\">Amounts are shown in the receipt currency. Use the filters in the sidebar to narrow the queue.</p>",
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.98 (foreground color: #b8b8b8, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+        }
+      ]
+    },
+    {
+      "id": "heading-order",
+      "impact": "moderate",
+      "help": "Heading levels should only increase by one",
+      "description": "Ensure the order of headings is semantically correct",
+      "tags": [
+        "cat.semantics",
+        "best-practice"
+      ],
+      "nodes": [
+        {
+          "target": [
+            "#review-queue"
+          ],
+          "html": "<h3 id=\"review-queue\" aria-labelledby=\":r2:\">",
+          "failureSummary": "Fix any of the following:\n  Heading order invalid"
+        }
+      ]
+    }
+  ],
+  "passes": 47,
+  "incomplete": 1,
+  "inapplicable": 43,
+  "counts": {
+    "serious": 1,
+    "critical": 0,
+    "moderate": 1,
+    "minor": 0
+  }
+}

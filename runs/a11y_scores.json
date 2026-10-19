@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-10-19T19:15:12+00:00",
+  "url": "http://localhost:8501",
+  "axe": {
+    "before": {
+      "violations": 2,
+      "ids": [
+        "color-contrast",
+        "heading-order"
+      ],
+      "counts": {
+        "serious": 1,
+        "critical": 0,
+        "moderate": 1,
+        "minor": 0
+      },
+      "passes": 47
+    },
+    "after": {
+      "violations": 0,
+      "ids": [],
+      "counts": {
+        "serious": 0,
+        "critical": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "passes": 47
+    }
+  },
+  "lighthouse": {
+    "before": {
+      "score": 95.0,
+      "failing": [
+        "color-contrast",
+        "heading-order"
+      ]
+    },
+    "after": {
+      "score": 100,
+      "failing": []
+    }
+  },
+  "fixes": [
+    "darkened the intro helper text from #b8b8b8 to #4a4a4a",
+    "raised caption opacity to 1.0 and set accessible foreground/background pairs",
+    "made the search field label visible and kept the accessible name",
+    "changed section headings from h3 to h2 so the outline is h1 -> h2",
+    "added a visible focus-visible outline for keyboard users",
+    "added a text summary beside the merchant-category chart"
+  ],
+  "artifacts": {
+    "axe_before": "evidence/a11y/before.json",
+    "axe_after": "evidence/a11y/after.json",
+    "lighthouse_before": "evidence/a11y/before-lighthouse.json",
+    "lighthouse_after": "evidence/a11y/after-lighthouse.json",
+    "screenshots": [
+      "evidence/a11y/before.png",
+      "evidence/a11y/after.png"
+    ],
+    "keyboard": "evidence/a11y/keyboard.json"
+  }
+}

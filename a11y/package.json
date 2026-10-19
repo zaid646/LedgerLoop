@@ -1,0 +1,13 @@
+{
+  "name": "expenseiq-a11y",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "audit": "node audit.mjs",
+    "keyboard": "node keyboard.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "playwright": "^1.49.1"
+  }
+}

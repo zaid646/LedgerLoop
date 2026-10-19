@@ -1,0 +1,15 @@
+{
+  "url": "http://localhost:8501",
+  "label": "after",
+  "checkedAt": "2026-10-19T19:19:11.519Z",
+  "violations": [],
+  "passes": 47,
+  "incomplete": 0,
+  "inapplicable": 43,
+  "counts": {
+    "serious": 0,
+    "critical": 0,
+    "moderate": 0,
+    "minor": 0
+  }
+}
