@@ -39,12 +39,19 @@ class Settings(BaseSettings):
     opensearch_url: str = "http://localhost:9200"
     opensearch_user: str = "admin"
     opensearch_password: str = "ExpenseIQ!123"
+    # entity/relationship graph behind the GraphQL API
+    neo4j_uri: str = "bolt://localhost:7687"
+    neo4j_user: str = "neo4j"
+    neo4j_password: str = "expenseiq-dev"
     # The bundled OpenSearch runs with the security plugin disabled; flip to true
     # when pointing at a secured cluster.
     opensearch_use_security: bool = False
     # Embedding model for the vector channel (fastembed/ONNX). Falls back to
     # feature hashing when fastembed is not installed.
     embed_model: str = "BAAI/bge-small-en-v1.5"
+    # auto = fastembed when installed, else feature hashing; force hashing for
+    # benchmarks so serial/multiprocessing/Ray workers use the same backend.
+    embed_backend: str = "auto"
 
     # --- service ---
     ai_service_port: int = 8080

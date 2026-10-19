@@ -1,0 +1,4818 @@
+{
+  "stats": {
+    "golden_version": "v0",
+    "entities": 175,
+    "relationships": 462,
+    "by_type": {
+      "Category": 13,
+      "Policy": 8,
+      "Merchant": 63,
+      "Source": 2,
+      "Date": 11,
+      "Route": 3,
+      "Expense": 75
+    },
+    "by_relationship": {
+      "HAS_POLICY": 20,
+      "MERCHANT_CATEGORY": 63,
+      "PAID_TO": 75,
+      "CODED_AS": 75,
+      "FROM_SOURCE": 75,
+      "ON_DATE": 75,
+      "ROUTED_TO": 75,
+      "VIOLATES": 4
+    }
+  },
+  "entities": [
+    {
+      "id": "category:travel",
+      "type": "Category",
+      "label": "TRAVEL",
+      "properties": {
+        "name": "TRAVEL"
+      }
+    },
+    {
+      "id": "category:meals",
+      "type": "Category",
+      "label": "MEALS",
+      "properties": {
+        "name": "MEALS"
+      }
+    },
+    {
+      "id": "category:office-supplies",
+      "type": "Category",
+      "label": "OFFICE_SUPPLIES",
+      "properties": {
+        "name": "OFFICE_SUPPLIES"
+      }
+    },
+    {
+      "id": "category:software",
+      "type": "Category",
+      "label": "SOFTWARE",
+      "properties": {
+        "name": "SOFTWARE"
+      }
+    },
+    {
+      "id": "category:hardware",
+      "type": "Category",
+      "label": "HARDWARE",
+      "properties": {
+        "name": "HARDWARE"
+      }
+    },
+    {
+      "id": "category:marketing",
+      "type": "Category",
+      "label": "MARKETING",
+      "properties": {
+        "name": "MARKETING"
+      }
+    },
+    {
+      "id": "category:professional-services",
+      "type": "Category",
+      "label": "PROFESSIONAL_SERVICES",
+      "properties": {
+        "name": "PROFESSIONAL_SERVICES"
+      }
+    },
+    {
+      "id": "category:utilities",
+      "type": "Category",
+      "label": "UTILITIES",
+      "properties": {
+        "name": "UTILITIES"
+      }
+    },
+    {
+      "id": "category:rent",
+      "type": "Category",
+      "label": "RENT",
+      "properties": {
+        "name": "RENT"
+      }
+    },
+    {
+      "id": "category:insurance",
+      "type": "Category",
+      "label": "INSURANCE",
+      "properties": {
+        "name": "INSURANCE"
+      }
+    },
+    {
+      "id": "category:training",
+      "type": "Category",
+      "label": "TRAINING",
+      "properties": {
+        "name": "TRAINING"
+      }
+    },
+    {
+      "id": "category:entertainment",
+      "type": "Category",
+      "label": "ENTERTAINMENT",
+      "properties": {
+        "name": "ENTERTAINMENT"
+      }
+    },
+    {
+      "id": "category:other",
+      "type": "Category",
+      "label": "OTHER",
+      "properties": {
+        "name": "OTHER"
+      }
+    },
+    {
+      "id": "policy:meals-limit",
+      "type": "Policy",
+      "label": "meals_limit",
+      "properties": {
+        "rule": "meals_limit",
+        "applies_to": "MEALS",
+        "max_amount": 75.0,
+        "requires_receipt": true,
+        "requires_manager_above": null
+      }
+    },
+    {
+      "id": "policy:meals-manager",
+      "type": "Policy",
+      "label": "meals_manager",
+      "properties": {
+        "rule": "meals_manager",
+        "applies_to": "MEALS",
+        "max_amount": null,
+        "requires_receipt": false,
+        "requires_manager_above": 200.0
+      }
+    },
+    {
+      "id": "policy:travel-receipt",
+      "type": "Policy",
+      "label": "travel_receipt",
+      "properties": {
+        "rule": "travel_receipt",
+        "applies_to": "TRAVEL",
+        "max_amount": null,
+        "requires_receipt": true,
+        "requires_manager_above": null
+      }
+    },
+    {
+      "id": "policy:travel-manager",
+      "type": "Policy",
+      "label": "travel_manager",
+      "properties": {
+        "rule": "travel_manager",
+        "applies_to": "TRAVEL",
+        "max_amount": null,
+        "requires_receipt": false,
+        "requires_manager_above": 500.0
+      }
+    },
+    {
+      "id": "policy:entertainment-limit",
+      "type": "Policy",
+      "label": "entertainment_limit",
+      "properties": {
+        "rule": "entertainment_limit",
+        "applies_to": "ENTERTAINMENT",
+        "max_amount": 200.0,
+        "requires_receipt": false,
+        "requires_manager_above": null
+      }
+    },
+    {
+      "id": "policy:entertainment-manager",
+      "type": "Policy",
+      "label": "entertainment_manager",
+      "properties": {
+        "rule": "entertainment_manager",
+        "applies_to": "ENTERTAINMENT",
+        "max_amount": null,
+        "requires_receipt": false,
+        "requires_manager_above": 100.0
+      }
+    },
+    {
+      "id": "policy:software-manager",
+      "type": "Policy",
+      "label": "software_manager",
+      "properties": {
+        "rule": "software_manager",
+        "applies_to": "SOFTWARE",
+        "max_amount": null,
+        "requires_receipt": false,
+        "requires_manager_above": 1000.0
+      }
+    },
+    {
+      "id": "policy:global-manager",
+      "type": "Policy",
+      "label": "global_manager",
+      "properties": {
+        "rule": "global_manager",
+        "applies_to": "ALL",
+        "max_amount": null,
+        "requires_receipt": false,
+        "requires_manager_above": 2500.0
+      }
+    },
+    {
+      "id": "merchant:uber",
+      "type": "Merchant",
+      "label": "Uber",
+      "properties": {
+        "name": "Uber",
+        "name_key": "uber",
+        "category": "TRAVEL"
+      }
+    },
+    {
+      "id": "merchant:lyft",
+      "type": "Merchant",
+      "label": "Lyft",
+      "properties": {
+        "name": "Lyft",
+        "name_key": "lyft",
+        "category": "TRAVEL"
+      }
+    },
+    {
+      "id": "merchant:uber-eats",
+      "type": "Merchant",
+      "label": "Uber Eats",
+      "properties": {
+        "name": "Uber Eats",
+        "name_key": "uber eats",
+        "category": "MEALS"
+      }
+    },
+    {
+      "id": "merchant:delta-air-lines",
+      "type": "Merchant",
+      "label": "Delta Air Lines",
+      "properties": {
+        "name": "Delta Air Lines",
+        "name_key": "delta air lines",
+        "category": "TRAVEL"
+      }
+    },
+    {
+      "id": "merchant:united-airlines",
+      "type": "Merchant",
+      "label": "United Airlines",
+      "properties": {
+        "name": "United Airlines",
+        "name_key": "united airlines",
+        "category": "TRAVEL"
+      }
+    },
+    {
+      "id": "merchant:airbnb",
+      "type": "Merchant",
+      "label": "Airbnb",
+      "properties": {
+        "name": "Airbnb",
+        "name_key": "airbnb",
+        "category": "TRAVEL"
+      }
+    },
+    {
+      "id": "merchant:marriott-hotels",
+      "type": "Merchant",
+      "label": "Marriott Hotels",
+      "properties": {
+        "name": "Marriott Hotels",
+        "name_key": "marriott hotels",
+        "category": "TRAVEL"
+      }
+    },
+    {
+      "id": "merchant:shell",
+      "type": "Merchant",
+      "label": "Shell",
+      "properties": {
+        "name": "Shell",
+        "name_key": "shell",
+        "category": "TRAVEL"
+      }
+    },
+    {
+      "id": "merchant:starbucks",
+      "type": "Merchant",
+      "label": "Starbucks",
+      "properties": {
+        "name": "Starbucks",
+        "name_key": "starbucks",
+        "category": "MEALS"
+      }
+    },
+    {
+      "id": "merchant:doordash",
+      "type": "Merchant",
+      "label": "DoorDash",
+      "properties": {
+        "name": "DoorDash",
+        "name_key": "doordash",
+        "category": "MEALS"
+      }
+    },
+    {
+      "id": "merchant:mcdonald-s",
+      "type": "Merchant",
+      "label": "McDonald's",
+      "properties": {
+        "name": "McDonald's",
+        "name_key": "mcdonald's",
+        "category": "MEALS"
+      }
+    },
+    {
+      "id": "merchant:github",
+      "type": "Merchant",
+      "label": "GitHub",
+      "properties": {
+        "name": "GitHub",
+        "name_key": "github",
+        "category": "SOFTWARE"
+      }
+    },
+    {
+      "id": "merchant:amazon-web-services",
+      "type": "Merchant",
+      "label": "Amazon Web Services",
+      "properties": {
+        "name": "Amazon Web Services",
+        "name_key": "amazon web services",
+        "category": "SOFTWARE"
+      }
+    },
+    {
+      "id": "merchant:slack",
+      "type": "Merchant",
+      "label": "Slack",
+      "properties": {
+        "name": "Slack",
+        "name_key": "slack",
+        "category": "SOFTWARE"
+      }
+    },
+    {
+      "id": "merchant:microsoft",
+      "type": "Merchant",
+      "label": "Microsoft",
+      "properties": {
+        "name": "Microsoft",
+        "name_key": "microsoft",
+        "category": "SOFTWARE"
+      }
+    },
+    {
+      "id": "merchant:adobe",
+      "type": "Merchant",
+      "label": "Adobe",
+      "properties": {
+        "name": "Adobe",
+        "name_key": "adobe",
+        "category": "SOFTWARE"
+      }
+    },
+    {
+      "id": "merchant:salesforce",
+      "type": "Merchant",
+      "label": "Salesforce",
+      "properties": {
+        "name": "Salesforce",
+        "name_key": "salesforce",
+        "category": "SOFTWARE"
+      }
+    },
+    {
+      "id": "merchant:staples",
+      "type": "Merchant",
+      "label": "Staples",
+      "properties": {
+        "name": "Staples",
+        "name_key": "staples",
+        "category": "OFFICE_SUPPLIES"
+      }
+    },
+    {
+      "id": "merchant:ikea",
+      "type": "Merchant",
+      "label": "IKEA",
+      "properties": {
+        "name": "IKEA",
+        "name_key": "ikea",
+        "category": "HARDWARE"
+      }
+    },
+    {
+      "id": "merchant:mr-d-i-y",
+      "type": "Merchant",
+      "label": "MR D.I.Y.",
+      "properties": {
+        "name": "MR D.I.Y.",
+        "name_key": "mr d.i.y.",
+        "category": "OFFICE_SUPPLIES"
+      }
+    },
+    {
+      "id": "merchant:apple",
+      "type": "Merchant",
+      "label": "Apple",
+      "properties": {
+        "name": "Apple",
+        "name_key": "apple",
+        "category": "HARDWARE"
+      }
+    },
+    {
+      "id": "merchant:dell",
+      "type": "Merchant",
+      "label": "Dell",
+      "properties": {
+        "name": "Dell",
+        "name_key": "dell",
+        "category": "HARDWARE"
+      }
+    },
+    {
+      "id": "merchant:google-ads",
+      "type": "Merchant",
+      "label": "Google Ads",
+      "properties": {
+        "name": "Google Ads",
+        "name_key": "google ads",
+        "category": "MARKETING"
+      }
+    },
+    {
+      "id": "merchant:meta-ads",
+      "type": "Merchant",
+      "label": "Meta Ads",
+      "properties": {
+        "name": "Meta Ads",
+        "name_key": "meta ads",
+        "category": "MARKETING"
+      }
+    },
+    {
+      "id": "merchant:deloitte",
+      "type": "Merchant",
+      "label": "Deloitte",
+      "properties": {
+        "name": "Deloitte",
+        "name_key": "deloitte",
+        "category": "PROFESSIONAL_SERVICES"
+      }
+    },
+    {
+      "id": "merchant:fedex",
+      "type": "Merchant",
+      "label": "FedEx",
+      "properties": {
+        "name": "FedEx",
+        "name_key": "fedex",
+        "category": "PROFESSIONAL_SERVICES"
+      }
+    },
+    {
+      "id": "merchant:wework",
+      "type": "Merchant",
+      "label": "WeWork",
+      "properties": {
+        "name": "WeWork",
+        "name_key": "wework",
+        "category": "RENT"
+      }
+    },
+    {
+      "id": "merchant:aetna",
+      "type": "Merchant",
+      "label": "Aetna",
+      "properties": {
+        "name": "Aetna",
+        "name_key": "aetna",
+        "category": "INSURANCE"
+      }
+    },
+    {
+      "id": "merchant:coursera",
+      "type": "Merchant",
+      "label": "Coursera",
+      "properties": {
+        "name": "Coursera",
+        "name_key": "coursera",
+        "category": "TRAINING"
+      }
+    },
+    {
+      "id": "merchant:book-ta-k-taman-daya-sdn-bhd",
+      "type": "Merchant",
+      "label": "BOOK TA .K(TAMAN DAYA) SDN BHD",
+      "properties": {
+        "name": "BOOK TA .K(TAMAN DAYA) SDN BHD",
+        "name_key": "book ta .k(taman daya) sdn bhd",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:indah-gift-home-deco",
+      "type": "Merchant",
+      "label": "INDAH GIFT & HOME DECO",
+      "properties": {
+        "name": "INDAH GIFT & HOME DECO",
+        "name_key": "indah gift & home deco",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:mr-d-i-y-johor-sdn-bhd",
+      "type": "Merchant",
+      "label": "MR D.I.Y. (JOHOR) SDN BHD",
+      "properties": {
+        "name": "MR D.I.Y. (JOHOR) SDN BHD",
+        "name_key": "mr d.i.y. (johor) sdn bhd",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:yongfatt-enterprise",
+      "type": "Merchant",
+      "label": "YONGFATT ENTERPRISE",
+      "properties": {
+        "name": "YONGFATT ENTERPRISE",
+        "name_key": "yongfatt enterprise",
+        "category": "OFFICE_SUPPLIES"
+      }
+    },
+    {
+      "id": "merchant:mr-d-i-y-m-sdn-bhd",
+      "type": "Merchant",
+      "label": "MR D.I.Y. (M) SDN BHD",
+      "properties": {
+        "name": "MR D.I.Y. (M) SDN BHD",
+        "name_key": "mr d.i.y. (m) sdn bhd",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:abc-ho-trading",
+      "type": "Merchant",
+      "label": "ABC HO TRADING",
+      "properties": {
+        "name": "ABC HO TRADING",
+        "name_key": "abc ho trading",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:soon-huat-machinery-enterprise",
+      "type": "Merchant",
+      "label": "SOON HUAT MACHINERY ENTERPRISE",
+      "properties": {
+        "name": "SOON HUAT MACHINERY ENTERPRISE",
+        "name_key": "soon huat machinery enterprise",
+        "category": "OFFICE_SUPPLIES"
+      }
+    },
+    {
+      "id": "merchant:s-h-h-motor-sungai-rengit-sdn-bhd",
+      "type": "Merchant",
+      "label": "S.H.H. MOTOR (SUNGAI RENGIT) SDN. BHD.",
+      "properties": {
+        "name": "S.H.H. MOTOR (SUNGAI RENGIT) SDN. BHD.",
+        "name_key": "s.h.h. motor (sungai rengit) sdn. bhd.",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:perniagaan-zheng-hui",
+      "type": "Merchant",
+      "label": "PERNIAGAAN ZHENG HUI",
+      "properties": {
+        "name": "PERNIAGAAN ZHENG HUI",
+        "name_key": "perniagaan zheng hui",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:gerbang-alaf-restaurants-sdn-bhd",
+      "type": "Merchant",
+      "label": "GERBANG ALAF RESTAURANTS SDN BHD",
+      "properties": {
+        "name": "GERBANG ALAF RESTAURANTS SDN BHD",
+        "name_key": "gerbang alaf restaurants sdn bhd",
+        "category": "MEALS"
+      }
+    },
+    {
+      "id": "merchant:sam-sam-trading-co",
+      "type": "Merchant",
+      "label": "SAM SAM TRADING CO",
+      "properties": {
+        "name": "SAM SAM TRADING CO",
+        "name_key": "sam sam trading co",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:alam-sdn-bhd",
+      "type": "Merchant",
+      "label": "ALAM) SDN BHD",
+      "properties": {
+        "name": "ALAM) SDN BHD",
+        "name_key": "alam) sdn bhd",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:electrical",
+      "type": "Merchant",
+      "label": "ELECTRICAL",
+      "properties": {
+        "name": "ELECTRICAL",
+        "name_key": "electrical",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:restoran-hassanbistro",
+      "type": "Merchant",
+      "label": "RESTORAN HASSANBISTRO",
+      "properties": {
+        "name": "RESTORAN HASSANBISTRO",
+        "name_key": "restoran hassanbistro",
+        "category": "MEALS"
+      }
+    },
+    {
+      "id": "merchant:asia-mart",
+      "type": "Merchant",
+      "label": "ASIA MART",
+      "properties": {
+        "name": "ASIA MART",
+        "name_key": "asia mart",
+        "category": "MEALS"
+      }
+    },
+    {
+      "id": "merchant:lightroom-gallery-sdn-bhd",
+      "type": "Merchant",
+      "label": "LIGHTROOM GALLERY SDN BHD",
+      "properties": {
+        "name": "LIGHTROOM GALLERY SDN BHD",
+        "name_key": "lightroom gallery sdn bhd",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:shell-isni-petro-trading",
+      "type": "Merchant",
+      "label": "SHELL ISNI PETRO TRADING",
+      "properties": {
+        "name": "SHELL ISNI PETRO TRADING",
+        "name_key": "shell isni petro trading",
+        "category": "TRAVEL"
+      }
+    },
+    {
+      "id": "merchant:syl-roasted-delights-sdn-bhd",
+      "type": "Merchant",
+      "label": "SYL ROASTED DELIGHTS SDN. BHD.",
+      "properties": {
+        "name": "SYL ROASTED DELIGHTS SDN. BHD.",
+        "name_key": "syl roasted delights sdn. bhd.",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:teo-heng-stationery-books",
+      "type": "Merchant",
+      "label": "TEO HENG STATIONERY & BOOKS",
+      "properties": {
+        "name": "TEO HENG STATIONERY & BOOKS",
+        "name_key": "teo heng stationery & books",
+        "category": "OFFICE_SUPPLIES"
+      }
+    },
+    {
+      "id": "merchant:fuyi-mini-market",
+      "type": "Merchant",
+      "label": "FUYI MINI MARKET",
+      "properties": {
+        "name": "FUYI MINI MARKET",
+        "name_key": "fuyi mini market",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:99-speed-mart-s-b-519537-x",
+      "type": "Merchant",
+      "label": "99 SPEED MART S/B (519537-X)",
+      "properties": {
+        "name": "99 SPEED MART S/B (519537-X)",
+        "name_key": "99 speed mart s/b (519537-x)",
+        "category": "MEALS"
+      }
+    },
+    {
+      "id": "merchant:c-w-khoo-hardware-sdn-bhd",
+      "type": "Merchant",
+      "label": "C W KHOO HARDWARE SDN BHD",
+      "properties": {
+        "name": "C W KHOO HARDWARE SDN BHD",
+        "name_key": "c w khoo hardware sdn bhd",
+        "category": "HARDWARE"
+      }
+    },
+    {
+      "id": "merchant:unihakka-international-sdn-bhd",
+      "type": "Merchant",
+      "label": "UNIHAKKA INTERNATIONAL SDN BHD",
+      "properties": {
+        "name": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "name_key": "unihakka international sdn bhd",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:aeon-co-m-bhd-126926-h",
+      "type": "Merchant",
+      "label": "AEON CO. (M) BHD (126926-H)",
+      "properties": {
+        "name": "AEON CO. (M) BHD (126926-H)",
+        "name_key": "aeon co. (m) bhd (126926-h)",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:warakuya-permas-city-sdn-bhd",
+      "type": "Merchant",
+      "label": "WARAKUYA PERMAS CITY SDN BHD",
+      "properties": {
+        "name": "WARAKUYA PERMAS CITY SDN BHD",
+        "name_key": "warakuya permas city sdn bhd",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:yhm-aeon-tebrau-city",
+      "type": "Merchant",
+      "label": "YHM AEON TEBRAU CITY",
+      "properties": {
+        "name": "YHM AEON TEBRAU CITY",
+        "name_key": "yhm aeon tebrau city",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:owner-by-castle-blue-s-b",
+      "type": "Merchant",
+      "label": "OWNER BY CASTLE BLUE S/B",
+      "properties": {
+        "name": "OWNER BY CASTLE BLUE S/B",
+        "name_key": "owner by castle blue s/b",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:bistro-cafe",
+      "type": "Merchant",
+      "label": "BISTRO & CAFE",
+      "properties": {
+        "name": "BISTRO & CAFE",
+        "name_key": "bistro & cafe",
+        "category": "MEALS"
+      }
+    },
+    {
+      "id": "merchant:taste-of-the-world-sdn-bhd",
+      "type": "Merchant",
+      "label": "TASTE OF THE WORLD SDN BHD",
+      "properties": {
+        "name": "TASTE OF THE WORLD SDN BHD",
+        "name_key": "taste of the world sdn bhd",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:32-pub-bistro-own-by-cnu-trading",
+      "type": "Merchant",
+      "label": "32 PUB & BISTRO OWN BY CNU TRADING",
+      "properties": {
+        "name": "32 PUB & BISTRO OWN BY CNU TRADING",
+        "name_key": "32 pub & bistro own by cnu trading",
+        "category": "MEALS"
+      }
+    },
+    {
+      "id": "merchant:pasar-mini-jin-seng",
+      "type": "Merchant",
+      "label": "PASAR MINI JIN SENG",
+      "properties": {
+        "name": "PASAR MINI JIN SENG",
+        "name_key": "pasar mini jin seng",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "merchant:restaurant-sin-du",
+      "type": "Merchant",
+      "label": "RESTAURANT SIN DU",
+      "properties": {
+        "name": "RESTAURANT SIN DU",
+        "name_key": "restaurant sin du",
+        "category": "MEALS"
+      }
+    },
+    {
+      "id": "merchant:yong-tat-hardware-trading",
+      "type": "Merchant",
+      "label": "YONG TAT HARDWARE TRADING",
+      "properties": {
+        "name": "YONG TAT HARDWARE TRADING",
+        "name_key": "yong tat hardware trading",
+        "category": "HARDWARE"
+      }
+    },
+    {
+      "id": "merchant:unknown",
+      "type": "Merchant",
+      "label": "Unknown (no merchant)",
+      "properties": {
+        "name": "",
+        "name_key": "",
+        "category": "OTHER"
+      }
+    },
+    {
+      "id": "source:cord",
+      "type": "Source",
+      "label": "cord",
+      "properties": {
+        "name": "cord"
+      }
+    },
+    {
+      "id": "source:sroie",
+      "type": "Source",
+      "label": "sroie",
+      "properties": {
+        "name": "sroie"
+      }
+    },
+    {
+      "id": "date:2017-06",
+      "type": "Date",
+      "label": "2017-06",
+      "properties": {
+        "bucket": "2017-06"
+      }
+    },
+    {
+      "id": "date:2017-11",
+      "type": "Date",
+      "label": "2017-11",
+      "properties": {
+        "bucket": "2017-11"
+      }
+    },
+    {
+      "id": "date:2017-12",
+      "type": "Date",
+      "label": "2017-12",
+      "properties": {
+        "bucket": "2017-12"
+      }
+    },
+    {
+      "id": "date:2017-28",
+      "type": "Date",
+      "label": "2017-28",
+      "properties": {
+        "bucket": "2017-28"
+      }
+    },
+    {
+      "id": "date:2018-01",
+      "type": "Date",
+      "label": "2018-01",
+      "properties": {
+        "bucket": "2018-01"
+      }
+    },
+    {
+      "id": "date:2018-02",
+      "type": "Date",
+      "label": "2018-02",
+      "properties": {
+        "bucket": "2018-02"
+      }
+    },
+    {
+      "id": "date:2018-03",
+      "type": "Date",
+      "label": "2018-03",
+      "properties": {
+        "bucket": "2018-03"
+      }
+    },
+    {
+      "id": "date:2018-10",
+      "type": "Date",
+      "label": "2018-10",
+      "properties": {
+        "bucket": "2018-10"
+      }
+    },
+    {
+      "id": "date:2018-12",
+      "type": "Date",
+      "label": "2018-12",
+      "properties": {
+        "bucket": "2018-12"
+      }
+    },
+    {
+      "id": "date:2019-01",
+      "type": "Date",
+      "label": "2019-01",
+      "properties": {
+        "bucket": "2019-01"
+      }
+    },
+    {
+      "id": "date:unknown",
+      "type": "Date",
+      "label": "unknown",
+      "properties": {
+        "bucket": "unknown"
+      }
+    },
+    {
+      "id": "route:auto-approve",
+      "type": "Route",
+      "label": "auto approve",
+      "properties": {
+        "route": "auto_approve"
+      }
+    },
+    {
+      "id": "route:manager-review",
+      "type": "Route",
+      "label": "manager review",
+      "properties": {
+        "route": "manager_review"
+      }
+    },
+    {
+      "id": "route:human-queue",
+      "type": "Route",
+      "label": "human queue",
+      "properties": {
+        "route": "human_queue"
+      }
+    },
+    {
+      "id": "expense:sroie-0",
+      "type": "Expense",
+      "label": "BOOK TA .K(TAMAN DAYA) SDN BHD",
+      "properties": {
+        "doc_id": "sroie-0",
+        "source": "sroie",
+        "merchant": "BOOK TA .K(TAMAN DAYA) SDN BHD",
+        "category": "OTHER",
+        "total_amount": 9.0,
+        "transaction_date": "25/12/2018 8:13:39 PM",
+        "date_bucket": "2018-12"
+      }
+    },
+    {
+      "id": "expense:sroie-1",
+      "type": "Expense",
+      "label": "INDAH GIFT & HOME DECO",
+      "properties": {
+        "doc_id": "sroie-1",
+        "source": "sroie",
+        "merchant": "INDAH GIFT & HOME DECO",
+        "category": "OTHER",
+        "total_amount": 60.3,
+        "transaction_date": "19/10/2018 20:49:59 #01",
+        "date_bucket": "2018-10"
+      }
+    },
+    {
+      "id": "expense:sroie-2",
+      "type": "Expense",
+      "label": "MR D.I.Y. (JOHOR) SDN BHD",
+      "properties": {
+        "doc_id": "sroie-2",
+        "source": "sroie",
+        "merchant": "MR D.I.Y. (JOHOR) SDN BHD",
+        "category": "OTHER",
+        "total_amount": 33.9,
+        "transaction_date": "12-01-19 21:13 SH01 ZK09",
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:sroie-3",
+      "type": "Expense",
+      "label": "YONGFATT ENTERPRISE",
+      "properties": {
+        "doc_id": "sroie-3",
+        "source": "sroie",
+        "merchant": "YONGFATT ENTERPRISE",
+        "category": "OFFICE_SUPPLIES",
+        "total_amount": 80.9,
+        "transaction_date": "25/12/2018",
+        "date_bucket": "2018-12"
+      }
+    },
+    {
+      "id": "expense:sroie-4",
+      "type": "Expense",
+      "label": "MR D.I.Y. (M) SDN BHD",
+      "properties": {
+        "doc_id": "sroie-4",
+        "source": "sroie",
+        "merchant": "MR D.I.Y. (M) SDN BHD",
+        "category": "OTHER",
+        "total_amount": 30.9,
+        "transaction_date": "18-11-18 13 : 58 SH01 ZI53",
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:sroie-5",
+      "type": "Expense",
+      "label": "ABC HO TRADING",
+      "properties": {
+        "doc_id": "sroie-5",
+        "source": "sroie",
+        "merchant": "ABC HO TRADING",
+        "category": "OTHER",
+        "total_amount": 31.0,
+        "transaction_date": "09/01/2019 8:01:11 PM",
+        "date_bucket": "2019-01"
+      }
+    },
+    {
+      "id": "expense:sroie-6",
+      "type": "Expense",
+      "label": "SOON HUAT MACHINERY ENTERPRISE",
+      "properties": {
+        "doc_id": "sroie-6",
+        "source": "sroie",
+        "merchant": "SOON HUAT MACHINERY ENTERPRISE",
+        "category": "OFFICE_SUPPLIES",
+        "total_amount": 327.0,
+        "transaction_date": "DATE: 11/01/2019",
+        "date_bucket": "2019-01"
+      }
+    },
+    {
+      "id": "expense:sroie-7",
+      "type": "Expense",
+      "label": "S.H.H. MOTOR (SUNGAI RENGIT) SDN. BHD.",
+      "properties": {
+        "doc_id": "sroie-7",
+        "source": "sroie",
+        "merchant": "S.H.H. MOTOR (SUNGAI RENGIT) SDN. BHD.",
+        "category": "OTHER",
+        "total_amount": 20.0,
+        "transaction_date": "23-01-2019 13:14:15 PM, PRINT BY: ROOT",
+        "date_bucket": "2019-01"
+      }
+    },
+    {
+      "id": "expense:sroie-8",
+      "type": "Expense",
+      "label": "PERNIAGAAN ZHENG HUI",
+      "properties": {
+        "doc_id": "sroie-8",
+        "source": "sroie",
+        "merchant": "PERNIAGAAN ZHENG HUI",
+        "category": "OTHER",
+        "total_amount": 112.45,
+        "transaction_date": "DATE: 12/02/2018",
+        "date_bucket": "2018-02"
+      }
+    },
+    {
+      "id": "expense:sroie-9",
+      "type": "Expense",
+      "label": "GERBANG ALAF RESTAURANTS SDN BHD",
+      "properties": {
+        "doc_id": "sroie-9",
+        "source": "sroie",
+        "merchant": "GERBANG ALAF RESTAURANTS SDN BHD",
+        "category": "MEALS",
+        "total_amount": 26.6,
+        "transaction_date": "ORD #50 -REG #19- 18/01/2018 10:27:03",
+        "date_bucket": "2018-01"
+      }
+    },
+    {
+      "id": "expense:sroie-10",
+      "type": "Expense",
+      "label": "SAM SAM TRADING CO",
+      "properties": {
+        "doc_id": "sroie-10",
+        "source": "sroie",
+        "merchant": "SAM SAM TRADING CO",
+        "category": "OTHER",
+        "total_amount": 14.1,
+        "transaction_date": "29-12-2017",
+        "date_bucket": "2017-12"
+      }
+    },
+    {
+      "id": "expense:sroie-11",
+      "type": "Expense",
+      "label": "ALAM) SDN BHD",
+      "properties": {
+        "doc_id": "sroie-11",
+        "source": "sroie",
+        "merchant": "ALAM) SDN BHD",
+        "category": "OTHER",
+        "total_amount": 15.0,
+        "transaction_date": "RECEIPT #: CSP0393921 DATE: 15/06/2017",
+        "date_bucket": "2017-06"
+      }
+    },
+    {
+      "id": "expense:sroie-12",
+      "type": "Expense",
+      "label": "ELECTRICAL",
+      "properties": {
+        "doc_id": "sroie-12",
+        "source": "sroie",
+        "merchant": "ELECTRICAL",
+        "category": "OTHER",
+        "total_amount": 15.9,
+        "transaction_date": "22/12/2017 14:03",
+        "date_bucket": "2017-12"
+      }
+    },
+    {
+      "id": "expense:sroie-13",
+      "type": "Expense",
+      "label": "RESTORAN HASSANBISTRO",
+      "properties": {
+        "doc_id": "sroie-13",
+        "source": "sroie",
+        "merchant": "RESTORAN HASSANBISTRO",
+        "category": "MEALS",
+        "total_amount": 15.0,
+        "transaction_date": ": 12/28/2017 10:17:32 PM",
+        "date_bucket": "2017-28"
+      }
+    },
+    {
+      "id": "expense:sroie-14",
+      "type": "Expense",
+      "label": "ASIA MART",
+      "properties": {
+        "doc_id": "sroie-14",
+        "source": "sroie",
+        "merchant": "ASIA MART",
+        "category": "MEALS",
+        "total_amount": 32.7,
+        "transaction_date": "DATE: 22/12/2017",
+        "date_bucket": "2017-12"
+      }
+    },
+    {
+      "id": "expense:sroie-15",
+      "type": "Expense",
+      "label": "ELECTRICAL",
+      "properties": {
+        "doc_id": "sroie-15",
+        "source": "sroie",
+        "merchant": "ELECTRICAL",
+        "category": "OTHER",
+        "total_amount": 15.9,
+        "transaction_date": "22/12/2017 14:03",
+        "date_bucket": "2017-12"
+      }
+    },
+    {
+      "id": "expense:sroie-16",
+      "type": "Expense",
+      "label": "LIGHTROOM GALLERY SDN BHD",
+      "properties": {
+        "doc_id": "sroie-16",
+        "source": "sroie",
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "category": "OTHER",
+        "total_amount": 73.0,
+        "transaction_date": "BILL DATE : 20/12/2017",
+        "date_bucket": "2017-12"
+      }
+    },
+    {
+      "id": "expense:sroie-17",
+      "type": "Expense",
+      "label": "LIGHTROOM GALLERY SDN BHD",
+      "properties": {
+        "doc_id": "sroie-17",
+        "source": "sroie",
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "category": "OTHER",
+        "total_amount": 39.8,
+        "transaction_date": "BILL DATE : 20/11/2017",
+        "date_bucket": "2017-11"
+      }
+    },
+    {
+      "id": "expense:sroie-18",
+      "type": "Expense",
+      "label": "LIGHTROOM GALLERY SDN BHD",
+      "properties": {
+        "doc_id": "sroie-18",
+        "source": "sroie",
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "category": "OTHER",
+        "total_amount": 73.0,
+        "transaction_date": "BILL DATE : 20/12/2017",
+        "date_bucket": "2017-12"
+      }
+    },
+    {
+      "id": "expense:sroie-19",
+      "type": "Expense",
+      "label": "SHELL ISNI PETRO TRADING",
+      "properties": {
+        "doc_id": "sroie-19",
+        "source": "sroie",
+        "merchant": "SHELL ISNI PETRO TRADING",
+        "category": "TRAVEL",
+        "total_amount": 86.0,
+        "transaction_date": "18/03/18 15:17 06051 02",
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:sroie-20",
+      "type": "Expense",
+      "label": "SYL ROASTED DELIGHTS SDN. BHD.",
+      "properties": {
+        "doc_id": "sroie-20",
+        "source": "sroie",
+        "merchant": "SYL ROASTED DELIGHTS SDN. BHD.",
+        "category": "OTHER",
+        "total_amount": 54.5,
+        "transaction_date": "06/03/2018",
+        "date_bucket": "2018-03"
+      }
+    },
+    {
+      "id": "expense:sroie-21",
+      "type": "Expense",
+      "label": "TEO HENG STATIONERY & BOOKS",
+      "properties": {
+        "doc_id": "sroie-21",
+        "source": "sroie",
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "category": "OFFICE_SUPPLIES",
+        "total_amount": 4.9,
+        "transaction_date": "DATE : 18/01/2018",
+        "date_bucket": "2018-01"
+      }
+    },
+    {
+      "id": "expense:sroie-22",
+      "type": "Expense",
+      "label": "FUYI MINI MARKET",
+      "properties": {
+        "doc_id": "sroie-22",
+        "source": "sroie",
+        "merchant": "FUYI MINI MARKET",
+        "category": "OTHER",
+        "total_amount": 9.0,
+        "transaction_date": "25/01/2018 1:22:56PM",
+        "date_bucket": "2018-01"
+      }
+    },
+    {
+      "id": "expense:sroie-23",
+      "type": "Expense",
+      "label": "TEO HENG STATIONERY & BOOKS",
+      "properties": {
+        "doc_id": "sroie-23",
+        "source": "sroie",
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "category": "OFFICE_SUPPLIES",
+        "total_amount": 27.55,
+        "transaction_date": "DATE : 17/01/2018",
+        "date_bucket": "2018-01"
+      }
+    },
+    {
+      "id": "expense:sroie-24",
+      "type": "Expense",
+      "label": "TEO HENG STATIONERY & BOOKS",
+      "properties": {
+        "doc_id": "sroie-24",
+        "source": "sroie",
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "category": "OFFICE_SUPPLIES",
+        "total_amount": 55.1,
+        "transaction_date": "DATE : 15/01/2018",
+        "date_bucket": "2018-01"
+      }
+    },
+    {
+      "id": "expense:sroie-25",
+      "type": "Expense",
+      "label": "TEO HENG STATIONERY & BOOKS",
+      "properties": {
+        "doc_id": "sroie-25",
+        "source": "sroie",
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "category": "OFFICE_SUPPLIES",
+        "total_amount": 18.0,
+        "transaction_date": "DATE : 23/01/2018",
+        "date_bucket": "2018-01"
+      }
+    },
+    {
+      "id": "expense:sroie-26",
+      "type": "Expense",
+      "label": "TEO HENG STATIONERY & BOOKS",
+      "properties": {
+        "doc_id": "sroie-26",
+        "source": "sroie",
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "category": "OFFICE_SUPPLIES",
+        "total_amount": 18.0,
+        "transaction_date": "DATE : 23/01/2018",
+        "date_bucket": "2018-01"
+      }
+    },
+    {
+      "id": "expense:sroie-27",
+      "type": "Expense",
+      "label": "TEO HENG STATIONERY & BOOKS",
+      "properties": {
+        "doc_id": "sroie-27",
+        "source": "sroie",
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "category": "OFFICE_SUPPLIES",
+        "total_amount": 153.35,
+        "transaction_date": "DATE : 12/02/2018",
+        "date_bucket": "2018-02"
+      }
+    },
+    {
+      "id": "expense:sroie-28",
+      "type": "Expense",
+      "label": "MR. D.I.Y. (M) SDN BHD",
+      "properties": {
+        "doc_id": "sroie-28",
+        "source": "sroie",
+        "merchant": "MR. D.I.Y. (M) SDN BHD",
+        "category": "OTHER",
+        "total_amount": 37.1,
+        "transaction_date": "14-03-18 21:49 SH03 ZJ20",
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:sroie-29",
+      "type": "Expense",
+      "label": "99 SPEED MART S/B (519537-X)",
+      "properties": {
+        "doc_id": "sroie-29",
+        "source": "sroie",
+        "merchant": "99 SPEED MART S/B (519537-X)",
+        "category": "MEALS",
+        "total_amount": 2.5,
+        "transaction_date": "24-01-18",
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:sroie-30",
+      "type": "Expense",
+      "label": "C W KHOO HARDWARE SDN BHD",
+      "properties": {
+        "doc_id": "sroie-30",
+        "source": "sroie",
+        "merchant": "C W KHOO HARDWARE SDN BHD",
+        "category": "HARDWARE",
+        "total_amount": 21.2,
+        "transaction_date": ": 01-03-18 5:23:26 PM",
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:sroie-31",
+      "type": "Expense",
+      "label": "UNIHAKKA INTERNATIONAL SDN BHD",
+      "properties": {
+        "doc_id": "sroie-31",
+        "source": "sroie",
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "category": "OTHER",
+        "total_amount": 8.2,
+        "transaction_date": "05 MAR 2018 18:24",
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:sroie-32",
+      "type": "Expense",
+      "label": "AEON CO. (M) BHD (126926-H)",
+      "properties": {
+        "doc_id": "sroie-32",
+        "source": "sroie",
+        "merchant": "AEON CO. (M) BHD (126926-H)",
+        "category": "OTHER",
+        "total_amount": 75.0,
+        "transaction_date": "06/03/2018 20:01",
+        "date_bucket": "2018-03"
+      }
+    },
+    {
+      "id": "expense:sroie-33",
+      "type": "Expense",
+      "label": "UNIHAKKA INTERNATIONAL SDN BHD",
+      "properties": {
+        "doc_id": "sroie-33",
+        "source": "sroie",
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "category": "OTHER",
+        "total_amount": 8.2,
+        "transaction_date": "03 MAR 2018 18:22",
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:sroie-34",
+      "type": "Expense",
+      "label": "UNIHAKKA INTERNATIONAL SDN BHD",
+      "properties": {
+        "doc_id": "sroie-34",
+        "source": "sroie",
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "category": "OTHER",
+        "total_amount": 8.2,
+        "transaction_date": "10 MAR 2018 18:24",
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:sroie-35",
+      "type": "Expense",
+      "label": "PERNIAGAAN ZHENG HUI",
+      "properties": {
+        "doc_id": "sroie-35",
+        "source": "sroie",
+        "merchant": "PERNIAGAAN ZHENG HUI",
+        "category": "OTHER",
+        "total_amount": 332.3,
+        "transaction_date": "DATE: 09/03/2018",
+        "date_bucket": "2018-03"
+      }
+    },
+    {
+      "id": "expense:sroie-36",
+      "type": "Expense",
+      "label": "UNIHAKKA INTERNATIONAL SDN BHD",
+      "properties": {
+        "doc_id": "sroie-36",
+        "source": "sroie",
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "category": "OTHER",
+        "total_amount": 8.2,
+        "transaction_date": "12 MAR 2018 18:19",
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:sroie-37",
+      "type": "Expense",
+      "label": "UNIHAKKA INTERNATIONAL SDN BHD",
+      "properties": {
+        "doc_id": "sroie-37",
+        "source": "sroie",
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "category": "OTHER",
+        "total_amount": 8.2,
+        "transaction_date": "14 MAR 2018 18:40",
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:sroie-38",
+      "type": "Expense",
+      "label": "WARAKUYA PERMAS CITY SDN BHD",
+      "properties": {
+        "doc_id": "sroie-38",
+        "source": "sroie",
+        "merchant": "WARAKUYA PERMAS CITY SDN BHD",
+        "category": "OTHER",
+        "total_amount": 57.8,
+        "transaction_date": "DATE: 10/03/2018 5:41:06",
+        "date_bucket": "2018-03"
+      }
+    },
+    {
+      "id": "expense:sroie-39",
+      "type": "Expense",
+      "label": "YHM AEON TEBRAU CITY",
+      "properties": {
+        "doc_id": "sroie-39",
+        "source": "sroie",
+        "merchant": "YHM AEON TEBRAU CITY",
+        "category": "OTHER",
+        "total_amount": 13.1,
+        "transaction_date": "11/03/2018 06:20 PM",
+        "date_bucket": "2018-03"
+      }
+    },
+    {
+      "id": "expense:sroie-40",
+      "type": "Expense",
+      "label": "OWNER BY CASTLE BLUE S/B",
+      "properties": {
+        "doc_id": "sroie-40",
+        "source": "sroie",
+        "merchant": "OWNER BY CASTLE BLUE S/B",
+        "category": "OTHER",
+        "total_amount": 189.75,
+        "transaction_date": ": 30/03/2018 # 8:13 PM",
+        "date_bucket": "2018-03"
+      }
+    },
+    {
+      "id": "expense:sroie-41",
+      "type": "Expense",
+      "label": "BISTRO & CAFE",
+      "properties": {
+        "doc_id": "sroie-41",
+        "source": "sroie",
+        "merchant": "BISTRO & CAFE",
+        "category": "MEALS",
+        "total_amount": 343.95,
+        "transaction_date": "BIZDATE: 12/03/2018",
+        "date_bucket": "2018-03"
+      }
+    },
+    {
+      "id": "expense:sroie-42",
+      "type": "Expense",
+      "label": "BISTRO & CAFE",
+      "properties": {
+        "doc_id": "sroie-42",
+        "source": "sroie",
+        "merchant": "BISTRO & CAFE",
+        "category": "MEALS",
+        "total_amount": 174.9,
+        "transaction_date": "INV DATE: 03/03/2018",
+        "date_bucket": "2018-03"
+      }
+    },
+    {
+      "id": "expense:sroie-43",
+      "type": "Expense",
+      "label": "TASTE OF THE WORLD SDN BHD",
+      "properties": {
+        "doc_id": "sroie-43",
+        "source": "sroie",
+        "merchant": "TASTE OF THE WORLD SDN BHD",
+        "category": "OTHER",
+        "total_amount": 64.15,
+        "transaction_date": "DATE : 5/3/2018 22:52:33",
+        "date_bucket": "2018-03"
+      }
+    },
+    {
+      "id": "expense:sroie-44",
+      "type": "Expense",
+      "label": "32 PUB & BISTRO OWN BY CNU TRADING",
+      "properties": {
+        "doc_id": "sroie-44",
+        "source": "sroie",
+        "merchant": "32 PUB & BISTRO OWN BY CNU TRADING",
+        "category": "MEALS",
+        "total_amount": 190.0,
+        "transaction_date": ": 10-03-2018 23:03:06",
+        "date_bucket": "2018-03"
+      }
+    },
+    {
+      "id": "expense:sroie-45",
+      "type": "Expense",
+      "label": "UNIHAKKA INTERNATIONAL SDN BHD",
+      "properties": {
+        "doc_id": "sroie-45",
+        "source": "sroie",
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "category": "OTHER",
+        "total_amount": 8.6,
+        "transaction_date": "18 MAR 2018 18:25",
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:sroie-46",
+      "type": "Expense",
+      "label": "UNIHAKKA INTERNATIONAL SDN BHD",
+      "properties": {
+        "doc_id": "sroie-46",
+        "source": "sroie",
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "category": "OTHER",
+        "total_amount": 6.9,
+        "transaction_date": "27 MAR 2018 18:46",
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:sroie-47",
+      "type": "Expense",
+      "label": "PASAR MINI JIN SENG",
+      "properties": {
+        "doc_id": "sroie-47",
+        "source": "sroie",
+        "merchant": "PASAR MINI JIN SENG",
+        "category": "OTHER",
+        "total_amount": 28.6,
+        "transaction_date": "18/03/18",
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:sroie-48",
+      "type": "Expense",
+      "label": "RESTAURANT SIN DU",
+      "properties": {
+        "doc_id": "sroie-48",
+        "source": "sroie",
+        "merchant": "RESTAURANT SIN DU",
+        "category": "MEALS",
+        "total_amount": 170.0,
+        "transaction_date": "09/03/2018 21:28",
+        "date_bucket": "2018-03"
+      }
+    },
+    {
+      "id": "expense:sroie-49",
+      "type": "Expense",
+      "label": "YONG TAT HARDWARE TRADING",
+      "properties": {
+        "doc_id": "sroie-49",
+        "source": "sroie",
+        "merchant": "YONG TAT HARDWARE TRADING",
+        "category": "HARDWARE",
+        "total_amount": 100.9,
+        "transaction_date": "DATE: 13/03/2018",
+        "date_bucket": "2018-03"
+      }
+    },
+    {
+      "id": "expense:cord-0",
+      "type": "Expense",
+      "label": "cord-0",
+      "properties": {
+        "doc_id": "cord-0",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 60.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-1",
+      "type": "Expense",
+      "label": "cord-1",
+      "properties": {
+        "doc_id": "cord-1",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 91000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-2",
+      "type": "Expense",
+      "label": "cord-2",
+      "properties": {
+        "doc_id": "cord-2",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 28000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-3",
+      "type": "Expense",
+      "label": "cord-3",
+      "properties": {
+        "doc_id": "cord-3",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 11000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-4",
+      "type": "Expense",
+      "label": "cord-4",
+      "properties": {
+        "doc_id": "cord-4",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 174600.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-5",
+      "type": "Expense",
+      "label": "cord-5",
+      "properties": {
+        "doc_id": "cord-5",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 31.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-6",
+      "type": "Expense",
+      "label": "cord-6",
+      "properties": {
+        "doc_id": "cord-6",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 46000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-7",
+      "type": "Expense",
+      "label": "cord-7",
+      "properties": {
+        "doc_id": "cord-7",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 111000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-8",
+      "type": "Expense",
+      "label": "cord-8",
+      "properties": {
+        "doc_id": "cord-8",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 50000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-9",
+      "type": "Expense",
+      "label": "cord-9",
+      "properties": {
+        "doc_id": "cord-9",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 50000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-10",
+      "type": "Expense",
+      "label": "cord-10",
+      "properties": {
+        "doc_id": "cord-10",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 17000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-11",
+      "type": "Expense",
+      "label": "cord-11",
+      "properties": {
+        "doc_id": "cord-11",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 230000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-12",
+      "type": "Expense",
+      "label": "cord-12",
+      "properties": {
+        "doc_id": "cord-12",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 120000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-13",
+      "type": "Expense",
+      "label": "cord-13",
+      "properties": {
+        "doc_id": "cord-13",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 51.3,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-14",
+      "type": "Expense",
+      "label": "cord-14",
+      "properties": {
+        "doc_id": "cord-14",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 281435.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-15",
+      "type": "Expense",
+      "label": "cord-15",
+      "properties": {
+        "doc_id": "cord-15",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 63.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-16",
+      "type": "Expense",
+      "label": "cord-16",
+      "properties": {
+        "doc_id": "cord-16",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 70000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-17",
+      "type": "Expense",
+      "label": "cord-17",
+      "properties": {
+        "doc_id": "cord-17",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 91000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-18",
+      "type": "Expense",
+      "label": "cord-18",
+      "properties": {
+        "doc_id": "cord-18",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 156000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-19",
+      "type": "Expense",
+      "label": "cord-19",
+      "properties": {
+        "doc_id": "cord-19",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 176000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-20",
+      "type": "Expense",
+      "label": "cord-20",
+      "properties": {
+        "doc_id": "cord-20",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 377859.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-21",
+      "type": "Expense",
+      "label": "cord-21",
+      "properties": {
+        "doc_id": "cord-21",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 38.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-22",
+      "type": "Expense",
+      "label": "cord-22",
+      "properties": {
+        "doc_id": "cord-22",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 40000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-23",
+      "type": "Expense",
+      "label": "cord-23",
+      "properties": {
+        "doc_id": "cord-23",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 63000.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    },
+    {
+      "id": "expense:cord-24",
+      "type": "Expense",
+      "label": "cord-24",
+      "properties": {
+        "doc_id": "cord-24",
+        "source": "cord",
+        "merchant": "",
+        "category": "OTHER",
+        "total_amount": 118.0,
+        "transaction_date": null,
+        "date_bucket": "unknown"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "source": "category:meals",
+      "target": "policy:meals-limit",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:meals",
+      "target": "policy:meals-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:travel",
+      "target": "policy:travel-receipt",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:travel",
+      "target": "policy:travel-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:entertainment",
+      "target": "policy:entertainment-limit",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:entertainment",
+      "target": "policy:entertainment-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:software",
+      "target": "policy:software-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:travel",
+      "target": "policy:global-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:meals",
+      "target": "policy:global-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:office-supplies",
+      "target": "policy:global-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:software",
+      "target": "policy:global-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:hardware",
+      "target": "policy:global-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:marketing",
+      "target": "policy:global-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:professional-services",
+      "target": "policy:global-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:utilities",
+      "target": "policy:global-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:rent",
+      "target": "policy:global-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:insurance",
+      "target": "policy:global-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:training",
+      "target": "policy:global-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:entertainment",
+      "target": "policy:global-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "category:other",
+      "target": "policy:global-manager",
+      "type": "HAS_POLICY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:uber",
+      "target": "category:travel",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:lyft",
+      "target": "category:travel",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:uber-eats",
+      "target": "category:meals",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:delta-air-lines",
+      "target": "category:travel",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:united-airlines",
+      "target": "category:travel",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:airbnb",
+      "target": "category:travel",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:marriott-hotels",
+      "target": "category:travel",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:shell",
+      "target": "category:travel",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:starbucks",
+      "target": "category:meals",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:doordash",
+      "target": "category:meals",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:mcdonald-s",
+      "target": "category:meals",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:github",
+      "target": "category:software",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:amazon-web-services",
+      "target": "category:software",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:slack",
+      "target": "category:software",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:microsoft",
+      "target": "category:software",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:adobe",
+      "target": "category:software",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:salesforce",
+      "target": "category:software",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:staples",
+      "target": "category:office-supplies",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:ikea",
+      "target": "category:hardware",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:mr-d-i-y",
+      "target": "category:office-supplies",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:apple",
+      "target": "category:hardware",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:dell",
+      "target": "category:hardware",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:google-ads",
+      "target": "category:marketing",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:meta-ads",
+      "target": "category:marketing",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:deloitte",
+      "target": "category:professional-services",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:fedex",
+      "target": "category:professional-services",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:wework",
+      "target": "category:rent",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:aetna",
+      "target": "category:insurance",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:coursera",
+      "target": "category:training",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:book-ta-k-taman-daya-sdn-bhd",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:indah-gift-home-deco",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:mr-d-i-y-johor-sdn-bhd",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:yongfatt-enterprise",
+      "target": "category:office-supplies",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:mr-d-i-y-m-sdn-bhd",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:abc-ho-trading",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:soon-huat-machinery-enterprise",
+      "target": "category:office-supplies",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:s-h-h-motor-sungai-rengit-sdn-bhd",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:perniagaan-zheng-hui",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:gerbang-alaf-restaurants-sdn-bhd",
+      "target": "category:meals",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:sam-sam-trading-co",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:alam-sdn-bhd",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:electrical",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:restoran-hassanbistro",
+      "target": "category:meals",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:asia-mart",
+      "target": "category:meals",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:lightroom-gallery-sdn-bhd",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:shell-isni-petro-trading",
+      "target": "category:travel",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:syl-roasted-delights-sdn-bhd",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:teo-heng-stationery-books",
+      "target": "category:office-supplies",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:fuyi-mini-market",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:99-speed-mart-s-b-519537-x",
+      "target": "category:meals",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:c-w-khoo-hardware-sdn-bhd",
+      "target": "category:hardware",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:unihakka-international-sdn-bhd",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:aeon-co-m-bhd-126926-h",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:warakuya-permas-city-sdn-bhd",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:yhm-aeon-tebrau-city",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:owner-by-castle-blue-s-b",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:bistro-cafe",
+      "target": "category:meals",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:taste-of-the-world-sdn-bhd",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:32-pub-bistro-own-by-cnu-trading",
+      "target": "category:meals",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:pasar-mini-jin-seng",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:restaurant-sin-du",
+      "target": "category:meals",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:yong-tat-hardware-trading",
+      "target": "category:hardware",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "merchant:unknown",
+      "target": "category:other",
+      "type": "MERCHANT_CATEGORY",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-0",
+      "target": "merchant:book-ta-k-taman-daya-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-0",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-0",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-0",
+      "target": "date:2018-12",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-0",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-1",
+      "target": "merchant:indah-gift-home-deco",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-1",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-1",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-1",
+      "target": "date:2018-10",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-1",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-2",
+      "target": "merchant:mr-d-i-y-johor-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-2",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-2",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-2",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-2",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-3",
+      "target": "merchant:yongfatt-enterprise",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-3",
+      "target": "category:office-supplies",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-3",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-3",
+      "target": "date:2018-12",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-3",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-4",
+      "target": "merchant:mr-d-i-y-m-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-4",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-4",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-4",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-4",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-5",
+      "target": "merchant:abc-ho-trading",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-5",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-5",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-5",
+      "target": "date:2019-01",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-5",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-6",
+      "target": "merchant:soon-huat-machinery-enterprise",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-6",
+      "target": "category:office-supplies",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-6",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-6",
+      "target": "date:2019-01",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-6",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-7",
+      "target": "merchant:s-h-h-motor-sungai-rengit-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-7",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-7",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-7",
+      "target": "date:2019-01",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-7",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-8",
+      "target": "merchant:perniagaan-zheng-hui",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-8",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-8",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-8",
+      "target": "date:2018-02",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-8",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-9",
+      "target": "merchant:gerbang-alaf-restaurants-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-9",
+      "target": "category:meals",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-9",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-9",
+      "target": "date:2018-01",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-9",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-10",
+      "target": "merchant:sam-sam-trading-co",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-10",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-10",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-10",
+      "target": "date:2017-12",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-10",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-11",
+      "target": "merchant:alam-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-11",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-11",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-11",
+      "target": "date:2017-06",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-11",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-12",
+      "target": "merchant:electrical",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-12",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-12",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-12",
+      "target": "date:2017-12",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-12",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-13",
+      "target": "merchant:restoran-hassanbistro",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-13",
+      "target": "category:meals",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-13",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-13",
+      "target": "date:2017-28",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-13",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-14",
+      "target": "merchant:asia-mart",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-14",
+      "target": "category:meals",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-14",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-14",
+      "target": "date:2017-12",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-14",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-15",
+      "target": "merchant:electrical",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-15",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-15",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-15",
+      "target": "date:2017-12",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-15",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-16",
+      "target": "merchant:lightroom-gallery-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-16",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-16",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-16",
+      "target": "date:2017-12",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-16",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-17",
+      "target": "merchant:lightroom-gallery-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-17",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-17",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-17",
+      "target": "date:2017-11",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-17",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-18",
+      "target": "merchant:lightroom-gallery-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-18",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-18",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-18",
+      "target": "date:2017-12",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-18",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-19",
+      "target": "merchant:shell-isni-petro-trading",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-19",
+      "target": "category:travel",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-19",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-19",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-19",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-20",
+      "target": "merchant:syl-roasted-delights-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-20",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-20",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-20",
+      "target": "date:2018-03",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-20",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-21",
+      "target": "merchant:teo-heng-stationery-books",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-21",
+      "target": "category:office-supplies",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-21",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-21",
+      "target": "date:2018-01",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-21",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-22",
+      "target": "merchant:fuyi-mini-market",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-22",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-22",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-22",
+      "target": "date:2018-01",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-22",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-23",
+      "target": "merchant:teo-heng-stationery-books",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-23",
+      "target": "category:office-supplies",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-23",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-23",
+      "target": "date:2018-01",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-23",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-24",
+      "target": "merchant:teo-heng-stationery-books",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-24",
+      "target": "category:office-supplies",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-24",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-24",
+      "target": "date:2018-01",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-24",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-25",
+      "target": "merchant:teo-heng-stationery-books",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-25",
+      "target": "category:office-supplies",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-25",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-25",
+      "target": "date:2018-01",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-25",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-26",
+      "target": "merchant:teo-heng-stationery-books",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-26",
+      "target": "category:office-supplies",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-26",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-26",
+      "target": "date:2018-01",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-26",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-27",
+      "target": "merchant:teo-heng-stationery-books",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-27",
+      "target": "category:office-supplies",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-27",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-27",
+      "target": "date:2018-02",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-27",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-28",
+      "target": "merchant:mr-d-i-y-m-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-28",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-28",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-28",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-28",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-29",
+      "target": "merchant:99-speed-mart-s-b-519537-x",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-29",
+      "target": "category:meals",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-29",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-29",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-29",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-30",
+      "target": "merchant:c-w-khoo-hardware-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-30",
+      "target": "category:hardware",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-30",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-30",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-30",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-31",
+      "target": "merchant:unihakka-international-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-31",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-31",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-31",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-31",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-32",
+      "target": "merchant:aeon-co-m-bhd-126926-h",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-32",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-32",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-32",
+      "target": "date:2018-03",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-32",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-33",
+      "target": "merchant:unihakka-international-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-33",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-33",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-33",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-33",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-34",
+      "target": "merchant:unihakka-international-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-34",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-34",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-34",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-34",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-35",
+      "target": "merchant:perniagaan-zheng-hui",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-35",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-35",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-35",
+      "target": "date:2018-03",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-35",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-36",
+      "target": "merchant:unihakka-international-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-36",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-36",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-36",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-36",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-37",
+      "target": "merchant:unihakka-international-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-37",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-37",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-37",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-37",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-38",
+      "target": "merchant:warakuya-permas-city-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-38",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-38",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-38",
+      "target": "date:2018-03",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-38",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-39",
+      "target": "merchant:yhm-aeon-tebrau-city",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-39",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-39",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-39",
+      "target": "date:2018-03",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-39",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-40",
+      "target": "merchant:owner-by-castle-blue-s-b",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-40",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-40",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-40",
+      "target": "date:2018-03",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-40",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-41",
+      "target": "merchant:bistro-cafe",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-41",
+      "target": "category:meals",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-41",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-41",
+      "target": "date:2018-03",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-41",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-41",
+      "target": "policy:meals-limit",
+      "type": "VIOLATES",
+      "properties": {
+        "detail": "Amount 343.95 exceeds limit 75.00"
+      }
+    },
+    {
+      "source": "expense:sroie-42",
+      "target": "merchant:bistro-cafe",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-42",
+      "target": "category:meals",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-42",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-42",
+      "target": "date:2018-03",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-42",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-42",
+      "target": "policy:meals-limit",
+      "type": "VIOLATES",
+      "properties": {
+        "detail": "Amount 174.90 exceeds limit 75.00"
+      }
+    },
+    {
+      "source": "expense:sroie-43",
+      "target": "merchant:taste-of-the-world-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-43",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-43",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-43",
+      "target": "date:2018-03",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-43",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-44",
+      "target": "merchant:32-pub-bistro-own-by-cnu-trading",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-44",
+      "target": "category:meals",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-44",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-44",
+      "target": "date:2018-03",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-44",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-44",
+      "target": "policy:meals-limit",
+      "type": "VIOLATES",
+      "properties": {
+        "detail": "Amount 190.00 exceeds limit 75.00"
+      }
+    },
+    {
+      "source": "expense:sroie-45",
+      "target": "merchant:unihakka-international-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-45",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-45",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-45",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-45",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-46",
+      "target": "merchant:unihakka-international-sdn-bhd",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-46",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-46",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-46",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-46",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-47",
+      "target": "merchant:pasar-mini-jin-seng",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-47",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-47",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-47",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-47",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-48",
+      "target": "merchant:restaurant-sin-du",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-48",
+      "target": "category:meals",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-48",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-48",
+      "target": "date:2018-03",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-48",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-48",
+      "target": "policy:meals-limit",
+      "type": "VIOLATES",
+      "properties": {
+        "detail": "Amount 170.00 exceeds limit 75.00"
+      }
+    },
+    {
+      "source": "expense:sroie-49",
+      "target": "merchant:yong-tat-hardware-trading",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-49",
+      "target": "category:hardware",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-49",
+      "target": "source:sroie",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-49",
+      "target": "date:2018-03",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:sroie-49",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-0",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-0",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-0",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-0",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-0",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-1",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-1",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-1",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-1",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-1",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-2",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-2",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-2",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-2",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-2",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-3",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-3",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-3",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-3",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-3",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-4",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-4",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-4",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-4",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-4",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-5",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-5",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-5",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-5",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-5",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-6",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-6",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-6",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-6",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-6",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-7",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-7",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-7",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-7",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-7",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-8",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-8",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-8",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-8",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-8",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-9",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-9",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-9",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-9",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-9",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-10",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-10",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-10",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-10",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-10",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-11",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-11",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-11",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-11",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-11",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-12",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-12",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-12",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-12",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-12",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-13",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-13",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-13",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-13",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-13",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-14",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-14",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-14",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-14",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-14",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-15",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-15",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-15",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-15",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-15",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-16",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-16",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-16",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-16",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-16",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-17",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-17",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-17",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-17",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-17",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-18",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-18",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-18",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-18",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-18",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-19",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-19",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-19",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-19",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-19",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-20",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-20",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-20",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-20",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-20",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-21",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-21",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-21",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-21",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-21",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-22",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-22",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-22",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-22",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-22",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-23",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-23",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-23",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-23",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-23",
+      "target": "route:manager-review",
+      "type": "ROUTED_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-24",
+      "target": "merchant:unknown",
+      "type": "PAID_TO",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-24",
+      "target": "category:other",
+      "type": "CODED_AS",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-24",
+      "target": "source:cord",
+      "type": "FROM_SOURCE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-24",
+      "target": "date:unknown",
+      "type": "ON_DATE",
+      "properties": {}
+    },
+    {
+      "source": "expense:cord-24",
+      "target": "route:auto-approve",
+      "type": "ROUTED_TO",
+      "properties": {}
+    }
+  ]
+}

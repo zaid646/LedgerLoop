@@ -16,11 +16,13 @@ EMBED_DIM = 384  # bge-small-en-v1.5 dimensionality
 class Embedder:
     """Text -> unit vector. ``backend`` is ``fastembed`` or ``hashing``."""
 
-    def __init__(self, model_name: str = "BAAI/bge-small-en-v1.5") -> None:
+    def __init__(self, model_name: str = "BAAI/bge-small-en-v1.5", backend: str = "auto") -> None:
         self.model_name = model_name
         self.dim = EMBED_DIM
         self.backend = "hashing"
         self._model = None
+        if backend == "hashing":
+            return
         try:  # pragma: no cover - depends on optional extra
             from fastembed import TextEmbedding
 
@@ -30,6 +32,8 @@ class Embedder:
             self.backend = "fastembed"
         except Exception:  # noqa: BLE001 - fall back silently
             self._model = None
+            if backend == "fastembed":
+                raise
 
     def embed(self, texts: list[str]) -> list[list[float]]:
         texts = list(texts)
@@ -56,4 +60,5 @@ class Embedder:
 def get_embedder() -> Embedder:
     from .config import get_settings
 
-    return Embedder(get_settings().embed_model)
+    settings = get_settings()
+    return Embedder(settings.embed_model, backend=settings.embed_backend)

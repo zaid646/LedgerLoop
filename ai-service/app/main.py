@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from . import __version__
 from .config import get_settings
+from .graph.router import router as graph_router
 from .llm import LLMClient
 from .metrics import STORE
 from .routers import assistant, code, corrections, extract, policy, search
@@ -56,6 +57,7 @@ app.include_router(policy.router)
 app.include_router(corrections.router)
 app.include_router(search.router)
 app.include_router(assistant.router)
+app.include_router(graph_router, prefix="/graphql")
 
 
 @app.get("/health", response_model=HealthResponse, tags=["meta"])

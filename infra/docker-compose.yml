@@ -1,10 +1,12 @@
 # =============================================================================
 # ExpenseIQ local infra
-#   core         : Postgres, MongoDB, OpenSearch  (default)
+#   core         : Postgres, MongoDB, OpenSearch, Neo4j  (default)
 #   observability: + Langfuse v3 (web, worker, clickhouse, redis, minio)
+#   ray          : 1 Ray head + 2 workers for the ingestion benchmark
 #
 #   docker compose up -d
 #   docker compose --profile observability up -d
+#   docker compose --profile ray up -d --build
 # =============================================================================
 name: expenseiq
 
@@ -42,6 +44,26 @@ services:
       timeout: 5s
       retries: 10
 
+  # ------------------------------------------------------------------- Neo4j
+  # Entity/relationship graph behind /graphql. Auth is local-dev only.
+  neo4j:
+    image: neo4j:5-community
+    container_name: eq-neo4j
+    restart: unless-stopped
+    environment:
+      NEO4J_AUTH: neo4j/expenseiq-dev
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 1G
+      NEO4J_server_memory_pagecache_size: 512m
+    ports: ["7474:7474", "7687:7687"]
+    volumes:
+      - neodata:/data
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p expenseiq-dev 'RETURN 1' >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
   # --------------------------------------------------------------- OpenSearch
   opensearch:
     image: opensearchproject/opensearch:2.15.0
@@ -64,6 +86,58 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
+
+  # ======================= Ray cluster (profile: ray) =======================
+  # 1 head + 2 workers, each worker advertising 4 CPUs. The benchmark driver
+  # runs inside the head container so tasks are scheduled across containers.
+  ray-head:
+    build:
+      context: ..
+      dockerfile: infra/ray/Dockerfile
+    container_name: eq-ray-head
+    profiles: ["ray"]
+    command: ray start --head --port=6379 --dashboard-host=0.0.0.0 --num-cpus=0 --block
+    ports: ["8265:8265"]
+    shm_size: "2gb"
+    volumes:
+      - ..:/workspace:ro
+      - ../runs:/workspace/runs
+      - ../evidence:/workspace/evidence
+    healthcheck:
+      test: ["CMD-SHELL", "ray status --address=127.0.0.1:6379 >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  ray-worker-1:
+    build:
+      context: ..
+      dockerfile: infra/ray/Dockerfile
+    container_name: eq-ray-worker-1
+    profiles: ["ray"]
+    command: ray start --address=ray-head:6379 --num-cpus=4 --block
+    depends_on:
+      ray-head: { condition: service_healthy }
+    shm_size: "2gb"
+    volumes:
+      - ..:/workspace:ro
+      - ../runs:/workspace/runs
+      - ../evidence:/workspace/evidence
+
+  ray-worker-2:
+    build:
+      context: ..
+      dockerfile: infra/ray/Dockerfile
+    container_name: eq-ray-worker-2
+    profiles: ["ray"]
+    command: ray start --address=ray-head:6379 --num-cpus=4 --block
+    depends_on:
+      ray-head: { condition: service_healthy }
+    shm_size: "2gb"
+    volumes:
+      - ..:/workspace:ro
+      - ../runs:/workspace/runs
+      - ../evidence:/workspace/evidence
 
   # ============================ Langfuse (profile: observability) ============
   clickhouse:
@@ -183,6 +257,7 @@ services:
 volumes:
   pgdata:
   mongodata:
+  neodata:
   osdata:
   clickhousedata:
   redisdata:

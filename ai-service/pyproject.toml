@@ -19,12 +19,22 @@ dependencies = [
     "opensearch-py>=2.7",
     "pyyaml>=6.0",
     "rich>=13.7",
+    # entity graph + GraphQL API
+    "neo4j>=5.20",
+    "strawberry-graphql[fastapi]>=0.235",
+    # clustering / community detection
+    "networkx>=3.3",
+    "scikit-learn>=1.5",
 ]
 
 [project.optional-dependencies]
 # semantic vectors for OpenSearch hybrid retrieval (falls back to hashing)
 search = [
     "fastembed>=0.3",
+]
+# Ray distributed ingestion benchmark (CI runs a small local-mode job)
+bench = [
+    "ray[default]>=2.40,<3",
 ]
 # notebooks / evals / datasets (Phase 1)
 evals = [

@@ -1,0 +1,444 @@
+{
+  "generated_at": "2026-10-19T18:34:17+00:00",
+  "url": "http://localhost:8080/graphql",
+  "iterations": 25,
+  "graph": {
+    "entities": 175,
+    "relationships": 648,
+    "clusters": 16,
+    "byType": [
+      {
+        "key": "Category",
+        "count": 13
+      },
+      {
+        "key": "Date",
+        "count": 11
+      },
+      {
+        "key": "Expense",
+        "count": 75
+      },
+      {
+        "key": "Merchant",
+        "count": 63
+      },
+      {
+        "key": "Policy",
+        "count": 8
+      },
+      {
+        "key": "Route",
+        "count": 3
+      },
+      {
+        "key": "Source",
+        "count": 2
+      }
+    ],
+    "byRelationship": [
+      {
+        "key": "CODED_AS",
+        "count": 75
+      },
+      {
+        "key": "FROM_SOURCE",
+        "count": 75
+      },
+      {
+        "key": "HAS_POLICY",
+        "count": 20
+      },
+      {
+        "key": "IN_COMMUNITY",
+        "count": 186
+      },
+      {
+        "key": "MERCHANT_CATEGORY",
+        "count": 63
+      },
+      {
+        "key": "ON_DATE",
+        "count": 75
+      },
+      {
+        "key": "PAID_TO",
+        "count": 75
+      },
+      {
+        "key": "ROUTED_TO",
+        "count": 75
+      },
+      {
+        "key": "VIOLATES",
+        "count": 4
+      }
+    ]
+  },
+  "queries": {
+    "graphStats": {
+      "n": 25,
+      "mean_ms": 13.33,
+      "p50_ms": 11.42,
+      "p95_ms": 24.18,
+      "min_ms": 10.07,
+      "max_ms": 34.93
+    },
+    "entities": {
+      "n": 25,
+      "mean_ms": 6.77,
+      "p50_ms": 6.45,
+      "p95_ms": 8.75,
+      "min_ms": 4.91,
+      "max_ms": 11.25
+    },
+    "entity": {
+      "n": 25,
+      "mean_ms": 6.19,
+      "p50_ms": 4.14,
+      "p95_ms": 7.29,
+      "min_ms": 3.63,
+      "max_ms": 46.34
+    },
+    "neighbors": {
+      "n": 25,
+      "mean_ms": 7.49,
+      "p50_ms": 7.27,
+      "p95_ms": 9.06,
+      "min_ms": 6.14,
+      "max_ms": 12.77
+    },
+    "searchEntities": {
+      "n": 25,
+      "mean_ms": 4.56,
+      "p50_ms": 4.46,
+      "p95_ms": 5.5,
+      "min_ms": 3.73,
+      "max_ms": 7.49
+    },
+    "clusters": {
+      "n": 25,
+      "mean_ms": 6.29,
+      "p50_ms": 6.09,
+      "p95_ms": 7.48,
+      "min_ms": 5.15,
+      "max_ms": 10.31
+    }
+  },
+  "samples": {
+    "graphStats": {
+      "data": {
+        "graphStats": {
+          "entities": 175,
+          "relationships": 648,
+          "clusters": 16,
+          "byType": [
+            {
+              "key": "Category",
+              "count": 13
+            },
+            {
+              "key": "Date",
+              "count": 11
+            },
+            {
+              "key": "Expense",
+              "count": 75
+            },
+            {
+              "key": "Merchant",
+              "count": 63
+            },
+            {
+              "key": "Policy",
+              "count": 8
+            },
+            {
+              "key": "Route",
+              "count": 3
+            },
+            {
+              "key": "Source",
+              "count": 2
+            }
+          ],
+          "byRelationship": [
+            {
+              "key": "CODED_AS",
+              "count": 75
+            },
+            {
+              "key": "FROM_SOURCE",
+              "count": 75
+            },
+            {
+              "key": "HAS_POLICY",
+              "count": 20
+            },
+            {
+              "key": "IN_COMMUNITY",
+              "count": 186
+            },
+            {
+              "key": "MERCHANT_CATEGORY",
+              "count": 63
+            },
+            {
+              "key": "ON_DATE",
+              "count": 75
+            },
+            {
+              "key": "PAID_TO",
+              "count": 75
+            },
+            {
+              "key": "ROUTED_TO",
+              "count": 75
+            },
+            {
+              "key": "VIOLATES",
+              "count": 4
+            }
+          ]
+        }
+      }
+    },
+    "entities": {
+      "data": {
+        "entities": [
+          {
+            "id": "merchant:32-pub-bistro-own-by-cnu-trading",
+            "type": "Merchant",
+            "label": "32 PUB & BISTRO OWN BY CNU TRADING"
+          },
+          {
+            "id": "merchant:99-speed-mart-s-b-519537-x",
+            "type": "Merchant",
+            "label": "99 SPEED MART S/B (519537-X)"
+          },
+          {
+            "id": "merchant:abc-ho-trading",
+            "type": "Merchant",
+            "label": "ABC HO TRADING"
+          },
+          {
+            "id": "merchant:adobe",
+            "type": "Merchant",
+            "label": "Adobe"
+          },
+          {
+            "id": "merchant:aeon-co-m-bhd-126926-h",
+            "type": "Merchant",
+            "label": "AEON CO. (M) BHD (126926-H)"
+          }
+        ]
+      }
+    },
+    "entity": {
+      "data": {
+        "entity": {
+          "id": "expense:sroie-0",
+          "type": "Expense",
+          "label": "BOOK TA .K(TAMAN DAYA) SDN BHD",
+          "properties": {
+            "transaction_date": "25/12/2018 8:13:39 PM",
+            "total_amount": 9.0,
+            "date_bucket": "2018-12",
+            "merchant": "BOOK TA .K(TAMAN DAYA) SDN BHD",
+            "source": "sroie",
+            "category": "OTHER",
+            "doc_id": "sroie-0"
+          }
+        }
+      }
+    },
+    "neighbors": {
+      "data": {
+        "neighbors": [
+          {
+            "relationship": "CODED_AS",
+            "direction": "out",
+            "depth": 1,
+            "entity": {
+              "id": "category:other",
+              "type": "Category",
+              "label": "OTHER"
+            }
+          },
+          {
+            "relationship": "FROM_SOURCE",
+            "direction": "out",
+            "depth": 1,
+            "entity": {
+              "id": "source:sroie",
+              "type": "Source",
+              "label": "sroie"
+            }
+          },
+          {
+            "relationship": "ON_DATE",
+            "direction": "out",
+            "depth": 1,
+            "entity": {
+              "id": "date:2018-12",
+              "type": "Date",
+              "label": "2018-12"
+            }
+          },
+          {
+            "relationship": "PAID_TO",
+            "direction": "out",
+            "depth": 1,
+            "entity": {
+              "id": "merchant:book-ta-k-taman-daya-sdn-bhd",
+              "type": "Merchant",
+              "label": "BOOK TA .K(TAMAN DAYA) SDN BHD"
+            }
+          },
+          {
+            "relationship": "ROUTED_TO",
+            "direction": "out",
+            "depth": 1,
+            "entity": {
+              "id": "route:auto-approve",
+              "type": "Route",
+              "label": "auto approve"
+            }
+          }
+        ]
+      }
+    },
+    "searchEntities": {
+      "data": {
+        "searchEntities": []
+      }
+    },
+    "clusters": {
+      "data": {
+        "clusters": [
+          {
+            "id": "cluster:kmeans:0",
+            "label": "kmeans cluster 0",
+            "algorithm": "kmeans",
+            "size": 9,
+            "metrics": {
+              "ari": 0.20771467735943325,
+              "nmi": 0.49398740643520717,
+              "purity": 0.6190476190476191
+            }
+          },
+          {
+            "id": "cluster:kmeans:1",
+            "label": "kmeans cluster 1",
+            "algorithm": "kmeans",
+            "size": 11,
+            "metrics": {
+              "ari": 0.20771467735943325,
+              "nmi": 0.49398740643520717,
+              "purity": 0.6190476190476191
+            }
+          },
+          {
+            "id": "cluster:kmeans:10",
+            "label": "kmeans cluster 10",
+            "algorithm": "kmeans",
+            "size": 12,
+            "metrics": {
+              "ari": 0.20771467735943325,
+              "nmi": 0.49398740643520717,
+              "purity": 0.6190476190476191
+            }
+          },
+          {
+            "id": "cluster:kmeans:2",
+            "label": "kmeans cluster 2",
+            "algorithm": "kmeans",
+            "size": 8,
+            "metrics": {
+              "ari": 0.20771467735943325,
+              "nmi": 0.49398740643520717,
+              "purity": 0.6190476190476191
+            }
+          },
+          {
+            "id": "cluster:kmeans:3",
+            "label": "kmeans cluster 3",
+            "algorithm": "kmeans",
+            "size": 3,
+            "metrics": {
+              "ari": 0.20771467735943325,
+              "nmi": 0.49398740643520717,
+              "purity": 0.6190476190476191
+            }
+          },
+          {
+            "id": "cluster:kmeans:4",
+            "label": "kmeans cluster 4",
+            "algorithm": "kmeans",
+            "size": 2,
+            "metrics": {
+              "ari": 0.20771467735943325,
+              "nmi": 0.49398740643520717,
+              "purity": 0.6190476190476191
+            }
+          },
+          {
+            "id": "cluster:kmeans:5",
+            "label": "kmeans cluster 5",
+            "algorithm": "kmeans",
+            "size": 4,
+            "metrics": {
+              "ari": 0.20771467735943325,
+              "nmi": 0.49398740643520717,
+              "purity": 0.6190476190476191
+            }
+          },
+          {
+            "id": "cluster:kmeans:6",
+            "label": "kmeans cluster 6",
+            "algorithm": "kmeans",
+            "size": 4,
+            "metrics": {
+              "ari": 0.20771467735943325,
+              "nmi": 0.49398740643520717,
+              "purity": 0.6190476190476191
+            }
+          },
+          {
+            "id": "cluster:kmeans:7",
+            "label": "kmeans cluster 7",
+            "algorithm": "kmeans",
+            "size": 6,
+            "metrics": {
+              "ari": 0.20771467735943325,
+              "nmi": 0.49398740643520717,
+              "purity": 0.6190476190476191
+            }
+          },
+          {
+            "id": "cluster:kmeans:8",
+            "label": "kmeans cluster 8",
+            "algorithm": "kmeans",
+            "size": 2,
+            "metrics": {
+              "ari": 0.20771467735943325,
+              "nmi": 0.49398740643520717,
+              "purity": 0.6190476190476191
+            }
+          },
+          {
+            "id": "cluster:kmeans:9",
+            "label": "kmeans cluster 9",
+            "algorithm": "kmeans",
+            "size": 1,
+            "metrics": {
+              "ari": 0.20771467735943325,
+              "nmi": 0.49398740643520717,
+              "purity": 0.6190476190476191
+            }
+          }
+        ]
+      }
+    }
+  }
+}
