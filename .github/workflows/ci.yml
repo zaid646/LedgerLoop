@@ -24,6 +24,23 @@ jobs:
       - name: Pytest
         run: uv run pytest -q
 
+  benchmark-smoke:
+    name: Ingestion benchmark smoke (serial + local Ray)
+    runs-on: ubuntu-latest
+    needs: python-service
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+      - run: uv python install 3.12
+      - name: Sync env with benchmark extra
+        working-directory: ai-service
+        run: uv sync --dev --extra bench
+      - name: Serial + local Ray, identical outputs
+        working-directory: ai-service
+        run: .venv/bin/python ../scripts/ingest_benchmark.py --docs 200 --chunk-size 50 --backends serial,ray --ray-local-mode --no-figure --out ../runs/ingest_smoke.json
+
   eval-gate:
     name: Eval regression gate
     runs-on: ubuntu-latest

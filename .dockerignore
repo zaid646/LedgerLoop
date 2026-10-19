@@ -1,0 +1,16 @@
+.git
+.github
+.venv
+**/.venv
+node_modules
+**/node_modules
+__pycache__
+**/__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+runs
+evidence
+gpu/data
+notebooks
+backend
