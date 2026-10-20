@@ -1,0 +1,98 @@
+{
+  "model": "BAAI/bge-small-en-v1.5",
+  "texts": 15,
+  "reference": "PyTorch fp32",
+  "labels": [
+    "TRAVEL",
+    "MEALS",
+    "OFFICE_SUPPLIES",
+    "SOFTWARE",
+    "HARDWARE",
+    "MARKETING",
+    "PROFESSIONAL_SERVICES",
+    "UTILITIES",
+    "RENT",
+    "INSURANCE",
+    "TRAINING",
+    "ENTERTAINMENT",
+    "OTHER"
+  ],
+  "expected_accuracy": 1.0,
+  "runtimes": {
+    "onnx_fp32": {
+      "cosine_min": 1.0,
+      "cosine_mean": 1.0,
+      "max_abs_diff": 0.0,
+      "mean_abs_diff": 0.0,
+      "label_agreement": 1.0,
+      "accuracy": 1.0,
+      "predicted_labels": [
+        "MEALS",
+        "TRAVEL",
+        "OFFICE_SUPPLIES",
+        "SOFTWARE",
+        "HARDWARE",
+        "MARKETING",
+        "MEALS",
+        "SOFTWARE",
+        "PROFESSIONAL_SERVICES",
+        "UTILITIES",
+        "TRAINING",
+        "INSURANCE",
+        "HARDWARE",
+        "MARKETING",
+        "TRAVEL"
+      ]
+    },
+    "onnx_int8": {
+      "cosine_min": 0.976099,
+      "cosine_mean": 0.984596,
+      "max_abs_diff": 0.039535,
+      "mean_abs_diff": 0.00702,
+      "label_agreement": 1.0,
+      "accuracy": 1.0,
+      "predicted_labels": [
+        "MEALS",
+        "TRAVEL",
+        "OFFICE_SUPPLIES",
+        "SOFTWARE",
+        "HARDWARE",
+        "MARKETING",
+        "MEALS",
+        "SOFTWARE",
+        "PROFESSIONAL_SERVICES",
+        "UTILITIES",
+        "TRAINING",
+        "INSURANCE",
+        "HARDWARE",
+        "MARKETING",
+        "TRAVEL"
+      ]
+    },
+    "tflite_fp32": {
+      "cosine_min": 1.0,
+      "cosine_mean": 1.0,
+      "max_abs_diff": 0.0,
+      "mean_abs_diff": 0.0,
+      "label_agreement": 1.0,
+      "accuracy": 1.0,
+      "predicted_labels": [
+        "MEALS",
+        "TRAVEL",
+        "OFFICE_SUPPLIES",
+        "SOFTWARE",
+        "HARDWARE",
+        "MARKETING",
+        "MEALS",
+        "SOFTWARE",
+        "PROFESSIONAL_SERVICES",
+        "UTILITIES",
+        "TRAINING",
+        "INSURANCE",
+        "HARDWARE",
+        "MARKETING",
+        "TRAVEL"
+      ]
+    }
+  }
+}

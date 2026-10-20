@@ -10,6 +10,8 @@ secrets/
 __pycache__/
 *.py[cod]
 .venv/
+.venv-runtime/
+.uv-cache/
 venv/
 .pytest_cache/
 .ruff_cache/
@@ -28,6 +30,9 @@ coverage/
 data/raw/
 data/processed/
 gpu/data/
+airflow/.airflow/
+airflow/.venv/
+airflow/logs/
 artifacts/
 wandb/
 *.sqlite
@@ -40,6 +45,8 @@ runs/*
 !runs/graphql_probe.json
 !runs/ingest_benchmark.json
 !runs/a11y_scores.json
+!runs/runtime_benchmark.json
+!runs/runtime_parity.json
 
 # --- notebooks outputs (keep notebooks, drop heavy outputs) ---
 notebooks/**/*.nbconvert.ipynb

@@ -23,6 +23,8 @@ jobs:
         run: uv run ruff check .
       - name: Pytest
         run: uv run pytest -q
+      - name: Repo policy tests (Airflow DAG + CI configs)
+        run: uv run pytest -q ../tests/test_airflow_dag.py ../tests/test_ci_configs.py
 
   benchmark-smoke:
     name: Ingestion benchmark smoke (serial + local Ray)

@@ -27,6 +27,8 @@ self-correcting** — so quality is a number, not a vibe.
 - [Graph layer (Neo4j + GraphQL)](#graph-layer-neo4j--graphql)
 - [Merchant clustering](#merchant-clustering)
 - [Distributed ingestion benchmark](#distributed-ingestion-benchmark)
+- [Cross-runtime export & CPU benchmark](#cross-runtime-export--cpu-benchmark)
+- [CI/CD: Airflow, GitLab, Jenkins](#cicd-airflow-gitlab-jenkins)
 - [Review UI & accessibility](#review-ui--accessibility)
 - [Evidence](#evidence)
 - [Security practices](#security-practices)
@@ -127,8 +129,13 @@ expenseiq/
 ├── infra/              docker-compose: Postgres, MongoDB, OpenSearch, Neo4j, Langfuse, Ray
 ├── warehouse/          Snowflake DDL + queries for spend analytics
 ├── gpu/                Runbook + endpoint checker for the self-hosted vLLM
+├── runtime/            ONNX/TFLite export, parity and CPU benchmark harness
+├── airflow/            Offline ingestion → eval → gate DAG + local runbook
+├── tests/              Airflow wiring + CI config lint + runtime parity tests
 ├── evidence/           Screenshots + logs (SCREENSHOTS.md manifest)
-└── .github/workflows/  CI: lint, tests, PromptFoo regression gate
+├── .github/workflows/  CI: lint, tests, PromptFoo regression gate
+├── .gitlab-ci.yml      GitLab mirror: lint, pytest, eval gate, benchmark smoke
+└── Jenkinsfile         Smoke stage: install, lint, pytest subset
 ```
 
 ## Quickstart
@@ -262,6 +269,84 @@ numbers.
 ![ingestion throughput](evidence/png/17-ingest-throughput.png)
 
 Reproduce: `make ray-up && make bench-ray` (cluster) or `make bench-local` (serial + mp).
+
+## Cross-runtime export & CPU benchmark
+
+The smallest model already used by the service is the 33M-parameter
+`BAAI/bge-small-en-v1.5` embedder (`ai-service/app/embeddings.py`). It is exported to
+ONNX Runtime (fp32 + dynamic int8) and TFLite (fp32, via ONNX → TensorFlow → TFLite).
+The Qwen2.5-0.5B GL-coding classifier is not the export target: no QLoRA adapter is
+checked in (`gpu/finetune_qlora.py` writes to `/workspace/expenseiq-qlora`), and a 0.5B
+decoder graph is too heavy for a reliable TFLite conversion. This is recorded in
+`artifacts/runtime/metadata.json` under `classifier_export` and is why the embedder is
+used instead.
+
+All runtimes share one preprocessing path (`runtime/common.py`): tokenizer padding to
+64 tokens, truncation, CLS pooling and L2 normalization. GL labels come from
+`gpu/coding_data.py`; a fixed prototype matrix maps embeddings to the same 13 labels in
+every runtime.
+
+**Parity** (15 GL expense lines, PyTorch fp32 reference):
+
+| Comparison | min cosine | max abs diff | label agreement | expected-label accuracy |
+|---|---:|---:|---:|---:|
+| ONNX Runtime fp32 | 1.000000 | 0.000000 | 15/15 | 15/15 |
+| ONNX Runtime int8 (dynamic) | 0.976099 | 0.039535 | 15/15 | 15/15 |
+| TFLite fp32 | 1.000000 | 0.000000 | 15/15 | 15/15 |
+
+Pytest tolerances are explicit per runtime: ONNX fp32 requires cosine ≥ 0.99999 and
+max abs diff ≤ 1e-5; TFLite requires cosine ≥ 0.999 and max abs diff ≤ 1e-4; int8
+requires cosine ≥ 0.97 and max abs diff ≤ 0.06. All three also assert identical labels. TFLite float16 and dynamic-range variants were not
+published because they failed on this macOS runner (`MEAN` op allocation error and NaN
+outputs respectively).
+
+**CPU benchmark** — Apple M5, 10 cores, 4 threads, batch 1, 64 tokens, 30 warm-up and
+200 timed iterations. Latency excludes tokenization (pre-tokenized inputs); throughput
+is single-item inference. Model size is parameter bytes for PyTorch and file size for
+ONNX/TFLite; RSS is isolated per backend process.
+
+| Backend | Precision | p50 ms | p95 ms | samples/s | Model MB | RSS after load MB | Peak RSS MB |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| PyTorch | fp32 | 9.238 | 9.554 | 108.3 | 133.4 | 733 | 734 |
+| ONNX Runtime | fp32 | **8.260** | **8.456** | **124.6** | 133.1 | 570 | 570 |
+| ONNX Runtime | int8 | 8.825 | 9.337 | 115.9 | **33.8** | **438** | **438** |
+| TFLite | fp32 | 9.197 | 10.453 | 107.4 | 132.3 | 808 | 809 |
+
+ONNX Runtime fp32 is ~1.12× faster at p50 than PyTorch with ~22% lower process RSS;
+int8 cuts model size by 75% and keeps 100% label agreement, though dynamic quantization
+does not improve latency on this CPU. TFLite fp32 lands within 0.5% of PyTorch at p50
+but has the highest runtime footprint because TensorFlow is loaded in-process. Raw runs:
+[`runs/runtime_benchmark.json`](runs/runtime_benchmark.json) and
+[`runs/runtime_parity.json`](runs/runtime_parity.json).
+
+```bash
+make runtime-install     # CPU venv: torch, onnx, onnxruntime, tensorflow, onnx2tf
+make runtime-export      # writes artifacts/runtime/*.onnx + *.tflite (gitignored)
+make runtime-bench       # benchmark + parity JSON under runs/
+make runtime-test        # pytest parity/preprocessing/label-mapping tests
+```
+
+## CI/CD: Airflow, GitLab, Jenkins
+
+All three are offline/local by default and need no cloud credentials.
+
+- **Airflow** — `airflow/dags/ledgerloop_pipeline.py` defines
+  `ingest >> eval >> regression_gate`. It runs the serial ingestion benchmark, the
+  deterministic heuristic eval (`--no-wandb`), then `evals/gate.py` against
+  `evals/baseline.json`. Install the DAG environment and run it locally with
+  `airflow dags test ledgerloop_offline_pipeline 2026-01-01`; full steps are in
+  [`airflow/README.md`](airflow/README.md).
+- **GitLab CI** — `.gitlab-ci.yml` mirrors the GitHub Actions jobs: `lint` (ruff),
+  `pytest` (service + repo policy tests), `eval-gate` (heuristic eval → baseline gate)
+  and `benchmark-smoke` (serial + local Ray). Use a local runner
+  (`gitlab-runner exec docker <job>`) or `make ci-policy` to validate the config and DAG
+  wiring without a GitLab server.
+- **Jenkins** — the `Smoke` stage in `Jenkinsfile` installs `uv`, syncs `ai-service`,
+  runs ruff and a fast pytest subset (`test_policy`, `test_redaction`, `test_search`)
+  plus the Airflow/CI wiring tests. The same sequence is `make ci-smoke`.
+
+Tests for all three live in [`tests/test_airflow_dag.py`](tests/test_airflow_dag.py)
+and [`tests/test_ci_configs.py`](tests/test_ci_configs.py).
 
 ## Review UI & accessibility
 

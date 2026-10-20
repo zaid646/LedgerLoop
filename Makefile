@@ -4,7 +4,7 @@ SHELL := /bin/bash
 # -----------------------------------------------------------------------------
 # ExpenseIQ — developer entrypoints
 # -----------------------------------------------------------------------------
-.PHONY: help infra-up infra-down ai-install ai-run ai-test gpu-check lint fmt evals index graph-build graph-cluster graphql-probe ui-install ui-run a11y a11y-install a11y-lighthouse ray-up ray-down bench-local bench-ray backend-install backend-run backend-check assistant-eval ask
+.PHONY: help infra-up infra-down ai-install ai-run ai-test gpu-check lint fmt evals index graph-build graph-cluster graphql-probe ui-install ui-run a11y a11y-install a11y-lighthouse ray-up ray-down bench-local bench-ray backend-install backend-run backend-check assistant-eval ask runtime-install runtime-export runtime-parity runtime-bench runtime-test ci-policy ci-smoke
 
 help: ## Show this help
 	@grep -hE '^[a-zA-Z0-9_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*?## "}{printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
@@ -91,3 +91,25 @@ ask: ## Ask the spend assistant (usage: make ask Q="how much on travel?")
 
 assistant-eval: ## Answer-correctness eval for the spend assistant (needs ai-service up)
 	cd ai-service && uv run python ../evals/run_assistant_eval.py --url http://localhost:$${AI_SERVICE_PORT:-8080}
+
+runtime-install: ## Create the CPU runtime venv for ONNX/TFLite export + benchmark
+	uv venv .venv-runtime --python 3.12
+	uv pip install --python .venv-runtime/bin/python -r runtime/requirements.txt
+
+runtime-export: ## Export bge-small-en-v1.5 to ONNX (fp32/int8) and TFLite
+	.venv-runtime/bin/python -m runtime.export --artifacts artifacts/runtime
+
+runtime-parity: ## Compare PyTorch / ONNX / TFLite embeddings and labels
+	.venv-runtime/bin/python -m runtime.parity --artifacts artifacts/runtime --out runs/runtime_parity.json
+
+runtime-bench: ## CPU latency/throughput/size/memory benchmark
+	.venv-runtime/bin/python -m runtime.benchmark --artifacts artifacts/runtime --out runs/runtime_benchmark.json --parity-out runs/runtime_parity.json
+
+runtime-test: ## Parity pytest suite (requires runtime-export artifacts)
+	.venv-runtime/bin/python -m pytest -q tests/test_runtime_parity.py
+
+ci-policy: ## Test Airflow DAG wiring + GitLab/GitHub/Jenkins config lint
+	cd ai-service && uv run pytest -q ../tests/test_airflow_dag.py ../tests/test_ci_configs.py
+
+ci-smoke: ## Local equivalent of the Jenkins Smoke stage (install, lint, pytest subset)
+	cd ai-service && uv sync --dev && uv run ruff check . && uv run pytest -q tests/test_policy.py tests/test_redaction.py tests/test_search.py
