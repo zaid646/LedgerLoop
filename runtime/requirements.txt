@@ -1,0 +1,12 @@
+# CPU export/parity/benchmark environment. Keep this out of the service image.
+torch>=2.2
+transformers>=4.40,<5
+onnx>=1.16,<2
+onnxruntime>=1.18
+numpy>=1.26,<2.3
+tensorflow>=2.16
+tf-keras>=2.16
+onnx2tf>=1.24
+psutil>=5.9
+pytest>=8
+pyyaml>=6
