@@ -1,0 +1,50 @@
+stages:
+  - lint
+  - test
+  - eval
+  - smoke
+
+variables:
+  UV_CACHE_DIR: "$CI_PROJECT_DIR/.uv-cache"
+  PYTHONDONTWRITEBYTECODE: "1"
+
+default:
+  image: python:3.12-slim
+  before_script:
+    - pip install --no-cache-dir uv
+  cache:
+    key:
+      files:
+        - ai-service/uv.lock
+    paths:
+      - .uv-cache/
+
+lint:
+  stage: lint
+  script:
+    - cd ai-service
+    - uv sync --dev
+    - uv run ruff check .
+
+pytest:
+  stage: test
+  script:
+    - cd ai-service
+    - uv sync --dev
+    - uv run pytest -q
+    - uv run pytest -q ../tests
+
+eval-gate:
+  stage: eval
+  script:
+    - cd ai-service
+    - uv sync --dev
+    - uv run python ../evals/run_evals.py --engine heuristic --golden v0 --no-wandb --name gitlab-heuristic
+    - uv run python ../evals/gate.py --results ../evals/results/gitlab-heuristic.json --baseline ../evals/baseline.json
+
+benchmark-smoke:
+  stage: smoke
+  script:
+    - cd ai-service
+    - uv sync --dev --extra bench
+    - .venv/bin/python ../scripts/ingest_benchmark.py --docs 200 --chunk-size 50 --backends serial,ray --ray-local-mode --no-figure --out ../runs/ingest_gitlab_smoke.json
