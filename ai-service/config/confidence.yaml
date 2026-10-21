@@ -1,0 +1,36 @@
+# Confidence scoring + routing configuration.
+#
+# Raw scores are a weighted blend of independent signals, then mapped through
+# an isotonic calibration curve fitted on the frozen golden set (see
+# evals/replay_confidence.py). Thresholds are deliberately conservative:
+# anything below `document.reject_threshold` is fail-closed / escalated.
+version: "2026-10-21"
+fields:
+  merchant:
+    weight: 0.35
+    required: true
+    auto_threshold: 0.75
+  total_amount:
+    weight: 0.45
+    required: true
+    auto_threshold: 0.75
+  transaction_date:
+    weight: 0.20
+    required: false
+    auto_threshold: 0.70
+document:
+  auto_threshold: 0.75
+  reject_threshold: 0.35
+signal_weights:
+  llm_confidence: 0.42
+  retrieval_agreement: 0.33
+  schema_ok: 0.10
+  repair: 0.10
+  policy: 0.05
+  # Added only when the LLM response actually contains token logprobs.
+  logprob: 0.15
+calibration:
+  file: calibration.json
+  bins: 10
+retrieval:
+  merchant_token_overlap: 0.60

@@ -67,6 +67,15 @@ class ExtractRequest(BaseModel):
     source: Literal["receipt", "card_transaction"] = "receipt"
 
 
+class RoutingInfo(BaseModel):
+    route: Literal["auto_approve", "human_review", "reject_escalate"]
+    reasons: list[str] = Field(default_factory=list)
+    document_score: float = 0.0
+    field_scores: dict[str, float] = Field(default_factory=dict)
+    thresholds: dict[str, float] = Field(default_factory=dict)
+    forced: bool = False
+
+
 class ExtractResponse(BaseModel):
     document_id: str
     extraction: ReceiptExtraction
@@ -78,6 +87,11 @@ class ExtractResponse(BaseModel):
     latency_ms: float
     cost_usd: float
     redactions: dict[str, int] = Field(default_factory=dict)
+    # ARS confidence + HITL routing (optional for backwards compatibility).
+    document_confidence: float | None = None
+    field_confidence: dict[str, float] = Field(default_factory=dict)
+    routing: RoutingInfo | None = None
+    confidence_notes: list[str] = Field(default_factory=list)
 
 
 # ----------------------------------------------------------------------- coding
