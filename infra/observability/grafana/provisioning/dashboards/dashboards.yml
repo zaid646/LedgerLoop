@@ -1,0 +1,7 @@
+apiVersion: 1
+providers:
+  - name: ledgerloop
+    folder: LedgerLoop
+    type: file
+    options:
+      path: /var/lib/grafana/dashboards

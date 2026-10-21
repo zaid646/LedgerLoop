@@ -131,3 +131,29 @@ def test_extract_response_includes_confidence_and_routing(monkeypatch):
     assert "total_amount" in body["field_confidence"]
     assert body["routing"]["route"] in {"auto_approve", "human_review", "reject_escalate"}
     assert body["routing"]["thresholds"]["document_auto"] > 0
+
+
+def test_prometheus_endpoint_exposes_extraction_and_drift_metrics():
+    client.post("/extract", json={"document_id": "metrics-1", "text": "METRICS SHOP\nTOTAL 1.00\nDATE 01/02/2026"})
+    r = client.get("/metrics/prometheus")
+    assert r.status_code == 200
+    body = r.text
+    assert "expenseiq_extractions_total" in body
+    assert "expenseiq_document_confidence" in body
+    assert "expenseiq_drift_fired" in body
+
+
+def test_drift_check_scores_a_full_window_and_fires_on_amount_shift():
+    sample = {
+        "text": "DRIFT SHOP\nTOTAL 9999.00\nDATE 01/02/2026",
+        "fields": {"merchant": "DRIFT SHOP", "total_amount": 9999.0, "transaction_date": "01/02/2026"},
+    }
+    r = client.post("/drift/check", json={"samples": [sample] * 50})
+    assert r.status_code == 200
+    body = r.json()
+    assert body["monitor"]["window_docs"] == 50
+    assert body["report"]["window_docs"] == 50
+    assert body["report"]["fired"] is True
+    status = client.get("/drift/status").json()
+    assert status["window_docs"] == 50
+    assert status["latest"]["fired"] is True

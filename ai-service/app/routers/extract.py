@@ -5,12 +5,12 @@ import json
 import logging
 from datetime import UTC, datetime
 
-from fastapi import APIRouter
+from fastapi import APIRouter, BackgroundTasks
 
 from ..confidence import get_scorer
 from ..confidence.signals import infer_policy_route
 from ..config import REPO_ROOT
-from ..metrics import STORE
+from ..metrics import STORE, observe_extraction
 from ..redaction import redact
 from ..routing import ROUTE_AUTO, route_document
 from ..schemas import ExtractRequest, ExtractResponse, ReceiptExtraction, RoutingInfo
@@ -65,7 +65,7 @@ def _score_and_route(
 
 
 @router.post("/extract", response_model=ExtractResponse)
-async def extract(req: ExtractRequest) -> ExtractResponse:
+async def extract(req: ExtractRequest, background: BackgroundTasks) -> ExtractResponse:
     tracer = get_tracer()
 
     # 1. redact PII / cards BEFORE anything leaves the process
@@ -119,6 +119,15 @@ async def extract(req: ExtractRequest) -> ExtractResponse:
             }
         )
 
+    observe_extraction(
+        route=routing.route,
+        confidence=float(document_confidence or 0.0),
+        latency_ms=outcome.latency_ms,
+    )
+    background.add_task(
+        _monitor_drift,
+        {"text": red.text, "fields": extraction.model_dump()},
+    )
     STORE.observe("/extract", outcome.latency_ms, outcome.cost_usd)
     STORE.incr("extract_requests")
     if outcome.repaired:
@@ -167,3 +176,12 @@ async def extract(req: ExtractRequest) -> ExtractResponse:
         routing=routing,
         confidence_notes=confidence_notes,
     )
+
+
+def _monitor_drift(sample: dict) -> None:
+    from ..drift_monitor import MONITOR
+
+    try:
+        MONITOR.observe([sample])
+    except Exception:  # noqa: BLE001 - monitoring is best effort
+        log.exception("drift monitor failed")
