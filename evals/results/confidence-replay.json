@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T10:53:28+00:00",
+  "generated_at": "2026-10-21T11:32:52+00:00",
   "inputs": {
     "golden": "evals/golden/v0.jsonl",
     "cached_predictions": "evals/results/llm-qwen7b-v0.json",
@@ -1439,13 +1439,13 @@
   "latency": {
     "iterations": 20,
     "documents_per_iteration": 75,
-    "scoring_p50_ms": 0.0576,
-    "scoring_p95_ms": 0.112,
+    "scoring_p50_ms": 0.0583,
+    "scoring_p95_ms": 0.0972,
     "routing_p50_ms": 0.0022,
-    "routing_p95_ms": 0.0042,
-    "combined_p50_ms": 0.06,
-    "combined_p95_ms": 0.1155,
-    "combined_mean_ms": 0.0567
+    "routing_p95_ms": 0.0032,
+    "combined_p50_ms": 0.0607,
+    "combined_p95_ms": 0.0998,
+    "combined_mean_ms": 0.0582
   },
   "limitations": [
     "Cached outputs do not contain token logprobs; model self-reported confidence is used.",

@@ -24,6 +24,7 @@ self-correcting** — so quality is a number, not a vibe.
 - [Quickstart](#quickstart)
 - [Build order / roadmap](#build-order--roadmap)
 - [Measuring quality](#measuring-quality)
+- [Safety, confidence and drift](#safety-confidence-and-drift)
 - [Graph layer (Neo4j + GraphQL)](#graph-layer-neo4j--graphql)
 - [Merchant clustering](#merchant-clustering)
 - [Distributed ingestion benchmark](#distributed-ingestion-benchmark)
@@ -195,6 +196,92 @@ python gpu/check_gpu.py
 | Cluster agreement | ARI / NMI / purity vs GL codes | `runs/graph_clusters.json` |
 | Ingest throughput | docs/s, speedup, efficiency | `runs/ingest_benchmark.json` |
 | Accessibility | axe violations + Lighthouse score | `runs/a11y_scores.json` |
+
+## Safety, confidence and drift
+
+**Purpose and scope.** ExpenseIQ extracts receipt fields and recommends a route for internal
+finance workflows. It is decision support, not an autonomous payment, tax, credit,
+employment or audit decision system, and it is not approved for documents outside the
+supported receipt/invoice formats.
+
+**Human oversight.** A document is auto-approved only when the schema validates, every
+required field clears its calibrated threshold, and the calibrated document score reaches
+`0.75`. Missing required fields fail closed to `reject_escalate`; anything between the
+reject and auto thresholds goes to `human_review`. Reviewers see per-field confidence,
+record approve/correct/reject decisions in an append-only audit trail, and corrections are
+stored as labelled data. A kill switch (`POST /admin/kill-switch`) forces every new document
+to human review without redeploying.
+
+### Measured calibration and routing
+
+Golden set `v0` (75 documents: 50 SROIE + 25 CORD), replaying cached Qwen2.5-7B predictions
+on CPU. No live model calls and no paid APIs were used.
+
+| Metric | Before | After |
+|---|---|---|
+| Document ECE (lower is better) | 0.1493 | **0.0368** (−75.4%) |
+| Merchant ECE | 0.0332 | **0.0232** (−30.0%) |
+| Total-amount ECE | 0.0183 | **0.0142** (−22.1%) |
+| Transaction-date ECE | 0.1070 | **0.0533** (−50.2%) |
+| Auto-approved documents | — | 33/75 (44.0%) |
+| Accuracy on auto-approved documents | — | 96.97% macro field, 90.91% exact document |
+| Routed to review / reject | — | 21.3% / 34.7% |
+| Errors reaching a human (review + reject) | — | 35/38 (92.1%) |
+| Errors auto-approved | — | 3/38 |
+| Confidence scoring + routing latency (p95) | — | 0.10 ms per document |
+
+Isotonic calibration is cross-fitted over five document folds, then fitted on all 75
+documents for serving. The operating point uses a 0.95 accuracy floor; 0.75 was selected
+from the measured sweep. Route thresholds, signal weights and calibration curves live in
+[`ai-service/config/confidence.yaml`](ai-service/config/confidence.yaml) and
+[`ai-service/config/calibration.json`](ai-service/config/calibration.json).
+
+### Drift monitoring
+
+PSI on log amount, PSI on transaction quarter, two-sample KS on amount and date, PSI on
+merchant category, and bge-small embedding-centroid distance run over 50-document windows.
+On the synthetic replay (30 fastembed replicates, 150 null windows; thresholds calibrated at
+the 99.5th percentile of null windows):
+
+| Scenario | Detection rate | Null false alarms | Time to detect |
+|---|---|---|---|
+| New merchants | 100% | 0/30 | 25 documents |
+| New receipt format | 100% | 0/30 | 25 documents |
+| Noisy OCR | 100% | 0/30 | 25 documents |
+| Amount shift | 100% | 0/30 | 25 documents |
+| Date shift | 100% | 0/30 | 25 documents |
+
+Detector-only latency is 2.3 ms p50; embedding 50 documents with bge-small on CPU takes
+6.5 s in a background task. Prometheus metrics, Grafana panels and alert rules are in
+[`infra/observability/`](infra/observability/). The CI gate refuses merges when ECE,
+auto-approval accuracy, human catch rate, false alarms or shift detection regress.
+
+### Known limitations
+
+- The golden set has 75 public receipts; confidence intervals are wide and the mix is not
+  production traffic. SROIE/CORD over-represent Malaysian and English receipts.
+- The cached LLM outputs expose self-reported confidence, not token logprobs, so the
+  logprob signal is disabled; calibration cannot fix a systematically overconfident model.
+- The router is deliberately conservative: 34.7% of documents are rejected, creating
+  manual work. Three of 38 measured errors still reached auto-approval.
+- Drift scenarios are synthetic; embedding distance is slower on CPU and has only been
+  validated on this corpus. There is no live production baseline yet.
+- Handwriting, heavy blur, non-receipt images and adversarial text are out of scope.
+
+**Privacy and data handling.** Card numbers and PII are redacted before model calls;
+review text is stored in the internal Postgres/MongoDB deployment; corrections are retained
+for evaluation and can be exported for deletion requests. Secrets stay in `.env`.
+
+**Ownership and escalation.** The ML platform team owns calibration and drift; the finance
+operations lead owns queue SLAs and reviewer staffing. Pages go to on-call for
+`DriftDetected`; tickets go to the ML platform queue for calibration or backlog regressions.
+See [`docs/runbooks/drift.md`](docs/runbooks/drift.md),
+[`docs/runbooks/hitl.md`](docs/runbooks/hitl.md) and the
+[final measured report](docs/FINAL_REPORT.md).
+
+**Prohibited use.** Do not use the system to make final payment, tax, credit, employment or
+audit decisions without a qualified human; do not feed secrets, credentials or documents
+outside the approved data classification.
 
 ## Graph layer (Neo4j + GraphQL)
 
