@@ -239,7 +239,8 @@ from the measured sweep. Route thresholds, signal weights and calibration curves
 ### Drift monitoring
 
 PSI on log amount, PSI on transaction quarter, two-sample KS on amount and date, PSI on
-merchant category, and bge-small embedding-centroid distance run over 50-document windows.
+merchant category, and bge-small embedding-centroid distance run over 50-document windows
+against a prediction-aligned baseline (the cached model outputs, not golden labels).
 On the synthetic replay (30 fastembed replicates, 150 null windows; thresholds calibrated at
 the 99.5th percentile of null windows):
 

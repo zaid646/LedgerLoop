@@ -90,3 +90,14 @@ def test_report_serialises_measured_values_and_thresholds():
     assert math.isclose(payload["metrics"]["psi_amount"], 0.0, abs_tol=1e-9)
     assert "embedding_centroid_distance" in payload["detectors"]
     assert payload["thresholds"]["ks_alpha"] > 0
+
+
+def test_serving_baseline_is_prediction_aligned():
+    from app.drift_monitor import BASELINE_PATH
+
+    assert BASELINE_PATH.name == "drift_baseline.jsonl"
+    assert BASELINE_PATH.exists()
+    lines = [line for line in BASELINE_PATH.read_text().splitlines() if line.strip()]
+    assert len(lines) == 75
+    row = __import__("json").loads(lines[0])
+    assert {"id", "text", "fields"} <= set(row)

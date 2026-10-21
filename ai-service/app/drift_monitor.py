@@ -16,12 +16,14 @@ from .drift import (
 )
 from .metrics import observe_drift
 
-GOLDEN_PATH = Path(os.getenv("DRIFT_BASELINE_PATH", REPO_ROOT / "evals" / "golden" / "v0.jsonl"))
+BASELINE_PATH = Path(
+    os.getenv("DRIFT_BASELINE_PATH", REPO_ROOT / "ai-service" / "config" / "drift_baseline.jsonl")
+)
 
 
 class DriftMonitor:
     def __init__(self, *, baseline_path: Path | None = None, window: int = 50) -> None:
-        self.baseline_path = Path(baseline_path or GOLDEN_PATH)
+        self.baseline_path = Path(baseline_path or BASELINE_PATH)
         self.window = window
         self._lock = threading.Lock()
         self._buffer: list[dict] = []

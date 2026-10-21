@@ -17,7 +17,7 @@ and run on CPU; no paid API, GPU or live inference was used. Existing tests stay
 | Drift detection (5 shift scenarios) | n/a | 100% each; 0/30 null false alarms |
 | Drift time-to-detect | n/a | 25 documents (first window) |
 | Drift detector / embedding latency | n/a | 2.3 ms p50 / 6.54 s per 50 docs (CPU) |
-| AI service tests | 58 passed, 1 skipped | **87 passed** (86 + 1 skipped in CI without the optional embedder) |
+| AI service tests | 58 passed, 1 skipped | **88 passed** (87 + 1 skipped in CI without the optional embedder) |
 | Backend | no review code | typecheck clean, 5 logic tests passed; 3 live decisions and 2 corrections verified against Postgres |
 
 **Why it matters.** Calibration cut document ECE by 75% and date ECE by 50%, and the
@@ -33,7 +33,7 @@ blocks changes that worsen calibration, catch rate, latency or drift detection.
 | `335de59` | Calibrated ARS scoring, threshold routing, replay metrics and reliability plot |
 | `e970799` | Review queue DDL, audit/correction tables, kill switch, reviewer UI and tests |
 | `fe09afc` | Drift detectors, simulator, Prometheus metrics, Grafana dashboard and alerts |
-| this commit | Responsible AI notes, runbooks, CI quality gate and this report |
+| `e0ef2db` | Responsible AI notes, runbooks, CI quality gate and this report |
 
 **Evidence.** [`confidence-replay.json`](../evals/results/confidence-replay.json) ·
 [`drift-sim.json`](../evals/results/drift-sim.json) ·
