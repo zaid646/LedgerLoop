@@ -1,0 +1,382 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "adapter": "sft/outputs/qwen2.5-0.5b-ledgerloop-lora/final",
+  "device": "cuda",
+  "quantized_4bit": true,
+  "n_eval": 55,
+  "n_domain": 30,
+  "completion_loss": 1.9974088773163279,
+  "perplexity": 7.369935035705566,
+  "loss_by_source": {
+    "ledgerloop": 0.2655823060621818,
+    "dolly": 1.9061757624149323
+  },
+  "domain_exact_match": 0.6333333333333333,
+  "domain_token_f1": 0.6333333333333333,
+  "format_adherence": 0.6333333333333333,
+  "per_category": {
+    "ENTERTAINMENT": {
+      "n": 4,
+      "correct": 1,
+      "accuracy": 0.25
+    },
+    "HARDWARE": {
+      "n": 4,
+      "correct": 3,
+      "accuracy": 0.75
+    },
+    "INSURANCE": {
+      "n": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "MARKETING": {
+      "n": 2,
+      "correct": 1,
+      "accuracy": 0.5
+    },
+    "MEALS": {
+      "n": 1,
+      "correct": 0,
+      "accuracy": 0.0
+    },
+    "OFFICE_SUPPLIES": {
+      "n": 5,
+      "correct": 3,
+      "accuracy": 0.6
+    },
+    "OTHER": {
+      "n": 2,
+      "correct": 2,
+      "accuracy": 1.0
+    },
+    "RENT": {
+      "n": 4,
+      "correct": 2,
+      "accuracy": 0.5
+    },
+    "SOFTWARE": {
+      "n": 1,
+      "correct": 0,
+      "accuracy": 0.0
+    },
+    "TRAINING": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "TRAVEL": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "UTILITIES": {
+      "n": 3,
+      "correct": 3,
+      "accuracy": 1.0
+    }
+  },
+  "elapsed_seconds": 18.22,
+  "predictions": [
+    {
+      "id": "ledgerloop-039",
+      "instruction": "Merchant: Local Stationery\nAmount: USD 1276.45\nDate: 2026-04-03\nDescription: Envelopes and letterhead for client mail",
+      "gold": "OFFICE_SUPPLIES",
+      "prediction": "OFFICE_SUPPLIES",
+      "raw_output": "OFFICE_SUPPLIES",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-141",
+      "instruction": "Merchant: Udemy\nAmount: CAD 1245.57\nDate: 2026-08-26\nDescription: Python automation course for finance staff",
+      "gold": "TRAINING",
+      "prediction": "TRAINING",
+      "raw_output": "TRAINING",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-120",
+      "instruction": "Merchant: Storage Facility\nAmount: CAD 1372.12\nDate: 2026-05-25\nDescription: Archive storage unit for finance records",
+      "gold": "RENT",
+      "prediction": "UTILITIES",
+      "raw_output": "UTILITIES",
+      "exact_match": false,
+      "token_f1": 0.0,
+      "format_ok": false
+    },
+    {
+      "id": "ledgerloop-104",
+      "instruction": "Merchant: Waste Management\nAmount: CAD 1615.80\nDate: 2026-08-09\nDescription: Office waste collection service",
+      "gold": "UTILITIES",
+      "prediction": "UTILITIES",
+      "raw_output": "UTILITIES",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-118",
+      "instruction": "Merchant: FlexSpace\nAmount: CAD 251.17\nDate: 2026-03-02\nDescription: Short-term office lease for the launch team",
+      "gold": "RENT",
+      "prediction": "RENT",
+      "raw_output": "RENT",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-023",
+      "instruction": "Merchant: Grubhub\nAmount: EUR 281.89\nDate: 2026-07-20\nDescription: Late dinner during the release cutover",
+      "gold": "MEALS",
+      "prediction": "TRAVEL",
+      "raw_output": "TRAVEL",
+      "exact_match": false,
+      "token_f1": 0.0,
+      "format_ok": false
+    },
+    {
+      "id": "ledgerloop-069",
+      "instruction": "Merchant: Razer\nAmount: GBP 1149.71\nDate: 2026-03-24\nDescription: Headsets for the customer support team",
+      "gold": "HARDWARE",
+      "prediction": "HARDWARE",
+      "raw_output": "HARDWARE",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-127",
+      "instruction": "Merchant: Blue Cross\nAmount: USD 1736.78\nDate: 2026-01-10\nDescription: Dental and vision coverage for the quarter",
+      "gold": "INSURANCE",
+      "prediction": "INSURANCE",
+      "raw_output": "INSURANCE",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-163",
+      "instruction": "Merchant: Sports Club\nAmount: GBP 422.81\nDate: 2026-08-03\nDescription: Box seats for the client hospitality event",
+      "gold": "ENTERTAINMENT",
+      "prediction": "OTHER",
+      "raw_output": "OTHER",
+      "exact_match": false,
+      "token_f1": 0.0,
+      "format_ok": false
+    },
+    {
+      "id": "ledgerloop-057",
+      "instruction": "Merchant: Dell\nAmount: CAD 1117.93\nDate: 2026-09-11\nDescription: Replacement monitors for the support desk",
+      "gold": "HARDWARE",
+      "prediction": "PROFESSIONAL_SERVICES",
+      "raw_output": "PROFESSIONAL_SERVICES",
+      "exact_match": false,
+      "token_f1": 0.0,
+      "format_ok": false
+    },
+    {
+      "id": "ledgerloop-123",
+      "instruction": "Merchant: Summit Coworking\nAmount: USD 1407.97\nDate: 2026-01-08\nDescription: Day passes for the visiting engineering team",
+      "gold": "RENT",
+      "prediction": "TRAVEL",
+      "raw_output": "TRAVEL",
+      "exact_match": false,
+      "token_f1": 0.0,
+      "format_ok": false
+    },
+    {
+      "id": "ledgerloop-176",
+      "instruction": "Merchant: Petty Cash\nAmount: AUD 1465.91\nDate: 2026-01-15\nDescription: Replenishment of the office petty cash box",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "raw_output": "OTHER",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-155",
+      "instruction": "Merchant: Spotify\nAmount: USD 1042.02\nDate: 2026-03-05\nDescription: Office music subscription",
+      "gold": "ENTERTAINMENT",
+      "prediction": "HARDWARE",
+      "raw_output": "HARDWARE",
+      "exact_match": false,
+      "token_f1": 0.0,
+      "format_ok": false
+    },
+    {
+      "id": "ledgerloop-165",
+      "instruction": "Merchant: Comedy Club\nAmount: EUR 983.86\nDate: 2026-05-27\nDescription: Customer dinner and show",
+      "gold": "ENTERTAINMENT",
+      "prediction": "OTHER",
+      "raw_output": "OTHER",
+      "exact_match": false,
+      "token_f1": 0.0,
+      "format_ok": false
+    },
+    {
+      "id": "ledgerloop-030",
+      "instruction": "Merchant: MR D.I.Y.\nAmount: CAD 1081.31\nDate: 2026-01-04\nDescription: Shelving and storage bins for the records room",
+      "gold": "OFFICE_SUPPLIES",
+      "prediction": "OFFICE_SUPPLIES",
+      "raw_output": "OFFICE_SUPPLIES",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-116",
+      "instruction": "Merchant: Industrial Properties\nAmount: AUD 1655.82\nDate: 2026-09-01\nDescription: Warehouse rent for the inventory team",
+      "gold": "RENT",
+      "prediction": "RENT",
+      "raw_output": "RENT",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-174",
+      "instruction": "Merchant: Late Fee\nAmount: GBP 739.76\nDate: 2026-02-28\nDescription: Late payment charge on a supplier invoice",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "raw_output": "OTHER",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-074",
+      "instruction": "Merchant: Mailchimp\nAmount: GBP 1203.14\nDate: 2026-09-28\nDescription: Email campaign plan for the newsletter",
+      "gold": "MARKETING",
+      "prediction": "MARKETING",
+      "raw_output": "MARKETING",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-040",
+      "instruction": "Merchant: Costco Business Center\nAmount: USD 1548.47\nDate: 2026-09-08\nDescription: Bulk coffee and cups for the office",
+      "gold": "OFFICE_SUPPLIES",
+      "prediction": "MEALS",
+      "raw_output": "MEALS",
+      "exact_match": false,
+      "token_f1": 0.0,
+      "format_ok": false
+    },
+    {
+      "id": "ledgerloop-037",
+      "instruction": "Merchant: Target\nAmount: EUR 224.84\nDate: 2026-02-11\nDescription: Kitchen supplies for the break room",
+      "gold": "OFFICE_SUPPLIES",
+      "prediction": "HARDWARE",
+      "raw_output": "HARDWARE",
+      "exact_match": false,
+      "token_f1": 0.0,
+      "format_ok": false
+    },
+    {
+      "id": "ledgerloop-130",
+      "instruction": "Merchant: Travelers\nAmount: CAD 630.19\nDate: 2026-06-03\nDescription: Workers compensation premium",
+      "gold": "INSURANCE",
+      "prediction": "INSURANCE",
+      "raw_output": "INSURANCE",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-079",
+      "instruction": "Merchant: Vimeo\nAmount: EUR 1546.60\nDate: 2026-04-27\nDescription: Video hosting for the product demo",
+      "gold": "MARKETING",
+      "prediction": "OTHER",
+      "raw_output": "OTHER",
+      "exact_match": false,
+      "token_f1": 0.0,
+      "format_ok": false
+    },
+    {
+      "id": "ledgerloop-061",
+      "instruction": "Merchant: Lenovo\nAmount: EUR 914.55\nDate: 2026-06-03\nDescription: ThinkPad laptops for the sales team",
+      "gold": "HARDWARE",
+      "prediction": "HARDWARE",
+      "raw_output": "HARDWARE",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-048",
+      "instruction": "Merchant: Notion\nAmount: AUD 98.65\nDate: 2026-01-03\nDescription: Team workspace plan for product operations",
+      "gold": "SOFTWARE",
+      "prediction": "OFFICE_SUPPLIES",
+      "raw_output": "OFFICE_SUPPLIES",
+      "exact_match": false,
+      "token_f1": 0.0,
+      "format_ok": false
+    },
+    {
+      "id": "ledgerloop-062",
+      "instruction": "Merchant: HP\nAmount: EUR 670.19\nDate: 2026-08-27\nDescription: Network switch for the branch office",
+      "gold": "HARDWARE",
+      "prediction": "HARDWARE",
+      "raw_output": "HARDWARE",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-003",
+      "instruction": "Merchant: United Airlines\nAmount: AUD 1013.75\nDate: 2026-07-08\nDescription: One-way airfare to the Denver conference",
+      "gold": "TRAVEL",
+      "prediction": "TRAVEL",
+      "raw_output": "TRAVEL",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-161",
+      "instruction": "Merchant: Museum Tickets\nAmount: EUR 289.45\nDate: 2026-09-03\nDescription: Client entertainment at the art museum",
+      "gold": "ENTERTAINMENT",
+      "prediction": "ENTERTAINMENT",
+      "raw_output": "ENTERTAINMENT",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-106",
+      "instruction": "Merchant: Duke Energy\nAmount: USD 500.08\nDate: 2026-05-08\nDescription: Electricity for the Charlotte branch",
+      "gold": "UTILITIES",
+      "prediction": "UTILITIES",
+      "raw_output": "UTILITIES",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-029",
+      "instruction": "Merchant: Office Depot\nAmount: EUR 281.89\nDate: 2026-09-25\nDescription: Notebooks, pens and file folders",
+      "gold": "OFFICE_SUPPLIES",
+      "prediction": "OFFICE_SUPPLIES",
+      "raw_output": "OFFICE_SUPPLIES",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    },
+    {
+      "id": "ledgerloop-098",
+      "instruction": "Merchant: Con Edison\nAmount: EUR 893.92\nDate: 2026-03-21\nDescription: Electricity for the New York office",
+      "gold": "UTILITIES",
+      "prediction": "UTILITIES",
+      "raw_output": "UTILITIES",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
+    }
+  ]
+}

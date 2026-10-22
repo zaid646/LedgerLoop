@@ -1,0 +1,32 @@
+{
+  "train": 327,
+  "val": 55,
+  "train_by_source": {
+    "dolly": 175,
+    "ledgerloop": 152
+  },
+  "val_by_source": {
+    "ledgerloop": 30,
+    "dolly": 25
+  },
+  "domain_categories": 13,
+  "allowed_categories": [
+    "TRAVEL",
+    "MEALS",
+    "OFFICE_SUPPLIES",
+    "SOFTWARE",
+    "HARDWARE",
+    "MARKETING",
+    "PROFESSIONAL_SERVICES",
+    "UTILITIES",
+    "RENT",
+    "INSURANCE",
+    "TRAINING",
+    "ENTERTAINMENT",
+    "OTHER"
+  ],
+  "public_source": "checked-in sample (public_dolly_sample.jsonl)",
+  "seed": 42,
+  "format": "qwen-chatml prompt/completion",
+  "chat_template": "ChatML with <|im_start|>/<|im_end|>"
+}

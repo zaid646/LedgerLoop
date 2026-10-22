@@ -23,6 +23,8 @@ jobs:
         run: uv run ruff check .
       - name: Pytest
         run: uv run pytest -q
+      - name: SFT data/format tests
+        run: uv run python -m unittest discover -s ../sft/tests
       - name: Repo policy tests (Airflow DAG + CI configs)
         run: uv run pytest -q ../tests/test_airflow_dag.py ../tests/test_ci_configs.py
 
