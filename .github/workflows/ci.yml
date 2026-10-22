@@ -142,3 +142,23 @@ jobs:
             exit 0
           fi
           npx -y promptfoo@latest eval -c promptfoo/promptfooconfig.js --max-concurrency 4
+
+  cv-ml:
+    name: CV preprocessing + LightGBM
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+      - run: uv python install 3.12
+      - name: Create CPU venv
+        run: |
+          uv venv .venv-cv --python 3.12
+          uv pip install --python .venv-cv/bin/python -r requirements-cv-ci.txt
+      - name: Install Tesseract
+        run: sudo apt-get update && sudo apt-get install -y tesseract-ocr
+      - name: Ruff (CV + ML)
+        run: .venv-cv/bin/ruff check --config ai-service/pyproject.toml cv ml tests/test_cv_ml.py
+      - name: Pytest (CV preprocessing + LightGBM training)
+        run: .venv-cv/bin/python -m pytest -q tests/test_cv_ml.py

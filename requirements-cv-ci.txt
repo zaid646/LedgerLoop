@@ -1,0 +1,12 @@
+# CPU-only subset used by GitHub Actions (no Torch/Ultralytics needed for the
+# preprocessing + LightGBM unit tests).
+numpy==2.5.4
+opencv-python-headless==5.0.0.93
+Pillow==12.3.0
+scikit-learn==1.9.1
+pandas==3.0.6
+scipy==1.18.1
+lightgbm==4.7.0
+xgboost==3.4.1
+pytest==9.1.1
+ruff==0.17.1
