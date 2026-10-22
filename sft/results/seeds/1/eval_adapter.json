@@ -13,7 +13,7 @@
   },
   "domain_exact_match": 0.9,
   "domain_token_f1": 0.9,
-  "format_adherence": 0.9,
+  "format_adherence": 1.0,
   "per_category": {
     "ENTERTAINMENT": {
       "n": 4,
@@ -76,7 +76,7 @@
       "accuracy": 1.0
     }
   },
-  "elapsed_seconds": 19.87,
+  "elapsed_seconds": 19.46,
   "predictions": [
     {
       "id": "ledgerloop-039",
@@ -206,7 +206,7 @@
       "raw_output": "SOFTWARE",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-165",
@@ -226,7 +226,7 @@
       "raw_output": "OTHER",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-116",
@@ -296,7 +296,7 @@
       "raw_output": "UTILITIES",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-061",

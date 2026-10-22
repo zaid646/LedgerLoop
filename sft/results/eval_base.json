@@ -13,7 +13,7 @@
   },
   "domain_exact_match": 0.26666666666666666,
   "domain_token_f1": 0.26666666666666666,
-  "format_adherence": 0.26666666666666666,
+  "format_adherence": 1.0,
   "per_category": {
     "ENTERTAINMENT": {
       "n": 4,
@@ -76,7 +76,7 @@
       "accuracy": 0.0
     }
   },
-  "elapsed_seconds": 11.06,
+  "elapsed_seconds": 11.04,
   "predictions": [
     {
       "id": "ledgerloop-039",
@@ -96,7 +96,7 @@
       "raw_output": "PROFESSIONAL_SERVICES",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-120",
@@ -106,7 +106,7 @@
       "raw_output": "OTHER",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-104",
@@ -116,7 +116,7 @@
       "raw_output": "OTHER",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-118",
@@ -136,7 +136,7 @@
       "raw_output": "ENTERTAINMENT",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-069",
@@ -146,7 +146,7 @@
       "raw_output": "OTHER",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-127",
@@ -156,7 +156,7 @@
       "raw_output": "OTHER",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-163",
@@ -166,7 +166,7 @@
       "raw_output": "OTHER",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-057",
@@ -176,7 +176,7 @@
       "raw_output": "OTHER",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-123",
@@ -186,7 +186,7 @@
       "raw_output": "OTHER",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-176",
@@ -196,7 +196,7 @@
       "raw_output": "TRAVEL",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-155",
@@ -206,7 +206,7 @@
       "raw_output": "SOFTWARE",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-165",
@@ -216,7 +216,7 @@
       "raw_output": "MEALS",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-030",
@@ -226,7 +226,7 @@
       "raw_output": "OTHER",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-116",
@@ -246,7 +246,7 @@
       "raw_output": "TRAVEL",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-074",
@@ -256,7 +256,7 @@
       "raw_output": "SOFTWARE",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-040",
@@ -286,7 +286,7 @@
       "raw_output": "OTHER",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-079",
@@ -296,7 +296,7 @@
       "raw_output": "OTHER",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-061",
@@ -306,7 +306,7 @@
       "raw_output": "PROFESSIONAL_SERVICES",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-048",
@@ -316,7 +316,7 @@
       "raw_output": "OTHER",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-062",
@@ -346,7 +346,7 @@
       "raw_output": "TRAVEL",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-106",
@@ -356,7 +356,7 @@
       "raw_output": "OTHER",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     },
     {
       "id": "ledgerloop-029",
@@ -376,7 +376,7 @@
       "raw_output": "OTHER",
       "exact_match": false,
       "token_f1": 0.0,
-      "format_ok": false
+      "format_ok": true
     }
   ]
 }

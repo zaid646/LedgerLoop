@@ -433,15 +433,16 @@ and 512-token sequences: 63 steps / **6m39s** on a Tesla T4, train loss **1.025*
 |---|---:|---:|
 | Held-out domain exact match (`domain_exact_match`) | 0.266667 | **0.866667** |
 | Domain token F1 (`domain_token_f1`) | 0.266667 | **0.866667** |
-| Format adherence (`format_adherence`) | 0.266667 | **0.866667** |
+| Valid-code adherence (`format_adherence`) | 1.000000 | **1.000000** |
 | Domain completion loss (`loss_by_source.ledgerloop`) | 0.810746 | **0.060118** |
 | Dolly completion loss (`loss_by_source.dolly`) | 2.517077 | **1.544232** |
 | Overall completion loss (`completion_loss`) | 2.047040 | **1.722272** |
 | Overall perplexity (`perplexity`) | 7.744946 | **5.597230** |
 
-`perplexity = exp(completion_loss)` (computed with float32 `torch.exp`). Token F1 equals
-exact match here because both prediction and gold are normalized to one of 13
-single-token GL codes; the evaluator has no EM fallback.
+`perplexity = exp(completion_loss)` (computed with float32 `torch.exp`). `format_adherence`
+is valid-code rate (any of 13 codes, regardless of correctness). Token F1 equals exact
+match here because both prediction and gold are normalized to one of 13 single-token GL
+codes; the evaluator has no EM fallback.
 
 **What this demonstrates:** instruction fine-tuning (SFT) with `trl.SFTTrainer`, domain
 adaptation to GL-coding, data preprocessing (Qwen ChatML formatting), evaluation with

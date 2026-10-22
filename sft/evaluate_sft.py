@@ -2,8 +2,8 @@
 """Evaluate a base model or a LedgerLoop LoRA adapter on held-out instructions.
 
 Reports completion-only cross-entropy, perplexity, exact-match accuracy,
-token-level F1 and format-adherence for the synthetic GL-coding set, plus loss
-on the held-out general-instruction sample.
+token-level F1 and valid-code adherence for the synthetic GL-coding set, plus
+loss on the held-out general-instruction sample.
 """
 from __future__ import annotations
 
@@ -213,7 +213,7 @@ def main(argv: list[str] | None = None) -> int:
         prediction = normalize_prediction(raw)
         exact = prediction == gold
         f1 = token_f1(prediction, gold)
-        strict = raw.strip().rstrip(".").strip().upper() == gold
+        format_ok = prediction in ALLOWED
         per_category[gold]["n"] += 1
         per_category[gold]["correct"] += int(exact)
         predictions.append(
@@ -225,7 +225,7 @@ def main(argv: list[str] | None = None) -> int:
                 "raw_output": raw,
                 "exact_match": exact,
                 "token_f1": f1,
-                "format_ok": strict,
+                "format_ok": format_ok,
             }
         )
         if (i + 1) % 10 == 0:

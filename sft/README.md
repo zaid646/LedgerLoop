@@ -17,15 +17,16 @@ Dolly instructions**:
 |---|---:|---:|---:|
 | Held-out domain exact match (`domain_exact_match`) | 0.266667 | **0.866667** | +0.600000 |
 | Domain token F1 (`domain_token_f1`) | 0.266667 | **0.866667** | +0.600000 |
-| Format adherence (`format_adherence`) | 0.266667 | **0.866667** | +0.600000 |
+| Valid-code adherence (`format_adherence`) | 1.000000 | **1.000000** | 0.000000 |
 | Domain completion loss (`loss_by_source.ledgerloop`) | 0.810746 | **0.060118** | −0.750628 |
 | Dolly completion loss (`loss_by_source.dolly`) | 2.517077 | **1.544232** | −0.972845 |
 | Overall completion loss (`completion_loss`) | 2.047040 | **1.722272** | −0.324768 |
 | Overall perplexity (`perplexity`) | 7.744946 | **5.597230** | −2.147715 |
 
 Rates are fractions (multiply by 100 for percent). `perplexity = exp(completion_loss)`;
-the evaluator computes it with float32 `torch.exp`. Full-precision values are in
-`results/eval_base.json` and `results/eval_adapter.json`.
+the evaluator computes it with float32 `torch.exp`. `format_adherence` is the fraction of
+outputs that map to any of the 13 valid codes, regardless of correctness. Full-precision
+values are in `results/eval_base.json` and `results/eval_adapter.json`.
 
 ### Why token F1 equals exact match
 
@@ -44,6 +45,10 @@ grad-accum 8 fit comfortably on the T4, so the batch-1/grad-accum-16 fallback wa
 needed. The loss curve is `results/loss_curve.png`; the raw step log is
 `results/trainer_log_history.json` and `results/loss_log.csv`.
 
+> `eval_loss` **0.717** is SFTTrainer's full-sequence loss over prompt+completion, while
+> evaluator `completion_loss` **1.722** masks the prompt and scores only completion tokens.
+> Token F1 is classification-style over single-token GL codes, so F1 == exact match by design.
+
 ### Multi-seed variance
 
 The same recipe was run with seeds **42, 1 and 2**. Per-seed evaluator outputs and logs
@@ -58,10 +63,8 @@ are under `results/seeds/<seed>/`; `results/seeds/multiseed_summary.json` is gen
 | **Mean ± std** | **88.9% ± 1.9 pts** | **88.9% ± 1.9 pts** | 0.061 ± 0.004 | 1.544 ± 0.002 | 5.600 ± 0.011 | 1.014 ± 0.010 | 6m39s ± 5s |
 
 Raw aggregate: `domain_exact_match = 0.888888888888889 ± 0.01924500897298752`;
-`domain_token_f1` is identical for the reason above.
-
-> Evaluation loss is higher than the Trainer's `eval_loss` because `evaluate_sft.py`
-> masks the prompt and scores only completion tokens.
+`domain_token_f1` is identical for the reason above; valid-code adherence is
+`1.000000 ± 0.000000`.
 
 The base model leans heavily on `OTHER` for long-tail merchants. The adapter learns the
 13-code taxonomy and the merchant/description mapping, while the lower Dolly loss shows
@@ -183,7 +186,7 @@ sft/
 ├── format_dataset.py    # public + domain data → train.jsonl / val.jsonl
 ├── domain_data.py       # deterministic 182-pair LedgerLoop GL-coding corpus
 ├── train_sft.py         # trl.SFTTrainer + peft QLoRA (free T4 defaults)
-├── evaluate_sft.py      # loss, perplexity, exact match, token F1, format adherence
+├── evaluate_sft.py      # loss, perplexity, exact match, token F1, valid-code rate
 ├── aggregate_seeds.py   # per-seed evals → mean ± std JSON
 ├── requirements.txt     # pinned Colab T4 environment
 ├── data/                # checked-in Dolly sample + generated train/val JSONL
