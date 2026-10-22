@@ -425,10 +425,23 @@ LedgerLoop GL-coding pairs. It is distinct from `gpu/finetune_qlora.py` (classif
 style, rented GPU): this one trains prompt→response instructions and runs on a free T4.
 
 On 30 held-out transactions from unseen merchants, exact match improves from **26.7%
-(base)** to **86.7% (LoRA, seed 42)**; domain completion loss falls 0.811 → **0.060** and
-Dolly completion loss 2.517 → **1.544**. Across seeds 42/1/2, exact match and token F1 are
+(base)** to **86.7% (LoRA, seed 42)**. Across seeds 42/1/2, exact match and token F1 are
 **88.9% ± 1.9 points**. Training uses 4-bit NF4, LoRA r=16, 3 epochs, effective batch 16
 and 512-token sequences: 63 steps / **6m39s** on a Tesla T4, train loss **1.025**.
+
+| Metric (`JSON key`) | Base Qwen2.5-1.5B | + LedgerLoop LoRA (seed 42) |
+|---|---:|---:|
+| Held-out domain exact match (`domain_exact_match`) | 0.266667 | **0.866667** |
+| Domain token F1 (`domain_token_f1`) | 0.266667 | **0.866667** |
+| Format adherence (`format_adherence`) | 0.266667 | **0.866667** |
+| Domain completion loss (`loss_by_source.ledgerloop`) | 0.810746 | **0.060118** |
+| Dolly completion loss (`loss_by_source.dolly`) | 2.517077 | **1.544232** |
+| Overall completion loss (`completion_loss`) | 2.047040 | **1.722272** |
+| Overall perplexity (`perplexity`) | 7.744946 | **5.597230** |
+
+`perplexity = exp(completion_loss)` (computed with float32 `torch.exp`). Token F1 equals
+exact match here because both prediction and gold are normalized to one of 13
+single-token GL codes; the evaluator has no EM fallback.
 
 **What this demonstrates:** instruction fine-tuning (SFT) with `trl.SFTTrainer`, domain
 adaptation to GL-coding, data preprocessing (Qwen ChatML formatting), evaluation with

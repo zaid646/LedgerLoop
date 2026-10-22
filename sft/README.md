@@ -13,15 +13,29 @@ measures instruction-following rather than only label accuracy.
 Evaluated on **30 held-out LedgerLoop transactions** (unseen merchants) and **25 held-out
 Dolly instructions**:
 
-| Metric | Base Qwen2.5-1.5B-Instruct | + LedgerLoop LoRA | Delta |
+| Metric (`JSON key`) | Base Qwen2.5-1.5B | + LedgerLoop LoRA (seed 42) | Delta |
 |---|---:|---:|---:|
-| Domain exact match | 26.7% | **86.7%** | **+60.0 pts** |
-| Domain token F1 | 26.7% | **86.7%** | +60.0 pts |
-| Format adherence (only one code) | 26.7% | **86.7%** | +60.0 pts |
-| Domain completion loss | 0.811 | **0.060** | **−92.6%** |
-| Dolly completion loss | 2.517 | **1.544** | −38.7% |
-| Overall completion loss | 2.047 | **1.722** | −15.9% |
-| Overall perplexity | 7.74 | **5.60** | −27.7% |
+| Held-out domain exact match (`domain_exact_match`) | 0.266667 | **0.866667** | +0.600000 |
+| Domain token F1 (`domain_token_f1`) | 0.266667 | **0.866667** | +0.600000 |
+| Format adherence (`format_adherence`) | 0.266667 | **0.866667** | +0.600000 |
+| Domain completion loss (`loss_by_source.ledgerloop`) | 0.810746 | **0.060118** | −0.750628 |
+| Dolly completion loss (`loss_by_source.dolly`) | 2.517077 | **1.544232** | −0.972845 |
+| Overall completion loss (`completion_loss`) | 2.047040 | **1.722272** | −0.324768 |
+| Overall perplexity (`perplexity`) | 7.744946 | **5.597230** | −2.147715 |
+
+Rates are fractions (multiply by 100 for percent). `perplexity = exp(completion_loss)`;
+the evaluator computes it with float32 `torch.exp`. Full-precision values are in
+`results/eval_base.json` and `results/eval_adapter.json`.
+
+### Why token F1 equals exact match
+
+The F1 implementation has no EM fallback. It is standard multiset token F1 over
+whitespace tokens, but both the normalized prediction and gold target are exactly one
+of the 13 allowed category codes, each a single token (`PROFESSIONAL_SERVICES` contains
+an underscore, not a space). A one-token prediction therefore scores either 1.0 when it
+matches the one-token gold or 0.0 when it does not, so the mean token F1 is exactly
+accuracy. This is constrained label generation, not free-form completion; Dolly is
+evaluated by loss only.
 
 Training run (seed 42): **63 optimizer steps**, **6m39s (398.85s)** on a free Colab T4,
 average train loss **1.025**, last logged step loss **0.863**, SFTTrainer full-sequence
@@ -42,6 +56,9 @@ are under `results/seeds/<seed>/`; `results/seeds/multiseed_summary.json` is gen
 | 1 | 90.0% | 90.0% | 0.057 | 1.546 | 5.592 | 1.007 | 6m44s |
 | 2 | 90.0% | 90.0% | 0.066 | 1.541 | 5.612 | 1.010 | 6m34s |
 | **Mean ± std** | **88.9% ± 1.9 pts** | **88.9% ± 1.9 pts** | 0.061 ± 0.004 | 1.544 ± 0.002 | 5.600 ± 0.011 | 1.014 ± 0.010 | 6m39s ± 5s |
+
+Raw aggregate: `domain_exact_match = 0.888888888888889 ± 0.01924500897298752`;
+`domain_token_f1` is identical for the reason above.
 
 > Evaluation loss is higher than the Trainer's `eval_loss` because `evaluate_sft.py`
 > masks the prompt and scores only completion tokens.
