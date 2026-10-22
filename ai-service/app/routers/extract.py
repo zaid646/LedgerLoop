@@ -1,18 +1,23 @@
-"""POST /extract — redact then LLM-extract structured receipt fields (self-healing)."""
+"""POST /extract — redact, extract, score confidence and route for human review."""
 from __future__ import annotations
 
 import json
+import logging
 from datetime import UTC, datetime
 
-from fastapi import APIRouter
+from fastapi import APIRouter, BackgroundTasks
 
+from ..confidence import get_scorer
+from ..confidence.signals import infer_policy_route
 from ..config import REPO_ROOT
-from ..metrics import STORE
+from ..metrics import STORE, observe_extraction
 from ..redaction import redact
-from ..schemas import ExtractRequest, ExtractResponse, ReceiptExtraction
+from ..routing import ROUTE_AUTO, route_document
+from ..schemas import ExtractRequest, ExtractResponse, ReceiptExtraction, RoutingInfo
 from ..self_heal import extract_with_healing
 from ..tracing import get_tracer
 
+log = logging.getLogger("expenseiq.extract")
 router = APIRouter(tags=["extraction"])
 
 HUMAN_QUEUE = REPO_ROOT / "runs" / "human_queue.jsonl"
@@ -24,8 +29,43 @@ def _enqueue(payload: dict) -> None:
         fh.write(json.dumps(payload) + "\n")
 
 
+def _score_and_route(
+    extraction: ReceiptExtraction,
+    text: str,
+    *,
+    attempts: int,
+    repaired: bool,
+    schema_ok: bool,
+    source: str,
+):
+    scorer = get_scorer()
+    policy_route, _ = infer_policy_route(extraction, source=source)
+    result = scorer.score(
+        extraction,
+        text,
+        attempts=attempts,
+        repaired=repaired,
+        schema_ok=schema_ok,
+        policy_route=policy_route,
+        source=source,
+    )
+    missing = [
+        name
+        for name, spec in scorer.config.fields.items()
+        if spec.required and not result.field_signals[name].present
+    ]
+    decision = route_document(
+        result,
+        config=scorer.config,
+        policy_route=policy_route,
+        schema_ok=schema_ok,
+        missing_required=missing,
+    )
+    return result, decision
+
+
 @router.post("/extract", response_model=ExtractResponse)
-async def extract(req: ExtractRequest) -> ExtractResponse:
+async def extract(req: ExtractRequest, background: BackgroundTasks) -> ExtractResponse:
     tracer = get_tracer()
 
     # 1. redact PII / cards BEFORE anything leaves the process
@@ -36,33 +76,63 @@ async def extract(req: ExtractRequest) -> ExtractResponse:
 
     extraction = outcome.extraction
     if extraction is None:
-        # exhausted retries -> human review queue
+        # exhausted retries -> never auto-approve
         extraction = ReceiptExtraction(merchant="", confidence={})
+
+    # 3. calibrated confidence + threshold routing (fail-closed on errors)
+    try:
+        result, decision = _score_and_route(
+            extraction,
+            red.text,
+            attempts=outcome.attempts,
+            repaired=outcome.repaired,
+            schema_ok=outcome.extraction is not None,
+            source=req.source,
+        )
+        routing = RoutingInfo(**decision.to_dict())
+        document_confidence = result.document_score
+        field_confidence = result.field_scores
+        confidence_notes = result.notes
+    except Exception as exc:  # noqa: BLE001 - confidence must never break extraction
+        log.exception("confidence scoring failed; forcing human review")
+        routing = RoutingInfo(
+            route="human_review",
+            reasons=[f"confidence_error:{type(exc).__name__}"],
+            document_score=0.0,
+        )
+        document_confidence = 0.0
+        field_confidence = {}
+        confidence_notes = ["confidence_scoring_error"]
+
+    if routing.route != ROUTE_AUTO:
         _enqueue(
             {
                 "ts": datetime.now(UTC).isoformat(timespec="seconds"),
                 "document_id": req.document_id,
-                "reason": "schema_invalid_after_retries",
+                "reason": routing.reasons,
+                "route": routing.route,
+                "document_confidence": document_confidence,
+                "field_confidence": field_confidence,
+                "escalated": outcome.escalated,
                 "errors": outcome.errors,
                 "redacted_text": red.text,
             }
         )
 
-    if outcome.escalated and extraction is not None and outcome.extraction is not None:
-        _enqueue(
-            {
-                "ts": datetime.now(UTC).isoformat(timespec="seconds"),
-                "document_id": req.document_id,
-                "reason": "low_confidence",
-                "fields": outcome.low_confidence_fields,
-            }
-        )
-
+    observe_extraction(
+        route=routing.route,
+        confidence=float(document_confidence or 0.0),
+        latency_ms=outcome.latency_ms,
+    )
+    background.add_task(
+        _monitor_drift,
+        {"text": red.text, "fields": extraction.model_dump()},
+    )
     STORE.observe("/extract", outcome.latency_ms, outcome.cost_usd)
     STORE.incr("extract_requests")
     if outcome.repaired:
         STORE.incr("extract_repaired")
-    if outcome.escalated:
+    if routing.route != ROUTE_AUTO:
         STORE.incr("extract_escalated")
 
     tracer.generation(
@@ -75,10 +145,20 @@ async def extract(req: ExtractRequest) -> ExtractResponse:
             "prompt_version": outcome.prompt_version,
             "attempts": outcome.attempts,
             "repaired": outcome.repaired,
-            "escalated": outcome.escalated,
+            "escalated": routing.route != ROUTE_AUTO,
+            "routing": routing.model_dump(),
+            "document_confidence": document_confidence,
+            "field_confidence": field_confidence,
             "redactions": red.counts,
         },
     )
+    if hasattr(tracer, "score"):
+        tracer.score(
+            name="document_confidence",
+            value=float(document_confidence or 0.0),
+            comment=f"route={routing.route}",
+            metadata={"document_id": req.document_id},
+        )
 
     return ExtractResponse(
         document_id=req.document_id,
@@ -87,8 +167,21 @@ async def extract(req: ExtractRequest) -> ExtractResponse:
         model=outcome.model,
         attempts=outcome.attempts,
         repaired=outcome.repaired,
-        escalated=outcome.escalated,
+        escalated=routing.route != ROUTE_AUTO,
         latency_ms=round(outcome.latency_ms, 2),
         cost_usd=round(outcome.cost_usd, 8),
         redactions=red.counts,
+        document_confidence=round(float(document_confidence or 0.0), 6),
+        field_confidence={k: round(v, 6) for k, v in field_confidence.items()},
+        routing=routing,
+        confidence_notes=confidence_notes,
     )
+
+
+def _monitor_drift(sample: dict) -> None:
+    from ..drift_monitor import MONITOR
+
+    try:
+        MONITOR.observe([sample])
+    except Exception:  # noqa: BLE001 - monitoring is best effort
+        log.exception("drift monitor failed")

@@ -14,6 +14,23 @@ async function post<T = Json>(path: string, body: unknown): Promise<T> {
   return (await res.json()) as T;
 }
 
+async function get<T = Json>(path: string): Promise<T> {
+  const res = await fetch(`${env.aiServiceUrl}${path}`);
+  if (!res.ok) {
+    throw new Error(`ai-service ${path} -> ${res.status}: ${await res.text()}`);
+  }
+  return (await res.json()) as T;
+}
+
+export interface RoutingInfo {
+  route: 'auto_approve' | 'human_review' | 'reject_escalate';
+  reasons: string[];
+  document_score: number;
+  field_scores: Record<string, number>;
+  thresholds: Record<string, number>;
+  forced: boolean;
+}
+
 export interface Extraction {
   document_id: string;
   extraction: { merchant: string; total_amount: number | null; currency: string | null; [k: string]: unknown };
@@ -25,6 +42,10 @@ export interface Extraction {
   latency_ms: number;
   cost_usd: number;
   redactions: Record<string, number>;
+  document_confidence?: number | null;
+  field_confidence?: Record<string, number>;
+  routing?: RoutingInfo | null;
+  confidence_notes?: string[];
 }
 
 export interface Coding {
@@ -56,4 +77,7 @@ export const ai = {
   searchMerchants: (query: string, k = 5) => post('/search/merchants', { query, k }),
   searchPolicies: (query: string, k = 5) => post('/search/policies', { query, k }),
   correct: (payload: unknown) => post('/corrections', payload),
+  forceReview: (enabled: boolean, actor: string) =>
+    post('/admin/kill-switch', { enabled, actor }),
+  killSwitch: () => get<{ enabled: boolean; actor: string; changed_at: string }>('/admin/kill-switch'),
 };

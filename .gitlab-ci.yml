@@ -42,6 +42,24 @@ eval-gate:
     - uv run python ../evals/run_evals.py --engine heuristic --golden v0 --no-wandb --name gitlab-heuristic
     - uv run python ../evals/gate.py --results ../evals/results/gitlab-heuristic.json --baseline ../evals/baseline.json
 
+backend:
+  stage: test
+  image: node:22
+  script:
+    - cd backend
+    - npm ci
+    - npm run typecheck
+    - npm test
+
+quality-gate:
+  stage: eval
+  script:
+    - cd ai-service
+    - uv sync --dev
+    - uv run python ../evals/replay_confidence.py
+    - uv run python ../evals/drift_sim.py --backend hashing --replicates 20 --null-windows 50 --out ../runs/drift-ci.json --no-plot
+    - uv run python ../evals/quality_gate.py --confidence ../evals/results/confidence-replay.json --drift ../runs/drift-ci.json
+
 benchmark-smoke:
   stage: smoke
   script:

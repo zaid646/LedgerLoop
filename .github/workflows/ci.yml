@@ -23,8 +23,59 @@ jobs:
         run: uv run ruff check .
       - name: Pytest
         run: uv run pytest -q
+      - name: SFT data/format tests
+        run: uv run python -m unittest discover -s ../sft/tests
       - name: Repo policy tests (Airflow DAG + CI configs)
         run: uv run pytest -q ../tests/test_airflow_dag.py ../tests/test_ci_configs.py
+
+  backend:
+    name: Typecheck + review logic (backend)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+
+  quality-gate:
+    name: Confidence + drift quality gate
+    runs-on: ubuntu-latest
+    needs: python-service
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+      - run: uv python install 3.12
+      - name: Sync env
+        working-directory: ai-service
+        run: uv sync --dev
+      - name: Replay calibrated confidence and routing
+        working-directory: ai-service
+        run: uv run python ../evals/replay_confidence.py
+      - name: Replay drift scenarios (hashing embedder for CI determinism)
+        working-directory: ai-service
+        run: uv run python ../evals/drift_sim.py --backend hashing --replicates 20 --null-windows 50 --out ../runs/drift-ci.json --no-plot
+      - name: Gate on ECE, auto-approval accuracy, catch rate, drift detection
+        working-directory: ai-service
+        run: uv run python ../evals/quality_gate.py --confidence ../evals/results/confidence-replay.json --drift ../runs/drift-ci.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: quality-evidence
+          path: |
+            evals/results/confidence-replay.json
+            evals/results/drift-sim.json
+            evidence/png/confidence-reliability.png
+            evidence/png/drift-detection.png
+          if-no-files-found: warn
 
   benchmark-smoke:
     name: Ingestion benchmark smoke (serial + local Ray)

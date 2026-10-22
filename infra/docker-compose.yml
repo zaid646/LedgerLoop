@@ -139,6 +139,40 @@ services:
       - ../runs:/workspace/runs
       - ../evidence:/workspace/evidence
 
+
+  # ===================== Prometheus + Grafana (profile: observability) ======
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    container_name: eq-prometheus
+    restart: unless-stopped
+    profiles: ["observability"]
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=15d
+    volumes:
+      - ./observability/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./observability/alerts.yml:/etc/prometheus/alerts.yml:ro
+      - promdata:/prometheus
+    ports: ["9090:9090"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  grafana:
+    image: grafana/grafana:11.1.0
+    container_name: eq-grafana
+    restart: unless-stopped
+    profiles: ["observability"]
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - ./observability/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./observability/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafanadata:/var/lib/grafana
+    ports: ["3000:3000"]
+    depends_on: [prometheus]
+
   # ============================ Langfuse (profile: observability) ============
   clickhouse:
     image: clickhouse/clickhouse-server:24.3
@@ -256,6 +290,8 @@ services:
 
 volumes:
   pgdata:
+  promdata:
+  grafanadata:
   mongodata:
   neodata:
   osdata:

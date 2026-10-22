@@ -15,6 +15,7 @@ dependencies = [
     "python-dotenv>=1.0",
     "langfuse>=3.0",
     "psycopg[binary]>=3.2",
+    "prometheus-client>=0.20",
     "pymongo>=4.8",
     "opensearch-py>=2.7",
     "pyyaml>=6.0",

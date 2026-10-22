@@ -92,6 +92,34 @@ class Tracer:
                 )
             client.flush()
 
+    def score(
+        self,
+        name: str,
+        value: float,
+        comment: str = "",
+        metadata: dict[str, Any] | None = None,
+    ) -> None:
+        """Attach a numeric quality score to Langfuse (no-op when disabled)."""
+        if not (self.enabled and self._client is not None):
+            return
+        client = self._client
+        with contextlib.suppress(Exception):
+            if hasattr(client, "create_score"):
+                client.create_score(
+                    name=name,
+                    value=float(value),
+                    comment=comment,
+                    metadata=metadata or {},
+                )
+            elif hasattr(client, "score"):
+                client.score(
+                    name=name,
+                    value=float(value),
+                    comment=comment,
+                    metadata=metadata or {},
+                )
+            client.flush()
+
     def flush(self) -> None:
         if self.enabled and self._client is not None:
             with contextlib.suppress(Exception):

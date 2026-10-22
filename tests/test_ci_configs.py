@@ -65,3 +65,13 @@ def test_airflow_local_runbook_is_present() -> None:
     runbook = (REPO_ROOT / "airflow" / "README.md").read_text()
     assert "airflow dags test ledgerloop_offline_pipeline" in runbook
     assert "--no-wandb" in (REPO_ROOT / "airflow" / "dags" / "ledgerloop_pipeline.py").read_text()
+
+
+def test_quality_gate_and_backend_are_wired_into_ci() -> None:
+    github = (REPO_ROOT / ".github" / "workflows" / "ci.yml").read_text()
+    gitlab = (REPO_ROOT / ".gitlab-ci.yml").read_text()
+    for config in (github, gitlab):
+        assert "quality_gate.py" in config
+        assert "drift_sim.py" in config
+        assert "npm test" in config
+        assert "npm run typecheck" in config

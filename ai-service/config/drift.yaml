@@ -1,0 +1,13 @@
+# Drift detector defaults. The simulator recalibrates these from null windows
+# (99th percentile) and records the measured thresholds in its result JSON.
+version: "2026-10-21"
+thresholds:
+  psi_amount: 0.20
+  ks_alpha: 0.05
+  psi_date_quarter: 0.20
+  psi_merchant_category: 0.20
+  embedding_centroid_distance: 0.02
+windows:
+  baseline_docs: 75
+  current_docs: 50
+  sequential_window_docs: 25

@@ -13,7 +13,7 @@ from .config import get_settings
 from .graph.router import router as graph_router
 from .llm import LLMClient
 from .metrics import STORE
-from .routers import assistant, code, corrections, extract, policy, search
+from .routers import admin, assistant, code, corrections, extract, ops, policy, search
 from .schemas import HealthResponse
 from .tracing import get_tracer
 
@@ -52,6 +52,8 @@ app.add_middleware(
 )
 
 app.include_router(extract.router)
+app.include_router(admin.router)
+app.include_router(ops.router)
 app.include_router(code.router)
 app.include_router(policy.router)
 app.include_router(corrections.router)
