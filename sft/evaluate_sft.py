@@ -32,7 +32,7 @@ ALLOWED = set(GL_CATEGORIES)
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--model", default="Qwen/Qwen2.5-0.5B-Instruct")
+    p.add_argument("--model", default="Qwen/Qwen2.5-1.5B-Instruct")
     p.add_argument("--adapter", type=Path, default=None, help="PEFT adapter directory")
     p.add_argument("--val-file", type=Path, default=ROOT / "data" / "val.jsonl")
     p.add_argument("--results-dir", type=Path, default=ROOT / "results")

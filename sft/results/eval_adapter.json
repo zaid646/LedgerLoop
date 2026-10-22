@@ -1,29 +1,29 @@
 {
-  "model": "Qwen/Qwen2.5-0.5B-Instruct",
-  "adapter": "sft/outputs/qwen2.5-0.5b-ledgerloop-lora/final",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "adapter": "sft/outputs/qwen2.5-1.5b-ledgerloop-lora/seed-42/final",
   "device": "cuda",
   "quantized_4bit": true,
   "n_eval": 55,
   "n_domain": 30,
-  "completion_loss": 1.9974088773163279,
-  "perplexity": 7.369935035705566,
+  "completion_loss": 1.7222719272759994,
+  "perplexity": 5.597230434417725,
   "loss_by_source": {
-    "ledgerloop": 0.2655823060621818,
-    "dolly": 1.9061757624149323
+    "ledgerloop": 0.06011771433792698,
+    "dolly": 1.5442316353321075
   },
-  "domain_exact_match": 0.6333333333333333,
-  "domain_token_f1": 0.6333333333333333,
-  "format_adherence": 0.6333333333333333,
+  "domain_exact_match": 0.8666666666666667,
+  "domain_token_f1": 0.8666666666666667,
+  "format_adherence": 0.8666666666666667,
   "per_category": {
     "ENTERTAINMENT": {
       "n": 4,
-      "correct": 1,
-      "accuracy": 0.25
+      "correct": 3,
+      "accuracy": 0.75
     },
     "HARDWARE": {
       "n": 4,
-      "correct": 3,
-      "accuracy": 0.75
+      "correct": 4,
+      "accuracy": 1.0
     },
     "INSURANCE": {
       "n": 2,
@@ -37,8 +37,8 @@
     },
     "MEALS": {
       "n": 1,
-      "correct": 0,
-      "accuracy": 0.0
+      "correct": 1,
+      "accuracy": 1.0
     },
     "OFFICE_SUPPLIES": {
       "n": 5,
@@ -52,13 +52,13 @@
     },
     "RENT": {
       "n": 4,
-      "correct": 2,
-      "accuracy": 0.5
+      "correct": 4,
+      "accuracy": 1.0
     },
     "SOFTWARE": {
       "n": 1,
-      "correct": 0,
-      "accuracy": 0.0
+      "correct": 1,
+      "accuracy": 1.0
     },
     "TRAINING": {
       "n": 1,
@@ -76,7 +76,7 @@
       "accuracy": 1.0
     }
   },
-  "elapsed_seconds": 18.22,
+  "elapsed_seconds": 19.06,
   "predictions": [
     {
       "id": "ledgerloop-039",
@@ -102,11 +102,11 @@
       "id": "ledgerloop-120",
       "instruction": "Merchant: Storage Facility\nAmount: CAD 1372.12\nDate: 2026-05-25\nDescription: Archive storage unit for finance records",
       "gold": "RENT",
-      "prediction": "UTILITIES",
-      "raw_output": "UTILITIES",
-      "exact_match": false,
-      "token_f1": 0.0,
-      "format_ok": false
+      "prediction": "RENT",
+      "raw_output": "RENT",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
     },
     {
       "id": "ledgerloop-104",
@@ -132,11 +132,11 @@
       "id": "ledgerloop-023",
       "instruction": "Merchant: Grubhub\nAmount: EUR 281.89\nDate: 2026-07-20\nDescription: Late dinner during the release cutover",
       "gold": "MEALS",
-      "prediction": "TRAVEL",
-      "raw_output": "TRAVEL",
-      "exact_match": false,
-      "token_f1": 0.0,
-      "format_ok": false
+      "prediction": "MEALS",
+      "raw_output": "MEALS",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
     },
     {
       "id": "ledgerloop-069",
@@ -162,31 +162,31 @@
       "id": "ledgerloop-163",
       "instruction": "Merchant: Sports Club\nAmount: GBP 422.81\nDate: 2026-08-03\nDescription: Box seats for the client hospitality event",
       "gold": "ENTERTAINMENT",
-      "prediction": "OTHER",
-      "raw_output": "OTHER",
-      "exact_match": false,
-      "token_f1": 0.0,
-      "format_ok": false
+      "prediction": "ENTERTAINMENT",
+      "raw_output": "ENTERTAINMENT",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
     },
     {
       "id": "ledgerloop-057",
       "instruction": "Merchant: Dell\nAmount: CAD 1117.93\nDate: 2026-09-11\nDescription: Replacement monitors for the support desk",
       "gold": "HARDWARE",
-      "prediction": "PROFESSIONAL_SERVICES",
-      "raw_output": "PROFESSIONAL_SERVICES",
-      "exact_match": false,
-      "token_f1": 0.0,
-      "format_ok": false
+      "prediction": "HARDWARE",
+      "raw_output": "HARDWARE",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
     },
     {
       "id": "ledgerloop-123",
       "instruction": "Merchant: Summit Coworking\nAmount: USD 1407.97\nDate: 2026-01-08\nDescription: Day passes for the visiting engineering team",
       "gold": "RENT",
-      "prediction": "TRAVEL",
-      "raw_output": "TRAVEL",
-      "exact_match": false,
-      "token_f1": 0.0,
-      "format_ok": false
+      "prediction": "RENT",
+      "raw_output": "RENT",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
     },
     {
       "id": "ledgerloop-176",
@@ -202,8 +202,8 @@
       "id": "ledgerloop-155",
       "instruction": "Merchant: Spotify\nAmount: USD 1042.02\nDate: 2026-03-05\nDescription: Office music subscription",
       "gold": "ENTERTAINMENT",
-      "prediction": "HARDWARE",
-      "raw_output": "HARDWARE",
+      "prediction": "SOFTWARE",
+      "raw_output": "SOFTWARE",
       "exact_match": false,
       "token_f1": 0.0,
       "format_ok": false
@@ -212,21 +212,21 @@
       "id": "ledgerloop-165",
       "instruction": "Merchant: Comedy Club\nAmount: EUR 983.86\nDate: 2026-05-27\nDescription: Customer dinner and show",
       "gold": "ENTERTAINMENT",
-      "prediction": "OTHER",
-      "raw_output": "OTHER",
-      "exact_match": false,
-      "token_f1": 0.0,
-      "format_ok": false
+      "prediction": "ENTERTAINMENT",
+      "raw_output": "ENTERTAINMENT",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
     },
     {
       "id": "ledgerloop-030",
       "instruction": "Merchant: MR D.I.Y.\nAmount: CAD 1081.31\nDate: 2026-01-04\nDescription: Shelving and storage bins for the records room",
       "gold": "OFFICE_SUPPLIES",
-      "prediction": "OFFICE_SUPPLIES",
-      "raw_output": "OFFICE_SUPPLIES",
-      "exact_match": true,
-      "token_f1": 1.0,
-      "format_ok": true
+      "prediction": "OTHER",
+      "raw_output": "OTHER",
+      "exact_match": false,
+      "token_f1": 0.0,
+      "format_ok": false
     },
     {
       "id": "ledgerloop-116",
@@ -272,11 +272,11 @@
       "id": "ledgerloop-037",
       "instruction": "Merchant: Target\nAmount: EUR 224.84\nDate: 2026-02-11\nDescription: Kitchen supplies for the break room",
       "gold": "OFFICE_SUPPLIES",
-      "prediction": "HARDWARE",
-      "raw_output": "HARDWARE",
-      "exact_match": false,
-      "token_f1": 0.0,
-      "format_ok": false
+      "prediction": "OFFICE_SUPPLIES",
+      "raw_output": "OFFICE_SUPPLIES",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
     },
     {
       "id": "ledgerloop-130",
@@ -312,11 +312,11 @@
       "id": "ledgerloop-048",
       "instruction": "Merchant: Notion\nAmount: AUD 98.65\nDate: 2026-01-03\nDescription: Team workspace plan for product operations",
       "gold": "SOFTWARE",
-      "prediction": "OFFICE_SUPPLIES",
-      "raw_output": "OFFICE_SUPPLIES",
-      "exact_match": false,
-      "token_f1": 0.0,
-      "format_ok": false
+      "prediction": "SOFTWARE",
+      "raw_output": "SOFTWARE",
+      "exact_match": true,
+      "token_f1": 1.0,
+      "format_ok": true
     },
     {
       "id": "ledgerloop-062",

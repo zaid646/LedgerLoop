@@ -1,0 +1,106 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "n_seeds": 3,
+  "seeds": [
+    "1",
+    "2",
+    "42"
+  ],
+  "n_domain": 30,
+  "n_eval": 55,
+  "runs": [
+    {
+      "seed": "1",
+      "path": "1/eval_adapter.json",
+      "domain_exact_match": 0.9,
+      "domain_token_f1": 0.9,
+      "format_adherence": 0.9,
+      "completion_loss": 1.7213192536395248,
+      "perplexity": 5.59190034866333,
+      "domain_completion_loss": 0.05742226967510457,
+      "dolly_completion_loss": 1.545712457895279,
+      "n_domain": 30,
+      "n_eval": 55,
+      "model": "Qwen/Qwen2.5-1.5B-Instruct"
+    },
+    {
+      "seed": "2",
+      "path": "2/eval_adapter.json",
+      "domain_exact_match": 0.9,
+      "domain_token_f1": 0.9,
+      "format_adherence": 0.9,
+      "completion_loss": 1.72494248524265,
+      "perplexity": 5.6121978759765625,
+      "domain_completion_loss": 0.06570066356798634,
+      "dolly_completion_loss": 1.5411750239133835,
+      "n_domain": 30,
+      "n_eval": 55,
+      "model": "Qwen/Qwen2.5-1.5B-Instruct"
+    },
+    {
+      "seed": "42",
+      "path": "42/eval_adapter.json",
+      "domain_exact_match": 0.8666666666666667,
+      "domain_token_f1": 0.8666666666666667,
+      "format_adherence": 0.8666666666666667,
+      "completion_loss": 1.7222719272759994,
+      "perplexity": 5.597230434417725,
+      "domain_completion_loss": 0.06011771433792698,
+      "dolly_completion_loss": 1.5442316353321075,
+      "n_domain": 30,
+      "n_eval": 55,
+      "model": "Qwen/Qwen2.5-1.5B-Instruct"
+    }
+  ],
+  "aggregate": {
+    "domain_exact_match": {
+      "n": 3,
+      "mean": 0.888888888888889,
+      "std": 0.01924500897298752,
+      "min": 0.8666666666666667,
+      "max": 0.9
+    },
+    "domain_token_f1": {
+      "n": 3,
+      "mean": 0.888888888888889,
+      "std": 0.01924500897298752,
+      "min": 0.8666666666666667,
+      "max": 0.9
+    },
+    "format_adherence": {
+      "n": 3,
+      "mean": 0.888888888888889,
+      "std": 0.01924500897298752,
+      "min": 0.8666666666666667,
+      "max": 0.9
+    },
+    "completion_loss": {
+      "n": 3,
+      "mean": 1.722844555386058,
+      "std": 0.0018782648979293215,
+      "min": 1.7213192536395248,
+      "max": 1.72494248524265
+    },
+    "perplexity": {
+      "n": 3,
+      "mean": 5.600442886352539,
+      "std": 0.010523178670581142,
+      "min": 5.59190034866333,
+      "max": 5.6121978759765625
+    },
+    "domain_completion_loss": {
+      "n": 3,
+      "mean": 0.0610802158603393,
+      "std": 0.004222293008178151,
+      "min": 0.05742226967510457,
+      "max": 0.06570066356798634
+    },
+    "dolly_completion_loss": {
+      "n": 3,
+      "mean": 1.5437063723802567,
+      "std": 0.0023138717901939627,
+      "min": 1.5411750239133835,
+      "max": 1.545712457895279
+    }
+  }
+}

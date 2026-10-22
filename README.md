@@ -104,7 +104,7 @@ records a real **cost-per-document** derived from GPU `$/hr ÷ docs/hr`.
 | Prompt lifecycle | Prompt registry (draft → eval → prod → rollback) per use case; PromptFoo regression suite as CI gate | Prompt version control, PromptFoo |
 | Self-healing harness | Schema validation, retry with error feedback, fallback model, human-review queue | Agent loops, self-healing |
 | Extraction & coding | LLM structured outputs for receipts (SROIE/CORD); transaction classification; optional QLoRA served with vLLM | Document intelligence, classification, fine-tuning & serving |
-| Instruction tuning (SFT) | `trl.SFTTrainer` + PEFT QLoRA on Qwen2.5-0.5B with public Dolly + synthetic GL corpus; free Colab T4 | Instruction fine-tuning & domain adaptation |
+| Instruction tuning (SFT) | `trl.SFTTrainer` + PEFT QLoRA on Qwen2.5-1.5B with public Dolly + synthetic GL corpus; free Colab T4 | Instruction fine-tuning & domain adaptation |
 | Databases | PostgreSQL (transactions), MongoDB (raw extractions, traces), OpenSearch hybrid BM25 + vector (policies, merchants) | Postgres, MongoDB, vector search |
 | Observability & feedback | Langfuse traces; correction endpoint feeding the golden set | Observability, production feedback loop |
 | Safeguards | PII + card-number redaction before every LLM call (reuses the **Fortress** middleware) | Sensitive financial data |
@@ -420,20 +420,27 @@ make runtime-test        # pytest parity/preprocessing/label-mapping tests
 ## Instruction fine-tuning (SFT) — free Colab T4
 
 [`sft/`](sft/README.md) is a self-contained `trl.SFTTrainer` + PEFT QLoRA pipeline that
-instruction-tunes **Qwen2.5-0.5B-Instruct** on Databricks Dolly plus 182 synthetic
+instruction-tunes **Qwen2.5-1.5B-Instruct** on Databricks Dolly plus 182 synthetic
 LedgerLoop GL-coding pairs. It is distinct from `gpu/finetune_qlora.py` (classification
 style, rented GPU): this one trains prompt→response instructions and runs on a free T4.
 
-On 30 held-out transactions from unseen merchants, exact match improves from **6.7%
-(base)** to **63.3% (LoRA)**; domain completion loss falls 1.232 → **0.266** and Dolly
-completion loss 2.333 → **1.906**. Training uses 4-bit NF4, LoRA r=16, 3 epochs, effective
-batch 16 and 512-token sequences: 63 steps / **5m23s** on a Tesla T4, train loss **1.132**.
+On 30 held-out transactions from unseen merchants, exact match improves from **26.7%
+(base)** to **86.7% (LoRA, seed 42)**; domain completion loss falls 0.811 → **0.060** and
+Dolly completion loss 2.517 → **1.544**. Across seeds 42/1/2, exact match and token F1 are
+**88.9% ± 1.9 points**. Training uses 4-bit NF4, LoRA r=16, 3 epochs, effective batch 16
+and 512-token sequences: 63 steps / **6m39s** on a Tesla T4, train loss **1.025**.
+
+**What this demonstrates:** instruction fine-tuning (SFT) with `trl.SFTTrainer`, domain
+adaptation to GL-coding, data preprocessing (Qwen ChatML formatting), evaluation with
+loss/perplexity/token F1/exact match, and reproducible free-T4 training from pinned
+versions, checked-in data and per-seed logs.
 
 ```bash
 pip install -r sft/requirements.txt
 python sft/format_dataset.py
 python sft/train_sft.py
-python sft/evaluate_sft.py --adapter sft/outputs/qwen2.5-0.5b-ledgerloop-lora/final
+python sft/evaluate_sft.py --output sft/results/eval_base.json
+python sft/evaluate_sft.py --adapter sft/outputs/qwen2.5-1.5b-ledgerloop-lora/final
 ```
 
 Data, hyperparameters, loss curve, metrics and caveats: [`sft/README.md`](sft/README.md).

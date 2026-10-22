@@ -1,18 +1,20 @@
 {
-  "train_runtime": 323.0143,
-  "train_samples_per_second": 3.037,
-  "train_steps_per_second": 0.195,
-  "total_flos": 345520340912640.0,
-  "train_loss": 1.1317781285634116,
-  "final_eval_loss": 0.8034056425094604,
+  "train_runtime": 398.414,
+  "train_samples_per_second": 2.462,
+  "train_steps_per_second": 0.158,
+  "total_flos": 1252069523146752.0,
+  "train_loss": 1.0251090469814481,
   "epoch": 3.0,
-  "train_runtime_seconds": 323.459284,
+  "final_eval_loss": 0.7169837355613708,
+  "last_step_loss": 0.8630718231201172,
+  "last_step": 60,
+  "train_runtime_seconds": 398.849052,
   "train_samples": 327,
   "eval_samples": 55,
   "device": "cuda",
   "gpu": "Tesla T4",
   "quantized_4bit": true,
-  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
   "hyperparameters": {
     "epochs": 3.0,
     "learning_rate": 0.0002,
@@ -38,6 +40,6 @@
     "datasets": "4.8.5",
     "bitsandbytes": "0.50.2"
   },
-  "started_utc": "2026-10-22T16:27:24.907957+00:00",
-  "finished_utc": "2026-10-22T16:32:48.367241+00:00"
+  "started_utc": "2026-10-22T16:49:09.442288+00:00",
+  "finished_utc": "2026-10-22T16:55:48.291340+00:00"
 }

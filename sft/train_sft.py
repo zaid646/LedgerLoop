@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """QLoRA supervised fine-tuning for LedgerLoop's expense-coding assistant.
 
-The script is tuned for a free Colab T4 (16 GB): Qwen2.5-0.5B-Instruct is loaded
+The script is tuned for a free Colab T4 (16 GB): Qwen2.5-1.5B-Instruct is loaded
 in 4-bit NF4, LoRA adapters are trained on prompt/completion JSONL, and the
 result is saved as a PEFT adapter. It also supports CPU and Apple MPS dry runs
 (without 4-bit quantization) so the pipeline can be smoke-tested locally.
@@ -25,13 +25,13 @@ from trl import SFTConfig, SFTTrainer
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_DATA_DIR = ROOT / "data"
-DEFAULT_OUTPUT_DIR = ROOT / "outputs" / "qwen2.5-0.5b-ledgerloop-lora"
+DEFAULT_OUTPUT_DIR = ROOT / "outputs" / "qwen2.5-1.5b-ledgerloop-lora"
 DEFAULT_RESULTS_DIR = ROOT / "results"
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--model", default="Qwen/Qwen2.5-0.5B-Instruct")
+    p.add_argument("--model", default="Qwen/Qwen2.5-1.5B-Instruct")
     p.add_argument("--train-file", type=Path, default=DEFAULT_DATA_DIR / "train.jsonl")
     p.add_argument("--val-file", type=Path, default=DEFAULT_DATA_DIR / "val.jsonl")
     p.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
@@ -137,7 +137,7 @@ def write_loss_curve(log_history: list[dict[str, Any]], path: Path) -> None:
     plt.plot(steps, losses, marker="o", linewidth=1.5)
     plt.xlabel("optimizer step")
     plt.ylabel("training loss")
-    plt.title("LedgerLoop SFT (Qwen2.5-0.5B, QLoRA)")
+    plt.title("LedgerLoop SFT (Qwen2.5-1.5B, QLoRA)")
     plt.grid(alpha=0.3)
     plt.tight_layout()
     plt.savefig(path, dpi=140)
@@ -252,6 +252,10 @@ def main(argv: list[str] | None = None) -> int:
     eval_entries = [row for row in trainer.state.log_history if "eval_loss" in row]
     if eval_entries:
         metrics["final_eval_loss"] = eval_entries[-1]["eval_loss"]
+    loss_entries = [row for row in trainer.state.log_history if "loss" in row]
+    if loss_entries:
+        metrics["last_step_loss"] = loss_entries[-1]["loss"]
+        metrics["last_step"] = loss_entries[-1].get("step")
     metrics["train_runtime_seconds"] = (finished - started).total_seconds()
     metrics["train_samples"] = len(train_ds)
     metrics["eval_samples"] = len(val_ds)
