@@ -1,0 +1,804 @@
+{
+  "task": "GL coding",
+  "split": {
+    "train_file": "sft/data/train.jsonl",
+    "val_file": "sft/data/val.jsonl",
+    "n_train": 152,
+    "n_val": 30,
+    "note": "same 152/30 domain split as the QLoRA adapter"
+  },
+  "features": {
+    "word_tfidf_features": 1387,
+    "char_tfidf_features": 6000,
+    "total_design_matrix": 7417,
+    "numeric": [
+      "log_amount",
+      "amount_k",
+      "day",
+      "is_weekend"
+    ],
+    "categorical": [
+      "currency",
+      "amount_bucket",
+      "weekday",
+      "month"
+    ]
+  },
+  "seed": 42,
+  "lightgbm_cv5_macro_f1": {
+    "mean": 0.3358,
+    "std": 0.1223,
+    "folds": [
+      0.1784,
+      0.2538,
+      0.2886,
+      0.4833,
+      0.4747
+    ]
+  },
+  "lightgbm": {
+    "model": "lightgbm",
+    "n": 30,
+    "accuracy": 0.4,
+    "macro_f1": 0.4039,
+    "weighted_f1": 0.4131,
+    "per_class": {
+      "TRAVEL": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 1
+      },
+      "MEALS": {
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4,
+        "support": 1
+      },
+      "OFFICE_SUPPLIES": {
+        "precision": 0.5,
+        "recall": 0.6,
+        "f1": 0.5455,
+        "support": 5
+      },
+      "SOFTWARE": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 1
+      },
+      "HARDWARE": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 4
+      },
+      "MARKETING": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 2
+      },
+      "PROFESSIONAL_SERVICES": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "UTILITIES": {
+        "precision": 0.25,
+        "recall": 0.3333,
+        "f1": 0.2857,
+        "support": 3
+      },
+      "RENT": {
+        "precision": 0.3333,
+        "recall": 0.25,
+        "f1": 0.2857,
+        "support": 4
+      },
+      "INSURANCE": {
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6667,
+        "support": 2
+      },
+      "TRAINING": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 1
+      },
+      "ENTERTAINMENT": {
+        "precision": 1.0,
+        "recall": 0.25,
+        "f1": 0.4,
+        "support": 4
+      },
+      "OTHER": {
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6667,
+        "support": 2
+      }
+    },
+    "confusion_matrix": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        2,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  "xgboost": {
+    "model": "xgboost",
+    "n": 30,
+    "accuracy": 0.3667,
+    "macro_f1": 0.3284,
+    "weighted_f1": 0.3424,
+    "per_class": {
+      "TRAVEL": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 1
+      },
+      "MEALS": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 1
+      },
+      "OFFICE_SUPPLIES": {
+        "precision": 0.3333,
+        "recall": 0.2,
+        "f1": 0.25,
+        "support": 5
+      },
+      "SOFTWARE": {
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5,
+        "support": 1
+      },
+      "HARDWARE": {
+        "precision": 0.4,
+        "recall": 0.5,
+        "f1": 0.4444,
+        "support": 4
+      },
+      "MARKETING": {
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667,
+        "support": 2
+      },
+      "PROFESSIONAL_SERVICES": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "UTILITIES": {
+        "precision": 0.1667,
+        "recall": 0.3333,
+        "f1": 0.2222,
+        "support": 3
+      },
+      "RENT": {
+        "precision": 0.3333,
+        "recall": 0.25,
+        "f1": 0.2857,
+        "support": 4
+      },
+      "INSURANCE": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 2
+      },
+      "TRAINING": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 1
+      },
+      "ENTERTAINMENT": {
+        "precision": 1.0,
+        "recall": 0.25,
+        "f1": 0.4,
+        "support": 4
+      },
+      "OTHER": {
+        "precision": 0.5,
+        "recall": 0.5,
+        "f1": 0.5,
+        "support": 2
+      }
+    },
+    "confusion_matrix": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  "labels": [
+    "TRAVEL",
+    "MEALS",
+    "OFFICE_SUPPLIES",
+    "SOFTWARE",
+    "HARDWARE",
+    "MARKETING",
+    "PROFESSIONAL_SERVICES",
+    "UTILITIES",
+    "RENT",
+    "INSURANCE",
+    "TRAINING",
+    "ENTERTAINMENT",
+    "OTHER"
+  ],
+  "predictions": [
+    {
+      "id": "ledgerloop-039",
+      "gold": "OFFICE_SUPPLIES",
+      "lightgbm": "OFFICE_SUPPLIES",
+      "xgboost": "OFFICE_SUPPLIES"
+    },
+    {
+      "id": "ledgerloop-141",
+      "gold": "TRAINING",
+      "lightgbm": "HARDWARE",
+      "xgboost": "HARDWARE"
+    },
+    {
+      "id": "ledgerloop-120",
+      "gold": "RENT",
+      "lightgbm": "SOFTWARE",
+      "xgboost": "OTHER"
+    },
+    {
+      "id": "ledgerloop-104",
+      "gold": "UTILITIES",
+      "lightgbm": "UTILITIES",
+      "xgboost": "UTILITIES"
+    },
+    {
+      "id": "ledgerloop-118",
+      "gold": "RENT",
+      "lightgbm": "UTILITIES",
+      "xgboost": "UTILITIES"
+    },
+    {
+      "id": "ledgerloop-023",
+      "gold": "MEALS",
+      "lightgbm": "MEALS",
+      "xgboost": "MARKETING"
+    },
+    {
+      "id": "ledgerloop-069",
+      "gold": "HARDWARE",
+      "lightgbm": "PROFESSIONAL_SERVICES",
+      "xgboost": "HARDWARE"
+    },
+    {
+      "id": "ledgerloop-127",
+      "gold": "INSURANCE",
+      "lightgbm": "OFFICE_SUPPLIES",
+      "xgboost": "HARDWARE"
+    },
+    {
+      "id": "ledgerloop-163",
+      "gold": "ENTERTAINMENT",
+      "lightgbm": "ENTERTAINMENT",
+      "xgboost": "ENTERTAINMENT"
+    },
+    {
+      "id": "ledgerloop-057",
+      "gold": "HARDWARE",
+      "lightgbm": "PROFESSIONAL_SERVICES",
+      "xgboost": "HARDWARE"
+    },
+    {
+      "id": "ledgerloop-123",
+      "gold": "RENT",
+      "lightgbm": "OFFICE_SUPPLIES",
+      "xgboost": "OFFICE_SUPPLIES"
+    },
+    {
+      "id": "ledgerloop-176",
+      "gold": "OTHER",
+      "lightgbm": "UTILITIES",
+      "xgboost": "UTILITIES"
+    },
+    {
+      "id": "ledgerloop-155",
+      "gold": "ENTERTAINMENT",
+      "lightgbm": "SOFTWARE",
+      "xgboost": "SOFTWARE"
+    },
+    {
+      "id": "ledgerloop-165",
+      "gold": "ENTERTAINMENT",
+      "lightgbm": "MEALS",
+      "xgboost": "INSURANCE"
+    },
+    {
+      "id": "ledgerloop-030",
+      "gold": "OFFICE_SUPPLIES",
+      "lightgbm": "OFFICE_SUPPLIES",
+      "xgboost": "MARKETING"
+    },
+    {
+      "id": "ledgerloop-116",
+      "gold": "RENT",
+      "lightgbm": "RENT",
+      "xgboost": "RENT"
+    },
+    {
+      "id": "ledgerloop-174",
+      "gold": "OTHER",
+      "lightgbm": "OTHER",
+      "xgboost": "OTHER"
+    },
+    {
+      "id": "ledgerloop-074",
+      "gold": "MARKETING",
+      "lightgbm": "MARKETING",
+      "xgboost": "MARKETING"
+    },
+    {
+      "id": "ledgerloop-040",
+      "gold": "OFFICE_SUPPLIES",
+      "lightgbm": "MEALS",
+      "xgboost": "UTILITIES"
+    },
+    {
+      "id": "ledgerloop-037",
+      "gold": "OFFICE_SUPPLIES",
+      "lightgbm": "OFFICE_SUPPLIES",
+      "xgboost": "HARDWARE"
+    },
+    {
+      "id": "ledgerloop-130",
+      "gold": "INSURANCE",
+      "lightgbm": "INSURANCE",
+      "xgboost": "SOFTWARE"
+    },
+    {
+      "id": "ledgerloop-079",
+      "gold": "MARKETING",
+      "lightgbm": "MARKETING",
+      "xgboost": "MARKETING"
+    },
+    {
+      "id": "ledgerloop-061",
+      "gold": "HARDWARE",
+      "lightgbm": "OFFICE_SUPPLIES",
+      "xgboost": "OFFICE_SUPPLIES"
+    },
+    {
+      "id": "ledgerloop-048",
+      "gold": "SOFTWARE",
+      "lightgbm": "HARDWARE",
+      "xgboost": "SOFTWARE"
+    },
+    {
+      "id": "ledgerloop-062",
+      "gold": "HARDWARE",
+      "lightgbm": "RENT",
+      "xgboost": "RENT"
+    },
+    {
+      "id": "ledgerloop-003",
+      "gold": "TRAVEL",
+      "lightgbm": "TRAVEL",
+      "xgboost": "TRAVEL"
+    },
+    {
+      "id": "ledgerloop-161",
+      "gold": "ENTERTAINMENT",
+      "lightgbm": "PROFESSIONAL_SERVICES",
+      "xgboost": "UTILITIES"
+    },
+    {
+      "id": "ledgerloop-106",
+      "gold": "UTILITIES",
+      "lightgbm": "MEALS",
+      "xgboost": "INSURANCE"
+    },
+    {
+      "id": "ledgerloop-029",
+      "gold": "OFFICE_SUPPLIES",
+      "lightgbm": "UTILITIES",
+      "xgboost": "UTILITIES"
+    },
+    {
+      "id": "ledgerloop-098",
+      "gold": "UTILITIES",
+      "lightgbm": "RENT",
+      "xgboost": "RENT"
+    }
+  ]
+}

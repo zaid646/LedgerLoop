@@ -1,0 +1,4279 @@
+{
+  "benchmark": "synthetic-render-ocr-vs-cached-llm",
+  "caveat": "Images are deterministic renders of the golden receipt TEXT, not photographs. OCR numbers reflect clean synthetic pages and are an upper bound vs real phone photos.",
+  "n_documents": 75,
+  "source_golden": "evals/golden/v0.jsonl",
+  "llm_replay": "evals/results/llm-qwen7b-v0.json",
+  "llm_model": "Qwen2.5-7B-Instruct (cached)",
+  "yolo_weights": "cv/weights/receipt_fields_yolov8n.pt",
+  "yolo_conf": 0.25,
+  "environment": {
+    "python": "3.12.14",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4"
+  },
+  "methods": {
+    "ocr_only": "Tesseract on preprocessed full page + regex parser",
+    "ocr_yolo": "YOLOv8n field crops + Tesseract per crop",
+    "llm_only": "Cached Qwen2.5-7B extraction",
+    "ocr_llm": "Fusion: merchant from LLM; total/date from YOLO+OCR when present, else full-page OCR, else LLM"
+  },
+  "ocr_only": {
+    "n": 75,
+    "field_accuracy": {
+      "merchant": 1.0,
+      "total_amount": 1.0,
+      "transaction_date": 0.82
+    },
+    "field_support": {
+      "merchant": 50,
+      "total_amount": 75,
+      "transaction_date": 50
+    },
+    "exact_doc_match": 0.88
+  },
+  "ocr_yolo": {
+    "n": 75,
+    "field_accuracy": {
+      "merchant": 0.94,
+      "total_amount": 1.0,
+      "transaction_date": 0.82
+    },
+    "field_support": {
+      "merchant": 50,
+      "total_amount": 75,
+      "transaction_date": 50
+    },
+    "exact_doc_match": 0.84
+  },
+  "llm_only": {
+    "n": 75,
+    "field_accuracy": {
+      "merchant": 0.96,
+      "total_amount": 0.6267,
+      "transaction_date": 0.84
+    },
+    "field_support": {
+      "merchant": 50,
+      "total_amount": 75,
+      "transaction_date": 50
+    },
+    "exact_doc_match": 0.4933
+  },
+  "ocr_llm": {
+    "n": 75,
+    "field_accuracy": {
+      "merchant": 0.96,
+      "total_amount": 1.0,
+      "transaction_date": 0.84
+    },
+    "field_support": {
+      "merchant": 50,
+      "total_amount": 75,
+      "transaction_date": 50
+    },
+    "exact_doc_match": 0.8667
+  },
+  "details": [
+    {
+      "id": "sroie-0",
+      "ocr_full": {
+        "merchant": "BOOK TA .K(TAMAN DAYA) SDN BHD",
+        "transaction_date": "25/12/2018",
+        "total_amount": 9.0
+      },
+      "ocr_regions": {
+        "merchant": "BOOK TA .K(TAMAN DAYA) SDN BHD",
+        "transaction_date": "25/12/2018",
+        "total_amount": 9.0
+      },
+      "llm": {
+        "merchant": "BOOK TA .TAMAN DAYA) SDN BHD",
+        "transaction_date": "25/12/2018",
+        "total_amount": 9.0
+      },
+      "ocr_llm": {
+        "merchant": "BOOK TA .TAMAN DAYA) SDN BHD",
+        "transaction_date": "25/12/2018",
+        "total_amount": 9.0
+      },
+      "ocr_confidence": 0.9376,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8845,
+          "box": [
+            60,
+            325,
+            270,
+            364
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8324,
+          "box": [
+            55,
+            44,
+            723,
+            90
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8194,
+          "box": [
+            60,
+            135,
+            388,
+            167
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-1",
+      "ocr_full": {
+        "merchant": "INDAH GIFT & HOME DECO",
+        "transaction_date": "19/10/2018",
+        "total_amount": 60.3
+      },
+      "ocr_regions": {
+        "merchant": "INDAH GIFT & HOME DECO",
+        "transaction_date": "19/10/2018",
+        "total_amount": 60.3
+      },
+      "llm": {
+        "merchant": "INDAH GIFT & HOME DECO",
+        "transaction_date": "19/10/2018",
+        "total_amount": 60.3
+      },
+      "ocr_llm": {
+        "merchant": "INDAH GIFT & HOME DECO",
+        "transaction_date": "19/10/2018",
+        "total_amount": 60.3
+      },
+      "ocr_confidence": 0.8957,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8778,
+          "box": [
+            107,
+            417,
+            330,
+            455
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8518,
+          "box": [
+            106,
+            80,
+            615,
+            131
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.6819,
+          "box": [
+            104,
+            166,
+            437,
+            198
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-2",
+      "ocr_full": {
+        "merchant": "MR D.I.Y. (JOHOR) SDN BHD",
+        "transaction_date": "12-01-19",
+        "total_amount": 33.9
+      },
+      "ocr_regions": {
+        "merchant": "MR D.I.Y. (JOHOR) SDN BHD",
+        "transaction_date": "12-01-19",
+        "total_amount": 33.9
+      },
+      "llm": {
+        "merchant": "MR D.I.Y. (JOHOR) SDN BHD",
+        "transaction_date": "12-01-19",
+        "total_amount": 33.9
+      },
+      "ocr_llm": {
+        "merchant": "MR D.I.Y. (JOHOR) SDN BHD",
+        "transaction_date": "12-01-19",
+        "total_amount": 33.9
+      },
+      "ocr_confidence": 0.8758,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8931,
+          "box": [
+            57,
+            407,
+            289,
+            447
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8827,
+          "box": [
+            59,
+            49,
+            592,
+            103
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8692,
+          "box": [
+            54,
+            151,
+            434,
+            189
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-3",
+      "ocr_full": {
+        "merchant": "YONGFATT ENTERPRISE",
+        "transaction_date": "25/12/2018",
+        "total_amount": 80.9
+      },
+      "ocr_regions": {
+        "merchant": null,
+        "transaction_date": "25/12/2018",
+        "total_amount": 80.9
+      },
+      "llm": {
+        "merchant": "TAN WOON YANN\nYONGFATT ENTERPRISE",
+        "transaction_date": "25/12/2018",
+        "total_amount": 80.9
+      },
+      "ocr_llm": {
+        "merchant": "TAN WOON YANN\nYONGFATT ENTERPRISE",
+        "transaction_date": "25/12/2018",
+        "total_amount": 80.9
+      },
+      "ocr_confidence": 0.874,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.8792,
+          "box": [
+            106,
+            150,
+            306,
+            182
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8748,
+          "box": [
+            102,
+            389,
+            322,
+            428
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8596,
+          "box": [
+            103,
+            67,
+            566,
+            114
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-4",
+      "ocr_full": {
+        "merchant": "MR D.I.Y. (M) SDN BHD",
+        "transaction_date": "18-11-18",
+        "total_amount": 30.9
+      },
+      "ocr_regions": {
+        "merchant": "MR D.LY. (M) SDN BHD",
+        "transaction_date": "18-11-18",
+        "total_amount": 30.9
+      },
+      "llm": {
+        "merchant": "TAN WOON YANN",
+        "transaction_date": "18-11-18",
+        "total_amount": 30.9
+      },
+      "ocr_llm": {
+        "merchant": "TAN WOON YANN",
+        "transaction_date": "18-11-18",
+        "total_amount": 30.9
+      },
+      "ocr_confidence": 0.8273,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8583,
+          "box": [
+            96,
+            78,
+            548,
+            136
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8333,
+          "box": [
+            100,
+            416,
+            342,
+            457
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.7809,
+          "box": [
+            89,
+            181,
+            504,
+            218
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-5",
+      "ocr_full": {
+        "merchant": "ABC HO TRADING",
+        "transaction_date": "09/01/2019",
+        "total_amount": 31.0
+      },
+      "ocr_regions": {
+        "merchant": "ABC HO TRADING",
+        "transaction_date": "09/01/2019",
+        "total_amount": 31.0
+      },
+      "llm": {
+        "merchant": "ABC HO TRADING",
+        "transaction_date": "09/01/2019",
+        "total_amount": 31.0
+      },
+      "ocr_llm": {
+        "merchant": "ABC HO TRADING",
+        "transaction_date": "09/01/2019",
+        "total_amount": 31.0
+      },
+      "ocr_confidence": 0.94,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8817,
+          "box": [
+            119,
+            79,
+            478,
+            124
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8422,
+          "box": [
+            122,
+            371,
+            358,
+            412
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.7611,
+          "box": [
+            118,
+            165,
+            479,
+            201
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-6",
+      "ocr_full": {
+        "merchant": "SOON HUAT MACHINERY ENTERPRISE",
+        "transaction_date": "11/01/2019",
+        "total_amount": 327.0
+      },
+      "ocr_regions": {
+        "merchant": "SOON HUAT MACHINERY ENTERPRISE",
+        "transaction_date": "11/01/2019",
+        "total_amount": 327.0
+      },
+      "llm": {
+        "merchant": "SOON HUAT MACHINERY ENTERPRISE",
+        "transaction_date": "11/01/2019",
+        "total_amount": 327.0
+      },
+      "ocr_llm": {
+        "merchant": "SOON HUAT MACHINERY ENTERPRISE",
+        "transaction_date": "11/01/2019",
+        "total_amount": 327.0
+      },
+      "ocr_confidence": 0.9018,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8375,
+          "box": [
+            62,
+            323,
+            310,
+            363
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8016,
+          "box": [
+            63,
+            131,
+            338,
+            164
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.7138,
+          "box": [
+            66,
+            49,
+            785,
+            102
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-7",
+      "ocr_full": {
+        "merchant": "S.H.H. MOTOR (SUNGAI RENGIT) SDN. BHD.",
+        "transaction_date": "23-01-2019",
+        "total_amount": 20.0
+      },
+      "ocr_regions": {
+        "merchant": "S.H.H. MOTOR (SUNGAI RENGIT) SDN. BHD.",
+        "transaction_date": "23-01-2019",
+        "total_amount": 20.0
+      },
+      "llm": {
+        "merchant": "S.H.H. MOTOR (SUNGAI RENGIT) SDN. BHD.",
+        "transaction_date": "23-01-2019",
+        "total_amount": 20.0
+      },
+      "ocr_llm": {
+        "merchant": "S.H.H. MOTOR (SUNGAI RENGIT) SDN. BHD.",
+        "transaction_date": "23-01-2019",
+        "total_amount": 20.0
+      },
+      "ocr_confidence": 0.9317,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8714,
+          "box": [
+            87,
+            434,
+            317,
+            474
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.7907,
+          "box": [
+            90,
+            69,
+            907,
+            126
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.7457,
+          "box": [
+            74,
+            165,
+            657,
+            204
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-8",
+      "ocr_full": {
+        "merchant": "PERNIAGAAN ZHENG HUI",
+        "transaction_date": "12/02/2018",
+        "total_amount": 112.45
+      },
+      "ocr_regions": {
+        "merchant": "PERNIAGAAN ZHENG HUI",
+        "transaction_date": "12/02/2018",
+        "total_amount": 112.45
+      },
+      "llm": {
+        "merchant": "PERNIAGAAN ZHENG HUI",
+        "transaction_date": "12/02/2018",
+        "total_amount": 112.45
+      },
+      "ocr_llm": {
+        "merchant": "PERNIAGAAN ZHENG HUI",
+        "transaction_date": "12/02/2018",
+        "total_amount": 112.45
+      },
+      "ocr_confidence": 0.9154,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8781,
+          "box": [
+            95,
+            73,
+            577,
+            118
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8778,
+          "box": [
+            98,
+            351,
+            339,
+            394
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.851,
+          "box": [
+            91,
+            158,
+            370,
+            194
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-9",
+      "ocr_full": {
+        "merchant": "GERBANG ALAF RESTAURANTS SDN BHD",
+        "transaction_date": "18/01/2018",
+        "total_amount": 26.6
+      },
+      "ocr_regions": {
+        "merchant": "GERBANG ALAF RESTAURANTS SDN BHD",
+        "transaction_date": "18/01/2018",
+        "total_amount": 26.6
+      },
+      "llm": {
+        "merchant": "GERBANG ALAF RESTAURANTS SDN BHD",
+        "transaction_date": "18/01/2018",
+        "total_amount": 26.6
+      },
+      "ocr_llm": {
+        "merchant": "GERBANG ALAF RESTAURANTS SDN BHD",
+        "transaction_date": "18/01/2018",
+        "total_amount": 26.6
+      },
+      "ocr_confidence": 0.9324,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8322,
+          "box": [
+            88,
+            371,
+            309,
+            408
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.7947,
+          "box": [
+            93,
+            151,
+            606,
+            190
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.5979,
+          "box": [
+            95,
+            65,
+            884,
+            119
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-10",
+      "ocr_full": {
+        "merchant": "SAM SAM TRADING CO",
+        "transaction_date": "29-12-2017",
+        "total_amount": 14.1
+      },
+      "ocr_regions": {
+        "merchant": null,
+        "transaction_date": "29-12-2017",
+        "total_amount": 14.1
+      },
+      "llm": {
+        "merchant": "SAM SAM TRADING CO",
+        "transaction_date": "29-12-2017",
+        "total_amount": 14.1
+      },
+      "ocr_llm": {
+        "merchant": "SAM SAM TRADING CO",
+        "transaction_date": "29-12-2017",
+        "total_amount": 14.1
+      },
+      "ocr_confidence": 0.9359,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.9244,
+          "box": [
+            91,
+            70,
+            540,
+            117
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.9149,
+          "box": [
+            94,
+            355,
+            325,
+            397
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8223,
+          "box": [
+            94,
+            156,
+            304,
+            189
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-11",
+      "ocr_full": {
+        "merchant": "ALAM) SDN BHD",
+        "transaction_date": "15/06/2017",
+        "total_amount": 15.0
+      },
+      "ocr_regions": {
+        "merchant": "ALAM) SDN BHD",
+        "transaction_date": null,
+        "total_amount": 15.0
+      },
+      "llm": {
+        "merchant": "AIK HUAT HARDWARE ENTERPRISE (SETIA ALAM) SDN BHD",
+        "transaction_date": "15/06/2017",
+        "total_amount": 15.0
+      },
+      "ocr_llm": {
+        "merchant": "AIK HUAT HARDWARE ENTERPRISE (SETIA ALAM) SDN BHD",
+        "transaction_date": "15/06/2017",
+        "total_amount": 15.0
+      },
+      "ocr_confidence": 0.9116,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8838,
+          "box": [
+            65,
+            52,
+            379,
+            102
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8716,
+          "box": [
+            67,
+            398,
+            292,
+            434
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8001,
+          "box": [
+            66,
+            144,
+            380,
+            181
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-12",
+      "ocr_full": {
+        "merchant": "ELECTRICAL",
+        "transaction_date": "22/12/2017",
+        "total_amount": 15.9
+      },
+      "ocr_regions": {
+        "merchant": "ELECTRICAL",
+        "transaction_date": "22/12/2017",
+        "total_amount": 15.9
+      },
+      "llm": {
+        "merchant": "HOME MASTER HARDWARE & ELECTRICAL",
+        "transaction_date": "22/12/2017",
+        "total_amount": 15.9
+      },
+      "ocr_llm": {
+        "merchant": "HOME MASTER HARDWARE & ELECTRICAL",
+        "transaction_date": "22/12/2017",
+        "total_amount": 15.9
+      },
+      "ocr_confidence": 0.91,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8766,
+          "box": [
+            82,
+            370,
+            310,
+            411
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8715,
+          "box": [
+            83,
+            145,
+            363,
+            181
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8583,
+          "box": [
+            79,
+            62,
+            329,
+            104
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-13",
+      "ocr_full": {
+        "merchant": "RESTORAN HASSANBISTRO",
+        "transaction_date": "12/28/2017",
+        "total_amount": 15.0
+      },
+      "ocr_regions": {
+        "merchant": "RESTORAN HASSANBISTRO",
+        "transaction_date": "12/28/2017",
+        "total_amount": 15.0
+      },
+      "llm": {
+        "merchant": "RESTORAN HASSANBISTRO",
+        "transaction_date": "12/28/2017",
+        "total_amount": 15.0
+      },
+      "ocr_llm": {
+        "merchant": "RESTORAN HASSANBISTRO",
+        "transaction_date": "12/28/2017",
+        "total_amount": 15.0
+      },
+      "ocr_confidence": 0.9091,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.9136,
+          "box": [
+            77,
+            390,
+            301,
+            429
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8715,
+          "box": [
+            74,
+            139,
+            424,
+            177
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8393,
+          "box": [
+            80,
+            59,
+            601,
+            105
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-14",
+      "ocr_full": {
+        "merchant": "ASIA MART",
+        "transaction_date": "22/12/2017",
+        "total_amount": 32.7
+      },
+      "ocr_regions": {
+        "merchant": "ASIA MART",
+        "transaction_date": "22/12/2017",
+        "total_amount": 32.7
+      },
+      "llm": {
+        "merchant": "ASIA MART",
+        "transaction_date": "22/12/2017",
+        "total_amount": 32.7
+      },
+      "ocr_llm": {
+        "merchant": "ASIA MART",
+        "transaction_date": "22/12/2017",
+        "total_amount": 32.7
+      },
+      "ocr_confidence": 0.8559,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.867,
+          "box": [
+            94,
+            349,
+            329,
+            391
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8585,
+          "box": [
+            94,
+            58,
+            329,
+            104
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8178,
+          "box": [
+            91,
+            146,
+            390,
+            181
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-15",
+      "ocr_full": {
+        "merchant": "ELECTRICAL",
+        "transaction_date": "22/12/2017",
+        "total_amount": 15.9
+      },
+      "ocr_regions": {
+        "merchant": "ELECTRICAL",
+        "transaction_date": "22/12/2017",
+        "total_amount": 15.9
+      },
+      "llm": {
+        "merchant": "HOME MASTER HARDWARE & ELECTRICAL",
+        "transaction_date": "22/12/2017",
+        "total_amount": 15.9
+      },
+      "ocr_llm": {
+        "merchant": "HOME MASTER HARDWARE & ELECTRICAL",
+        "transaction_date": "22/12/2017",
+        "total_amount": 15.9
+      },
+      "ocr_confidence": 0.8641,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8707,
+          "box": [
+            81,
+            346,
+            304,
+            384
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8452,
+          "box": [
+            86,
+            56,
+            319,
+            97
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8176,
+          "box": [
+            82,
+            130,
+            338,
+            162
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-16",
+      "ocr_full": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/12/2017",
+        "total_amount": 73.0
+      },
+      "ocr_regions": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/12/2017",
+        "total_amount": 73.0
+      },
+      "llm": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/12/2017",
+        "total_amount": 73.0
+      },
+      "ocr_llm": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/12/2017",
+        "total_amount": 73.0
+      },
+      "ocr_confidence": 0.9182,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.904,
+          "box": [
+            71,
+            67,
+            729,
+            117
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8919,
+          "box": [
+            93,
+            421,
+            334,
+            462
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8129,
+          "box": [
+            93,
+            156,
+            446,
+            193
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-17",
+      "ocr_full": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/11/2017",
+        "total_amount": 39.8
+      },
+      "ocr_regions": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/11/2017",
+        "total_amount": 39.8
+      },
+      "llm": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/11/2017",
+        "total_amount": 39.8
+      },
+      "ocr_llm": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/11/2017",
+        "total_amount": 39.8
+      },
+      "ocr_confidence": 0.9202,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8776,
+          "box": [
+            87,
+            79,
+            721,
+            128
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.873,
+          "box": [
+            100,
+            368,
+            333,
+            407
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.6757,
+          "box": [
+            97,
+            164,
+            448,
+            199
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-18",
+      "ocr_full": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/12/2017",
+        "total_amount": 73.0
+      },
+      "ocr_regions": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/12/2017",
+        "total_amount": 73.0
+      },
+      "llm": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/12/2017",
+        "total_amount": 73.0
+      },
+      "ocr_llm": {
+        "merchant": "LIGHTROOM GALLERY SDN BHD",
+        "transaction_date": "20/12/2017",
+        "total_amount": 73.0
+      },
+      "ocr_confidence": 0.8547,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8977,
+          "box": [
+            97,
+            352,
+            322,
+            390
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8815,
+          "box": [
+            100,
+            81,
+            689,
+            131
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.7574,
+          "box": [
+            96,
+            173,
+            417,
+            206
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-19",
+      "ocr_full": {
+        "merchant": "SHELL ISNI PETRO TRADING",
+        "transaction_date": "18/03/18",
+        "total_amount": 86.0
+      },
+      "ocr_regions": {
+        "merchant": "SHELL ISNI PETRO TRADING",
+        "transaction_date": "18/03/18",
+        "total_amount": 86.0
+      },
+      "llm": {
+        "merchant": "SHELL ISNI PETRO TRADING",
+        "transaction_date": "18/03/18",
+        "total_amount": 86.0
+      },
+      "ocr_llm": {
+        "merchant": "SHELL ISNI PETRO TRADING",
+        "transaction_date": "18/03/18",
+        "total_amount": 86.0
+      },
+      "ocr_confidence": 0.9274,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8868,
+          "box": [
+            105,
+            364,
+            329,
+            402
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8649,
+          "box": [
+            105,
+            80,
+            642,
+            132
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.6666,
+          "box": [
+            102,
+            164,
+            439,
+            199
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-20",
+      "ocr_full": {
+        "merchant": "SYL ROASTED DELIGHTS SDN. BHD.",
+        "transaction_date": "06/03/2018",
+        "total_amount": 54.5
+      },
+      "ocr_regions": {
+        "merchant": "SYL ROASTED DELIGHTS SDN. BHD.",
+        "transaction_date": "06/03/2018",
+        "total_amount": 54.5
+      },
+      "llm": {
+        "merchant": "SYL ROASTED DELIGHTS SDN. BHD.",
+        "transaction_date": "06/03/2018",
+        "total_amount": 54.5
+      },
+      "ocr_llm": {
+        "merchant": "SYL ROASTED DELIGHTS SDN. BHD.",
+        "transaction_date": "06/03/2018",
+        "total_amount": 54.5
+      },
+      "ocr_confidence": 0.8775,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.9104,
+          "box": [
+            81,
+            149,
+            294,
+            179
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8451,
+          "box": [
+            75,
+            378,
+            318,
+            418
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.6867,
+          "box": [
+            86,
+            64,
+            773,
+            114
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-21",
+      "ocr_full": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "18/01/2018",
+        "total_amount": 4.9
+      },
+      "ocr_regions": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "18/01/2018",
+        "total_amount": 4.9
+      },
+      "llm": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "18/01/2018",
+        "total_amount": 4.9
+      },
+      "ocr_llm": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "18/01/2018",
+        "total_amount": 4.9
+      },
+      "ocr_confidence": 0.9058,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8846,
+          "box": [
+            62,
+            397,
+            278,
+            435
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8648,
+          "box": [
+            63,
+            141,
+            366,
+            176
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8081,
+          "box": [
+            56,
+            58,
+            708,
+            105
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-22",
+      "ocr_full": {
+        "merchant": "FUYI MINI MARKET",
+        "transaction_date": "25/01/2018",
+        "total_amount": 9.0
+      },
+      "ocr_regions": {
+        "merchant": "FUYI MINI MARKET",
+        "transaction_date": "25/01/2018",
+        "total_amount": 9.0
+      },
+      "llm": {
+        "merchant": "FUYI MINI MARKET",
+        "transaction_date": "25/01/2018",
+        "total_amount": 8.49
+      },
+      "ocr_llm": {
+        "merchant": "FUYI MINI MARKET",
+        "transaction_date": "25/01/2018",
+        "total_amount": 9.0
+      },
+      "ocr_confidence": 0.91,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8713,
+          "box": [
+            106,
+            330,
+            311,
+            368
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8487,
+          "box": [
+            109,
+            58,
+            464,
+            104
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.77,
+          "box": [
+            103,
+            136,
+            425,
+            167
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-23",
+      "ocr_full": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "17/01/2018",
+        "total_amount": 27.55
+      },
+      "ocr_regions": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "17/01/2018",
+        "total_amount": 27.55
+      },
+      "llm": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "17/01/2018",
+        "total_amount": 27.55
+      },
+      "ocr_llm": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "17/01/2018",
+        "total_amount": 27.55
+      },
+      "ocr_confidence": 0.9223,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8572,
+          "box": [
+            65,
+            372,
+            303,
+            412
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.7839,
+          "box": [
+            67,
+            45,
+            760,
+            97
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.7049,
+          "box": [
+            64,
+            127,
+            375,
+            162
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-24",
+      "ocr_full": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "18/01/2018",
+        "total_amount": 55.1
+      },
+      "ocr_regions": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "15/01/2018",
+        "total_amount": 55.1
+      },
+      "llm": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "15/01/2018",
+        "total_amount": 55.1
+      },
+      "ocr_llm": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "15/01/2018",
+        "total_amount": 55.1
+      },
+      "ocr_confidence": 0.8954,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.8796,
+          "box": [
+            82,
+            153,
+            381,
+            188
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8713,
+          "box": [
+            81,
+            68,
+            757,
+            118
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8614,
+          "box": [
+            84,
+            403,
+            320,
+            443
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-25",
+      "ocr_full": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "23/01/2018",
+        "total_amount": 18.0
+      },
+      "ocr_regions": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "23/01/2018",
+        "total_amount": 18.0
+      },
+      "llm": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "23/01/2018",
+        "total_amount": 18.0
+      },
+      "ocr_llm": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "23/01/2018",
+        "total_amount": 18.0
+      },
+      "ocr_confidence": 0.8752,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8815,
+          "box": [
+            106,
+            405,
+            329,
+            444
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8673,
+          "box": [
+            83,
+            71,
+            748,
+            119
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8197,
+          "box": [
+            104,
+            159,
+            391,
+            195
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-26",
+      "ocr_full": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "23/01/2018",
+        "total_amount": 18.0
+      },
+      "ocr_regions": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "23/01/2018",
+        "total_amount": 18.0
+      },
+      "llm": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "23/01/2018",
+        "total_amount": 18.0
+      },
+      "ocr_llm": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "23/01/2018",
+        "total_amount": 18.0
+      },
+      "ocr_confidence": 0.9022,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.9131,
+          "box": [
+            69,
+            328,
+            291,
+            368
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8438,
+          "box": [
+            70,
+            139,
+            348,
+            172
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8044,
+          "box": [
+            62,
+            58,
+            682,
+            105
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-27",
+      "ocr_full": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "12/02/2018",
+        "total_amount": 153.35
+      },
+      "ocr_regions": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "12/02/2018",
+        "total_amount": 153.35
+      },
+      "llm": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "12/02/2018",
+        "total_amount": 153.35
+      },
+      "ocr_llm": {
+        "merchant": "TEO HENG STATIONERY & BOOKS",
+        "transaction_date": "12/02/2018",
+        "total_amount": 153.35
+      },
+      "ocr_confidence": 0.8858,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8977,
+          "box": [
+            101,
+            75,
+            688,
+            119
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.872,
+          "box": [
+            99,
+            400,
+            326,
+            437
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8571,
+          "box": [
+            96,
+            157,
+            359,
+            190
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-28",
+      "ocr_full": {
+        "merchant": "MR. D.1.Y. (M) SDN BHD",
+        "transaction_date": "14-03-18",
+        "total_amount": 37.1
+      },
+      "ocr_regions": {
+        "merchant": "MR. D.1.Y. (M) SDN BHD",
+        "transaction_date": "14-03-18",
+        "total_amount": 37.1
+      },
+      "llm": {
+        "merchant": "MR. D.I.Y. (M) SDN BHD",
+        "transaction_date": "14-03-18",
+        "total_amount": 37.1
+      },
+      "ocr_llm": {
+        "merchant": "MR. D.I.Y. (M) SDN BHD",
+        "transaction_date": "14-03-18",
+        "total_amount": 37.1
+      },
+      "ocr_confidence": 0.8993,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8999,
+          "box": [
+            69,
+            346,
+            304,
+            389
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8607,
+          "box": [
+            69,
+            145,
+            438,
+            181
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8345,
+          "box": [
+            66,
+            49,
+            516,
+            104
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-29",
+      "ocr_full": {
+        "merchant": "99 SPEED MART S/B (519537-X)",
+        "transaction_date": "24-01-18",
+        "total_amount": 2.5
+      },
+      "ocr_regions": {
+        "merchant": "99 SPEED MART S/B (519537-X)",
+        "transaction_date": "24-01-18",
+        "total_amount": 2.5
+      },
+      "llm": {
+        "merchant": "99 SPEED MART S/B",
+        "transaction_date": "24-01-18",
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "99 SPEED MART S/B",
+        "transaction_date": "24-01-18",
+        "total_amount": 2.5
+      },
+      "ocr_confidence": 0.8948,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8935,
+          "box": [
+            99,
+            75,
+            724,
+            123
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8731,
+          "box": [
+            118,
+            436,
+            332,
+            475
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.827,
+          "box": [
+            116,
+            173,
+            308,
+            207
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-30",
+      "ocr_full": {
+        "merchant": "C W KHOO HARDWARE SDN BHD",
+        "transaction_date": "01-03-18",
+        "total_amount": 21.2
+      },
+      "ocr_regions": {
+        "merchant": "C W KHOO HARDWARE SDN BHD",
+        "transaction_date": "01-03-18",
+        "total_amount": 21.2
+      },
+      "llm": {
+        "merchant": "C W KHOO HARDWARE SDN BHD",
+        "transaction_date": "01-03-18",
+        "total_amount": 21.2
+      },
+      "ocr_llm": {
+        "merchant": "C W KHOO HARDWARE SDN BHD",
+        "transaction_date": "01-03-18",
+        "total_amount": 21.2
+      },
+      "ocr_confidence": 0.8944,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8888,
+          "box": [
+            82,
+            357,
+            316,
+            399
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8861,
+          "box": [
+            75,
+            67,
+            705,
+            118
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8719,
+          "box": [
+            81,
+            157,
+            411,
+            195
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-31",
+      "ocr_full": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2
+      },
+      "ocr_regions": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2
+      },
+      "llm": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "05 MAR 2018",
+        "total_amount": 8.2
+      },
+      "ocr_llm": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "05 MAR 2018",
+        "total_amount": 8.2
+      },
+      "ocr_confidence": 0.9358,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.9145,
+          "box": [
+            66,
+            339,
+            272,
+            377
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8307,
+          "box": [
+            59,
+            150,
+            336,
+            182
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.717,
+          "box": [
+            73,
+            63,
+            734,
+            108
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-32",
+      "ocr_full": {
+        "merchant": "AEON CO. (M) BHD (126926-H)",
+        "transaction_date": "06/03/2018",
+        "total_amount": 75.0
+      },
+      "ocr_regions": {
+        "merchant": "AEON CO. (M) BHD (126926-H)",
+        "transaction_date": "06/03/2018",
+        "total_amount": 75.0
+      },
+      "llm": {
+        "merchant": "AEON CO. (M) BHD",
+        "transaction_date": "06/03/2018",
+        "total_amount": 75.0
+      },
+      "ocr_llm": {
+        "merchant": "AEON CO. (M) BHD",
+        "transaction_date": "06/03/2018",
+        "total_amount": 75.0
+      },
+      "ocr_confidence": 0.9141,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.9124,
+          "box": [
+            90,
+            71,
+            627,
+            120
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8806,
+          "box": [
+            85,
+            350,
+            311,
+            392
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.6969,
+          "box": [
+            79,
+            165,
+            348,
+            195
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-33",
+      "ocr_full": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2
+      },
+      "ocr_regions": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2
+      },
+      "llm": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "03 MAR 2018",
+        "total_amount": 8.2
+      },
+      "ocr_llm": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "03 MAR 2018",
+        "total_amount": 8.2
+      },
+      "ocr_confidence": 0.9115,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8902,
+          "box": [
+            81,
+            66,
+            744,
+            109
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8258,
+          "box": [
+            90,
+            148,
+            369,
+            182
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.82,
+          "box": [
+            91,
+            337,
+            294,
+            374
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-34",
+      "ocr_full": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2
+      },
+      "ocr_regions": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2
+      },
+      "llm": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "10-03-2018",
+        "total_amount": 8.2
+      },
+      "ocr_llm": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "10-03-2018",
+        "total_amount": 8.2
+      },
+      "ocr_confidence": 0.9247,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.9074,
+          "box": [
+            73,
+            405,
+            290,
+            446
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8073,
+          "box": [
+            79,
+            49,
+            814,
+            103
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.7825,
+          "box": [
+            71,
+            139,
+            378,
+            174
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-35",
+      "ocr_full": {
+        "merchant": "PERNIAGAAN ZHENG HUI",
+        "transaction_date": "09/03/2018",
+        "total_amount": 332.3
+      },
+      "ocr_regions": {
+        "merchant": "PERNIAGAAN ZHENG HUI",
+        "transaction_date": "09/03/2018",
+        "total_amount": 332.3
+      },
+      "llm": {
+        "merchant": "PERNIAGAAN ZHENG HUI",
+        "transaction_date": "09/03/2018",
+        "total_amount": 332.3
+      },
+      "ocr_llm": {
+        "merchant": "PERNIAGAAN ZHENG HUI",
+        "transaction_date": "09/03/2018",
+        "total_amount": 332.3
+      },
+      "ocr_confidence": 0.9278,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.8921,
+          "box": [
+            82,
+            137,
+            373,
+            171
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.837,
+          "box": [
+            88,
+            57,
+            577,
+            104
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8362,
+          "box": [
+            84,
+            340,
+            337,
+            380
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-36",
+      "ocr_full": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2
+      },
+      "ocr_regions": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2
+      },
+      "llm": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "12-03-2018",
+        "total_amount": 8.2
+      },
+      "ocr_llm": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "12-03-2018",
+        "total_amount": 8.2
+      },
+      "ocr_confidence": 0.937,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.9249,
+          "box": [
+            99,
+            356,
+            318,
+            396
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8233,
+          "box": [
+            97,
+            146,
+            424,
+            182
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.7047,
+          "box": [
+            98,
+            60,
+            843,
+            116
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-37",
+      "ocr_full": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2
+      },
+      "ocr_regions": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.2
+      },
+      "llm": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "14/03/2018",
+        "total_amount": 8.2
+      },
+      "ocr_llm": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "14/03/2018",
+        "total_amount": 8.2
+      },
+      "ocr_confidence": 0.9063,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.9157,
+          "box": [
+            83,
+            412,
+            296,
+            452
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.7862,
+          "box": [
+            81,
+            153,
+            389,
+            190
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.734,
+          "box": [
+            83,
+            61,
+            790,
+            116
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-38",
+      "ocr_full": {
+        "merchant": "WARAKUYA PERMAS CITY SDN BHD",
+        "transaction_date": "10/03/2018",
+        "total_amount": 57.8
+      },
+      "ocr_regions": {
+        "merchant": "WARAKUYA PERMAS CITY SDN BHD",
+        "transaction_date": "10/03/2018",
+        "total_amount": 57.8
+      },
+      "llm": {
+        "merchant": "WARAKUYA PERMAS CITY SDN BHD",
+        "transaction_date": "10/03/2018",
+        "total_amount": 57.8
+      },
+      "ocr_llm": {
+        "merchant": "WARAKUYA PERMAS CITY SDN BHD",
+        "transaction_date": "10/03/2018",
+        "total_amount": 57.8
+      },
+      "ocr_confidence": 0.8689,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.9206,
+          "box": [
+            65,
+            380,
+            301,
+            421
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8558,
+          "box": [
+            64,
+            145,
+            458,
+            182
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.7121,
+          "box": [
+            63,
+            56,
+            810,
+            112
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-39",
+      "ocr_full": {
+        "merchant": "YHM AEON TEBRAU CITY",
+        "transaction_date": "11/03/2018",
+        "total_amount": 13.1
+      },
+      "ocr_regions": {
+        "merchant": "YHM AEON TEBRAU CITY",
+        "transaction_date": "11/03/2018",
+        "total_amount": 13.1
+      },
+      "llm": {
+        "merchant": "YHM AEON TEBRAU CITY",
+        "transaction_date": "11/03/2018",
+        "total_amount": 13.1
+      },
+      "ocr_llm": {
+        "merchant": "YHM AEON TEBRAU CITY",
+        "transaction_date": "11/03/2018",
+        "total_amount": 13.1
+      },
+      "ocr_confidence": 0.9305,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.9236,
+          "box": [
+            70,
+            348,
+            302,
+            390
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8066,
+          "box": [
+            78,
+            56,
+            555,
+            103
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.7998,
+          "box": [
+            72,
+            142,
+            391,
+            177
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-40",
+      "ocr_full": {
+        "merchant": "OWNER BY CASTLE BLUE S/B",
+        "transaction_date": "30/03/2018",
+        "total_amount": 189.75
+      },
+      "ocr_regions": {
+        "merchant": "OWNER BY CASTLE BLUE S/B",
+        "transaction_date": "30/03/2018",
+        "total_amount": 189.75
+      },
+      "llm": {
+        "merchant": "BREWERY TAP",
+        "transaction_date": "30/03/2018",
+        "total_amount": 189.75
+      },
+      "ocr_llm": {
+        "merchant": "BREWERY TAP",
+        "transaction_date": "30/03/2018",
+        "total_amount": 189.75
+      },
+      "ocr_confidence": 0.914,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.857,
+          "box": [
+            115,
+            401,
+            342,
+            439
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8242,
+          "box": [
+            108,
+            79,
+            644,
+            127
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8075,
+          "box": [
+            114,
+            159,
+            422,
+            192
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-41",
+      "ocr_full": {
+        "merchant": "BISTRO & CAFE",
+        "transaction_date": "12/03/2018",
+        "total_amount": 343.95
+      },
+      "ocr_regions": {
+        "merchant": "BISTRO & CAFE",
+        "transaction_date": "12/03/2018",
+        "total_amount": 343.95
+      },
+      "llm": {
+        "merchant": "THREE STOOGES BISTRO & CAFE",
+        "transaction_date": "12/03/2018",
+        "total_amount": 343.95
+      },
+      "ocr_llm": {
+        "merchant": "THREE STOOGES BISTRO & CAFE",
+        "transaction_date": "12/03/2018",
+        "total_amount": 343.95
+      },
+      "ocr_confidence": 0.8815,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.8678,
+          "box": [
+            70,
+            123,
+            374,
+            156
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8656,
+          "box": [
+            72,
+            44,
+            367,
+            89
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8108,
+          "box": [
+            69,
+            363,
+            306,
+            401
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-42",
+      "ocr_full": {
+        "merchant": "BISTRO & CAFE",
+        "transaction_date": "03/03/2018",
+        "total_amount": 174.9
+      },
+      "ocr_regions": {
+        "merchant": null,
+        "transaction_date": "03/03/2018",
+        "total_amount": 174.9
+      },
+      "llm": {
+        "merchant": "THREE STOOGES BISTRO & CAFE",
+        "transaction_date": "03/03/2018",
+        "total_amount": 174.9
+      },
+      "ocr_llm": {
+        "merchant": "THREE STOOGES BISTRO & CAFE",
+        "transaction_date": "03/03/2018",
+        "total_amount": 174.9
+      },
+      "ocr_confidence": 0.9376,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8846,
+          "box": [
+            60,
+            60,
+            374,
+            105
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.871,
+          "box": [
+            65,
+            138,
+            400,
+            173
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8317,
+          "box": [
+            59,
+            340,
+            316,
+            381
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-43",
+      "ocr_full": {
+        "merchant": "TASTE OF THE WORLD SDN BHD",
+        "transaction_date": "5/3/2018",
+        "total_amount": 64.15
+      },
+      "ocr_regions": {
+        "merchant": "TASTE OF THE WORLD SDN BHD",
+        "transaction_date": "5/3/2018",
+        "total_amount": 64.15
+      },
+      "llm": {
+        "merchant": "TASTE OF THE WORLD SDN BHD",
+        "transaction_date": "5/3/2018",
+        "total_amount": 64.15
+      },
+      "ocr_llm": {
+        "merchant": "TASTE OF THE WORLD SDN BHD",
+        "transaction_date": "5/3/2018",
+        "total_amount": 64.15
+      },
+      "ocr_confidence": 0.8837,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.8832,
+          "box": [
+            68,
+            335,
+            301,
+            376
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8296,
+          "box": [
+            60,
+            55,
+            700,
+            106
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8281,
+          "box": [
+            63,
+            140,
+            433,
+            176
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-44",
+      "ocr_full": {
+        "merchant": "32 PUB & BISTRO OWN BY CNU TRADING",
+        "transaction_date": "10-03-2018",
+        "total_amount": 190.0
+      },
+      "ocr_regions": {
+        "merchant": "32 PUB & BISTRO OWN BY CNU TRADING",
+        "transaction_date": "10-03-2018",
+        "total_amount": 190.0
+      },
+      "llm": {
+        "merchant": "32 PUB & BISTRO OWN BY CNU TRADING",
+        "transaction_date": "10-03-2018",
+        "total_amount": 190.0
+      },
+      "ocr_llm": {
+        "merchant": "32 PUB & BISTRO OWN BY CNU TRADING",
+        "transaction_date": "10-03-2018",
+        "total_amount": 190.0
+      },
+      "ocr_confidence": 0.9307,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.9017,
+          "box": [
+            78,
+            351,
+            336,
+            395
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8667,
+          "box": [
+            73,
+            154,
+            407,
+            191
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.748,
+          "box": [
+            73,
+            61,
+            883,
+            117
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-45",
+      "ocr_full": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.6
+      },
+      "ocr_regions": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 8.6
+      },
+      "llm": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "18/03/2018",
+        "total_amount": 8.6
+      },
+      "ocr_llm": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "18/03/2018",
+        "total_amount": 8.6
+      },
+      "ocr_confidence": 0.9156,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.918,
+          "box": [
+            93,
+            386,
+            316,
+            427
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8129,
+          "box": [
+            89,
+            145,
+            414,
+            182
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.7421,
+          "box": [
+            95,
+            57,
+            849,
+            113
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-46",
+      "ocr_full": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 6.9
+      },
+      "ocr_regions": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": null,
+        "total_amount": 6.9
+      },
+      "llm": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "27/03/2018",
+        "total_amount": 6.9
+      },
+      "ocr_llm": {
+        "merchant": "UNIHAKKA INTERNATIONAL SDN BHD",
+        "transaction_date": "27/03/2018",
+        "total_amount": 6.9
+      },
+      "ocr_confidence": 0.9325,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.9017,
+          "box": [
+            70,
+            350,
+            287,
+            390
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8337,
+          "box": [
+            69,
+            143,
+            392,
+            179
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.7822,
+          "box": [
+            67,
+            50,
+            825,
+            108
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-47",
+      "ocr_full": {
+        "merchant": "PASAR MINI JIN SENG",
+        "transaction_date": "18/03/18",
+        "total_amount": 28.6
+      },
+      "ocr_regions": {
+        "merchant": "PASAR MINI JIN SENG",
+        "transaction_date": "18/03/18",
+        "total_amount": 28.6
+      },
+      "llm": {
+        "merchant": "PASAR MINI JIN SENG",
+        "transaction_date": "18/03/18",
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "PASAR MINI JIN SENG",
+        "transaction_date": "18/03/18",
+        "total_amount": 28.6
+      },
+      "ocr_confidence": 0.8157,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.9005,
+          "box": [
+            71,
+            69,
+            521,
+            120
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8819,
+          "box": [
+            79,
+            398,
+            315,
+            438
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8469,
+          "box": [
+            69,
+            166,
+            265,
+            197
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-48",
+      "ocr_full": {
+        "merchant": "RESTAURANT SIN DU",
+        "transaction_date": "09/03/2018",
+        "total_amount": 170.0
+      },
+      "ocr_regions": {
+        "merchant": "RESTAURANT SIN DU",
+        "transaction_date": "09/03/2018",
+        "total_amount": 170.0
+      },
+      "llm": {
+        "merchant": "RESTAURANT SIN DU",
+        "transaction_date": "09/03/2018",
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "RESTAURANT SIN DU",
+        "transaction_date": "09/03/2018",
+        "total_amount": 170.0
+      },
+      "ocr_confidence": 0.9338,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8552,
+          "box": [
+            95,
+            56,
+            504,
+            104
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8449,
+          "box": [
+            95,
+            139,
+            360,
+            175
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.83,
+          "box": [
+            97,
+            364,
+            337,
+            405
+          ]
+        }
+      }
+    },
+    {
+      "id": "sroie-49",
+      "ocr_full": {
+        "merchant": "YONG TAT HARDWARE TRADING",
+        "transaction_date": "13/03/2018",
+        "total_amount": 100.9
+      },
+      "ocr_regions": {
+        "merchant": "YONG TAT HARDWARE TRADING",
+        "transaction_date": "13/03/2018",
+        "total_amount": 100.9
+      },
+      "llm": {
+        "merchant": "YONG TAT HARDWARE TRADING",
+        "transaction_date": "13/03/2018",
+        "total_amount": 100.9
+      },
+      "ocr_llm": {
+        "merchant": "YONG TAT HARDWARE TRADING",
+        "transaction_date": "13/03/2018",
+        "total_amount": 100.9
+      },
+      "ocr_confidence": 0.9389,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8934,
+          "box": [
+            75,
+            66,
+            719,
+            113
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8793,
+          "box": [
+            97,
+            348,
+            348,
+            388
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8316,
+          "box": [
+            98,
+            146,
+            387,
+            182
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-0",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 60.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 60.0
+      },
+      "llm": {
+        "merchant": "TICKET CP",
+        "transaction_date": null,
+        "total_amount": 60.0
+      },
+      "ocr_llm": {
+        "merchant": "TICKET CP",
+        "transaction_date": "2026-01-01",
+        "total_amount": 60.0
+      },
+      "ocr_confidence": 0.8782,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.9186,
+          "box": [
+            55,
+            65,
+            521,
+            113
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.9014,
+          "box": [
+            57,
+            153,
+            281,
+            188
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8932,
+          "box": [
+            60,
+            414,
+            298,
+            454
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-1",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 91000.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 91000.0
+      },
+      "llm": {
+        "merchant": "J.STB",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "J.STB",
+        "transaction_date": "2026-01-01",
+        "total_amount": 91000.0
+      },
+      "ocr_confidence": 0.8791,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.8785,
+          "box": [
+            59,
+            134,
+            261,
+            163
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8576,
+          "box": [
+            66,
+            380,
+            352,
+            421
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8565,
+          "box": [
+            58,
+            54,
+            479,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-2",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 28000.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 28000.0
+      },
+      "llm": {
+        "merchant": "JASMINE MT",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "JASMINE MT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 28000.0
+      },
+      "ocr_confidence": 0.9285,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8611,
+          "box": [
+            64,
+            52,
+            482,
+            98
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8049,
+          "box": [
+            61,
+            343,
+            355,
+            385
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.7793,
+          "box": [
+            63,
+            130,
+            249,
+            161
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-3",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 11000.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 11000.0
+      },
+      "llm": {
+        "merchant": "DONAT GULA",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "DONAT GULA",
+        "transaction_date": "2026-01-01",
+        "total_amount": 11000.0
+      },
+      "ocr_confidence": 0.9203,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.9155,
+          "box": [
+            85,
+            65,
+            530,
+            113
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.9115,
+          "box": [
+            86,
+            149,
+            294,
+            180
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8039,
+          "box": [
+            82,
+            375,
+            387,
+            421
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-4",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 174600.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 174600.0
+      },
+      "llm": {
+        "merchant": "ICE BLACKCOFFE",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "ICE BLACKCOFFE",
+        "transaction_date": "2026-01-01",
+        "total_amount": 174600.0
+      },
+      "ocr_confidence": 0.9195,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.8928,
+          "box": [
+            71,
+            140,
+            270,
+            169
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8648,
+          "box": [
+            73,
+            57,
+            491,
+            101
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.7734,
+          "box": [
+            71,
+            344,
+            377,
+            386
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-5",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 31.0
+      },
+      "ocr_regions": {
+        "merchant": null,
+        "transaction_date": "2026-01-01",
+        "total_amount": 31.0
+      },
+      "llm": {
+        "merchant": "TRAD KY TOAST CARTE",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "TRAD KY TOAST CARTE",
+        "transaction_date": "2026-01-01",
+        "total_amount": 31.0
+      },
+      "ocr_confidence": 0.931,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.9077,
+          "box": [
+            79,
+            386,
+            313,
+            427
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.9022,
+          "box": [
+            75,
+            147,
+            298,
+            182
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8934,
+          "box": [
+            71,
+            65,
+            523,
+            109
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-6",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 46000.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 46000.0
+      },
+      "llm": {
+        "merchant": "null",
+        "transaction_date": "null",
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "null",
+        "transaction_date": "2026-01-01",
+        "total_amount": 46000.0
+      },
+      "ocr_confidence": 0.9254,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.8472,
+          "box": [
+            107,
+            160,
+            319,
+            193
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8354,
+          "box": [
+            105,
+            358,
+            409,
+            403
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8343,
+          "box": [
+            103,
+            79,
+            543,
+            127
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-7",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 111000.0
+      },
+      "ocr_regions": {
+        "merchant": null,
+        "transaction_date": "2026-01-01",
+        "total_amount": 111000.0
+      },
+      "llm": {
+        "merchant": "Kupon",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "Kupon",
+        "transaction_date": "2026-01-01",
+        "total_amount": 111000.0
+      },
+      "ocr_confidence": 0.919,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.9064,
+          "box": [
+            78,
+            146,
+            286,
+            178
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8528,
+          "box": [
+            79,
+            65,
+            500,
+            106
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.788,
+          "box": [
+            83,
+            379,
+            388,
+            424
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-8",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 50000.0
+      },
+      "ocr_regions": {
+        "merchant": null,
+        "transaction_date": "2026-01-01",
+        "total_amount": 50000.0
+      },
+      "llm": {
+        "merchant": "BLACK SAKURA",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "BLACK SAKURA",
+        "transaction_date": "2026-01-01",
+        "total_amount": 50000.0
+      },
+      "ocr_confidence": 0.9333,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.9257,
+          "box": [
+            88,
+            66,
+            539,
+            115
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8976,
+          "box": [
+            87,
+            152,
+            298,
+            184
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8083,
+          "box": [
+            84,
+            378,
+            387,
+            423
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-9",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 50000.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 50000.0
+      },
+      "llm": {
+        "merchant": "Bumbu Kaldu",
+        "transaction_date": null,
+        "total_amount": 136000.0
+      },
+      "ocr_llm": {
+        "merchant": "Bumbu Kaldu",
+        "transaction_date": "2026-01-01",
+        "total_amount": 50000.0
+      },
+      "ocr_confidence": 0.8197,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8566,
+          "box": [
+            73,
+            44,
+            507,
+            95
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8516,
+          "box": [
+            69,
+            130,
+            283,
+            162
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.7925,
+          "box": [
+            66,
+            352,
+            376,
+            395
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-10",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 17000.0
+      },
+      "ocr_regions": {
+        "merchant": null,
+        "transaction_date": "2026-01-01",
+        "total_amount": 17000.0
+      },
+      "llm": {
+        "merchant": "CINNAMON SUGAR",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "CINNAMON SUGAR",
+        "transaction_date": "2026-01-01",
+        "total_amount": 17000.0
+      },
+      "ocr_confidence": 0.8597,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.9253,
+          "box": [
+            90,
+            69,
+            553,
+            117
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8975,
+          "box": [
+            83,
+            158,
+            302,
+            192
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.7954,
+          "box": [
+            85,
+            356,
+            391,
+            401
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-11",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 230000.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 230000.0
+      },
+      "llm": {
+        "merchant": "BANABERRY",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "BANABERRY",
+        "transaction_date": "2026-01-01",
+        "total_amount": 230000.0
+      },
+      "ocr_confidence": 0.8594,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.894,
+          "box": [
+            77,
+            157,
+            274,
+            187
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8542,
+          "box": [
+            77,
+            72,
+            499,
+            116
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.6573,
+          "box": [
+            86,
+            336,
+            392,
+            377
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-12",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 120000.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 120000.0
+      },
+      "llm": {
+        "merchant": "BLUS WANITA",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "BLUS WANITA",
+        "transaction_date": "2026-01-01",
+        "total_amount": 120000.0
+      },
+      "ocr_confidence": 0.9321,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.8772,
+          "box": [
+            88,
+            144,
+            294,
+            176
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8579,
+          "box": [
+            90,
+            65,
+            506,
+            107
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.7587,
+          "box": [
+            90,
+            358,
+            398,
+            398
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-13",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 51.3
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 51.3
+      },
+      "llm": {
+        "merchant": "BASO KUAH",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "BASO KUAH",
+        "transaction_date": "2026-01-01",
+        "total_amount": 51.3
+      },
+      "ocr_confidence": 0.909,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.9157,
+          "box": [
+            83,
+            140,
+            299,
+            171
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8547,
+          "box": [
+            82,
+            363,
+            317,
+            403
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8337,
+          "box": [
+            84,
+            61,
+            523,
+            107
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-14",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 281435.0
+      },
+      "ocr_regions": {
+        "merchant": null,
+        "transaction_date": "2026-01-01",
+        "total_amount": 281435.0
+      },
+      "llm": {
+        "merchant": "RedVelvet",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "RedVelvet",
+        "transaction_date": "2026-01-01",
+        "total_amount": 281435.0
+      },
+      "ocr_confidence": 0.8151,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.9311,
+          "box": [
+            66,
+            144,
+            279,
+            178
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8131,
+          "box": [
+            63,
+            59,
+            504,
+            104
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.6884,
+          "box": [
+            65,
+            363,
+            399,
+            407
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-15",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 63.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 63.0
+      },
+      "llm": {
+        "merchant": "null",
+        "transaction_date": "null",
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "null",
+        "transaction_date": "2026-01-01",
+        "total_amount": 63.0
+      },
+      "ocr_confidence": 0.861,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.9045,
+          "box": [
+            90,
+            150,
+            299,
+            181
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.9022,
+          "box": [
+            92,
+            66,
+            528,
+            114
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8771,
+          "box": [
+            91,
+            387,
+            318,
+            428
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-16",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 70000.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 70000.0
+      },
+      "llm": {
+        "merchant": "LG",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "LG",
+        "transaction_date": "2026-01-01",
+        "total_amount": 70000.0
+      },
+      "ocr_confidence": 0.8656,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8594,
+          "box": [
+            114,
+            85,
+            573,
+            135
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8384,
+          "box": [
+            120,
+            175,
+            329,
+            204
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8166,
+          "box": [
+            112,
+            369,
+            427,
+            412
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-17",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 91000.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 91000.0
+      },
+      "llm": {
+        "merchant": "Goblin's Mace",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "Goblin's Mace",
+        "transaction_date": "2026-01-01",
+        "total_amount": 91000.0
+      },
+      "ocr_confidence": 0.93,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.9035,
+          "box": [
+            65,
+            138,
+            284,
+            171
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8447,
+          "box": [
+            64,
+            50,
+            512,
+            101
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.7695,
+          "box": [
+            63,
+            369,
+            368,
+            413
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-18",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 156000.0
+      },
+      "ocr_regions": {
+        "merchant": null,
+        "transaction_date": "2026-01-01",
+        "total_amount": 156000.0
+      },
+      "llm": {
+        "merchant": "Propolis Cair",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "Propolis Cair",
+        "transaction_date": "2026-01-01",
+        "total_amount": 156000.0
+      },
+      "ocr_confidence": 0.9385,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8618,
+          "box": [
+            110,
+            82,
+            536,
+            123
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.7916,
+          "box": [
+            111,
+            165,
+            317,
+            197
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.7452,
+          "box": [
+            113,
+            382,
+            429,
+            424
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-19",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 176000.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 176000.0
+      },
+      "llm": {
+        "merchant": "AMBUSH",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "AMBUSH",
+        "transaction_date": "2026-01-01",
+        "total_amount": 176000.0
+      },
+      "ocr_confidence": 0.9198,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.9126,
+          "box": [
+            95,
+            66,
+            545,
+            115
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8813,
+          "box": [
+            94,
+            148,
+            308,
+            180
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.7865,
+          "box": [
+            94,
+            410,
+            420,
+            453
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-20",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 377859.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 377859.0
+      },
+      "llm": {
+        "merchant": "null",
+        "transaction_date": "null",
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "null",
+        "transaction_date": "2026-01-01",
+        "total_amount": 377859.0
+      },
+      "ocr_confidence": 0.9147,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.9209,
+          "box": [
+            68,
+            139,
+            279,
+            171
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8727,
+          "box": [
+            70,
+            56,
+            492,
+            102
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.7213,
+          "box": [
+            72,
+            385,
+            384,
+            428
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-21",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 38.0
+      },
+      "ocr_regions": {
+        "merchant": null,
+        "transaction_date": "2026-01-01",
+        "total_amount": 38.0
+      },
+      "llm": {
+        "merchant": "NASI GOR SFD TLR",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "NASI GOR SFD TLR",
+        "transaction_date": "2026-01-01",
+        "total_amount": 38.0
+      },
+      "ocr_confidence": 0.9386,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8721,
+          "box": [
+            61,
+            43,
+            485,
+            88
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8612,
+          "box": [
+            60,
+            127,
+            265,
+            159
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8355,
+          "box": [
+            63,
+            318,
+            285,
+            355
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-22",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 40000.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 40000.0
+      },
+      "llm": {
+        "merchant": "SOFT STEAMED",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "SOFT STEAMED",
+        "transaction_date": "2026-01-01",
+        "total_amount": 40000.0
+      },
+      "ocr_confidence": 0.8934,
+      "detections": {
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.9089,
+          "box": [
+            102,
+            68,
+            537,
+            117
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.9062,
+          "box": [
+            104,
+            152,
+            306,
+            184
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.7054,
+          "box": [
+            101,
+            400,
+            389,
+            438
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-23",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 63000.0
+      },
+      "ocr_regions": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 63000.0
+      },
+      "llm": {
+        "merchant": "TWIST DONUT",
+        "transaction_date": null,
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "TWIST DONUT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 63000.0
+      },
+      "ocr_confidence": 0.907,
+      "detections": {
+        "date": {
+          "field": "date",
+          "confidence": 0.9185,
+          "box": [
+            54,
+            142,
+            268,
+            177
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8607,
+          "box": [
+            54,
+            52,
+            493,
+            103
+          ]
+        },
+        "total": {
+          "field": "total",
+          "confidence": 0.8471,
+          "box": [
+            58,
+            392,
+            361,
+            437
+          ]
+        }
+      }
+    },
+    {
+      "id": "cord-24",
+      "ocr_full": {
+        "merchant": "UNKNOWN MERCHANT",
+        "transaction_date": "2026-01-01",
+        "total_amount": 118.0
+      },
+      "ocr_regions": {
+        "merchant": null,
+        "transaction_date": "2026-01-01",
+        "total_amount": 118.0
+      },
+      "llm": {
+        "merchant": "null",
+        "transaction_date": "null",
+        "total_amount": null
+      },
+      "ocr_llm": {
+        "merchant": "null",
+        "transaction_date": "2026-01-01",
+        "total_amount": 118.0
+      },
+      "ocr_confidence": 0.8667,
+      "detections": {
+        "total": {
+          "field": "total",
+          "confidence": 0.9179,
+          "box": [
+            106,
+            394,
+            350,
+            436
+          ]
+        },
+        "date": {
+          "field": "date",
+          "confidence": 0.8771,
+          "box": [
+            106,
+            156,
+            312,
+            184
+          ]
+        },
+        "merchant": {
+          "field": "merchant",
+          "confidence": 0.8612,
+          "box": [
+            100,
+            72,
+            539,
+            119
+          ]
+        }
+      }
+    }
+  ]
+}

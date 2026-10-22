@@ -56,3 +56,8 @@ notebooks/**/*.nbconvert.ipynb
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# --- CV module local artifacts ---
+.venv-cv/
+cv/data/
+cv/runs/

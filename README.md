@@ -113,6 +113,8 @@ records a real **cost-per-document** derived from GPU `$/hr ÷ docs/hr`.
 | Graph API | Neo4j 5 + Strawberry GraphQL at `/graphql` | Entity graph + traversals over expenses, merchants, policies |
 | Merchant clustering | scikit-learn (k-means/HDBSCAN), NetworkX (Louvain), fastembed | Unsupervised merchant segments vs GL codes |
 | Distributed benchmark | Ray cluster (Docker) + stdlib multiprocessing | Measured parallel ingestion |
+| Receipt CV / OCR | OpenCV, YOLOv8n (fine-tuned on synthetic renders), Tesseract | Detector + OCR comparison vs LLM extraction |
+| Classical GL baseline | scikit-learn TF-IDF + LightGBM/XGBoost | Non-LLM coding baseline (40% vs QLoRA 88.9%) |
 | Review UI | Streamlit + axe-core + Lighthouse | Human review + accessibility evidence |
 
 ## Repository layout
@@ -132,6 +134,8 @@ expenseiq/
 ├── infra/              docker-compose: Postgres, MongoDB, OpenSearch, Neo4j, Langfuse, Ray
 ├── warehouse/          Snowflake DDL + queries for spend analytics
 ├── gpu/                Runbook + endpoint checker for the self-hosted vLLM
+├── cv/                 OpenCV preprocessing + fine-tuned YOLOv8n + Tesseract OCR
+├── ml/                 Classical LightGBM/XGBoost GL-coding baseline
 ├── sft/                Free-Colab TRL/QloRA instruction tuning + synthetic GL corpus
 ├── runtime/            ONNX/TFLite export, parity and CPU benchmark harness
 ├── airflow/            Offline ingestion → eval → gate DAG + local runbook

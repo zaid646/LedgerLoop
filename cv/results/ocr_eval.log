@@ -1,0 +1,67 @@
+processed 10/75
+processed 20/75
+processed 30/75
+processed 40/75
+processed 50/75
+processed 60/75
+processed 70/75
+processed 75/75
+{
+  "ocr_only": {
+    "n": 75,
+    "field_accuracy": {
+      "merchant": 1.0,
+      "total_amount": 1.0,
+      "transaction_date": 0.82
+    },
+    "field_support": {
+      "merchant": 50,
+      "total_amount": 75,
+      "transaction_date": 50
+    },
+    "exact_doc_match": 0.88
+  },
+  "ocr_yolo": {
+    "n": 75,
+    "field_accuracy": {
+      "merchant": 0.94,
+      "total_amount": 1.0,
+      "transaction_date": 0.82
+    },
+    "field_support": {
+      "merchant": 50,
+      "total_amount": 75,
+      "transaction_date": 50
+    },
+    "exact_doc_match": 0.84
+  },
+  "llm_only": {
+    "n": 75,
+    "field_accuracy": {
+      "merchant": 0.96,
+      "total_amount": 0.6267,
+      "transaction_date": 0.84
+    },
+    "field_support": {
+      "merchant": 50,
+      "total_amount": 75,
+      "transaction_date": 50
+    },
+    "exact_doc_match": 0.4933
+  },
+  "ocr_llm": {
+    "n": 75,
+    "field_accuracy": {
+      "merchant": 0.96,
+      "total_amount": 1.0,
+      "transaction_date": 0.84
+    },
+    "field_support": {
+      "merchant": 50,
+      "total_amount": 75,
+      "transaction_date": 50
+    },
+    "exact_doc_match": 0.8667
+  }
+}
+results -> cv/results/ocr_vs_llm.json

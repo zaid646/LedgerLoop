@@ -1,0 +1,17 @@
+# CV + classical-ML extras for the receipt pipeline.
+# Python 3.12, CPU only. Tesseract itself is a system package:
+#   macOS: brew install tesseract
+#   Ubuntu: sudo apt-get install -y tesseract-ocr
+numpy==2.5.4
+opencv-python-headless==5.0.0.93
+Pillow==12.3.0
+pytesseract==0.3.13
+ultralytics==8.4.184
+torch==2.14.1
+torchvision==0.29.1
+scikit-learn==1.9.1
+pandas==3.0.6
+scipy==1.18.1
+lightgbm==4.7.0
+xgboost==3.4.1
+pytest==9.1.1
