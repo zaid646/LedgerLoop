@@ -117,6 +117,11 @@ records a real **cost-per-document** derived from GPU `$/hr ÷ docs/hr`.
 | Classical GL baseline | scikit-learn TF-IDF + LightGBM/XGBoost | Non-LLM coding baseline (40% vs QLoRA 88.9%) |
 | Review UI | Streamlit + axe-core + Lighthouse | Human review + accessibility evidence |
 
+> **CV metric caveat:** the YOLO and OCR numbers are measured on **synthetic
+> receipt renders**, not phone photos, so they are upper bounds. YOLO was
+> trained on 50 SROIE documents and validated on 25 CORD documents — a
+> document- and source-disjoint split. See [`cv/README.md`](cv/README.md).
+
 ## Repository layout
 
 ```
