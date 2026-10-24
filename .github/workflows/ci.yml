@@ -94,6 +94,111 @@ jobs:
         working-directory: ai-service
         run: .venv/bin/python ../scripts/ingest_benchmark.py --docs 200 --chunk-size 50 --backends serial,ray --ray-local-mode --no-figure --out ../runs/ingest_smoke.json
 
+  spark-benchmark:
+    name: PySpark ingestion benchmark (local[*])
+    runs-on: ubuntu-latest
+    needs: python-service
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+      - run: uv python install 3.12
+      - name: Install pyspark
+        run: pip install pyspark==4.0.0
+      - name: PySpark ingestion benchmark (8 000 docs, local[*])
+        run: |
+          python scripts/spark_ingest.py \
+            --input evals/golden/v0.jsonl \
+            --output /tmp/spark_output \
+            --docs 8000 \
+            --master local[*] \
+            --out /tmp/spark_summary.json
+      - name: Upload spark summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: spark-benchmark
+          path: /tmp/spark_summary.json
+
+  bert-training:
+    name: BERT GL-coding fine-tune (CPU smoke)
+    runs-on: ubuntu-latest
+    needs: python-service
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install deps
+        run: |
+          pip install torch transformers scikit-learn
+      - name: CPU smoke test (tiny BERT, 10 steps)
+        run: |
+          python nlp/train_bert.py \
+            --model prajjwal1/bert-tiny \
+            --epochs 1 \
+            --max-steps 10 \
+            --batch-size 4 \
+            --device cpu \
+            --output-dir /tmp/bert_output \
+            --results-dir /tmp/bert_results
+      - name: Evaluate
+        run: |
+          python nlp/evaluate_bert.py \
+            --model-dir /tmp/bert_output \
+            --val-file sft/data/val.jsonl \
+            --output /tmp/bert_results/eval_val.json \
+            --device cpu
+      - name: Upload BERT results
+        uses: actions/upload-artifact@v4
+        with:
+          name: bert-results
+          path: /tmp/bert_results/
+
+  vit-training:
+    name: ViT GL-classification (CPU smoke)
+    runs-on: ubuntu-latest
+    needs: python-service
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install deps
+        run: |
+          pip install torch torchvision transformers scikit-learn Pillow
+      - name: CPU smoke test (ViT, 10 steps)
+        run: |
+          mkdir -p /tmp/vit_train/TRAVEL /tmp/vit_val/TRAVEL
+          python -c "
+            from PIL import Image
+            import os
+            for d in ['/tmp/vit_train/TRAVEL', '/tmp/vit_val/TRAVEL']:
+                for i in range(4):
+                    Image.new('RGB', (224, 224), color=(i*50, 100, 150)).save(os.path.join(d, f'img_{i}.jpg'))
+          "
+          python cv/train_vit.py \
+            --model google/vit-base-patch16-224 \
+            --train-root /tmp/vit_train \
+            --val-root /tmp/vit_val \
+            --epochs 1 \
+            --max-steps 10 \
+            --batch-size 4 \
+            --device cpu \
+            --output-dir /tmp/vit_output \
+            --results-dir /tmp/vit_results
+      - name: Compare ViT vs YOLOv8n
+        run: |
+          python cv/compare_vit_yolo.py \
+            --vit-results /tmp/vit_results/eval_val.json \
+            --yolo-results cv/runs/receipt_fields_yolov8n/results.csv \
+            --output /tmp/vit_results/comparison.json
+      - name: Upload ViT results
+        uses: actions/upload-artifact@v4
+        with:
+          name: vit-results
+          path: /tmp/vit_results/
+
   eval-gate:
     name: Eval regression gate
     runs-on: ubuntu-latest
