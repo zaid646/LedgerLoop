@@ -21,20 +21,21 @@ Usage::
     # RoBERTa variant
     python nlp/train_bert.py --model roberta-base --epochs 3 --device cuda
 """
-from collections import Counter
+from __future__ import annotations
 
 import argparse
-import csv
 import json
 import os
 import sys
 import time
+from collections import Counter
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 import torch
 from torch.utils.data import DataLoader
+import torch.nn as nn
 
 # Transformers imported lazily so the module loads without it installed.
 def _import_transformers():
@@ -53,7 +54,6 @@ NUM_LABELS = len(GL_CATEGORIES)
 # ---------------------------------------------------------------------------
 # Data loading
 # ---------------------------------------------------------------------------
-
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
     return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
@@ -150,8 +150,6 @@ def train(
         model_id, num_labels=NUM_LABELS, id2label=ID2LABEL, label2id=LABEL2ID
     )
     model.to(device)
-train_ds = GLDataset(train_examples, tokenizer, max_length)
-    val_ds = GLDataset(val_examples, tokenizer, max_length)
 
     # Compute class weights from training data to handle severe imbalance
     label_counts = Counter(ex["label"] for ex in train_examples)
@@ -162,6 +160,8 @@ train_ds = GLDataset(train_examples, tokenizer, max_length)
         dtype=torch.float32,
     ).to(device)
 
+    train_ds = GLDataset(train_examples, tokenizer, max_length)
+    val_ds = GLDataset(val_examples, tokenizer, max_length)
     train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False)
 
@@ -187,6 +187,7 @@ train_ds = GLDataset(train_examples, tokenizer, max_length)
             logits = outputs.logits
             loss_fn = nn.CrossEntropyLoss(weight=class_weights)
             loss = loss_fn(logits, labels)
+
             loss.backward()
             optimizer.step()
             scheduler.step()
