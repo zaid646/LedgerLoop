@@ -148,7 +148,8 @@ def train(
 
     processor = AutoImageProcessor.from_pretrained(model_id)
     model = AutoModelForImageClassification.from_pretrained(
-        model_id, num_labels=NUM_LABELS, id2label=ID2LABEL, label2id=LABEL2ID
+        model_id, num_labels=NUM_LABELS, id2label=ID2LABEL, label2id=LABEL2ID,
+        ignore_mismatched_sizes=True
     )
     model.to(device)
 
