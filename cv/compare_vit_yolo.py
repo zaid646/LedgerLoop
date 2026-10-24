@@ -68,7 +68,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"{'Recall':<35} {'N/A (classification)':>22} {yolo_rec:>22.4f}")
     print(f"{'Task':<35} {'GL category classification':>22} {'Field bounding-box detection':>22}")
     print(f"{'Train epochs':<35} {vit.get('epochs', 'N/A'):>22} {yolo.get('epoch', 'N/A'):>22}")
-    print(f"{'Train runtime (s)':<35} {vit.get('train_runtime_seconds', 'N/A'):>22.1f} {yolo.get('train_time_s', 'N/A'):>22.1f}")
+    print(f"{'Train runtime (s)':<35} {str(vit.get('train_runtime_seconds', 'N/A')):>22} {str(yolo.get('train_time_s', 'N/A')):>22}")
     print(f"{'Model':<35} {vit.get('model', 'N/A'):>22} {'yolov8n.pt':>22}")
     print(f"{'Device':<35} {vit.get('device', 'N/A'):>22} {'cpu':>22}")
     print()
