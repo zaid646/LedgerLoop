@@ -312,6 +312,8 @@ def train(
     model.train()
     started = datetime.now(UTC)
     train_losses: list[float] = []
+    grid = image_size // 16
+    cell = 1.0 / grid
 
     for epoch in range(epochs):
         epoch_loss = 0.0
@@ -344,7 +346,13 @@ def train(
                     if inside.sum() == 0:
                         continue
                     cls_target[b, inside] = cls_id + 1  # +1 for background offset
-                    box_target[b, inside] = gt_boxes[b, gi, 1:]
+                    pcx = centers[inside, 0].mean().item()
+                    pcy = centers[inside, 1].mean().item()
+                    # YOLO-style encoded targets relative to patch cell
+                    box_target[b, inside, 0] = (cx - pcx) / cell
+                    box_target[b, inside, 1] = (cy - pcy) / cell
+                    box_target[b, inside, 2] = math.log(max(w, 1e-6) / cell)
+                    box_target[b, inside, 3] = math.log(max(h, 1e-6) / cell)
                     box_mask[b, inside] = True
 
             # Classification loss (focal-ish weighting via CE)
@@ -454,10 +462,10 @@ def evaluate(
                 cls_id = int(max_class[idx].item())
                 cx0, cy0 = patch_centers[idx].tolist()
                 delta = box_deltas[b, idx].tolist()
-                # decode box relative to patch cell (cell size = 1/14)
+                # decode box relative to patch cell (YOLO-style bounded offsets)
                 cell = 1.0 / grid
-                cx = cx0 + delta[0] * cell
-                cy = cy0 + delta[1] * cell
+                cx = cx0 + (1.0 / (1.0 + math.exp(-delta[0]))) * cell
+                cy = cy0 + (1.0 / (1.0 + math.exp(-delta[1]))) * cell
                 w = math.exp(delta[2]) * cell
                 h = math.exp(delta[3]) * cell
                 cx = min(max(cx, 0.0), 1.0)
