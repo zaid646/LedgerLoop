@@ -21,7 +21,7 @@ Usage::
     # RoBERTa variant
     python nlp/train_bert.py --model roberta-base --epochs 3 --device cuda
 """
-from __future__ import annotations
+from collections import Counter
 
 import argparse
 import csv
@@ -150,9 +150,18 @@ def train(
         model_id, num_labels=NUM_LABELS, id2label=ID2LABEL, label2id=LABEL2ID
     )
     model.to(device)
-
-    train_ds = GLDataset(train_examples, tokenizer, max_length)
+train_ds = GLDataset(train_examples, tokenizer, max_length)
     val_ds = GLDataset(val_examples, tokenizer, max_length)
+
+    # Compute class weights from training data to handle severe imbalance
+    label_counts = Counter(ex["label"] for ex in train_examples)
+    total = len(train_examples)
+    # Inverse frequency weighting: weight = total / (num_classes * count)
+    class_weights = torch.tensor(
+        [total / (NUM_LABELS * label_counts.get(i, 1)) for i in range(NUM_LABELS)],
+        dtype=torch.float32,
+    ).to(device)
+
     train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False)
 
@@ -174,8 +183,10 @@ def train(
             attention_mask = batch["attention_mask"].to(device)
             labels = batch["labels"].to(device)
 
-            outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
-            loss = outputs.loss
+            outputs = model(input_ids=input_ids, attention_mask=attention_mask)
+            logits = outputs.logits
+            loss_fn = nn.CrossEntropyLoss(weight=class_weights)
+            loss = loss_fn(logits, labels)
             loss.backward()
             optimizer.step()
             scheduler.step()
