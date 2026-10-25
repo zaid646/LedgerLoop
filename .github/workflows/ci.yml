@@ -191,9 +191,10 @@ jobs:
             --results-dir /tmp/vit_results
       - name: Compare ViT vs YOLOv8n
         run: |
+          # cv/runs/ is gitignored (binary artifacts), so use the committed
+          # YOLOv8n baseline baked into compare_vit_yolo.py.
           python cv/compare_vit_yolo.py \
             --vit-results /tmp/vit_results/eval_val.json \
-            --yolo-results cv/runs/receipt_fields_yolov8n/results.csv \
             --output /tmp/vit_results/comparison.json
       - name: Upload ViT results
         uses: actions/upload-artifact@v4

@@ -132,7 +132,6 @@ vit-train: ## CPU smoke test: fine-tune ViT on synthetic receipts (10 steps, 4 i
 vit-compare: ## Compare ViT results vs YOLOv8n baseline
 	python cv/compare_vit_yolo.py \
 		--vit-results cv/results/eval_val.json \
-		--yolo-results cv/runs/receipt_fields_yolov8n/results.csv \
 		--output cv/results/comparison.json
 
 backend-install: ## Install backend deps

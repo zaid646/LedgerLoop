@@ -552,10 +552,11 @@ Model card: [`nlp/MODEL_CARD.md`](nlp/MODEL_CARD.md).
 ## Vision Transformer (ViT) receipt classifier (`cv/`)
 
 A ViT-based document classifier as a complement to the existing YOLOv8n
-object-detection baseline (`cv/runs/receipt_fields_yolov8n/`). Fine-tunes
+object-detection baseline (trained artifacts land in
+`cv/runs/receipt_fields_yolov8n/`, which is gitignored). Fine-tunes
 `google/vit-base-patch16-224` on synthetic receipt images for GL-category
 classification (13 classes). Reports accuracy and macro F1 on 50 held-out
-images. Compare against YOLOv8n's mAP50=0.995 / mAP50-95=0.741 (different task:
+images. Compare against YOLOv8n's mAP50=0.995 / mAP50-95=0.794 (different task:
 classification vs bounding-box detection).
 
 ```bash

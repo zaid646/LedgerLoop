@@ -1,7 +1,0 @@
-path: /Users/zaid/ledgerloop/cv/data
-train: images/train
-val: images/val
-names:
-  0: merchant
-  1: date
-  2: total

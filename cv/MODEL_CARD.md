@@ -34,9 +34,10 @@ The ViT expects images sorted into GL category folders::
         TRAVEL/   *.jpg
         ...
 
-Folder names must match GL_CATEGORIES exactly. The synthetic receipt dataset
-at `cv/data/` already contains images and YOLO-style labels; the ViT dataset
-is derived by grouping images by their dominant GL category.
+Folder names must match GL_CATEGORIES exactly. The synthetic receipt dataset is
+generated locally under `cv/data/` (gitignored) and contains images and
+YOLO-style labels; the ViT dataset is derived by grouping images by their
+dominant GL category.
 
 ## Training
 

@@ -60,3 +60,7 @@ notebooks/**/*.nbconvert.ipynb
 # --- trained model weights (regenerate via nlp/train_bert.py) ---
 nlp/outputs/
 cv/outputs/
+
+# --- generated CV datasets / training artifacts (large binaries) ---
+cv/runs/
+cv/data/
