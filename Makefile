@@ -4,7 +4,7 @@ SHELL := /bin/bash
 # -----------------------------------------------------------------------------
 # ExpenseIQ — developer entrypoints
 # -----------------------------------------------------------------------------
-.PHONY: help infra-up infra-down ai-install ai-run ai-test gpu-check lint fmt evals index graph-build graph-cluster graphql-probe ui-install ui-run a11y a11y-install a11y-lighthouse ray-up ray-down bench-local bench-ray backend-install backend-run backend-check assistant-eval ask runtime-install runtime-export runtime-parity runtime-bench runtime-test ci-policy ci-smoke
+.PHONY: help infra-up infra-down ai-install ai-run ai-test gpu-check lint fmt evals index graph-build graph-cluster graphql-probe ui-install ui-run a11y a11y-install a11y-lighthouse ray-up ray-down bench-local bench-ray spark-install spark-bench spark-compare bert-install bert-train bert-eval vit-install vit-train vit-compare backend-install backend-run backend-check assistant-eval ask runtime-install runtime-export runtime-parity runtime-bench runtime-test ci-policy ci-smoke
 
 help: ## Show this help
 	@grep -hE '^[a-zA-Z0-9_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*?## "}{printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
@@ -70,6 +70,69 @@ bench-local: ## Serial + multiprocessing ingestion benchmark (no Docker)
 bench-ray: ## Canonical benchmark on the Ray cluster (uses .venv python to avoid the uv hook)
 	docker compose -f infra/docker-compose.yml exec -T ray-head python /workspace/scripts/ingest_benchmark.py --docs 8000 --chunk-size 2000 --backends serial,mp,ray --workers 2,4,8 --ray-address auto --no-figure --out /workspace/runs/ingest_benchmark.json
 	cd ai-service && .venv/bin/python ../scripts/ingest_benchmark.py --from-json ../runs/ingest_benchmark.json --figure ../evidence/png/17-ingest-throughput.png
+
+spark-install: ## Install pyspark for the distributed ingestion pipeline
+	pip install pyspark==4.0.0
+
+spark-bench: ## PySpark ingestion benchmark (8 000 docs, local[*])
+	python scripts/spark_ingest.py \
+		--input evals/golden/v0.jsonl \
+		--output /tmp/spark_output \
+		--docs 8000 \
+		--master local[*] \
+		--out runs/spark_ingest.json
+
+spark-compare: ## Compare Spark vs Ray/multiprocessing throughput (requires bench-ray output)
+	@echo "Spark:" && python -c "import json; d=json.load(open('runs/spark_ingest.json')); print(f\"  docs/s={d['docs_per_s']} wall_s={d['wall_s']}\")"
+	@echo "Ray/mp:" && python -c "import json; d=json.load(open('runs/ingest_benchmark.json')); r=[x for x in d['results'] if x['backend']=='ray']; print(f\"  docs/s={r[0]['docs_per_s_work'] if r else 'N/A'}\")" 2>/dev/null || true
+
+bert-install: ## Install BERT/RoBERTa training deps (transformers, scikit-learn)
+	pip install torch transformers scikit-learn
+
+bert-train: ## CPU smoke test: fine-tune tiny BERT on GL-coding corpus (10 steps)
+	python nlp/train_bert.py \
+		--model prajjwal1/bert-tiny \
+		--epochs 1 \
+		--max-steps 10 \
+		--batch-size 4 \
+		--device cpu \
+		--output-dir nlp/outputs/bert-tiny \
+		--results-dir nlp/results
+
+bert-eval: ## Evaluate a fine-tuned BERT model on held-out val set
+	python nlp/evaluate_bert.py \
+		--model-dir nlp/outputs/bert-tiny \
+		--val-file sft/data/val.jsonl \
+		--output nlp/results/eval_val.json \
+		--device cpu
+
+vit-install: ## Install ViT training deps (torchvision, transformers, Pillow)
+	pip install torch torchvision transformers scikit-learn Pillow
+
+vit-train: ## CPU smoke test: fine-tune ViT on synthetic receipts (10 steps, 4 images/class)
+	mkdir -p /tmp/vit_train/TRAVEL /tmp/vit_val/TRAVEL
+	python -c "
+		from PIL import Image
+		import os
+		for d in ['/tmp/vit_train/TRAVEL', '/tmp/vit_val/TRAVEL']:
+			for i in range(4):
+				Image.new('RGB', (224, 224), color=(i*50, 100, 150)).save(os.path.join(d, f'img_{i}.jpg'))
+	"
+	python cv/train_vit.py \
+		--model google/vit-base-patch16-224 \
+		--train-root /tmp/vit_train \
+		--val-root /tmp/vit_val \
+		--epochs 1 \
+		--max-steps 10 \
+		--batch-size 4 \
+		--device cpu \
+		--output-dir cv/outputs/vit-base \
+		--results-dir cv/results
+
+vit-compare: ## Compare ViT results vs YOLOv8n baseline
+	python cv/compare_vit_yolo.py \
+		--vit-results cv/results/eval_val.json \
+		--output cv/results/comparison.json
 
 backend-install: ## Install backend deps
 	cd backend && npm install

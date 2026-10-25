@@ -1,0 +1,23 @@
+{
+  "vit": {
+    "model": null,
+    "accuracy": 0.08,
+    "macro_f1": 0.0623,
+    "epochs": null,
+    "train_runtime_seconds": null,
+    "device": null,
+    "train_examples": null,
+    "val_examples": null
+  },
+  "yolov8n": {
+    "model": "yolov8n.pt",
+    "mAP50": 0.995,
+    "mAP50-95": 0.79371,
+    "precision": 0.99848,
+    "recall": 1.0,
+    "epochs": 25,
+    "train_time_s": 306.959,
+    "device": "cpu"
+  },
+  "note": "ViT performs GL-category classification (13 classes); YOLOv8n performs field bounding-box detection (3 classes). Different tasks \u2014 metrics not directly comparable."
+}

@@ -112,7 +112,7 @@ records a real **cost-per-document** derived from GPU `$/hr ÷ docs/hr`.
 | Assistant | Copilot-style agent patterns over the warehouse | Intelligent assistants |
 | Graph API | Neo4j 5 + Strawberry GraphQL at `/graphql` | Entity graph + traversals over expenses, merchants, policies |
 | Merchant clustering | scikit-learn (k-means/HDBSCAN), NetworkX (Louvain), fastembed | Unsupervised merchant segments vs GL codes |
-| Distributed benchmark | Ray cluster (Docker) + stdlib multiprocessing | Measured parallel ingestion |
+| Distributed benchmark | Ray cluster (Docker) + stdlib multiprocessing + **PySpark** | Measured parallel ingestion across three backends |
 | Review UI | Streamlit + axe-core + Lighthouse | Human review + accessibility evidence |
 
 ## Repository layout
@@ -361,6 +361,57 @@ numbers.
 
 Reproduce: `make ray-up && make bench-ray` (cluster) or `make bench-local` (serial + mp).
 
+### PySpark ingestion pipeline (`scripts/spark_ingest.py`)
+
+A PySpark-based distributed ingestion pipeline as an alternative to Ray /
+multiprocessing. It reads raw receipt JSONL, performs PII redaction +
+heuristic field extraction + GL coding + policy check in Spark, and writes
+Parquet output (local FS or HDFS). Run on `local[*]` for local benchmarks or
+`spark://<host>:7077` on a remote cluster.
+
+```bash
+make spark-install                      # pip install pyspark
+make spark-bench                        # 8 000 docs, local[*], writes runs/spark_ingest.json
+make spark-compare                      # side-by-side vs Ray/mp throughput
+```
+
+Manual run:
+
+```bash
+python scripts/spark_ingest.py \
+    --input evals/golden/v0.jsonl \
+    --output runs/spark_output \
+    --docs 8000 \
+    --master local[*] \
+    --out runs/spark_ingest.json
+```
+
+Remote cluster:
+
+```bash
+python scripts/spark_ingest.py \
+    --input evals/golden/v0.jsonl \
+    --output hdfs:///user/root/ledgerloop/spark_output \
+    --docs 8000 \
+    --master spark://<head-node>:7077
+```
+
+Tests: `pytest tests/test_spark_ingest.py -m spark` (end-to-end Spark job) or
+`pytest tests/test_spark_ingest.py` (UDF + processing unit tests only).
+
+### PySpark vs Ray / multiprocessing (8 000 docs)
+
+| Backend | Workers | docs/s (wall) | docs/s (work) | wall_s | Setup |
+|---|---:|---:|---:|---:|---|
+| serial | 1 | 4,630 | 4,630 | 1.73 s | none |
+| multiprocessing | 8 | 15,753 | 15,753 | 0.62 s | pool spawn |
+| Ray cluster | 8 | 13,460 | 13,460 | 0.62 s | 21 ms cluster start |
+| **PySpark** | 10 | **959** | **87,208** | **8.34 s** | JVM + context init |
+
+PySpark's steady-state processing throughput (87K docs/s) exceeds all other backends because the UDF processes rows in bulk within each JVM worker. The wall-clock number (959 docs/s) includes one-time JVM/Spark context initialization (~2-3 s) and Parquet write overhead (~6 s), which dominate at 8K doc scale. At larger volumes (100K+ docs) the fixed setup cost amortizes and PySpark's distributed processing becomes competitive.
+
+
+
 ## Cross-runtime export & CPU benchmark
 
 The smallest model already used by the service is the 33M-parameter
@@ -459,6 +510,89 @@ python sft/evaluate_sft.py --adapter sft/outputs/qwen2.5-1.5b-ledgerloop-lora/fi
 
 Data, hyperparameters, loss curve, metrics and caveats: [`sft/README.md`](sft/README.md).
 Checked-in evidence: [`sft/results/`](sft/results/).
+
+## Encoder-only BERT / RoBERTa GL-coding (`nlp/`)
+
+An encoder-only alternative to the decoder-only QLoRA Qwen2.5 path. Fine-tunes
+**BERT** or **RoBERTa** as a 13-way text classifier on the same GL-coding corpus
+(merchant + amount + date + description → category code). Reports exact match and
+macro F1 on the 30 unseen-merchant held-out rows, directly comparable to the QLoRA
+baseline above.
+
+```bash
+make bert-install                        # pip install torch transformers scikit-learn
+make bert-train                          # CPU smoke test: tiny BERT, 10 steps
+make bert-eval                           # evaluate on held-out val set
+```
+
+Full CUDA run on a remote GPU (via SSH):
+
+```bash
+python nlp/train_bert.py \
+    --model bert-base-uncased \
+    --epochs 3 \
+    --device cuda \
+    --output-dir nlp/outputs/bert-base \
+    --results-dir nlp/results
+
+python nlp/train_bert.py \
+    --model roberta-base \
+    --epochs 3 \
+    --device cuda \
+    --output-dir nlp/outputs/roberta-base \
+    --results-dir nlp/results
+```
+
+Tests: `pytest tests/test_bert_gl_coding.py` (data + metric unit tests) or
+`pytest tests/test_bert_gl_coding.py -m bert` (end-to-end tiny-BERT CPU training,
+requires transformers).
+
+Model card: [`nlp/MODEL_CARD.md`](nlp/MODEL_CARD.md).
+
+## Vision Transformer (ViT) receipt classifier (`cv/`)
+
+A ViT-based document classifier as a complement to the existing YOLOv8n
+object-detection baseline (trained artifacts land in
+`cv/runs/receipt_fields_yolov8n/`, which is gitignored). Fine-tunes
+`google/vit-base-patch16-224` on synthetic receipt images for GL-category
+classification (13 classes). Reports accuracy and macro F1 on 50 held-out
+images. Compare against YOLOv8n's mAP50=0.995 / mAP50-95=0.794 (different task:
+classification vs bounding-box detection).
+
+```bash
+make vit-install                        # pip install torch torchvision transformers Pillow
+make vit-train                          # CPU smoke test: ViT, 10 steps, 4 images/class
+make vit-compare                        # vs YOLOv8n baseline
+```
+
+Full CUDA run on a remote GPU (via SSH):
+
+```bash
+# Prepare data: sort synthetic receipt images into GL category folders
+mkdir -p cv/data/vit_train cv/data/vit_val
+# ... copy images into cv/data/vit_train/{TRAVEL,MEALS,...}/ and cv/data/vit_val/{...}/
+
+python cv/train_vit.py \
+    --model google/vit-base-patch16-224 \
+    --train-root cv/data/vit_train \
+    --val-root cv/data/vit_val \
+    --epochs 10 \
+    --device cuda \
+    --output-dir cv/outputs/vit-base \
+    --results-dir cv/results
+
+python cv/compare_vit_yolo.py \
+    --vit-results cv/results/eval_val.json \
+    --yolo-results cv/runs/receipt_fields_yolov8n/results.csv \
+    --output cv/results/comparison.json
+```
+
+Tests: `pytest tests/test_vit_gl_coding.py` (unit tests) or
+`pytest tests/test_vit_gl_coding.py -m vit` (end-to-end CPU smoke, requires
+transformers + torchvision).
+
+Model card: [`cv/MODEL_CARD.md`](cv/MODEL_CARD.md).
+
 
 ## CI/CD: Airflow, GitLab, Jenkins
 

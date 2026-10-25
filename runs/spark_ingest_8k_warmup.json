@@ -1,0 +1,39 @@
+{
+  "engine": "pyspark",
+  "docs": 8000,
+  "partitions": 10,
+  "master": "local[*]",
+  "methodology": "cache input; warmup passes excluded; steady-state = mean of repeated full-pipeline foreachPartition actions (forces UDF evaluation, unlike count() which prunes columns)",
+  "load_s": 6.5003,
+  "warmup_runs": 2,
+  "warmup_times_s": [
+    2.1447,
+    0.3123
+  ],
+  "warmup_s": 1.2285,
+  "steady_state_runs": 5,
+  "steady_state_times_s": [
+    0.292,
+    0.2788,
+    0.2691,
+    0.2625,
+    0.2784
+  ],
+  "steady_state_mean_s": 0.2761,
+  "steady_state_p50_s": 0.2784,
+  "steady_state_min_s": 0.2625,
+  "steady_state_docs_per_s": 28970.22,
+  "work_s": 0.2761,
+  "write_s": 1.2766,
+  "wall_s": 8.053,
+  "docs_per_s": 993.42,
+  "docs_per_s_work": 28970.22,
+  "p50_latency_ms": 0.076,
+  "total_redactions": 9951,
+  "routes": {
+    "auto_approve": 7786,
+    "manager_review": 214
+  },
+  "output_path": "/tmp/spark_8k_ws3",
+  "generated_at": "2026-10-25T09:09:53+00:00"
+}
