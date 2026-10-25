@@ -204,8 +204,26 @@ def run_spark_ingest(
     docs: int,
     master: str,
     partitions: int | None = None,
+    warmup: int = 1,
+    repeats: int = 3,
 ) -> dict[str, Any]:
-    """Execute the PySpark ingestion pipeline and return a summary dict."""
+    """Execute the PySpark ingestion pipeline and return a summary dict.
+
+    Benchmark methodology
+    ---------------------
+    Spark is lazy: building the transformation plan is near-instant, and the
+    real work happens when an action forces execution. This function therefore
+    measures throughput by forcing an action (``count``) on the fully
+    transformed DataFrame:
+
+    * ``load_s``        — read + materialise the input, then cache it.
+    * ``warmup_s``      — first execution pass(es). Dominated by JVM startup,
+                          codegen, and executor initialisation. Reported
+                          separately and *excluded* from steady-state numbers.
+    * ``steady_state_s``— subsequent execution passes over the cached input.
+                          This is the meaningful throughput figure.
+    * ``write_s``       — materialise the result to Parquet.
+    """
     SparkSession, F, DoubleType, IntegerType, StringType, StructField, StructType = _import_pyspark()
 
     output_schema = _build_output_schema()
@@ -216,13 +234,12 @@ def run_spark_ingest(
 
         started = time.perf_counter()
         df = load_records(spark, input_path, docs)
+        n_partitions = partitions or spark.sparkContext.defaultParallelism
+        df = df.repartition(n_partitions).cache()
+        df.count()  # materialise the cache
         load_s = time.perf_counter() - started
 
-        n_partitions = partitions or spark.sparkContext.defaultParallelism
-        df = df.repartition(n_partitions)
-
         process_udf = F.udf(process_doc, output_schema)
-        started = time.perf_counter()
         struct_cols = F.struct([F.col(c) for c in df.columns])
         result = df.withColumn("result", process_udf(struct_cols))
         for field in output_schema.fields:
@@ -230,7 +247,33 @@ def run_spark_ingest(
         result = result.drop("result")
         result = result.withColumn("doc_index", F.monotonically_increasing_id())
 
-        work_s = time.perf_counter() - started
+        # --- Warmup: first passes include JVM/codegen/executor startup. ------
+        # NOTE: count() alone is NOT sufficient — Spark prunes unused columns,
+        # which would skip the UDF. foreachPartition materialises every column.
+        def _consume(rows):
+            for _ in rows:
+                pass
+
+        n_docs = result.count()  # untimed; establishes row count only
+
+        warmup_times: list[float] = []
+        for _ in range(max(0, warmup)):
+            t0 = time.perf_counter()
+            result.foreachPartition(_consume)  # forces full UDF execution
+            warmup_times.append(time.perf_counter() - t0)
+
+        # --- Steady state: cached input, repeated full pipeline execution. ---
+        steady_times: list[float] = []
+        for _ in range(max(1, repeats)):
+            t0 = time.perf_counter()
+            result.foreachPartition(_consume)
+            steady_times.append(time.perf_counter() - t0)
+
+        steady_sorted = sorted(steady_times)
+        steady_mean = sum(steady_times) / len(steady_times)
+        steady_p50 = steady_sorted[len(steady_sorted) // 2]
+        steady_min = steady_sorted[0]
+        work_s = steady_mean
 
         started = time.perf_counter()
         result.write.mode("overwrite").parquet(output_path)
@@ -254,7 +297,17 @@ def run_spark_ingest(
             "docs": n_docs,
             "partitions": n_partitions,
             "master": master,
+            "methodology": "cache input; warmup passes excluded; steady-state = mean of repeated full-pipeline foreachPartition actions (forces UDF evaluation, unlike count() which prunes columns)",
             "load_s": round(load_s, 4),
+            "warmup_runs": len(warmup_times),
+            "warmup_times_s": [round(t, 4) for t in warmup_times],
+            "warmup_s": round(sum(warmup_times) / len(warmup_times), 4) if warmup_times else 0.0,
+            "steady_state_runs": len(steady_times),
+            "steady_state_times_s": [round(t, 4) for t in steady_times],
+            "steady_state_mean_s": round(steady_mean, 4),
+            "steady_state_p50_s": round(steady_p50, 4),
+            "steady_state_min_s": round(steady_min, 4),
+            "steady_state_docs_per_s": round(n_docs / steady_mean, 2) if steady_mean else 0.0,
             "work_s": round(work_s, 4),
             "write_s": round(write_s, 4),
             "wall_s": round(wall, 4),
@@ -291,6 +344,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--partitions", type=int, default=None, help="Spark partitions (default: defaultParallelism)"
     )
+    parser.add_argument("--warmup", type=int, default=1, help="untimed warmup passes (default 1)")
+    parser.add_argument("--repeats", type=int, default=3, help="timed steady-state passes (default 3)")
     parser.add_argument(
         "--out", default=str(REPO_ROOT / "runs" / "spark_ingest.json"),
         help="summary JSON output path",
@@ -303,6 +358,8 @@ def main(argv: list[str] | None = None) -> int:
         docs=args.docs,
         master=args.master,
         partitions=args.partitions,
+        warmup=args.warmup,
+        repeats=args.repeats,
     )
     print(json.dumps(summary, indent=2))
     out = Path(args.out)

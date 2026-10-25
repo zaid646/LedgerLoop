@@ -1,0 +1,476 @@
+{
+  "split": "val",
+  "accuracy": 0.8364,
+  "macro_f1": 0.7236,
+  "domain_exact_match": 0.8364,
+  "domain_macro_f1": 0.7236,
+  "n_total": 55,
+  "n_domain": 55,
+  "per_category": {
+    "TRAVEL": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 1
+    },
+    "MEALS": {
+      "precision": 0.25,
+      "recall": 1.0,
+      "f1": 0.4,
+      "support": 1
+    },
+    "OFFICE_SUPPLIES": {
+      "precision": 0.8,
+      "recall": 0.8,
+      "f1": 0.8,
+      "support": 5
+    },
+    "SOFTWARE": {
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6667,
+      "support": 1
+    },
+    "HARDWARE": {
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75,
+      "support": 4
+    },
+    "MARKETING": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 2
+    },
+    "PROFESSIONAL_SERVICES": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 0
+    },
+    "UTILITIES": {
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.8571,
+      "support": 3
+    },
+    "RENT": {
+      "precision": 0.6667,
+      "recall": 0.5,
+      "f1": 0.5714,
+      "support": 4
+    },
+    "INSURANCE": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 2
+    },
+    "TRAINING": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 1
+    },
+    "ENTERTAINMENT": {
+      "precision": 1.0,
+      "recall": 0.25,
+      "f1": 0.4,
+      "support": 4
+    },
+    "OTHER": {
+      "precision": 1.0,
+      "recall": 0.9259,
+      "f1": 0.9615,
+      "support": 27
+    }
+  },
+  "domain_predictions": [
+    {
+      "id": "ledgerloop-039",
+      "text": "Merchant: Local Stationery\nAmount: USD 1276.45\nDate: 2026-04-03\nDescription: Envelopes and letterhead for client mail",
+      "gold": "OFFICE_SUPPLIES",
+      "prediction": "OFFICE_SUPPLIES",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-141",
+      "text": "Merchant: Udemy\nAmount: CAD 1245.57\nDate: 2026-08-26\nDescription: Python automation course for finance staff",
+      "gold": "TRAINING",
+      "prediction": "TRAINING",
+      "correct": true
+    },
+    {
+      "id": "dolly-10774",
+      "text": "What are five cities in the state of North Carolina?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "dolly-11164",
+      "text": "Name a few popular racquet sports",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-120",
+      "text": "Merchant: Storage Facility\nAmount: CAD 1372.12\nDate: 2026-05-25\nDescription: Archive storage unit for finance records",
+      "gold": "RENT",
+      "prediction": "HARDWARE",
+      "correct": false
+    },
+    {
+      "id": "ledgerloop-104",
+      "text": "Merchant: Waste Management\nAmount: CAD 1615.80\nDate: 2026-08-09\nDescription: Office waste collection service",
+      "gold": "UTILITIES",
+      "prediction": "UTILITIES",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-118",
+      "text": "Merchant: FlexSpace\nAmount: CAD 251.17\nDate: 2026-03-02\nDescription: Short-term office lease for the launch team",
+      "gold": "RENT",
+      "prediction": "RENT",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-023",
+      "text": "Merchant: Grubhub\nAmount: EUR 281.89\nDate: 2026-07-20\nDescription: Late dinner during the release cutover",
+      "gold": "MEALS",
+      "prediction": "MEALS",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-069",
+      "text": "Merchant: Razer\nAmount: GBP 1149.71\nDate: 2026-03-24\nDescription: Headsets for the customer support team",
+      "gold": "HARDWARE",
+      "prediction": "HARDWARE",
+      "correct": true
+    },
+    {
+      "id": "dolly-03229",
+      "text": "What math classes are offered at high schools in the United States?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "dolly-03878",
+      "text": "Which was the 5th largest recipient of FDI in world in 2020",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-127",
+      "text": "Merchant: Blue Cross\nAmount: USD 1736.78\nDate: 2026-01-10\nDescription: Dental and vision coverage for the quarter",
+      "gold": "INSURANCE",
+      "prediction": "INSURANCE",
+      "correct": true
+    },
+    {
+      "id": "dolly-05811",
+      "text": "How old is the largest living thing?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-163",
+      "text": "Merchant: Sports Club\nAmount: GBP 422.81\nDate: 2026-08-03\nDescription: Box seats for the client hospitality event",
+      "gold": "ENTERTAINMENT",
+      "prediction": "RENT",
+      "correct": false
+    },
+    {
+      "id": "dolly-01180",
+      "text": "Who won the 2022 Masters golf tournament?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-057",
+      "text": "Merchant: Dell\nAmount: CAD 1117.93\nDate: 2026-09-11\nDescription: Replacement monitors for the support desk",
+      "gold": "HARDWARE",
+      "prediction": "HARDWARE",
+      "correct": true
+    },
+    {
+      "id": "dolly-07195",
+      "text": "What is an ATV?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-123",
+      "text": "Merchant: Summit Coworking\nAmount: USD 1407.97\nDate: 2026-01-08\nDescription: Day passes for the visiting engineering team",
+      "gold": "RENT",
+      "prediction": "MEALS",
+      "correct": false
+    },
+    {
+      "id": "ledgerloop-176",
+      "text": "Merchant: Petty Cash\nAmount: AUD 1465.91\nDate: 2026-01-15\nDescription: Replenishment of the office petty cash box",
+      "gold": "OTHER",
+      "prediction": "OFFICE_SUPPLIES",
+      "correct": false
+    },
+    {
+      "id": "ledgerloop-155",
+      "text": "Merchant: Spotify\nAmount: USD 1042.02\nDate: 2026-03-05\nDescription: Office music subscription",
+      "gold": "ENTERTAINMENT",
+      "prediction": "SOFTWARE",
+      "correct": false
+    },
+    {
+      "id": "dolly-03885",
+      "text": "What is a side slide in aviation?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-165",
+      "text": "Merchant: Comedy Club\nAmount: EUR 983.86\nDate: 2026-05-27\nDescription: Customer dinner and show",
+      "gold": "ENTERTAINMENT",
+      "prediction": "MEALS",
+      "correct": false
+    },
+    {
+      "id": "ledgerloop-030",
+      "text": "Merchant: MR D.I.Y.\nAmount: CAD 1081.31\nDate: 2026-01-04\nDescription: Shelving and storage bins for the records room",
+      "gold": "OFFICE_SUPPLIES",
+      "prediction": "OFFICE_SUPPLIES",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-116",
+      "text": "Merchant: Industrial Properties\nAmount: AUD 1655.82\nDate: 2026-09-01\nDescription: Warehouse rent for the inventory team",
+      "gold": "RENT",
+      "prediction": "RENT",
+      "correct": true
+    },
+    {
+      "id": "dolly-11205",
+      "text": "What is a to-do list?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-174",
+      "text": "Merchant: Late Fee\nAmount: GBP 739.76\nDate: 2026-02-28\nDescription: Late payment charge on a supplier invoice",
+      "gold": "OTHER",
+      "prediction": "PROFESSIONAL_SERVICES",
+      "correct": false
+    },
+    {
+      "id": "ledgerloop-074",
+      "text": "Merchant: Mailchimp\nAmount: GBP 1203.14\nDate: 2026-09-28\nDescription: Email campaign plan for the newsletter",
+      "gold": "MARKETING",
+      "prediction": "MARKETING",
+      "correct": true
+    },
+    {
+      "id": "dolly-11192",
+      "text": "Classify each of the following on the basis of text (alphabetically) or numbers (numerically) - Bangalore, 265, Apple, 10, Bag, 49.",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-040",
+      "text": "Merchant: Costco Business Center\nAmount: USD 1548.47\nDate: 2026-09-08\nDescription: Bulk coffee and cups for the office",
+      "gold": "OFFICE_SUPPLIES",
+      "prediction": "MEALS",
+      "correct": false
+    },
+    {
+      "id": "dolly-08313",
+      "text": "Please tell me whether these are fish or fowl: salmon, chicken, tuna, swordfish, turkey, and halibut.",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "dolly-14532",
+      "text": "Identify which animal species is alive or extinct: Theropod, Pronghorn",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-037",
+      "text": "Merchant: Target\nAmount: EUR 224.84\nDate: 2026-02-11\nDescription: Kitchen supplies for the break room",
+      "gold": "OFFICE_SUPPLIES",
+      "prediction": "OFFICE_SUPPLIES",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-130",
+      "text": "Merchant: Travelers\nAmount: CAD 630.19\nDate: 2026-06-03\nDescription: Workers compensation premium",
+      "gold": "INSURANCE",
+      "prediction": "INSURANCE",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-079",
+      "text": "Merchant: Vimeo\nAmount: EUR 1546.60\nDate: 2026-04-27\nDescription: Video hosting for the product demo",
+      "gold": "MARKETING",
+      "prediction": "MARKETING",
+      "correct": true
+    },
+    {
+      "id": "dolly-12729",
+      "text": "For the list given, classify which items are considered vegan, vegitarian and non vegetarian: milk, tofu, curd, chicken, mutton, bacon, clam, tomato, potato, onion, egg, beef, pork, mango, apple, salmon, soy milk, paneer",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "dolly-05345",
+      "text": "Are there more wheels or doors in New York City?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "dolly-09979",
+      "text": "What is Prometheus?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "dolly-08733",
+      "text": "What team has won the most Stanley Cups?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-061",
+      "text": "Merchant: Lenovo\nAmount: EUR 914.55\nDate: 2026-06-03\nDescription: ThinkPad laptops for the sales team",
+      "gold": "HARDWARE",
+      "prediction": "HARDWARE",
+      "correct": true
+    },
+    {
+      "id": "dolly-04619",
+      "text": "Write a paragraph to convince someone to visit Porto Portugal.",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-048",
+      "text": "Merchant: Notion\nAmount: AUD 98.65\nDate: 2026-01-03\nDescription: Team workspace plan for product operations",
+      "gold": "SOFTWARE",
+      "prediction": "SOFTWARE",
+      "correct": true
+    },
+    {
+      "id": "dolly-14401",
+      "text": "How many states are part of New England?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "dolly-14234",
+      "text": "While deciding to buy a bicycle, you need to consider few parameters such as age, gender, price, quality, the purpose of buying, type of bicycle/features etc. For ex: if you are a boy of age 24, then you would consider to buy a bicycle with height of 18\" inch, with gear & shocker, etc.\nAnd if you are a girl of age 6 yrs, then you would consider a kid friendly bicycle with good safety features that the kid can ride.",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "dolly-12120",
+      "text": "Select the dishes that are Chinese from this menu: hamburger, pizza, fried rice, soup dumplings, spaghetti, scallion pancakes.",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "dolly-13899",
+      "text": "Which of the following races do participants run in? A marathon, a triathlon, an aqua bike?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-062",
+      "text": "Merchant: HP\nAmount: EUR 670.19\nDate: 2026-08-27\nDescription: Network switch for the branch office",
+      "gold": "HARDWARE",
+      "prediction": "UTILITIES",
+      "correct": false
+    },
+    {
+      "id": "dolly-05899",
+      "text": "How to cook Filipino chicken adobo?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "dolly-13944",
+      "text": "in which city was the first public opera house opened",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-003",
+      "text": "Merchant: United Airlines\nAmount: AUD 1013.75\nDate: 2026-07-08\nDescription: One-way airfare to the Denver conference",
+      "gold": "TRAVEL",
+      "prediction": "TRAVEL",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-161",
+      "text": "Merchant: Museum Tickets\nAmount: EUR 289.45\nDate: 2026-09-03\nDescription: Client entertainment at the art museum",
+      "gold": "ENTERTAINMENT",
+      "prediction": "ENTERTAINMENT",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-106",
+      "text": "Merchant: Duke Energy\nAmount: USD 500.08\nDate: 2026-05-08\nDescription: Electricity for the Charlotte branch",
+      "gold": "UTILITIES",
+      "prediction": "UTILITIES",
+      "correct": true
+    },
+    {
+      "id": "dolly-12268",
+      "text": "Why is the rover called Perseverance?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "dolly-01135",
+      "text": "What are the Regulations of Football?",
+      "gold": "OTHER",
+      "prediction": "OTHER",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-029",
+      "text": "Merchant: Office Depot\nAmount: EUR 281.89\nDate: 2026-09-25\nDescription: Notebooks, pens and file folders",
+      "gold": "OFFICE_SUPPLIES",
+      "prediction": "OFFICE_SUPPLIES",
+      "correct": true
+    },
+    {
+      "id": "ledgerloop-098",
+      "text": "Merchant: Con Edison\nAmount: EUR 893.92\nDate: 2026-03-21\nDescription: Electricity for the New York office",
+      "gold": "UTILITIES",
+      "prediction": "UTILITIES",
+      "correct": true
+    }
+  ]
+}

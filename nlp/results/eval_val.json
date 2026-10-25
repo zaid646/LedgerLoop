@@ -1,46 +1,46 @@
 {
   "split": "val",
-  "accuracy": 0.5273,
-  "macro_f1": 0.1066,
-  "domain_exact_match": 0.5273,
-  "domain_macro_f1": 0.1066,
+  "accuracy": 0.8364,
+  "macro_f1": 0.7236,
+  "domain_exact_match": 0.8364,
+  "domain_macro_f1": 0.7236,
   "n_total": 55,
   "n_domain": 55,
   "per_category": {
     "TRAVEL": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1": 0.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
       "support": 1
     },
     "MEALS": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1": 0.0,
+      "precision": 0.25,
+      "recall": 1.0,
+      "f1": 0.4,
       "support": 1
     },
     "OFFICE_SUPPLIES": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1": 0.0,
+      "precision": 0.8,
+      "recall": 0.8,
+      "f1": 0.8,
       "support": 5
     },
     "SOFTWARE": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1": 0.0,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6667,
       "support": 1
     },
     "HARDWARE": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1": 0.0,
+      "precision": 0.75,
+      "recall": 0.75,
+      "f1": 0.75,
       "support": 4
     },
     "MARKETING": {
-      "precision": 0.1538,
+      "precision": 1.0,
       "recall": 1.0,
-      "f1": 0.2667,
+      "f1": 1.0,
       "support": 2
     },
     "PROFESSIONAL_SERVICES": {
@@ -50,39 +50,39 @@
       "support": 0
     },
     "UTILITIES": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1": 0.0,
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.8571,
       "support": 3
     },
     "RENT": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1": 0.0,
+      "precision": 0.6667,
+      "recall": 0.5,
+      "f1": 0.5714,
       "support": 4
     },
     "INSURANCE": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1": 0.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
       "support": 2
     },
     "TRAINING": {
-      "precision": 0.125,
+      "precision": 1.0,
       "recall": 1.0,
-      "f1": 0.2222,
+      "f1": 1.0,
       "support": 1
     },
     "ENTERTAINMENT": {
-      "precision": 0.0,
-      "recall": 0.0,
-      "f1": 0.0,
+      "precision": 1.0,
+      "recall": 0.25,
+      "f1": 0.4,
       "support": 4
     },
     "OTHER": {
-      "precision": 0.8387,
-      "recall": 0.963,
-      "f1": 0.8966,
+      "precision": 1.0,
+      "recall": 0.9259,
+      "f1": 0.9615,
       "support": 27
     }
   },
@@ -91,8 +91,8 @@
       "id": "ledgerloop-039",
       "text": "Merchant: Local Stationery\nAmount: USD 1276.45\nDate: 2026-04-03\nDescription: Envelopes and letterhead for client mail",
       "gold": "OFFICE_SUPPLIES",
-      "prediction": "MARKETING",
-      "correct": false
+      "prediction": "OFFICE_SUPPLIES",
+      "correct": true
     },
     {
       "id": "ledgerloop-141",
@@ -119,36 +119,36 @@
       "id": "ledgerloop-120",
       "text": "Merchant: Storage Facility\nAmount: CAD 1372.12\nDate: 2026-05-25\nDescription: Archive storage unit for finance records",
       "gold": "RENT",
-      "prediction": "INSURANCE",
+      "prediction": "HARDWARE",
       "correct": false
     },
     {
       "id": "ledgerloop-104",
       "text": "Merchant: Waste Management\nAmount: CAD 1615.80\nDate: 2026-08-09\nDescription: Office waste collection service",
       "gold": "UTILITIES",
-      "prediction": "OTHER",
-      "correct": false
+      "prediction": "UTILITIES",
+      "correct": true
     },
     {
       "id": "ledgerloop-118",
       "text": "Merchant: FlexSpace\nAmount: CAD 251.17\nDate: 2026-03-02\nDescription: Short-term office lease for the launch team",
       "gold": "RENT",
-      "prediction": "TRAINING",
-      "correct": false
+      "prediction": "RENT",
+      "correct": true
     },
     {
       "id": "ledgerloop-023",
       "text": "Merchant: Grubhub\nAmount: EUR 281.89\nDate: 2026-07-20\nDescription: Late dinner during the release cutover",
       "gold": "MEALS",
-      "prediction": "OTHER",
-      "correct": false
+      "prediction": "MEALS",
+      "correct": true
     },
     {
       "id": "ledgerloop-069",
       "text": "Merchant: Razer\nAmount: GBP 1149.71\nDate: 2026-03-24\nDescription: Headsets for the customer support team",
       "gold": "HARDWARE",
-      "prediction": "TRAINING",
-      "correct": false
+      "prediction": "HARDWARE",
+      "correct": true
     },
     {
       "id": "dolly-03229",
@@ -168,8 +168,8 @@
       "id": "ledgerloop-127",
       "text": "Merchant: Blue Cross\nAmount: USD 1736.78\nDate: 2026-01-10\nDescription: Dental and vision coverage for the quarter",
       "gold": "INSURANCE",
-      "prediction": "MARKETING",
-      "correct": false
+      "prediction": "INSURANCE",
+      "correct": true
     },
     {
       "id": "dolly-05811",
@@ -182,7 +182,7 @@
       "id": "ledgerloop-163",
       "text": "Merchant: Sports Club\nAmount: GBP 422.81\nDate: 2026-08-03\nDescription: Box seats for the client hospitality event",
       "gold": "ENTERTAINMENT",
-      "prediction": "TRAINING",
+      "prediction": "RENT",
       "correct": false
     },
     {
@@ -196,8 +196,8 @@
       "id": "ledgerloop-057",
       "text": "Merchant: Dell\nAmount: CAD 1117.93\nDate: 2026-09-11\nDescription: Replacement monitors for the support desk",
       "gold": "HARDWARE",
-      "prediction": "MARKETING",
-      "correct": false
+      "prediction": "HARDWARE",
+      "correct": true
     },
     {
       "id": "dolly-07195",
@@ -210,21 +210,21 @@
       "id": "ledgerloop-123",
       "text": "Merchant: Summit Coworking\nAmount: USD 1407.97\nDate: 2026-01-08\nDescription: Day passes for the visiting engineering team",
       "gold": "RENT",
-      "prediction": "MARKETING",
+      "prediction": "MEALS",
       "correct": false
     },
     {
       "id": "ledgerloop-176",
       "text": "Merchant: Petty Cash\nAmount: AUD 1465.91\nDate: 2026-01-15\nDescription: Replenishment of the office petty cash box",
       "gold": "OTHER",
-      "prediction": "TRAVEL",
+      "prediction": "OFFICE_SUPPLIES",
       "correct": false
     },
     {
       "id": "ledgerloop-155",
       "text": "Merchant: Spotify\nAmount: USD 1042.02\nDate: 2026-03-05\nDescription: Office music subscription",
       "gold": "ENTERTAINMENT",
-      "prediction": "OTHER",
+      "prediction": "SOFTWARE",
       "correct": false
     },
     {
@@ -238,22 +238,22 @@
       "id": "ledgerloop-165",
       "text": "Merchant: Comedy Club\nAmount: EUR 983.86\nDate: 2026-05-27\nDescription: Customer dinner and show",
       "gold": "ENTERTAINMENT",
-      "prediction": "MARKETING",
+      "prediction": "MEALS",
       "correct": false
     },
     {
       "id": "ledgerloop-030",
       "text": "Merchant: MR D.I.Y.\nAmount: CAD 1081.31\nDate: 2026-01-04\nDescription: Shelving and storage bins for the records room",
       "gold": "OFFICE_SUPPLIES",
-      "prediction": "MARKETING",
-      "correct": false
+      "prediction": "OFFICE_SUPPLIES",
+      "correct": true
     },
     {
       "id": "ledgerloop-116",
       "text": "Merchant: Industrial Properties\nAmount: AUD 1655.82\nDate: 2026-09-01\nDescription: Warehouse rent for the inventory team",
       "gold": "RENT",
-      "prediction": "MARKETING",
-      "correct": false
+      "prediction": "RENT",
+      "correct": true
     },
     {
       "id": "dolly-11205",
@@ -266,8 +266,8 @@
       "id": "ledgerloop-174",
       "text": "Merchant: Late Fee\nAmount: GBP 739.76\nDate: 2026-02-28\nDescription: Late payment charge on a supplier invoice",
       "gold": "OTHER",
-      "prediction": "OTHER",
-      "correct": true
+      "prediction": "PROFESSIONAL_SERVICES",
+      "correct": false
     },
     {
       "id": "ledgerloop-074",
@@ -287,7 +287,7 @@
       "id": "ledgerloop-040",
       "text": "Merchant: Costco Business Center\nAmount: USD 1548.47\nDate: 2026-09-08\nDescription: Bulk coffee and cups for the office",
       "gold": "OFFICE_SUPPLIES",
-      "prediction": "TRAINING",
+      "prediction": "MEALS",
       "correct": false
     },
     {
@@ -308,15 +308,15 @@
       "id": "ledgerloop-037",
       "text": "Merchant: Target\nAmount: EUR 224.84\nDate: 2026-02-11\nDescription: Kitchen supplies for the break room",
       "gold": "OFFICE_SUPPLIES",
-      "prediction": "MARKETING",
-      "correct": false
+      "prediction": "OFFICE_SUPPLIES",
+      "correct": true
     },
     {
       "id": "ledgerloop-130",
       "text": "Merchant: Travelers\nAmount: CAD 630.19\nDate: 2026-06-03\nDescription: Workers compensation premium",
       "gold": "INSURANCE",
-      "prediction": "OTHER",
-      "correct": false
+      "prediction": "INSURANCE",
+      "correct": true
     },
     {
       "id": "ledgerloop-079",
@@ -357,8 +357,8 @@
       "id": "ledgerloop-061",
       "text": "Merchant: Lenovo\nAmount: EUR 914.55\nDate: 2026-06-03\nDescription: ThinkPad laptops for the sales team",
       "gold": "HARDWARE",
-      "prediction": "MARKETING",
-      "correct": false
+      "prediction": "HARDWARE",
+      "correct": true
     },
     {
       "id": "dolly-04619",
@@ -371,8 +371,8 @@
       "id": "ledgerloop-048",
       "text": "Merchant: Notion\nAmount: AUD 98.65\nDate: 2026-01-03\nDescription: Team workspace plan for product operations",
       "gold": "SOFTWARE",
-      "prediction": "TRAINING",
-      "correct": false
+      "prediction": "SOFTWARE",
+      "correct": true
     },
     {
       "id": "dolly-14401",
@@ -406,7 +406,7 @@
       "id": "ledgerloop-062",
       "text": "Merchant: HP\nAmount: EUR 670.19\nDate: 2026-08-27\nDescription: Network switch for the branch office",
       "gold": "HARDWARE",
-      "prediction": "TRAINING",
+      "prediction": "UTILITIES",
       "correct": false
     },
     {
@@ -427,22 +427,22 @@
       "id": "ledgerloop-003",
       "text": "Merchant: United Airlines\nAmount: AUD 1013.75\nDate: 2026-07-08\nDescription: One-way airfare to the Denver conference",
       "gold": "TRAVEL",
-      "prediction": "OTHER",
-      "correct": false
+      "prediction": "TRAVEL",
+      "correct": true
     },
     {
       "id": "ledgerloop-161",
       "text": "Merchant: Museum Tickets\nAmount: EUR 289.45\nDate: 2026-09-03\nDescription: Client entertainment at the art museum",
       "gold": "ENTERTAINMENT",
-      "prediction": "MARKETING",
-      "correct": false
+      "prediction": "ENTERTAINMENT",
+      "correct": true
     },
     {
       "id": "ledgerloop-106",
       "text": "Merchant: Duke Energy\nAmount: USD 500.08\nDate: 2026-05-08\nDescription: Electricity for the Charlotte branch",
       "gold": "UTILITIES",
-      "prediction": "TRAINING",
-      "correct": false
+      "prediction": "UTILITIES",
+      "correct": true
     },
     {
       "id": "dolly-12268",
@@ -462,15 +462,15 @@
       "id": "ledgerloop-029",
       "text": "Merchant: Office Depot\nAmount: EUR 281.89\nDate: 2026-09-25\nDescription: Notebooks, pens and file folders",
       "gold": "OFFICE_SUPPLIES",
-      "prediction": "MARKETING",
-      "correct": false
+      "prediction": "OFFICE_SUPPLIES",
+      "correct": true
     },
     {
       "id": "ledgerloop-098",
       "text": "Merchant: Con Edison\nAmount: EUR 893.92\nDate: 2026-03-21\nDescription: Electricity for the New York office",
       "gold": "UTILITIES",
-      "prediction": "INSURANCE",
-      "correct": false
+      "prediction": "UTILITIES",
+      "correct": true
     }
   ]
 }

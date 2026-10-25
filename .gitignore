@@ -56,3 +56,7 @@ notebooks/**/*.nbconvert.ipynb
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# --- trained model weights (regenerate via nlp/train_bert.py) ---
+nlp/outputs/
+cv/outputs/

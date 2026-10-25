@@ -1,0 +1,26 @@
+{
+  "split": "val",
+  "mAP50": 0.0635,
+  "per_class": {
+    "merchant": {
+      "ap": 0.0909,
+      "tp": 4,
+      "fp": 36,
+      "n_gts": 50
+    },
+    "date": {
+      "ap": 0.0,
+      "tp": 0,
+      "fp": 219,
+      "n_gts": 50
+    },
+    "total": {
+      "ap": 0.0997,
+      "tp": 12,
+      "fp": 56,
+      "n_gts": 50
+    }
+  },
+  "n_predictions": 327,
+  "n_images": 50
+}
