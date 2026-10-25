@@ -105,7 +105,7 @@ jobs:
           enable-cache: true
       - run: uv python install 3.12
       - name: Install pyspark
-        run: pip install pyspark==4.0.0
+        run: pip install pyspark==4.0.0 pydantic pydantic-settings
       - name: PySpark ingestion benchmark (8 000 docs, local[*])
         run: |
           python scripts/spark_ingest.py \
@@ -131,11 +131,13 @@ jobs:
           python-version: "3.12"
       - name: Install deps
         run: |
-          pip install torch transformers scikit-learn
+          pip install torch transformers scikit-learn sentencepiece
       - name: CPU smoke test (tiny BERT, 10 steps)
         run: |
+          # prajjwal1/bert-tiny lacks tokenizer.json and fails on transformers>=5;
+          # google/bert_uncased_L-2_H-128_A-2 is a genuine 2-layer BERT that works.
           python nlp/train_bert.py \
-            --model prajjwal1/bert-tiny \
+            --model google/bert_uncased_L-2_H-128_A-2 \
             --epochs 1 \
             --max-steps 10 \
             --batch-size 4 \
@@ -170,13 +172,13 @@ jobs:
       - name: CPU smoke test (ViT, 10 steps)
         run: |
           mkdir -p /tmp/vit_train/TRAVEL /tmp/vit_val/TRAVEL
-          python -c "
-            from PIL import Image
-            import os
-            for d in ['/tmp/vit_train/TRAVEL', '/tmp/vit_val/TRAVEL']:
-                for i in range(4):
-                    Image.new('RGB', (224, 224), color=(i*50, 100, 150)).save(os.path.join(d, f'img_{i}.jpg'))
-          "
+          python - <<'PY'
+          from PIL import Image
+          import os
+          for d in ['/tmp/vit_train/TRAVEL', '/tmp/vit_val/TRAVEL']:
+              for i in range(4):
+                  Image.new('RGB', (224, 224), color=(i*50, 100, 150)).save(os.path.join(d, f'img_{i}.jpg'))
+          PY
           python cv/train_vit.py \
             --model google/vit-base-patch16-224 \
             --train-root /tmp/vit_train \
